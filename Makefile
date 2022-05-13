@@ -92,6 +92,7 @@ open:
 	open coverage/math.h/index.html
 
 clean:
+	$(RM) $(TEST_OBJ_DIR)/main.o
 	$(RM) $(OBJS)
 	$(RM) $(GCDA)
 	$(RM) $(GCNO)

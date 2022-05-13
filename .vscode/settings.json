@@ -1,6 +1,7 @@
 {
 	"makefile.extensionOutputFolder": "./.vscode",
 	"files.associations": {
-		"s21_math_test.h": "c"
+		"s21_math_test.h": "c",
+		"s21_math.h": "c"
 	}
 }
