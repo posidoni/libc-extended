@@ -1,0 +1,1285 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-apple-darwin11.3.0
+ 
+
+# Make data base, printed on Fri May 13 13:17:40 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+ 
+# makefile (from `Makefile', line 11)
+TEST_SRC_DIR = ./tests
+# makefile (from `Makefile', line 7)
+GCOV_TARGET = ./coverage
+# makefile (from `Makefile', line 17)
+SRC := ./s21_floor.c ./s21_cos.c ./s21_exp.c ./s21_sin.c ./s21_pow.c ./s21_fabs.c ./s21_atan.c ./s21_log.c ./s21_fmod.c ./s21_ceil.c ./s21_tan.c ./s21_abs.c ./s21_sqrt.c ./s21_asin.c ./s21_acos.c
+# environment
+VSCODE_LOG_NATIVE = false
+# makefile (from `Makefile', line 3)
+TARGET = s21_math.a
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/andreyzhelannikov/math.h
+# makefile (from `Makefile', line 32)
+MK := mkdir -p
+# makefile
+SHELL = /bin/sh
+# makefile (from `Makefile', line 31)
+RM := rm -f
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# makefile (from `Makefile', line 36)
+CFLAGS = $(STDFLAGS) $(ASAN)
+# environment
+STARSHIP_SESSION_KEY = 2630316952617462
+# makefile (from `Makefile', line 13)
+OBJ_DIR = ./objs
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from `Makefile', line 37)
+TST_CFLAGS := -g -c -Wall -Wextra -std=c11  
+# environment
+__CFBundleIdentifier = com.microsoft.VSCode
+# environment
+INFOPATH = /opt/homebrew/share/info:
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zf/nthzbpb520946jjgmb2f_s0r0000gn/T/vscode-ipc-f1393590-2674-4575-99d6-d33761de3acb.sock
+# environment
+VSCODE_CWD = /
+# makefile (from `Makefile', line 20)
+TEST_SRC := ./tests/test_s21_fabs.c ./tests/test_s21_tan.c ./tests/test_s21_abs.c ./tests/test_s21_floor.c ./tests/test_s21_atan.c ./tests/test_s21_exp.c ./tests/test_s21_cos.c ./tests/test_s21_ceil.c ./tests/test_s21_sin.c ./tests/test_s21_fmod.c ./tests/test_s21_pow.c ./tests/test_s21_asin.c ./tests/test_s21_acos.c ./tests/test_s21_log.c ./tests/test_s21_sqrt.c
+# makefile (from `Makefile', line 30)
+RAN := ranlib
+# environment
+PATH = /opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands
+# environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# makefile (from `Makefile', line 5)
+TEST_EXE = test
+# makefile (from `Makefile', line 29)
+AR := ar rc
+# environment
+VSCODE_LOG_STACK = false
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.hvyh80OuB9/Listeners
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_PIPE_LOGGING = true
+# makefile (from `Makefile', line 22)
+OBJS := ./objs/s21_floor.o ./objs/s21_cos.o ./objs/s21_exp.o ./objs/s21_sin.o ./objs/s21_pow.o ./objs/s21_fabs.o ./objs/s21_atan.o ./objs/s21_log.o ./objs/s21_fmod.o ./objs/s21_ceil.o ./objs/s21_tan.o ./objs/s21_abs.o ./objs/s21_sqrt.o ./objs/s21_asin.o ./objs/s21_acos.o
+# environment
+PWD = /Users/andreyzhelannikov/math.h
+# makefile (from `Makefile', line 24)
+TEST_OBJS := ./tests/objs/test_s21_fabs.o ./tests/objs/test_s21_tan.o ./tests/objs/test_s21_abs.o ./tests/objs/test_s21_floor.o ./tests/objs/test_s21_atan.o ./tests/objs/test_s21_exp.o ./tests/objs/test_s21_cos.o ./tests/objs/test_s21_ceil.o ./tests/objs/test_s21_sin.o ./tests/objs/test_s21_fmod.o ./tests/objs/test_s21_pow.o ./tests/objs/test_s21_asin.o ./tests/objs/test_s21_acos.o ./tests/objs/test_s21_log.o ./tests/objs/test_s21_sqrt.o 
+# environment
+HOMEBREW_CELLAR = /opt/homebrew/Cellar
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# makefile (from `Makefile', line 23)
+GCOV_OBJS := ./tests/objs/s21_floor.o ./tests/objs/s21_cos.o ./tests/objs/s21_exp.o ./tests/objs/s21_sin.o ./tests/objs/s21_pow.o ./tests/objs/s21_fabs.o ./tests/objs/s21_atan.o ./tests/objs/s21_log.o ./tests/objs/s21_fmod.o ./tests/objs/s21_ceil.o ./tests/objs/s21_tan.o ./tests/objs/s21_abs.o ./tests/objs/s21_sqrt.o ./tests/objs/s21_asin.o ./tests/objs/s21_acos.o
+# environment
+MANPATH = /opt/local/share/man:/opt/homebrew/share/man::
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /Users/andreyzhelannikov
+# default
+MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/andreyzhelannikov/Library/Application Support/Code/CachedData/da15b6fd3ef856477bf6f4fb29ba1b7af717770d
+# environment
+LOGNAME = andreyzhelannikov
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+ZSH = /Users/andreyzhelannikov/.oh-my-zsh
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XPC_FLAGS = 0x0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+SHLVL = 1
+# makefile (from `Makefile', line 1)
+CC = gcc
+# default
+MAKE_VERSION := 3.81
+# environment
+USER = andreyzhelannikov
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from `Makefile', line 14)
+TEST_OBJ_DIR = ./tests/objs
+# makefile (from `Makefile', line 27)
+GCNO = $(shell find $(TEST_OBJ_DIR) -maxdepth 1 -name "*.gcno")
+# makefile (from `Makefile', line 19)
+TEST_INC := ./tests/s21_math_test.h
+# environment
+LESS = -R
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# makefile (from `Makefile', line 16)
+INC := ./s21_math.h
+# default
+.VARIABLES := 
+# environment
+TMPDIR = /var/folders/zf/nthzbpb520946jjgmb2f_s0r0000gn/T/
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /Users/andreyzhelannikov/Library/Application Support/Code/1.67.1-main.sock
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.3892367.3892373
+# environment
+HOMEBREW_PREFIX = /opt/homebrew
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from `Makefile', line 34)
+ASAN := 
+# automatic
++F = $(notdir $+)
+# makefile (from `Makefile', line 35)
+STDFLAGS = -c -Wall -Wextra -std=c11 
+# environment
+HOMEBREW_REPOSITORY = /opt/homebrew
+# environment
+__CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x0
+# environment
+COMMAND_MODE = unix2003
+# makefile (from `Makefile', line 26)
+GCDA = $(shell find $(TEST_OBJ_DIR) -maxdepth 1 -name "*.gcda")
+# default
+MAKEFILES := 
+# makefile (from `Makefile', line 10)
+SRC_DIR = .
+# automatic
+<F = $(notdir $<)
+# makefile (from `Makefile', line 40)
+TST_LIBS = -lcheck
+# environment
+PAGER = less
+# environment
+LC_ALL = C
+# makefile (from `Makefile', line 6)
+TEST_GCOV_EXE = test_gcov
+# automatic
+^F = $(notdir $^)
+# makefile (from `Makefile', line 38)
+GCOV_FLAGS = -fprofile-arcs -ftest-coverage
+# default
+SUFFIXES := 
+# default
+.INCLUDE_DIRS = /usr/local/include
+# environment
+MAKELEVEL := 0
+# makefile (from `Makefile', line 8)
+GCOV_INFO = coverage.info
+# environment
+LANG = C
+# environment
+VSCODE_PID = 4237
+# makefile (from `Makefile', line 4)
+TEST_TARGET = test_s21_math.a
+# environment
+STARSHIP_SHELL = zsh
+# variable set hash-table stats:
+# Load=103/1024=10%, Rehash=0, Collisions=17/201=8%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 16777233, inode 4226850): 27 files, no impossibilities.
+# tests (device 16777233, inode 4227497): 19 files, no impossibilities so far.
+ 
+
+# 46 files, no impossibilities in 2 directories.
+
+# Implicit Rules
+
+tests/objs%.o: ./tests%.c ./tests/s21_math_test.h
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+tests/objs/test_s21_fabs.o: tests/test_s21_fabs.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_fabs'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+tests/objs/s21_cos.o: ./s21_cos.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_cos'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+./s21_fmod.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:01:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tests/test_s21_sin.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:04:25
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+tests/objs/test_s21_abs.o: tests/test_s21_abs.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_abs'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+tests/s21_math_test.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:16:43
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+tests/objs/test_s21_exp.o: tests/test_s21_exp.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_exp'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+tests/objs/s21_fmod.o: ./s21_fmod.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_fmod'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+./s21_tan.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:02:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tests/test_s21_fabs.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:04:04
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+tests/objs/test_s21_floor.o: tests/test_s21_floor.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_floor'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+objs/s21_acos.o: ./s21_acos.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_acos'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+gcov_report: coverage
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: s21_math.a test gcov_report
+#  Phony target (prerequisite of .PHONY).
+#  Command-line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/10=0%
+
+tests/objs/s21_tan.o: ./s21_tan.c tests/s21_math_test.h
+ 
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_tan'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+.PHONY: all clean fclean re open
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+./s21_exp.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:01:27
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tests/test_s21_abs.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:15:54
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tests/test_s21_exp.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:03:59
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/s21_log.o: ./s21_log.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_log'
+#  Last modified 2022-05-13 13:17:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+tests/objs/test_s21_asin.o: tests/test_s21_asin.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_asin'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+main.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:10:49
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tests/test_s21_floor.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:04:10
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+./s21_acos.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:00:44
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+tests/objs/main.o: main.c
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-13 13:11:36
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $(TEST_OBJ_DIR)/main.o main.c  
+	
+
+objs/s21_atan.o: ./s21_atan.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_atan'
+ 
+#  Last modified 2022-05-13 13:17:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+./s21_log.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:01:55
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tests/test_s21_asin.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:03:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/s21_pow.o: ./s21_pow.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_pow'
+#  Last modified 2022-05-13 13:17:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+tests/objs/s21_log.o: ./s21_log.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_log'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+gcov_obj:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:17:19
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+./s21_atan.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:01:02
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+test: s21_math.a tests/objs/main.o tests/objs/test_s21_fabs.o tests/objs/test_s21_tan.o tests/objs/test_s21_abs.o tests/objs/test_s21_floor.o tests/objs/test_s21_atan.o tests/objs/test_s21_exp.o tests/objs/test_s21_cos.o tests/objs/test_s21_ceil.o tests/objs/test_s21_sin.o tests/objs/test_s21_fmod.o tests/objs/test_s21_pow.o tests/objs/test_s21_asin.o tests/objs/test_s21_acos.o tests/objs/test_s21_log.o tests/objs/test_s21_sqrt.o tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := test
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := s21_math.a tests/objs/main.o tests/objs/test_s21_fabs.o tests/objs/test_s21_tan.o tests/objs/test_s21_abs.o tests/objs/test_s21_floor.o tests/objs/test_s21_atan.o tests/objs/test_s21_exp.o tests/objs/test_s21_cos.o tests/objs/test_s21_ceil.o tests/objs/test_s21_sin.o tests/objs/test_s21_fmod.o tests/objs/test_s21_pow.o tests/objs/test_s21_asin.o tests/objs/test_s21_acos.o tests/objs/test_s21_log.o tests/objs/test_s21_sqrt.o tests/s21_math_test.h
+# automatic
+# | := 
+# automatic
+# < := s21_math.a
+# automatic
+# ^ := s21_math.a tests/objs/main.o tests/objs/test_s21_fabs.o tests/objs/test_s21_tan.o tests/objs/test_s21_abs.o tests/objs/test_s21_floor.o tests/objs/test_s21_atan.o tests/objs/test_s21_exp.o tests/objs/test_s21_cos.o tests/objs/test_s21_ceil.o tests/objs/test_s21_sin.o tests/objs/test_s21_fmod.o tests/objs/test_s21_pow.o tests/objs/test_s21_asin.o tests/objs/test_s21_acos.o tests/objs/test_s21_log.o tests/objs/test_s21_sqrt.o tests/s21_math_test.h
+# automatic
+# ? := s21_math.a tests/objs/main.o tests/objs/test_s21_fabs.o tests/objs/test_s21_tan.o tests/objs/test_s21_abs.o tests/objs/test_s21_floor.o tests/objs/test_s21_atan.o tests/objs/test_s21_exp.o tests/objs/test_s21_cos.o tests/objs/test_s21_ceil.o tests/objs/test_s21_sin.o tests/objs/test_s21_fmod.o tests/objs/test_s21_pow.o tests/objs/test_s21_asin.o tests/objs/test_s21_acos.o tests/objs/test_s21_log.o tests/objs/test_s21_sqrt.o tests/s21_math_test.h
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=3/18=17%
+#  commands to execute (from `Makefile', line 58):
+	$(CC) $(TEST_OBJS) $(TEST_OBJ_DIR)/main.o $(ASAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(TST_LIBS) -L. $(TARGET)
+	
+
+tests/objs/s21_atan.o: ./s21_atan.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_atan'
+#  Modification time never checked.
+#  File has not been updated.
+ 
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+tests/objs/test_s21_cos.o: tests/test_s21_cos.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_cos'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+./s21_pow.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:02:05
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+tests/objs/s21_pow.o: ./s21_pow.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_pow'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+tests/test_s21_ceil.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:03:51
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+tests/objs/test_s21_fmod.o: tests/test_s21_fmod.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_fmod'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+test_s21_math.a: tests/objs/s21_floor.o tests/objs/s21_cos.o tests/objs/s21_exp.o tests/objs/s21_sin.o tests/objs/s21_pow.o tests/objs/s21_fabs.o tests/objs/s21_atan.o tests/objs/s21_log.o tests/objs/s21_fmod.o tests/objs/s21_ceil.o tests/objs/s21_tan.o tests/objs/s21_abs.o tests/objs/s21_sqrt.o tests/objs/s21_asin.o tests/objs/s21_acos.o s21_math.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 54):
+	$(AR) $(TEST_TARGET) $(GCOV_OBJS)
+	$(RAN) $(TEST_TARGET)
+	
+
+# Not a target:
+tests/test_s21_cos.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:03:55
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+tests/objs/test_s21_tan.o: tests/test_s21_tan.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_tan'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+tests/objs/s21_ceil.o: ./s21_ceil.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_ceil'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+s21_math.a: objs/s21_floor.o objs/s21_cos.o objs/s21_exp.o objs/s21_sin.o objs/s21_pow.o objs/s21_fabs.o objs/s21_atan.o objs/s21_log.o objs/s21_fmod.o objs/s21_ceil.o objs/s21_tan.o objs/s21_abs.o objs/s21_sqrt.o objs/s21_asin.o objs/s21_acos.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 50):
+	$(AR) $(TARGET) $(OBJS)
+	$(RAN) $(TARGET)
+	
+
+objs/s21_sqrt.o: ./s21_sqrt.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_sqrt'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 101):
+	$(RM) $(TARGET)
+	$(RM) $(TEST_TARGET)
+	$(RM) $(TEST_EXE)
+	$(RM) $(TEST_GCOV_EXE)
+	$(RM) $(GCOV_INFO)
+	$(RM) -r $(GCOV_TARGET)
+	
+
+# Not a target:
+tests/test_s21_fmod.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:04:14
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tests/test_s21_tan.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:04:39
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/s21_sin.o: ./s21_sin.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_sin'
+#  Last modified 2022-05-13 13:17:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+tests/objs/test_s21_acos.o: tests/test_s21_acos.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_acos'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+./s21_sqrt.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:02:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/s21_fabs.o: ./s21_fabs.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_fabs'
+#  Last modified 2022-05-13 13:17:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+coverage.info: test_gcov
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 86):
+	./$(TEST_GCOV_EXE)
+	geninfo $(TEST_OBJ_DIR) -b . -o ./$(GCOV_INFO)
+	
+
+tests/objs/test_s21_ceil.o: tests/test_s21_ceil.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_ceil'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+tests/objs/s21_sqrt.o: ./s21_sqrt.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_sqrt'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+ 
+#  File has not been updated.
+
+tests/objs/test_s21_log.o: tests/test_s21_log.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_log'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+./s21_sin.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:02:16
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/s21_abs.o: ./s21_abs.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_abs'
+#  Last modified 2022-05-13 13:17:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+tests/test_s21_acos.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:03:35
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/s21_exp.o: ./s21_exp.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_exp'
+#  Last modified 2022-05-13 13:17:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+tests/objs/s21_sin.o: ./s21_sin.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_sin'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+tests/objs/test_s21_atan.o: tests/test_s21_atan.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_atan'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+./s21_fabs.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:01:34
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/s21_floor.o: ./s21_floor.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_floor'
+#  Last modified 2022-05-13 13:17:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+re: fclean all
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 94):
+	$(RM) $(OBJS)
+	$(RM) $(GCDA)
+	$(RM) $(GCNO)
+	$(RM) $(TEST_OBJS)
+	$(RM) $(GCOV_OBJS)
+	
+
+tests/objs/s21_fabs.o: ./s21_fabs.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_fabs'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+coverage: coverage.info
+ 
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+# makefile (from `Makefile', line 81)
+# CFLAGS += $(GCOV_FLAGS)
+# variable set hash-table stats:
+# Load=1/32=3%, Rehash=0, Collisions=0/2=0%
+#  commands to execute (from `Makefile', line 83):
+	genhtml $(GCOV_INFO) -o $(GCOV_TARGET)
+	
+
+tests/objs/test_s21_pow.o: tests/test_s21_pow.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_pow'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+./s21_abs.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:12:32
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+./s21_ceil.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:01:10
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+open:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 91):
+	open coverage/src/index.html
+	
+
+objs/s21_asin.o: ./s21_asin.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_asin'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+tests/objs/s21_abs.o: ./s21_abs.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_abs'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+tests/test_s21_atan.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:03:46
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+tests/objs/s21_exp.o: ./s21_exp.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_exp'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+./s21_floor.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:01:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+tests/objs/s21_floor.o: ./s21_floor.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_floor'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+tests/test_s21_pow.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:04:21
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+tests/test_s21_log.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:04:17
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+./s21_asin.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:00:53
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+tests/objs/s21_asin.o: ./s21_asin.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_asin'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+tests/objs/s21_acos.o: ./s21_acos.c tests/s21_math_test.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_acos'
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 76):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+s21_math.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 12:54:50
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/s21_cos.o: ./s21_cos.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_cos'
+#  Last modified 2022-05-13 13:17:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+tests/objs/test_s21_sqrt.o: tests/test_s21_sqrt.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_sqrt'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+test_gcov: test_s21_math.a tests/objs/main.o tests/objs/test_s21_fabs.o tests/objs/test_s21_tan.o tests/objs/test_s21_abs.o tests/objs/test_s21_floor.o tests/objs/test_s21_atan.o tests/objs/test_s21_exp.o tests/objs/test_s21_cos.o tests/objs/test_s21_ceil.o tests/objs/test_s21_sin.o tests/objs/test_s21_fmod.o tests/objs/test_s21_pow.o tests/objs/test_s21_asin.o tests/objs/test_s21_acos.o tests/objs/test_s21_log.o tests/objs/test_s21_sqrt.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 61):
+	$(CC) $(TEST_OBJS) $(TEST_OBJ_DIR)/main.o $(GCOV_FLAGS) -o $(TEST_GCOV_EXE) $(TST_LIBS) -L. $(TEST_TARGET)
+	
+
+objs/s21_fmod.o: ./s21_fmod.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_fmod'
+ 
+#  Last modified 2022-05-13 13:17:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+objs/s21_ceil.o: ./s21_ceil.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_ceil'
+#  Last modified 2022-05-13 13:17:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+tests/objs/test_s21_sin.o: tests/test_s21_sin.c tests/s21_math_test.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `/test_s21_sin'
+#  Last modified 2022-05-13 13:17:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 68):
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+./s21_cos.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:01:20
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/s21_tan.o: ./s21_tan.c s21_math.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `/s21_tan'
+#  Last modified 2022-05-13 13:17:30
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 72):
+	@$(MK) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
+	
+
+# Not a target:
+tests/test_s21_sqrt.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 13:04:29
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# files hash-table stats:
+# Load=96/1024=9%, Rehash=0, Collisions=36/343=10%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+
+# Finished Make data base on Fri May 13 13:17:40 2022
+
+ 
