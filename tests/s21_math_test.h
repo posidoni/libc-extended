@@ -28,4 +28,7 @@ Suite *suite_s21_tan(void);
 void run_tests(void);
 void run_testcase(Suite *testcase);
 
+double RandomReal(double low, double high);
+int RandomInteger(int low, int high);
+
 #endif  //  TEST
