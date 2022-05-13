@@ -1,0 +1,44 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/andreyzhelannikov/math.h'
+gcc ./tests/objs/test_s21_fabs.o ./tests/objs/test_s21_tan.o ./tests/objs/test_s21_abs.o ./tests/objs/test_s21_floor.o ./tests/objs/test_s21_atan.o ./tests/objs/test_s21_exp.o ./tests/objs/test_s21_cos.o ./tests/objs/test_s21_ceil.o ./tests/objs/test_s21_sin.o ./tests/objs/test_s21_fmod.o ./tests/objs/test_s21_pow.o ./tests/objs/test_s21_asin.o ./tests/objs/test_s21_acos.o ./tests/objs/test_s21_log.o ./tests/objs/test_s21_sqrt.o  ./tests/objs/main.o  -fprofile-arcs -ftest-coverage -o test -lcheck -L. s21_math.a
+ 
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_floor.o -c ./s21_floor.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_cos.o -c ./s21_cos.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_exp.o -c ./s21_exp.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_sin.o -c ./s21_sin.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_pow.o -c ./s21_pow.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_fabs.o -c ./s21_fabs.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_atan.o -c ./s21_atan.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_log.o -c ./s21_log.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_fmod.o -c ./s21_fmod.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_ceil.o -c ./s21_ceil.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_tan.o -c ./s21_tan.c
+ 
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_abs.o -c ./s21_abs.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_sqrt.o -c ./s21_sqrt.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_asin.o -c ./s21_asin.c
+mkdir -p ./tests/objs
+gcc -c -Wall -Wextra -std=c11   -fprofile-arcs -ftest-coverage -o tests/objs/s21_acos.o -c ./s21_acos.c
+ar rc test_s21_math.a ./tests/objs/s21_floor.o ./tests/objs/s21_cos.o ./tests/objs/s21_exp.o ./tests/objs/s21_sin.o ./tests/objs/s21_pow.o ./tests/objs/s21_fabs.o ./tests/objs/s21_atan.o ./tests/objs/s21_log.o ./tests/objs/s21_fmod.o ./tests/objs/s21_ceil.o ./tests/objs/s21_tan.o ./tests/objs/s21_abs.o ./tests/objs/s21_sqrt.o ./tests/objs/s21_asin.o ./tests/objs/s21_acos.o
+ranlib test_s21_math.a
+gcc ./tests/objs/test_s21_fabs.o ./tests/objs/test_s21_tan.o ./tests/objs/test_s21_abs.o ./tests/objs/test_s21_floor.o ./tests/objs/test_s21_atan.o ./tests/objs/test_s21_exp.o ./tests/objs/test_s21_cos.o ./tests/objs/test_s21_ceil.o ./tests/objs/test_s21_sin.o ./tests/objs/test_s21_fmod.o ./tests/objs/test_s21_pow.o ./tests/objs/test_s21_asin.o ./tests/objs/test_s21_acos.o ./tests/objs/test_s21_log.o ./tests/objs/test_s21_sqrt.o  ./tests/objs/main.o -fprofile-arcs -ftest-coverage -o test_gcov -lcheck -L. test_s21_math.a
+./test_gcov
+geninfo ./tests/objs -b . -o ./coverage.info
+ 
+genhtml coverage.info -o ./coverage
+make: Leaving directory `/Users/andreyzhelannikov/math.h'
+ 
