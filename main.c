@@ -26,8 +26,14 @@ void run_tests(void) {
                            //                   suite_s21_ceil(),
                            suite_s21_cos(),  // suite_s21_exp(), suite_s21_fabs(),
                            //  suite_s21_floor(), suite_s21_fmod(), suite_s21_log(),  suite_s21_pow(),
+<<<<<<< HEAD
                            suite_s21_sin(),  //   suite_s21_sqrt(),
                            suite_s21_tan(), NULL};
+=======
+                           // suite_s21_sin(),  //
+                           // suite_s21_tan(),
+                           suite_s21_sqrt(), NULL};
+>>>>>>> 1fa6891 (Feature: coded stable & tested sqrt (newtons method))
 
     for (Suite **current_testcase = list_cases; *current_testcase != NULL; current_testcase++) {
         run_testcase(*current_testcase);
