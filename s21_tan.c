@@ -1,59 +1,79 @@
 #include "s21_math.h"
 
 long double s21_tan(double x) {
-    long double res = 0.0;
-    long double n = (long double)x;
+    //     long double res = 0.0;
+    //     long double n = (long double)x;
 
-    static int test_n = 0;
+    //     static int test_n = 0;
 
-    long double m = 1;
+    //     long double m = 1;
 
-    n = fmodl(n, (long double)(M_PI));
+    //     n = fmodl(n, (long double)(M_PI));
 
-    if (n < 0) {
-        n = -n;
-        m = -m;
-    }
+    //     if (n < 0) {
+    //         n = -n;
+    //         m = -m;
+    //     }
 
-    if (n > M_PI_2) {
-        n = M_PI - n;
-        m = -m;
-    }
+    //     if (n > M_PI_2) {
+    //         n = M_PI - n;
+    //         m = -m;
+    //     }
 
-    printf("TEST N: %d\n", test_n);
-    printf("N : %Lf\n", n);
-    int rev = 0;
-    if (n > M_PI_4) {
-        n = M_PI_2 - n;
-        rev = 1;
-    }
+    //     printf("TEST N: %d\n", test_n);
+    //     printf("N : %Lf\n", n);
+    //     int rev = 0;
+    //     if (n > M_PI_4) {
+    //         printf("1, ");
+    //         n = M_PI_2 - n;
+    //         rev = 1;
+    //     }
 
-    printf("N2 : %Lf\n\n", n);
-    printf("rev : %d\n", rev);
-    if (n > M_PI_4 / 2.0) {
-        long double tan_2 = n / 2.0 + (powl(n / 2.0, 3.0) / 3.0) + (2.0 * powl(n / 2.0, 5.0) / 15.0) +
-                            (17.0 * powl(n / 2.0, 7.0) / 315.0) + (62.0 * powl(n / 2.0, 9.0) / 2835.0) +
-                            (1382.0 * powl(n / 2.0, 11.0) / 155925.0) + (21844.0 * powl(n, 13.0) / 6081075.0);
-        long double top = 2.0 * tan_2;
-        long double bot = 1.0 - powl(tan_2, 2.0);
-        if (rev)
-            res = bot / top;
-        else
-            res = top / bot;
-        rev = 0;
-    } else {
-        res = n + (powl(n, 3.0) / 3.0) + (2.0 * powl(n, 5.0) / 15.0) + (17.0 * powl(n, 7.0) / 315.0) +
-              (62.0 * powl(n, 9.0) / 2835.0) + (1382.0 * powl(n / 2.0, 11.0) / 155925.0) +
-              (21844.0 * powl(n, 13.0) / 6081075.0);
-    }
-    // n + (powl(n, 3) / 3.0) + ((2 * powl(n, 5.0)) / 15.0) + ((17.0 * powl(n, 7.0)) / 315.0);  //+
-    /*((62.0 * powl(n, 9.0)) / 2835.0) + ((1382.0 * powl(n, 11.0)) / 155925.0) +
-    ((21844.0 * powl(n, 13.0)) / 6081075.0) + ((929569.0 * powl(n, 15.0)) / 638512875.0) +
-    ((6404582.0 * powl(n, 17.0)) / 10854718875.0) + ((443861162.0 * powl(n, 19.0)) / 1856156927625.0) +
-    ((18888466084.0 * powl(n, 21.0)) / 194896477400625.0);*/
-    if (rev) res = 1.0 / res;
-    test_n++;
-    return m * res;
+    //     // printf("N2 : %Lf\n\n", n);
+    //     // printf("rev : %d\n", rev);
+    //     if (n > M_PI_4 / 2.0) {
+    //         printf("2.\n");
+
+    //         /*long double tan_2 = n / 2.0 + (powl(n / 2.0, 3.0) / 3.0) + (2.0 * powl(n / 2.0, 5.0) / 15.0)
+    //         +
+    //                             (17.0 * powl(n / 2.0, 7.0) / 315.0) + (62.0 * powl(n / 2.0, 9.0) / 2835.0);
+    //          (1382.0 * powl(n / 2.0, 11.0) / 155925.0) +
+    //          (21844.0 * powl(n / 2.0, 13.0) / 6081075.0) +
+    //          (6404582.0 * powl(n / 2.0, 17.0) / 10854718875.0) +
+    //          (443861162.0 * powl(n / 2.0, 19.0) / 1856156927625.0) +
+    //          (18888466084.0 * powl(n / 2.0, 21.0) / 194896477400625.0);*/
+
+    //         // long double top = 2.0 * tan_2;
+    //         // long double bot = 1.0 - powl(tan_2, 2.0);
+
+    //         if (rev)
+    //             res = (1.0 - powl(s21_tan(x / 2.0), 2)) / (2.0 * s21_tan(x / 2.0));
+    //         else
+    //             res = (2.0 * s21_tan(x / 2.0)) / (1.0 - powl(s21_tan(x / 2.0), 2));
+    //         rev = 0;
+
+    //     } else {
+    //         printf("3.\n");
+
+    //         res = n + (powl(n, 3.0) / 3.0) + (2.0 * powl(n, 5.0) / 15.0) + (17.0 * powl(n, 7.0) / 315.0);
+    //         (62.0 * powl(n, 9.0) / 2835.0);
+
+    //         /* + (1382.0 * powl(n / 2.0, 11.0) / 155925.0) +
+    //  (21844.0 * powl(n, 13.0) / 6081075.0) + (6404582.0 * powl(n, 17.0) / 10854718875.0) +
+    //  (443861162.0 * powl(n, 19.0) / 1856156927625.0) +
+    //  (18888466084.0 * powl(n, 21.0) / 194896477400625.0);*/
+    //     }
+    //     // n + (powl(n, 3) / 3.0) + ((2 * powl(n, 5.0)) / 15.0) + ((17.0 * powl(n, 7.0)) / 315.0);  //+
+    //     /*((62.0 * powl(n, 9.0)) / 2835.0) + ((1382.0 * powl(n, 11.0)) / 155925.0) +
+    //     ((21844.0 * powl(n, 13.0)) / 6081075.0) + ((929569.0 * powl(n, 15.0)) / 638512875.0) +
+    //     ((6404582.0 * powl(n, 17.0)) / 10854718875.0) + ((443861162.0 * powl(n, 19.0)) / 1856156927625.0) +
+    //     ((18888466084.0 * powl(n, 21.0)) / 194896477400625.0);*/
+    //     if (rev) res = 1.0 / res;
+    //     test_n++;
+    //     // printf("RES : : %Lf %Lf\n", m * res, tanl(x));
+    //     return m * res;
+
+    return s21_sin(x) / s21_cos(x);
 }
 
 /*x + x ^ 3 / 3 + (2 x ^ 5) / 15 + (17 x ^ 7) / 315 + (62 x ^ 9) / 2835 + (1382 x ^ 11) / 155925 +
