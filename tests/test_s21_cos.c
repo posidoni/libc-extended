@@ -11,7 +11,7 @@ Suite *suite_s21_cos(void) {
     TCase *tc = tcase_create("s21_cos_tc");
 
     // tcase_add_test(tc, );
-    tcase_add_loop_test(tc, cos_test_1, 0, 1000);
+    tcase_add_loop_test(tc, cos_test_1, 0, 10000);
 
     suite_add_tcase(s, tc);
     return s;

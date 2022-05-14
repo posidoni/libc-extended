@@ -5,7 +5,7 @@ START_TEST(tan_test_1) {
     // ck_assert_double_eq_tol(s21_tan(x), tan(x), 1e-06);
     // printf("A: %6Lf\n", a);
     // printf("B: %6Lf\n", b);
-    ck_assert_ldouble_eq_tol(s21_tan(x), (long double)tan(x), 1e-06);
+    ck_assert_ldouble_eq_tol(s21_tan(x), tanl(x), 1e-06);
 }
 END_TEST
 
