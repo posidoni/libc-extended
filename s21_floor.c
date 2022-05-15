@@ -6,9 +6,8 @@ long double s21_floor(double x) {
 
     long long val = x;
 
-    if (x != val && val > 0) {
+    if (x != val && val > 0)
         val -= 1;
-    }
 
     return val;
 }
