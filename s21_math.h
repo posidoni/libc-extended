@@ -16,6 +16,9 @@
 // returns non zero if not NAN or +-INF
 #define is_finite(x) __builtin_isfinite(x)
 
+#define TWO52 0x1.0p52 /* 2^52 */
+
+// [!] UNUSED VARIABLE DANGER
 static const long double factorials[30] = {
     [0] = 1,
     [1] = 1,
