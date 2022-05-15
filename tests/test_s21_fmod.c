@@ -1,12 +1,10 @@
 #include "s21_math_test.h"
 
 START_TEST(fmod_loop_test) {
-    double x = fRand(DBL_MIN, DBL_MAX);
-    if (rand() % 2)
-        x = -x;
-    double y = fRand(DBL_MIN, DBL_MAX);
-    if (rand() % 3)
-        y = -y;
+    double x = fRand(-1e11 + 1, 1e11 - 1);
+    if (rand() % 2) x = -x;
+    double y = fRand(-1e11 + 1, 1e11 - 1);
+    if (rand() % 3) y = -y;
 
     ck_assert_ldouble_eq(s21_fmod(x, y), fmod(x, y));
 }
