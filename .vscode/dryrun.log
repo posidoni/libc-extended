@@ -1,5 +1,0 @@
-make all --dry-run --keep-going --print-directory
-make: Entering directory `/Users/posidoni/s21_math.h'
-make: Nothing to be done for `all'.
-make: Leaving directory `/Users/posidoni/s21_math.h'
- 
