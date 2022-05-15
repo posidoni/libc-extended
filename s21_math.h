@@ -1,12 +1,18 @@
 #ifndef S21_MATH
 #define S21_MATH
 
-#include <math.h>  // (!) delete
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+// sets the value to INF
+#define INF (__builtin_inff())
+// sets the value to NAN
+#define NAN (__builtin_nanf(""))
+// returns non zero if not NAN or +-INF
+#define isfinite(x) __builtin_isfinite(x)
 
 static const long double factorials[30] = {
     [0] = 1,
