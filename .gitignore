@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Prerequisites
 *.d
 
@@ -55,3 +56,6 @@ dkms.conf
 *.o
 test
 >>>>>>> 6f308ad (fixed tests structure, added tests for atan, added gitignore)
+=======
+*/objs
+>>>>>>> 0f7f155 (fix test pow)
