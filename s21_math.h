@@ -15,6 +15,10 @@
 #define S21_NAN (__builtin_nanf(""))
 // returns non zero if not NAN or +-INF
 #define is_finite(x) __builtin_isfinite(x)
+// check if NAN
+#define is_nan(x) __builtin_isnan(x)
+// check for INF
+#define is_inf(x) __builtin_isinf(x)
 
 #define TWO52 0x1.0p52 /* 2^52 */
 
@@ -68,4 +72,6 @@ long double s21_sin(double x);
 long double s21_sqrt(double x);
 long double s21_tan(double x);
 
+// helpers
+long double s21_trunc(double val);
 #endif  //  S21_MATH
