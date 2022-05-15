@@ -7,7 +7,7 @@ START_TEST(cos_test_1) {
 END_TEST
 
 Suite *suite_s21_cos(void) {
-    Suite *s = suite_create("suite_s21_cos");
+    Suite *s = suite_create("s21_cos");
     TCase *tc = tcase_create("s21_cos_tc");
 
     // tcase_add_test(tc, );
