@@ -5,17 +5,18 @@ END_TEST
 
 START_TEST(abs_loop_test_1) {
     int n = rand();
-    if (rand() % 2) n = -n;
+    if (rand() % 2)
+        n = -n;
     ck_assert_int_eq(s21_abs(n), abs(n));
 }
 END_TEST
 
 Suite *suite_s21_abs(void) {
-    Suite *s = suite_create("suite_s21_add");
-    TCase *tc = tcase_create("s21_add_tc");
+    Suite *s = suite_create("s21_abs");
+    TCase *tc = tcase_create("suite_s21_abs");
 
     tcase_add_test(tc, abs_test_1);
-    tcase_add_loop_test(tc, abs_loop_test_1, 0, 1000);
+    tcase_add_loop_test(tc, abs_loop_test_1, 0, 10000);
 
     suite_add_tcase(s, tc);
     return s;

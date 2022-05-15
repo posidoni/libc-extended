@@ -7,8 +7,8 @@ START_TEST(sin_test_1) {
 END_TEST
 
 Suite *suite_s21_sin(void) {
-    Suite *s = suite_create("suite_s21_add");
-    TCase *tc = tcase_create("s21_add_tc");
+    Suite *s = suite_create("suite_s21_sin");
+    TCase *tc = tcase_create("s21_sin_tc");
 
     tcase_add_loop_test(tc, sin_test_1, 0, 10000);
 

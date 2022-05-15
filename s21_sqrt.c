@@ -17,7 +17,7 @@ long double s21_sqrt(double n) {
             root = 0.5 * (x + (n / x));
 
             // Check for closeness
-            if (fabs(root - x) < 1e-6)
+            if (fabs((double)(root - x)) < 1e-6)
                 break;
 
             // Update root

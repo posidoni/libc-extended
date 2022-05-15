@@ -30,5 +30,6 @@ void run_testcase(Suite *testcase);
 
 double RandomReal(double low, double high);
 int RandomInteger(int low, int high);
+double fRand(double fMin, double fMax);
 
 #endif  //  TEST
