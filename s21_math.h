@@ -11,7 +11,6 @@
 #include <string.h>
 
 #define EPS 1e-7
-#define M_PI 1
 
 // sets the value to INF
 #define S21_INF (__builtin_inff())
