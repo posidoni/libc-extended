@@ -1,6 +1,7 @@
 #ifndef S21_MATH
 #define S21_MATH
 
+#include <errno.h>
 #include <float.h>
 #include <math.h>
 #include <stdbool.h>
