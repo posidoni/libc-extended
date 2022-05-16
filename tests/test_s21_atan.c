@@ -1,5 +1,14 @@
 #include "s21_math_test.h"
 
+// Errors are reported as specified in math_errhandling.
+
+// If the implementation supports IEEE floating-point arithmetic (IEC 60559),
+
+// If the argument is ±0, it is returned unmodified
+// If the argument is +∞, +π/2 is returned
+// If the argument is -∞, -π/2 is returned
+// if the argument is NaN, NaN is returned
+
 START_TEST(atan_test_1) {
     double x = RandomReal(-1e10, 1e10);
 

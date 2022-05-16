@@ -1,17 +1,15 @@
 #!python3
 import math
 
-def s21_atan(x):
-    magic = (math.pi * math.sqrt(pow(x, 2))) / (2 * x)
-    print(magic)
-    res = 0
 
-    for i in range(0, 5):
-        res += (pow(-1, i) * pow(x, (-1 - 2*i))) / (1 + 2 * i)
+def s21_acos(x):
+    res = 0.0
 
+    res = math.atan(math.sqrt(1 - pow(x, 2)) / x)
 
-    return magic - res
+    return res
 
 if __name__ == "__main__":
-    print(s21_atan(2))
-    print(math.atan(2))
+    print(s21_acos(0.3))
+    print(math.acos(0.3))
+    
