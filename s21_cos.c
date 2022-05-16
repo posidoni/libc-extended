@@ -37,7 +37,7 @@ long double s21_cos(double x) {
     p = 0;
     s = 1.0;
     t = 1.0;
-    while (fabs(t / s) > 0.000000000001) {
+    while (fabsl(t / s) > 1e-100) {
         p++;
         t = (-t * x * x) / ((2 * p - 1) * (2 * p));
         s += t;

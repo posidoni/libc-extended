@@ -49,7 +49,7 @@ long double s21_sin(double n) {
     p = 0;
     s = (long double)x;
     t = (long double)x;
-    while (fabs(t / s) > 0.000000000001) {
+    while (fabsl(t / s) > 1e-100) {
         p++;
         t = (-t * x * x) / ((2.0 * p + 1) * (2.0 * p));
         s += t;
