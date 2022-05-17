@@ -29,30 +29,33 @@
 //     return m * res;
 // }
 
-long double s21_sin(double n) {
-    long double x = (long double)n;
-    x = fmodl(x, 2 * M_PI);
-
-    int m = 1;
-    if (x > (M_PI / 2.0) && x <= M_PI) {
-        x = M_PI - x;
-    } else if (x > M_PI && x <= M_PI * 3.0 / 2.0) {
-        x = (x - M_PI);
-        m = -m;
-    } else if (x > (M_PI * 3.0) / 2.0 && x <= 2.0 * M_PI) {
-        x = 2 * M_PI - x;
-        m = -m;
-    }
+long double s21_sin(double x) {
+    int invalid = (isnan(x) || !isfinite(x));
 
     long double t, s;
-    int p;
-    p = 0;
-    s = (long double)x;
-    t = (long double)x;
-    while (fabsl(t / s) > 1e-100) {
-        p++;
-        t = (-t * x * x) / ((2.0 * p + 1) * (2.0 * p));
-        s += t;
+    int m = 1;
+    if (!invalid) {
+        x = fmodl(x, 2 * M_PI);
+
+        if (x > (M_PI / 2.0) && x <= M_PI) {
+            x = M_PI - x;
+        } else if (x > M_PI && x <= M_PI * 3.0 / 2.0) {
+            x = (x - M_PI);
+            m = -m;
+        } else if (x > (M_PI * 3.0) / 2.0 && x <= 2.0 * M_PI) {
+            x = 2 * M_PI - x;
+            m = -m;
+        }
+
+        s = (long double)x;
+        t = (long double)x;
+        int p;
+        p = 0;
+        while (fabsl(t / s) > 1e-100) {
+            p++;
+            t = (-t * x * x) / ((2.0 * p + 1) * (2.0 * p));
+            s += t;
+        }
     }
-    return s * m;
+    return invalid ? NAN : s * m;
 }
