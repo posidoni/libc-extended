@@ -5,6 +5,7 @@ long double s21_tan(double x) {
     x = fmodl(x, 2 * M_PI);
     return s21_sin(x) / s21_cos(x);
 }
+<<<<<<< HEAD
 
 // Not working
 // long double s21_tan(double x) {
@@ -48,3 +49,5 @@ long double s21_tan(double x) {
 
 //     return res * m;
 // }
+=======
+>>>>>>> 79b848b (Fixed acos / asin (stable), added correct doubles equality, added good tests)
