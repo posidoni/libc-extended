@@ -31,16 +31,32 @@ long double s21_cos(double x) {
 }*/
 
 long double s21_cos(double x) {
-    x = fmodl(x, 2 * M_PI);
-    double t, s;
-    int p;
-    p = 0;
-    s = 1.0;
-    t = 1.0;
-    while (fabsl(t / s) > 1e-100) {
-        p++;
-        t = (-t * x * x) / ((2 * p - 1) * (2 * p));
-        s += t;
+    int invalid = (isnan(x) || !isfinite(x));
+
+    long double t, s;
+    int m = 1;
+    if (!invalid) {
+        x = fmodl(x, 2 * M_PI);
+
+        if (x > (M_PI / 2.0) && x <= M_PI) {
+            x = M_PI - x;
+            m = -m;
+        } else if (x > M_PI && x <= M_PI * 3.0 / 2.0) {
+            x = (x - M_PI);
+            m = -m;
+        } else if (x > (M_PI * 3.0) / 2.0 && x <= 2.0 * M_PI) {
+            x = 2 * M_PI - x;
+        }
+
+        int p;
+        p = 0;
+        s = 1.0;
+        t = 1.0;
+        while (fabsl(t / s) > 1e-100) {
+            p++;
+            t = (-t * x * x) / ((2 * p - 1) * (2 * p));
+            s += t;
+        }
     }
-    return s;
+    return invalid ? NAN : s * m;
 }
