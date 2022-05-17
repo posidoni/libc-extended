@@ -3,25 +3,34 @@
 long double s21_acos(double x) {
     const long double zero_acos = 1.5707963267948966;
     long double res = 0.0;
-    int mod = 0;
+
+    if (s21_ldeq(x, 0.0))
+        return zero_acos;
+
+    s21_bool mod = (s21_fabs(x) > 1.0);
+    s21_bool sign = (x > 0.0);
 
     /* These inputs DO NOT raise errno (unlike |x| > 1.0) */
-    int invalid = (is_nan(x) || !is_finite(x));
+    s21_bool invalid = ((is_nan(x) || !is_finite(x)) && !s21_ldeq(x, 0.0));
+
+    if (!sign && !invalid && !s21_ldeq(x, 0.0)) {
+        return (M_PI - s21_acos(x * -1.0));
+    }
 
     if (!invalid) {
         mod = (s21_fabs(x) > 1.0);
-
         if (mod) {
             errno = EDOM;
-        } else if (x == 1.0) {
+        } else if (s21_ldeq(x, 1.0)) {
             res = 0.0;
-        } else if (x == -1.0) {
+        } else if (s21_ldeq(x, -1.0)) {
             res = S21_M_PI;
-        } else {
+        } else if (s21_fabs(x) > 0.0) {
             /* Not sure are we allowed to compare them like that */
-            if (x == 0.0) res = zero_acos;
-
-            if (x != 0.0) { res += s21_atan(s21_sqrt(1 - x * x) / x); }
+            if (s21_ldeq(x, 0.0))
+                res = zero_acos;
+            else
+                res += atan(sqrt(1 - x * x) / x);
         }
     }
 

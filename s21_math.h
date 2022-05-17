@@ -4,6 +4,10 @@
 #include <errno.h>
 #include <float.h>
 
+#define s21_true 1
+#define s21_false 0
+#define s21_bool int
+
 #if defined(__MATH_H__)
 #pragma GCC warning "Standard math.h is defined!"
 // #error "Please, remove math.h from the build! This is illegal header!"
@@ -18,9 +22,10 @@
 #include <string.h>
 #pragma endregion STD_HEADERS
 
+s21_bool s21_ldeq(long double a, long double b);
 
-
-#define EPS 1e-7
+#define EPS 1e-6
+#define EPS_8 1e-7
 #define S21_M_PI 3.14159265358979323846264338327950288
 #define S21_M_PI_2 1.57079632679489661923132169163975144
 

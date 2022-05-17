@@ -42,5 +42,6 @@ long double s21_sqrt(double n) {
 
 static long double handle_special_cases(double n, long double root) {
     long double res = root;
-    return isnan(n) ? NAN : isfinite(n) ? res : INFINITY;
+    return isnan(n) ? NAN : isfinite(n) ? res
+                                        : INFINITY;
 }

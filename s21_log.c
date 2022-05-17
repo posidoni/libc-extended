@@ -3,12 +3,11 @@
 long double s21_log(double x) {
     long double res = 0.0L;
     const long double ln2 = 0.6931471805599453L;
-    //const long double ln2 = log(2.0l);
 
     /* Special cases */
 
-
-    if (x == 1.0) {
+    // if (x == 1.0)
+    if (fabs(x - 1.0) < EPS) {
         return 0.0L;
     }
 
@@ -29,7 +28,6 @@ long double s21_log(double x) {
         errno = EINVAL;
         return NAN;
     }
-
 
     /* Special cases END */
 
@@ -55,4 +53,4 @@ long double s21_log(double x) {
     return res;
 }
 
-// make static function for checking special value 
+// make static function for checking special value
