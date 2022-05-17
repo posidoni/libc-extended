@@ -6,20 +6,21 @@ static int check_inf(double x);
 long double s21_atan(double x) {
     long double res = 0.0L;
     const long double one_atan = 0.7853981633974480L;
-    int modulo_x = (fabsl(x) < 0);
+    int modulo_x = (fabsl(x) < 0.0L);
 
     /* Warning! Replaced sqrt(x^2) with fabs(x) in the original formula */
     long double magic = (M_PI * fabsl(x)) / (2 * x);
+    
     int special = check_inf(x);
 
     /* Constants for atan 1.0. This case is special, Taylor series can't count this */
-    if (x == 1.0)
+    if (x == 1.0L)
         res = one_atan;
-    if (x == -1.0)
+    if (x == -1.0L)
         res = -one_atan;
 
     if (x != 0.0 && !special && fabsl(x) != 1.0) {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10000; i++) {
             if (modulo_x) {
                 res += (pow(-1, i) * pow(x, 1 + 2 * i)) / (1 + 2 * i);
             } else {

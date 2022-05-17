@@ -1,7 +1,7 @@
 #include "s21_math_test.h"
 
 START_TEST(acos_test_1_rand) {
-    double x = RandomReal(-1e10, 1e10);
+    double x = RandomReal(DBL_MIN, DBL_MAX);
 
     if (x == 0) {
         ck_assert_ldouble_eq_tol(s21_acos(x), 0.0, 1e-6);
