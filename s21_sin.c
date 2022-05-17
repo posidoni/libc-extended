@@ -10,15 +10,15 @@
 //         m = -1;
 //     }
 
-//     n = fmodl(n, (long double)(2.0 * M_PI));
+//     n = fmodl(n, (long double)(2.0 * S21_M_PI));
 
-//     if (n > (M_PI / 2.0) && n <= M_PI) {
-//         n = M_PI - n;
-//     } else if (n > M_PI && n <= M_PI * 3.0 / 2.0) {
-//         n = (n - M_PI);
+//     if (n > (S21_M_PI / 2.0) && n <= S21_M_PI) {
+//         n = S21_M_PI - n;
+//     } else if (n > S21_M_PI && n <= S21_M_PI * 3.0 / 2.0) {
+//         n = (n - S21_M_PI);
 //         m = -m;
-//     } else if (n > (M_PI * 3.0) / 2.0 && n <= 2.0 * M_PI) {
-//         n = 2 * M_PI - n;
+//     } else if (n > (S21_M_PI * 3.0) / 2.0 && n <= 2.0 * S21_M_PI) {
+//         n = 2 * S21_M_PI - n;
 //         m = -m;
 //     }
 
@@ -30,32 +30,29 @@
 // }
 
 long double s21_sin(double x) {
-    int invalid = (isnan(x) || !isfinite(x));
+    if (x == S21_NAN || x == S21_INF || x == -S21_INF) return S21_NAN;
+
+    int m = 1;
+    x = s21_fmod(x, 2 * S21_M_PI);
+
+    if (x > (S21_M_PI / 2.0) && x <= S21_M_PI) {
+        x = S21_M_PI - x;
+    } else if (x > S21_M_PI && x <= S21_M_PI * 3.0 / 2.0) {
+        x = (x - S21_M_PI);
+        m = -m;
+    } else if (x > (S21_M_PI * 3.0) / 2.0 && x <= 2.0 * S21_M_PI) {
+        x = 2 * S21_M_PI - x;
+        m = -m;
+    }
 
     long double t, s;
-    int m = 1;
-    if (!invalid) {
-        x = fmodl(x, 2 * M_PI);
-
-        if (x > (M_PI / 2.0) && x <= M_PI) {
-            x = M_PI - x;
-        } else if (x > M_PI && x <= M_PI * 3.0 / 2.0) {
-            x = (x - M_PI);
-            m = -m;
-        } else if (x > (M_PI * 3.0) / 2.0 && x <= 2.0 * M_PI) {
-            x = 2 * M_PI - x;
-            m = -m;
-        }
-
-        s = (long double)x;
-        t = (long double)x;
-        int p;
-        p = 0;
-        while (fabsl(t / s) > 1e-100) {
-            p++;
-            t = (-t * x * x) / ((2.0 * p + 1) * (2.0 * p));
-            s += t;
-        }
+    s = (long double)x;
+    t = (long double)x;
+    int p = 0;
+    while (s21_fabs(t / s) > 1e-100) {
+        p++;
+        t = (-t * x * x) / ((2.0 * p + 1) * (2.0 * p));
+        s += t;
     }
-    return invalid ? NAN : s * m;
+    return s * m;
 }

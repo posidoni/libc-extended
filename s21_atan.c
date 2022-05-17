@@ -6,6 +6,7 @@ static int check_inf(double x);
 long double s21_atan(double x) {
     long double res = 0.0L;
     const long double one_atan = 0.7853981633974480L;
+<<<<<<< HEAD
     int modulo_x = (fabsl(x) < 0.0L);
 
     /* Warning! Replaced sqrt(x^2) with fabs(x) in the original formula */
@@ -21,27 +22,39 @@ long double s21_atan(double x) {
 
     if (x != 0.0 && !special && fabsl(x) != 1.0) {
         for (int i = 0; i < 10000; i++) {
+=======
+    int modulo_x = (s21_fabs(x) < 0);
+
+    /* Warning! Replaced sqrt(x^2) with fabs(x) in the original formula */
+    long double magic = (S21_M_PI * s21_fabs(x)) / (2 * x);
+    int special = check_inf(x);
+
+    /* Constants for atan 1.0. This case is special, Taylor series can't count this */
+    if (x == 1.0) res = one_atan;
+    if (x == -1.0) res = -one_atan;
+
+    if (x != 0.0 && !special && s21_fabs(x) != 1.0) {
+        for (int i = 0; i < 10; i++) {
+>>>>>>> 71bf06a (s21_)
             if (modulo_x) {
-                res += (pow(-1, i) * pow(x, 1 + 2 * i)) / (1 + 2 * i);
+                res += (s21_pow(-1, i) * s21_pow(x, 1 + 2 * i)) / (1 + 2 * i);
             } else {
-                res += (pow(-1, i) * pow(x, (-1 - 2 * i))) / (1 + 2 * i);
+                res += (s21_pow(-1, i) * s21_pow(x, (-1 - 2 * i))) / (1 + 2 * i);
             }
         }
     }
 
-    return (is_nan(x)) ? NAN : s21_atan_pos_neg(magic, res, modulo_x, &special, x);
+    return (is_nan(x)) ? S21_NAN : s21_atan_pos_neg(magic, res, modulo_x, &special, x);
 }
 
 static long double s21_atan_pos_neg(long double magic, long double res, int mod, int *sp, long double x) {
-    if (!mod && res != 0.0 && !(*sp)) {
-        res = magic - res;
-    }
+    if (!mod && res != 0.0 && !(*sp)) { res = magic - res; }
 
     if (*sp) {
-        if (x == INFINITY) {
-            res = M_PI_2;
+        if (x == S21_INF) {
+            res = S21_M_PI_2;
         } else {
-            res = -1.0L * M_PI_2;
+            res = -1.0L * S21_M_PI_2;
         }
     }
 
@@ -51,9 +64,7 @@ static long double s21_atan_pos_neg(long double magic, long double res, int mod,
 static int check_inf(double x) {
     int flag = 0;
 
-    if (!isfinite(x) && !is_nan(x)) {
-        flag = 1;
-    }
+    if (!is_finite(x) && !is_nan(x)) { flag = 1; }
 
     return flag;
 }

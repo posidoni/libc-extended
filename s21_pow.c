@@ -1,5 +1,5 @@
-#include "s21_math.h"
 #include "math.h"
+#include "s21_math.h"
 
 long double s21_pow(double base, double exp) {
     // TODO REPLACE MATH 2 S21_MATH
@@ -8,16 +8,16 @@ long double s21_pow(double base, double exp) {
         if (fabs(exp) > EPS) {
             res = expl(exp * logl(base));
         } else {
-            res = (long double) 1 / expl(-exp * logl(base));
+            res = (long double)1 / expl(-exp * logl(base));
         }
     } else {
-        res = -NAN;
+        res = NAN;
     }
     return res;
 }
 
-//int main() {
-//    long double base = -8;
-//    long double exp = 0.3;
-//    printf("%Lf\n%Lf", s21_pow(base, exp), powl(base, exp));
-//}
+// int main() {
+//     long double base = -8;
+//     long double exp = 0.3;
+//     printf("%Lf\n%Lf", s21_pow(base, exp), powl(base, exp));
+// }

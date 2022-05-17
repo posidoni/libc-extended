@@ -2,10 +2,9 @@
 
 long double s21_exp(double x) {
     // Error handling
-    if (x == NAN) return NAN;
-    if (x == -INFINITY) return 0;
-    if (x == INFINITY) return INFINITY;
-    if (x == 0) return 1;
+    if (x == S21_NAN) return S21_NAN;
+    if (x == -S21_INF) return 0;
+    if (x == S21_INF) return S21_INF;
 
     long double t, s;
     int p;
@@ -13,7 +12,7 @@ long double s21_exp(double x) {
     long double arg = (long double)x;
     s = (long double)1;
     t = (long double)1;
-    while (fabsl(t / s) > 1e-100) {
+    while (s21_fabs(t / s) > 1e-100) {
         p++;
         t = (t * arg) / p;
         s += t;
