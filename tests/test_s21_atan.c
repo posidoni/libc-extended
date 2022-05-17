@@ -38,6 +38,15 @@ END_TEST
 START_TEST(atan_test_2_rand) {
     double x = RandomReal(-1.0, 1.0);
 
+    printf("%lf \n", x);
+
+    ck_assert_ldouble_eq_tol(s21_atan(x), atan(x), EPS);
+}
+END_TEST
+
+START_TEST(atan_test_3_rand) {
+    double x = RandomReal(-0.99999, 0.999999);
+
     ck_assert_ldouble_eq_tol(s21_atan(x), atan(x), EPS);
 }
 END_TEST
@@ -47,11 +56,12 @@ Suite *suite_s21_atan(void) {
     TCase *tc = tcase_create("s21_add_tc");
 
     tcase_add_loop_test(tc, atan_test_1_rand, 0, 20000);
+    tcase_add_loop_test(tc, atan_test_2_rand, 0, 10000);
+    tcase_add_loop_test(tc, atan_test_3_rand, 0, 10000);
     tcase_add_test(tc, atan_test_2_inf);
     tcase_add_test(tc, atan_test_3_nan);
     tcase_add_test(tc, atan_test_4_one);
     tcase_add_test(tc, atan_test_5_zero);
-    tcase_add_loop_test(tc, atan_test_2_rand, 0, 20000);
 
     suite_add_tcase(s, tc);
     return s;
