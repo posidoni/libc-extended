@@ -1,8 +1,58 @@
 #include "s21_math.h"
 
-// get my python log and apply heavy optimization
-// https://stackoverflow.com/questions/10732034/how-are-logarithms-programmed
-
 long double s21_log(double x) {
-    //
+    long double res = 0.0L;
+    const long double ln2 = 0.6931471805599453L;
+    //const long double ln2 = log(2.0l);
+
+    /* Special cases */
+
+
+    if (x == 1.0) {
+        return 0.0L;
+    }
+
+    if (is_nan(x)) {
+        return NAN;
+    }
+
+    if (!is_finite(x) && x > 0) {
+        return INFINITY;
+    }
+
+    if (x == 0.0L) {
+        errno = ERANGE;
+        return -INFINITY;
+    }
+
+    if (x < 0.0) {
+        errno = EINVAL;
+        return NAN;
+    }
+
+
+    /* Special cases END */
+
+    if (x < 2.0) {
+        for (int i = 1; i < 100000; i++) {
+            long double a = (i % 2) ? -1 : 1;
+            long double b = pow((x - 1), i);
+            res -= (a * b) / i;
+        }
+    } else {
+        long double m = 0.0L;
+        long double p = 0.0L;
+
+        while (x > 2.0) {
+            m = x / 2.0;
+            x /= 2.0;
+            p++;
+        }
+
+        res = s21_log(m) + p * ln2;
+    }
+
+    return res;
 }
+
+// make static function for checking special value 
