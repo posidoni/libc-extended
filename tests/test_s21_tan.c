@@ -1,7 +1,9 @@
 #include "s21_math_test.h"
 
 START_TEST(tan_test_1) {
-    double x = RandomReal(-2 * M_PI, 2 * M_PI);
+    // double x = RandomReal(-2 * M_PI, 2 * M_PI);
+    double x = M_PI_2;
+    // double x = RandomReal(-1e5, 1e5);
     ck_assert_ldouble_eq_tol(s21_tan(x), tanl(x), 1e-06);
 }
 END_TEST
@@ -34,11 +36,11 @@ Suite *suite_s21_tan(void) {
     Suite *s = suite_create("suite_s21_tan");
     TCase *tc = tcase_create("s21_tan_tc");
 
-    tcase_add_loop_test(tc, tan_test_1, 0, 10000);
-    tcase_add_test(tc, tan_0);
-    tcase_add_test(tc, tan_minf);
-    tcase_add_test(tc, tan_inf);
-    tcase_add_test(tc, tan_nan);
+    tcase_add_loop_test(tc, tan_test_1, 0, 1);
+    // tcase_add_test(tc, tan_0);
+    // tcase_add_test(tc, tan_minf);
+    // tcase_add_test(tc, tan_inf);
+    // tcase_add_test(tc, tan_nan);
 
     suite_add_tcase(s, tc);
     return s;
