@@ -3,12 +3,22 @@
 
 #include <errno.h>
 #include <float.h>
+
+#if defined(__MATH_H__)
+#pragma GCC warning "Standard math.h is defined!"
+// #error "Please, remove math.h from the build! This is illegal header!"
+#endif
+
+#pragma region STD_HEADERS
 #include <math.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#pragma endregion STD_HEADERS
+
+
 
 #define EPS 1e-7
 #define S21_M_PI 3.14159265358979323846264338327950288
