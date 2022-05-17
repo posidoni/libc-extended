@@ -1,13 +1,12 @@
 #include "s21_math.h"
 
 long double s21_floor(double x) {
-    if (!is_finite(x) || fabs(x) >= TWO52)
-        return x;
+    if (is_nan(x)) return S21_NAN;
+    if (!is_finite(x) || s21_fabs(x) >= TWO52) return x;
 
     long long val = x;
 
-    if (x != val && val > 0)
-        val -= 1;
+    if (x != val && val > 0) val -= 1;
 
     return val;
 }
