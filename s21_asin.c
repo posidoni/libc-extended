@@ -20,7 +20,7 @@ long double s21_asin(double x) {
             else if (s21_ldeq(x, -1.0))
                 res = -one_asin;
             else if (!s21_ldeq(x, 0.0))
-                res += atan(x / s21_sqrt(1 - x * x));
+                res += s21_atan(x / s21_sqrt(1 - x * x));
         }
     }
 
