@@ -8,6 +8,8 @@
 #define s21_false 0
 #define s21_bool int
 
+#include "math.h"
+
 #if defined(__MATH_H__)
 #pragma GCC warning "Standard math.h is defined!"
 // #error "Please, remove math.h from the build! This is illegal header!"
