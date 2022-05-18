@@ -30,7 +30,7 @@ long double s21_acos(double x) {
             if (s21_ldeq(x, 0.0))
                 res = zero_acos;
             else
-                res += atan(sqrt(1 - x * x) / x);
+                res += s21_atan(sqrt(1 - x * x) / x);
         }
     }
 

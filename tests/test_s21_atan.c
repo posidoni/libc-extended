@@ -38,8 +38,6 @@ END_TEST
 START_TEST(atan_test_2_rand) {
     double x = RandomReal(-1.0, 1.0);
 
-    printf("%lf \n", x);
-
     ck_assert_ldouble_eq_tol(s21_atan(x), atan(x), EPS);
 }
 END_TEST
