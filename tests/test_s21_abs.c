@@ -13,7 +13,7 @@ END_TEST
 
 Suite *suite_s21_abs(void) {
     Suite *s = suite_create("s21_abs");
-    TCase *tc = tcase_create("suite_s21_abs");
+    TCase *tc = tcase_create("s21_add_tc");
 
     tcase_add_test(tc, abs_test_1);
     tcase_add_loop_test(tc, abs_loop_test_1, 0, 10000);
