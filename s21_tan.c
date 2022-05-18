@@ -2,7 +2,6 @@
 
 long double s21_tan(double x) {
     if (is_nan(x) || !is_finite(x)) return S21_NAN;
-    x = fmodl(x, 2 * M_PI);
     return s21_sin(x) / s21_cos(x);
 }
 <<<<<<< HEAD
