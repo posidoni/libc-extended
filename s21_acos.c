@@ -1,6 +1,7 @@
 #include "s21_math.h"
 
 long double s21_acos(double x) {
+    // TODO Move the definition below
     const long double zero_acos = 1.5707963267948966;
     long double res = 0.0;
 
@@ -14,7 +15,7 @@ long double s21_acos(double x) {
     s21_bool invalid = ((is_nan(x) || !is_finite(x)) && !s21_ldeq(x, 0.0));
 
     if (!sign && !invalid && !s21_ldeq(x, 0.0)) {
-        return (M_PI - s21_acos(x * -1.0));
+        return (S21_M_PI - s21_acos(x * -1.0));
     }
 
     if (!invalid) {
@@ -30,7 +31,7 @@ long double s21_acos(double x) {
             if (s21_ldeq(x, 0.0))
                 res = zero_acos;
             else
-                res += s21_atan(sqrt(1 - x * x) / x);
+                res += s21_atan(s21_sqrt(1 - x * x) / x);
         }
     }
 

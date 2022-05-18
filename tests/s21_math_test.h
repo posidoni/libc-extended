@@ -1,6 +1,7 @@
 #ifndef TEST
 #define TEST
 
+#include <time.h>
 #include <check.h>
 #include <math.h>
 #include <stdio.h>
@@ -9,6 +10,7 @@
 #include <time.h>
 
 #include "../s21_math.h"
+
 
 Suite *suite_s21_abs(void);
 Suite *suite_s21_acos(void);
