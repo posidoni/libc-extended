@@ -6,16 +6,12 @@ long double s21_exp(double x) {
     if (x == -S21_INF) return 0;
     if (x == S21_INF) return S21_INF;
 
-    long double t, s;
-    int p;
-    p = 0;
     long double arg = (long double)x;
-    s = (long double)1;
-    t = (long double)1;
-    while (s21_fabs(t / s) > 1e-100) {
-        p++;
-        t = (t * arg) / p;
-        s += t;
+    long double sum = 1.0;
+    long double tailor = 1.0;
+    for (int p = 1; s21_fabs(tailor / sum) > 1e-100; p++) {
+        tailor = (tailor * arg) / p;
+        sum += tailor;
     }
-    return s;
+    return sum;
 }
