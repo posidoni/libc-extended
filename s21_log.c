@@ -1,46 +1,52 @@
 #include "s21_math.h"
 
 long double s21_log(double x) {
+    // TODO Remove unnecessary returns
     long double res = 0.0L;
+    // TODO Move the definition below
     const long double ln2 = 0.6931471805599453L;
 
     /* Special cases */
 
     // if (x == 1.0)
-    if (fabs(x - 1.0) < EPS) {
+    if (s21_fabs(x - 1.0) < EPS) {
         return 0.0L;
     }
 
     if (is_nan(x)) {
-        return NAN;
+        return S21_NAN;
     }
 
     if (!is_finite(x) && x > 0) {
-        return INFINITY;
+        return S21_INF;
     }
 
+    // TODO Replace the comparison of doubles
     if (x == 0.0L) {
         errno = ERANGE;
-        return -INFINITY;
+        return -S21_INF;
     }
 
     if (x < 0.0) {
         errno = EINVAL;
-        return NAN;
+        return S21_NAN;
     }
 
     /* Special cases END */
 
+    // TODO Replace the comparison of doubles
     if (x < 2.0) {
+        // TODO Replace to constant
         for (int i = 1; i < 100000; i++) {
             long double a = (i % 2) ? -1 : 1;
-            long double b = pow((x - 1), i);
+            long double b = s21_pow((x - 1), i);
             res -= (a * b) / i;
         }
     } else {
         long double m = 0.0L;
         long double p = 0.0L;
 
+        // TODO Replace the comparison of doubles
         while (x > 2.0) {
             m = x / 2.0;
             x /= 2.0;

@@ -8,10 +8,10 @@ START_TEST(atan_test_1_rand) {
 END_TEST
 
 START_TEST(atan_test_2_inf) {
-    ck_assert_ldouble_eq_tol(s21_atan(INFINITY), (M_PI / 2.0), EPS);
-    ck_assert_ldouble_eq_tol(atan(INFINITY), (M_PI / 2.0), EPS);
-    ck_assert_ldouble_eq_tol(s21_atan((-INFINITY)), ((M_PI) / -2.0), EPS);
-    ck_assert_ldouble_eq_tol(atan(-INFINITY), ((M_PI) / -2.0), EPS);
+    ck_assert_ldouble_eq_tol(s21_atan(INFINITY), (S21_M_PI / 2.0), EPS);
+    ck_assert_ldouble_eq_tol(atan(INFINITY), (S21_M_PI / 2.0), EPS);
+    ck_assert_ldouble_eq_tol(s21_atan((-INFINITY)), ((S21_M_PI) / -2.0), EPS);
+    ck_assert_ldouble_eq_tol(atan(-INFINITY), ((S21_M_PI) / -2.0), EPS);
 }
 END_TEST
 

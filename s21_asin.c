@@ -1,6 +1,7 @@
 #include "s21_math.h"
 
 long double s21_asin(double x) {
+    // TODO Move the definition below
     const long double one_asin = 1.5707963267948966;
     long double res = 0.0;
     s21_bool mod = 0;

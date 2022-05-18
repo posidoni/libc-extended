@@ -30,6 +30,7 @@ long double s21_fast_pow(long double base, long long int exp) {
 
 long double s21_pow(double base, double exp) {
     // TODO REPLACE MATH 2 S21_MATH
+    // TODO Move the definition below
     long double res;
 
     int b_n = is_nan(base);

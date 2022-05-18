@@ -30,7 +30,12 @@
 // }
 
 long double s21_sin(double x) {
+<<<<<<< HEAD
     if (is_nan(x) || !is_finite(x)) return S21_NAN;
+=======
+    // TODO Remove unnecessary returns
+    if (x == S21_NAN || x == S21_INF || x == -S21_INF) return S21_NAN;
+>>>>>>> 85ddb17 (Add TODO)
 
     int sign = 1;
     x = s21_fmod(x, 2 * S21_M_PI);
@@ -45,11 +50,24 @@ long double s21_sin(double x) {
         sign = -sign;
     }
 
+<<<<<<< HEAD
     long double sum = (long double)x;
     long double tailor = (long double)x;
     for (int p = 1; s21_fabs(tailor / sum) > 1e-100; p++) {
         tailor = (-tailor * x * x) / ((2.0 * p + 1) * (2.0 * p));
         sum += tailor;
+=======
+    // TODO Maybe you can improve the view [Optional]
+    long double t, s;
+    s = (long double)x;
+    t = (long double)x;
+    int p = 0;
+    // TODO Replace to constant
+    while (s21_fabs(t / s) > 1e-100) {
+        p++;
+        t = (-t * x * x) / ((2.0 * p + 1) * (2.0 * p));
+        s += t;
+>>>>>>> 85ddb17 (Add TODO)
     }
     return sum * sign;
 }

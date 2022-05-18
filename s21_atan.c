@@ -4,6 +4,7 @@ static long double s21_atan_pos_neg(long double magic, long double res, int mod,
 static int check_inf(double x);
 
 long double s21_atan(double x) {
+    // TODO Remove unnecessary returns
     long double res = 0.0;
 
     const long double one_atan = 0.7853981633974480L;
@@ -34,7 +35,7 @@ long double s21_atan(double x) {
     long double magic = (S21_M_PI * s21_fabs(x)) / (2.0 * x);
     int special = check_inf(x);
 
-    if (!isfinite(x) && s21_fabs(x) > 0) {
+    if (!is_finite(x) && s21_fabs(x) > 0) {
         return S21_M_PI_2;
     }
 
@@ -53,14 +54,20 @@ long double s21_atan(double x) {
 
     if (!s21_ldeq(x, 0.0) && !special && !s21_ldeq(s21_fabs(res), one_atan)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         for (int i = 0; i < 10000; i++) {
 >>>>>>> 79b848b (Fixed acos / asin (stable), added correct doubles equality, added good tests)
 =======
+=======
+        // TODO Move iter... to const
+>>>>>>> 85ddb17 (Add TODO)
         for (int i = 0; i < 100000; i++) {
 >>>>>>> 7beee38 (fixed atan (needed better precision around 1))
             if (modulo_x) {
+                // TODO replace powl to s21_pow or (create func s21_powl)
                 res += (powl(-1.0, i) * powl(x, 1 + 2 * i)) / (1 + 2 * i);
             } else {
+                // TODO replace powl to s21_pow or (create func s21_powl)
                 res += (powl(-1.0, i) * powl(x, (-1 - 2 * i))) / (1 + 2 * i);
             }
         }
@@ -70,6 +77,7 @@ long double s21_atan(double x) {
 }
 
 static long double s21_atan_pos_neg(long double magic, long double res, int mod, int *sp, long double x) {
+    // TODO Replace the comparison of doubles
     if (!mod && !s21_ldeq(res, 0.0) && !(*sp)) {
         res = magic - res;
     }
