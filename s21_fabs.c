@@ -8,6 +8,5 @@ long double s21_fabs(double x) {
         return x;
     }
 
-    // TODO Replace the comparison of doubles
-    return x < 0 ? -x : x;
+    return __builtin_signbit(x) ? -x : x;
 }

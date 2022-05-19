@@ -7,8 +7,7 @@ long double s21_ceil(double x) {
 
     long double val = (long long)x;
 
-    // TODO Replace the comparison of doubles
-    if (x != val && val > 0) {
+    if (x != val && s21_fabs(val) > EPS) {
         if (val != DBL_MAX)
             val += 1;
         else
