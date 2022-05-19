@@ -28,7 +28,7 @@ START_TEST(exp_nan) {
 END_TEST
 
 Suite *suite_s21_exp(void) {
-    Suite *s = suite_create("suite_s21_exp");
+    Suite *s = suite_create("s21_exp");
     TCase *tc = tcase_create("s21_exp_tc");
 
     tcase_add_loop_test(tc, exp_test_1, 0, 10000);

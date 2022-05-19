@@ -53,6 +53,7 @@ long double s21_atan(double x) {
     if (s21_ldeq(x, -1.0)) res = atan(x);
 
     if (!s21_ldeq(x, 0.0) && !special && !s21_ldeq(s21_fabs(res), one_atan)) {
+<<<<<<< HEAD:s21_atan.c
 <<<<<<< HEAD
 <<<<<<< HEAD
         for (int i = 0; i < 10000; i++) {
@@ -63,12 +64,16 @@ long double s21_atan(double x) {
 >>>>>>> 85ddb17 (Add TODO)
         for (int i = 0; i < 100000; i++) {
 >>>>>>> 7beee38 (fixed atan (needed better precision around 1))
+=======
+        static const int good_precision = 100000;
+        for (int i = 0; i < good_precision; i++) {
+>>>>>>> 3b6eab5 (Minor fix, uncommented targets in makefile, removed math.h, GCOV untested):src/s21_atan.c
             if (modulo_x) {
-                // TODO replace powl to s21_pow or (create func s21_powl)
-                res += (powl(-1.0, i) * powl(x, 1 + 2 * i)) / (1 + 2 * i);
+                // TODO replace s21_pow to s21_pow or (create func s21_s21_pow)
+                res += (s21_pow(-1.0, i) * s21_pow(x, 1 + 2 * i)) / (1 + 2 * i);
             } else {
-                // TODO replace powl to s21_pow or (create func s21_powl)
-                res += (powl(-1.0, i) * powl(x, (-1 - 2 * i))) / (1 + 2 * i);
+                // TODO replace s21_pow to s21_pow or (create func s21_s21_pow)
+                res += (s21_pow(-1.0, i) * s21_pow(x, (-1 - 2 * i))) / (1 + 2 * i);
             }
         }
     }
@@ -77,7 +82,6 @@ long double s21_atan(double x) {
 }
 
 static long double s21_atan_pos_neg(long double magic, long double res, int mod, int *sp, long double x) {
-    // TODO Replace the comparison of doubles
     if (!mod && !s21_ldeq(res, 0.0) && !(*sp)) {
         res = magic - res;
     }
@@ -90,8 +94,6 @@ static long double s21_atan_pos_neg(long double magic, long double res, int mod,
             res = -1.0L * S21_M_PI_2;
         }
     }
-
-    // (!) THESE things break asin / acos
 
     if (x > S21_M_PI_2) {
         return S21_M_PI_2;
@@ -106,10 +108,8 @@ static long double s21_atan_pos_neg(long double magic, long double res, int mod,
 
 static int check_inf(double x) {
     int flag = 0;
-
     if (!is_finite(x) && !is_nan(x) && s21_ldeq(x, 0.0)) {
         flag = 1;
     }
-
     return flag;
 }

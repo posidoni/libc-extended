@@ -2,6 +2,7 @@
 #include "s21_math.h"
 
 long double s21_fast_pow(long double base, long long int exp) {
+<<<<<<< HEAD:s21_pow.c
 <<<<<<< HEAD
     long double res;
 <<<<<<< HEAD
@@ -15,6 +16,9 @@ long double s21_fast_pow(long double base, long long int exp) {
 =======
     long double res;    
 >>>>>>> 5969fca (Stable, 100% tests. Fix bugs in pow tests)
+=======
+    long double res;
+>>>>>>> 3b6eab5 (Minor fix, uncommented targets in makefile, removed math.h, GCOV untested):src/s21_pow.c
     if (exp >= 0) {
         res = 1;
         while (exp) {
@@ -33,9 +37,7 @@ long double s21_fast_pow(long double base, long long int exp) {
 }
 
 long double s21_pow(double base, double exp) {
-    // TODO REPLACE MATH 2 S21_MATH
-    // TODO Move the definition below
-    long double res;
+    long double res = 0.0;
 
     int b_n = is_nan(base);
     int b_f = is_finite(base);
@@ -46,44 +48,36 @@ long double s21_pow(double base, double exp) {
     // If base is finite and negative and exp is finite and non-integer,
     // a domain error occurs and a range error may occur.
     if (b_f && base < -EPS && e_f && !e_i) {
-        // TODO CHANGE ERROR
         return S21_NAN;
     }
 
     // If base is zero and exp is zero, a domain error may occur.
     if (fabs(base) < EPS && fabs(exp) < EPS) {
-        // TODO CHANGE ERROR
-        printf("2 \n");
         return S21_NAN;
     }
 
     // If base is zero and exp is negative, a domain error or a pole error may occur.
     if (fabs(base) < EPS && exp < -EPS) {
-        // TODO CHANGE ERROR
         return S21_NAN;
     }
 
     // 1 pow(+0, exp), where exp is a negative odd integer, returns +∞ and raises FE_DIVBYZERO
     if (base > 0 && base <= EPS && e_i && ((int)exp) < 0 && ((int)exp) % 2) {
-        // TODO CHANGE ERROR
         return S21_INF;
     }
 
     // 2 pow(-0, exp), where exp is a negative odd integer, returns -∞ and raises FE_DIVBYZERO
     if (base > 0 && base <= EPS && e_i && ((int)exp) < 0 && ((int)exp) % 2) {
-        // TODO CHANGE ERROR
         return -S21_INF;
     }
 
     // 3 pow(±0, exp), where exp is negative, finite, and is an even integer or a non-integer, returns +∞ and raises FE_DIVBYZERO
     if (fabs(base) < EPS && e_f && ((e_i && !(((int)exp) % 2)) || !e_i)) {
-        // TODO CHANGE ERROR
         return S21_INF;
     }
 
     // 4 pow(±0, -∞) returns +∞ and may raise FE_DIVBYZERO
     if (fabs(base) < EPS && !e_f && exp < 0) {
-        // TODO CHANGE ERROR
         return S21_INF;
     }
 

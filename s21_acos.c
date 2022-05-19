@@ -1,7 +1,6 @@
 #include "s21_math.h"
 
 long double s21_acos(double x) {
-    // TODO Move the definition below
     const long double zero_acos = 1.5707963267948966;
     long double res = 0.0;
 

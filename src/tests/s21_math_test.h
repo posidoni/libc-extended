@@ -7,10 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 #include "../s21_math.h"
-
 
 Suite *suite_s21_abs(void);
 Suite *suite_s21_acos(void);

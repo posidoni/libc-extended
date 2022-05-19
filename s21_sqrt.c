@@ -24,13 +24,13 @@ long double s21_sqrt(double n) {
 
     // TODO Replace the comparison of doubles
     // TODO Implement the "is normal" function
-    if (n > 0.0 && isnormal(n)) {
+    if (n > 0.0 && is_normal(n)) {
         while (1) {
             root = 0.5 * (x + (n / x));
 
             // TODO Replace to constant
-            // TODO Replace fabsl to s21_fabs or implement the "s21_fabls" function
-            if (fabsl(root - x) < 1e-12)
+            // TODO Replace s21_fabs to s21_fabs or implement the "s21_fabls" function
+            if (s21_fabs(root - x) < 1e-12)
                 break;
 
             x = root;

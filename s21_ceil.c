@@ -1,7 +1,6 @@
 #include "s21_math.h"
 
 long double s21_ceil(double x) {
-    // TODO Remove unnecessary returns
     if (!is_finite(x) || s21_fabs(x) >= TWO52)
         return x;
 
