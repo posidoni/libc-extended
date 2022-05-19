@@ -91,7 +91,7 @@ END_TEST
 
 Suite *
 suite_s21_log(void) {
-    Suite *s = suite_create("suite_s21_log");
+    Suite *s = suite_create("s21_log");
     TCase *tc = tcase_create("s21_add_tc");
 
     tcase_add_loop_test(tc, log_test_1_rand, 0, 1000);

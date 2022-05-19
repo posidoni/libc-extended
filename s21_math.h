@@ -1,31 +1,19 @@
 #ifndef S21_MATH
 #define S21_MATH
 
-#include <errno.h>
-#include <float.h>
-
 #define s21_true 1
 #define s21_false 0
 #define s21_bool int
 
-#include "math.h"
-
-#if defined(__MATH_H__)
-#pragma GCC warning "Standard math.h is defined!"
-// #error "Please, remove math.h from the build! This is illegal header!"
-#endif
-
 #pragma region STD_HEADERS
+#include <errno.h>
+#include <float.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #pragma endregion STD_HEADERS
-
-s21_bool s21_ldeq(long double a, long double b);
-
-long double s21_atan_custom(double x);
 
 #define EPS 1e-6
 #define EPS_8 1e-7
@@ -42,8 +30,11 @@ long double s21_atan_custom(double x);
 #define is_nan(x) __builtin_isnan(x)
 // check for INF
 #define is_inf(x) __builtin_isinf(x)
+#define is_normal(x) __builtin_isnormal(x)
 
 #define TWO52 0x1.0p52 /* 2^52 */
+
+/* Lib */
 
 int s21_abs(int x);
 long double s21_acos(double x);
@@ -61,6 +52,9 @@ long double s21_sin(double x);
 long double s21_sqrt(double x);
 long double s21_tan(double x);
 
-// helpers
+/* Helpers */
 long double s21_trunc(double val);
+s21_bool s21_ldeq(long double a, long double b);
+long double s21_atan_custom(double x);
+
 #endif  //  S21_MATH

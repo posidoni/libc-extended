@@ -38,7 +38,7 @@ START_TEST(tan_nan) {
 END_TEST
 
 Suite *suite_s21_tan(void) {
-    Suite *s = suite_create("suite_s21_tan");
+    Suite *s = suite_create("s21_tan");
     TCase *tc = tcase_create("s21_tan_tc");
 
     tcase_add_loop_test(tc, tan_test_1, 0, 10000);

@@ -23,7 +23,7 @@ START_TEST(all_neg) {
 END_TEST
 
 Suite *suite_s21_pow(void) {
-    Suite *s = suite_create("suite_s21_pow");
+    Suite *s = suite_create("s21_pow");
     TCase *tc = tcase_create("s21_pow_tc");
 
     tcase_add_loop_test(tc, basic_test, -666, 666);

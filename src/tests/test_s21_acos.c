@@ -100,10 +100,10 @@ START_TEST(acos_test_5_zero) {
 END_TEST
 
 Suite *suite_s21_acos(void) {
-    Suite *s = suite_create("suite_s21_acos");
+    Suite *s = suite_create("s21_acos");
     TCase *tc = tcase_create("s21_add_tc");
 
-    tcase_add_loop_test(tc, acos_test_1_rand, 0, 1000);
+    tcase_add_loop_test(tc, acos_test_1_rand, 0, 5);
     tcase_add_loop_test(tc, acos_test_2_rand, 0, 100);
     tcase_add_loop_test(tc, acos_test_3_rand, 0, 100);
     tcase_add_loop_test(tc, acos_test_4_rand, 0, 100);

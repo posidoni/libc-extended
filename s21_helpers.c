@@ -10,17 +10,14 @@ s21_bool s21_deq(double a, double b) { return (a < b + EPS_8 && a > b - EPS_8); 
 s21_bool s21_feq(float a, float b) { return (a < b + EPS_8 && a > b - EPS_8); }
 =======
 s21_bool s21_ldeq(long double a, long double b) {
-    // TODO fabs(a - b) < EPS) ? why not? [OPTIONAL]
     return (a < b + EPS_8 && a > b - EPS_8);
 }
 
 s21_bool s21_deq(double a, double b) {
-    // TODO fabs(a - b) < EPS) ? why not? [OPTIONAL]
     return (a < b + EPS_8 && a > b - EPS_8);
 }
 
 s21_bool s21_feq(float a, float b) {
-    // TODO fabs(a - b) < EPS) ? why not? [OPTIONAL]
     return (a < b + EPS_8 && a > b - EPS_8);
 }
 <<<<<<< HEAD
@@ -31,7 +28,6 @@ static long double s21_atan_custom_pos_neg(long double magic, long double res, i
 static int check_inf_custom(double x);
 
 long double s21_atan_custom(double x) {
-    // TODO Remove unnecessary returns
     long double res = 0.0;
 
     const long double one_atan = 0.7853981633974480L;
@@ -51,14 +47,11 @@ long double s21_atan_custom(double x) {
     if (s21_ldeq(x, -1.0)) res = -one_atan;
 
     if (!s21_ldeq(x, 0.0) && !special && !s21_ldeq(s21_fabs(res), one_atan)) {
-        // TODO Move iter... to const
         for (int i = 0; i < 100000; i++) {
             if (modulo_x) {
-                // TODO replace powl to s21_pow or (create func s21_powl)
-                res += (powl(-1.0, i) * powl(x, 1 + 2 * i)) / (1 + 2 * i);
+                res += (s21_pow(-1.0, i) * s21_pow(x, 1 + 2 * i)) / (1 + 2 * i);
             } else {
-                // TODO replace powl to s21_pow or (create func s21_powl)
-                res += (powl(-1.0, i) * powl(x, (-1 - 2 * i))) / (1 + 2 * i);
+                res += (s21_pow(-1.0, i) * s21_pow(x, (-1 - 2 * i))) / (1 + 2 * i);
             }
         }
     }
@@ -67,7 +60,6 @@ long double s21_atan_custom(double x) {
 }
 
 static long double s21_atan_custom_pos_neg(long double magic, long double res, int mod, int *sp, long double x) {
-    // TODO Replace the comparison of doubles
     if (!mod && !s21_ldeq(res, 0.0) && !(*sp)) {
         res = magic - res;
     }
@@ -80,16 +72,6 @@ static long double s21_atan_custom_pos_neg(long double magic, long double res, i
             res = -1.0L * S21_M_PI_2;
         }
     }
-
-    // (!) THESE things break asin / acos
-
-    // if (x > S21_M_PI_2) {
-    //     return S21_M_PI_2;
-    // }
-
-    // if (x < -1.0L * S21_M_PI_2) {
-    //     return -1.0L * S21_M_PI_2;
-    // }
 
     return res;
 }

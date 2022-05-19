@@ -30,7 +30,10 @@
 // }
 
 long double s21_sin(double x) {
+<<<<<<< HEAD:s21_sin.c
 <<<<<<< HEAD
+=======
+>>>>>>> 3b6eab5 (Minor fix, uncommented targets in makefile, removed math.h, GCOV untested):src/s21_sin.c
     if (is_nan(x) || !is_finite(x)) return S21_NAN;
 =======
     // TODO Remove unnecessary returns
@@ -53,6 +56,10 @@ long double s21_sin(double x) {
 <<<<<<< HEAD
     long double sum = (long double)x;
     long double tailor = (long double)x;
+<<<<<<< HEAD:s21_sin.c
+=======
+
+>>>>>>> 3b6eab5 (Minor fix, uncommented targets in makefile, removed math.h, GCOV untested):src/s21_sin.c
     for (int p = 1; s21_fabs(tailor / sum) > 1e-100; p++) {
         tailor = (-tailor * x * x) / ((2.0 * p + 1) * (2.0 * p));
         sum += tailor;
