@@ -1,3 +1,4 @@
+
 #include "s21_math_test.h"
 
 START_TEST(tan_test_1) {
@@ -41,10 +42,10 @@ Suite *suite_s21_tan(void) {
     TCase *tc = tcase_create("s21_tan_tc");
 
     tcase_add_loop_test(tc, tan_test_1, 0, 10000);
-    // tcase_add_test(tc, tan_0);
-    // tcase_add_test(tc, tan_minf);
-    // tcase_add_test(tc, tan_inf);
-    // tcase_add_test(tc, tan_nan);
+    tcase_add_test(tc, tan_0);
+    tcase_add_test(tc, tan_minf);
+    tcase_add_test(tc, tan_inf);
+    tcase_add_test(tc, tan_nan);
 
     suite_add_tcase(s, tc);
     return s;
