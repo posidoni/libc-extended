@@ -91,6 +91,8 @@ static long double s21_atan_pos_neg(long double magic, long double res, int mod,
         }
     }
 
+    // (!) THESE things break asin / acos
+
     if (x > S21_M_PI_2) {
         return S21_M_PI_2;
     }

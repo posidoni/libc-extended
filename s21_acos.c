@@ -27,11 +27,10 @@ long double s21_acos(double x) {
         } else if (s21_ldeq(x, -1.0)) {
             res = S21_M_PI;
         } else if (s21_fabs(x) > 0.0) {
-            /* Not sure are we allowed to compare them like that */
             if (s21_ldeq(x, 0.0))
                 res = zero_acos;
             else
-                res += s21_atan(s21_sqrt(1 - x * x) / x);
+                res += s21_atan_custom(s21_sqrt(1 - x * x) / x);
         }
     }
 
