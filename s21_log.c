@@ -9,27 +9,24 @@ long double s21_log(double x) {
     /* Special cases */
 
     // if (x == 1.0)
-    if (s21_fabs(x - 1.0) < EPS) {
+    if (s21_fabs(x - 1.0) < EPS && is_finite(x)) {
         return 0.0L;
     }
 
-    if (is_nan(x)) {
-        return S21_NAN;
-    }
 
     if (!is_finite(x) && x > 0) {
         return S21_INF;
+    }
+
+    if (x < 0.0 || (!is_finite(x)) || is_nan(x)) {
+        errno = EINVAL;
+        return S21_NAN;
     }
 
     // TODO Replace the comparison of doubles
     if (x == 0.0L) {
         errno = ERANGE;
         return -S21_INF;
-    }
-
-    if (x < 0.0) {
-        errno = EINVAL;
-        return S21_NAN;
     }
 
     /* Special cases END */
