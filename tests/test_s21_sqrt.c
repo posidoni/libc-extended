@@ -10,7 +10,24 @@ START_TEST(sqrt_test_1) {
 >>>>>>> 79b848b (Fixed acos / asin (stable), added correct doubles equality, added good tests)
 
     if (x < 0) {
-#pragma warning "Comment this out of the production build!"
+#pragma GCC warning "Comment this out of the production build!"
+        /* CPPLINT doesn't allow this! */
+        ck_assert_ldouble_nan(s21_sqrt(x));
+        ck_assert_int_eq(errno, EDOM);
+        errno = 0;
+        ck_assert_ldouble_nan(sqrt(x));
+        ck_assert_int_eq(errno, EDOM);
+    } else {
+        ck_assert_ldouble_eq_tol(s21_sqrt(x), sqrtl(x), 1e-06);
+    }
+}
+END_TEST
+
+START_TEST(sqrt_test_2) {
+    double x = RandomReal(-10, 10);
+
+    if (x < 0) {
+#pragma GCC warning "Comment this out of the production build!"
         /* CPPLINT doesn't allow this! */
         ck_assert_ldouble_nan(s21_sqrt(x));
         ck_assert_int_eq(errno, EDOM);
@@ -58,6 +75,7 @@ Suite *suite_s21_sqrt(void) {
     TCase *tc = tcase_create("s21_sqrt_tc");
 
     tcase_add_loop_test(tc, sqrt_test_1, 0, 10000);
+    tcase_add_loop_test(tc, sqrt_test_2, 0, 10000);
     tcase_add_test(tc, sqrt_test_2_inf);
     tcase_add_test(tc, sqrt_test_3_nan);
     tcase_add_test(tc, sqrt_test_4_one);
