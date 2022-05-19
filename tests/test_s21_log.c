@@ -37,8 +37,6 @@
 
 #pragma endregion math_info
 
-#pragma region log_test_cases
-
 START_TEST(log_test_1_rand) {
     double x = RandomReal(1e-10, 1e+10);
 

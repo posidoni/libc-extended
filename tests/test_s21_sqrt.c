@@ -13,10 +13,7 @@ START_TEST(sqrt_test_1) {
 #pragma GCC warning "Comment this out of the production build!"
         /* CPPLINT doesn't allow this! */
         ck_assert_ldouble_nan(s21_sqrt(x));
-        ck_assert_int_eq(errno, EDOM);
-        errno = 0;
         ck_assert_ldouble_nan(sqrt(x));
-        ck_assert_int_eq(errno, EDOM);
     } else {
         ck_assert_ldouble_eq_tol(s21_sqrt(x), sqrtl(x), 1e-06);
     }
@@ -30,10 +27,7 @@ START_TEST(sqrt_test_2) {
 #pragma GCC warning "Comment this out of the production build!"
         /* CPPLINT doesn't allow this! */
         ck_assert_ldouble_nan(s21_sqrt(x));
-        ck_assert_int_eq(errno, EDOM);
-        errno = 0;
         ck_assert_ldouble_nan(sqrt(x));
-        ck_assert_int_eq(errno, EDOM);
     } else {
         ck_assert_ldouble_eq_tol(s21_sqrt(x), sqrtl(x), 1e-06);
     }
