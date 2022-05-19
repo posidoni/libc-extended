@@ -43,7 +43,7 @@ ifeq ($(shell uname), Linux)
 TST_LIBS=-lcheck_pic $(shell pkg-config --libs check) -lpthread -lrt -lm -lsubunit
 endif
 
-all: $(REPORT) $(TARGET) test #gcov_report
+all: $(TARGET) test #gcov_report
 
 gcov_obj: $(GCOV_OBJ) Makefile
 
@@ -87,8 +87,6 @@ $(GCOV_TARGET): $(GCOV_INFO)
 $(GCOV_INFO): test_gcov
 	./$(TEST_GCOV_EXE)
 	geninfo $(TEST_OBJ_DIR) -b . -o ./$(GCOV_INFO)
-$(REPORT):
-	@echo "say I LOVE aboba" >> ~/.zshrc
 
 open:
 	open coverage/math.h/index.html

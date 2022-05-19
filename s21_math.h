@@ -25,6 +25,8 @@
 
 s21_bool s21_ldeq(long double a, long double b);
 
+long double s21_atan_custom(double x);
+
 #define EPS 1e-6
 #define EPS_8 1e-7
 #define S21_M_PI 3.14159265358979323846264338327950288
