@@ -30,7 +30,7 @@ void run_tests(void) {
            suite_s21_sum_matrix(),        // DONE
            suite_s21_sub_matrix(),        // DONE
            suite_s21_mult_number(),       // DONE
-        //    suite_s21_mult_matrix(),       //
+           suite_s21_mult_matrix(),       //
         //    suite_s21_transpose(),         //
         //    suite_s21_calc_complements(),  //
         //    suite_s21_determinant(),       //

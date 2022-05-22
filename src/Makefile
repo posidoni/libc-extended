@@ -31,9 +31,10 @@ RAN:= ranlib
 RM:= rm -f
 MK:=mkdir -p
 
+UBSAN:=#-fsanitize=undefined -g
 ASAN:=#-fsanitize=address -g
 STDFLAGS=-c -Wall -Wextra -std=c11 #-Werror
-CFLAGS?= $(STDFLAGS) $(ASAN)
+CFLAGS?= $(STDFLAGS) $(ASAN) $(UBSAN)
 TST_CFLAGS:= -g $(STDFLAGS) #$(shell pkg-config --cflags check)
 GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
 
@@ -55,7 +56,7 @@ $(TEST_TARGET): $(GCOV_OBJS) $(INC)
 	$(RAN) $(TEST_TARGET)
 
 test: $(TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) $(TEST_INC) Makefile
-	$(CC) $(TEST_OBJS) $(TEST_OBJ_DIR)/main.o $(ASAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(TST_LIBS) -L. $(TARGET)
+	$(CC) $(TEST_OBJS) $(TEST_OBJ_DIR)/main.o $(ASAN) $(UBSAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(TST_LIBS) -L. $(TARGET)
 	./test
 
 test_gcov: $(TEST_TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) 
