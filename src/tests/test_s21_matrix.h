@@ -13,10 +13,11 @@ Suite *suite_s21_sum_matrix(void);
 Suite *suite_s21_sub_matrix(void);
 Suite *suite_s21_mult_number(void);
 Suite *suite_s21_transpose(void);
+
 Suite *suite_s21_mult_matrix(void);
+Suite *suite_s21_determinant(void);
 
 //    suite_s21_calc_complements(),  //
-//    suite_s21_determinant(),       //
 //    suite_s21_inverse_matrix(),    //
 
 void run_tests(void);

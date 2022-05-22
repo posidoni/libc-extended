@@ -1,6 +1,6 @@
 #include "s21_matrix.h"
 
-const static double EPS = 1e-7;
+static const double EPS = 1e-6;
 
 int s21_create_matrix(const int rows, const int columns, matrix_t *result) {
     int res = INCORRECT_MATRIX;
@@ -78,27 +78,38 @@ int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
 }
 
 int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
-    if (result->rows != A->rows || result->columns != A->columns)
+    if (result->rows != A->rows || result->columns != B->columns || A->columns != B->rows || A->rows != B->columns)
         return CALC_ERROR;
 
-    return OK;
-}
-
-int s21_transpose(matrix_t *A, matrix_t *result) {
-    int code = s21_create_matrix(A->columns, A->rows, result);
-    
-    if (code == OK) {
-        
+    for (int i = 0; i < A->rows; i++) {
+        for (int j = 0; j < B->columns; j++) {
+            result->matrix[i][j] = 0;
+            for (int m = 0; m < B->rows; m++)
+                result->matrix[i][j] += A->matrix[i][m] * B->matrix[m][j];
+        }
     }
 
     return OK;
 }
 
-int s21_calc_complements(matrix_t *A, matrix_t *result) {
+int s21_transpose(matrix_t *A, matrix_t *result) {
+    if (A->columns != result->rows || A->rows != result->columns)
+        return CALC_ERROR;
+
+    for (int i = 0; i < A->rows; i++) {
+        for (int j = 0; j < A->columns; j++) {
+            result->matrix[j][i] = A->matrix[i][j];
+        }
+    }
+
+    return OK;
 }
 
-int s21_determinant(matrix_t *A, double *result) {
-}
+// int s21_calc_complements(matrix_t *A, matrix_t *result) {
+// }
 
-int s21_inverse_matrix(matrix_t *A) {
-}
+// int s21_determinant(matrix_t *A, double *result) {
+// }
+
+// int s21_inverse_matrix(matrix_t *A) {
+// }

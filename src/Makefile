@@ -32,8 +32,8 @@ RM:= rm -f
 MK:=mkdir -p
 
 UBSAN:=#-fsanitize=undefined -g
-ASAN:=#-fsanitize=address -g
-STDFLAGS=-c -Wall -Wextra -std=c11 #-Werror
+ASAN:=-fsanitize=address
+STDFLAGS=-c -Wall -Wextra -std=c11 -g #-Werror
 CFLAGS?= $(STDFLAGS) $(ASAN) $(UBSAN)
 TST_CFLAGS:= -g $(STDFLAGS) #$(shell pkg-config --cflags check)
 GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
