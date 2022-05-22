@@ -1,76 +1,112 @@
 CC=gcc
-CFLAGS:=-Wall -Werror -Wextra -std=c11 #$(ASAN)
 
-ifeq ($(shell uname), Mac)
-ASAN=-g -fsanitize=address
+TARGET?=s21_matrix.a
+TEST_TARGET?=test_s21_matrix.a
+TEST_EXE?=test
+TEST_GCOV_EXE?=test_gcov
+GCOV_TARGET=./coverage
+GCOV_INFO=coverage.info
+
+SRC_DIR?=.
+TEST_SRC_DIR?=./tests
+
+OBJ_DIR?=./objs
+TEST_OBJ_DIR?=./tests/objs
+
+INC:=$(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.h")
+SRC:=$(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.c")
+
+TEST_INC:=$(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.h")
+TEST_SRC:=$(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.c")
+
+OBJS:=$(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
+GCOV_OBJS:=$(addprefix $(TEST_OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
+TEST_OBJS:=$(addprefix $(TEST_OBJ_DIR)/, $(notdir $(TEST_SRC:.c=.o))) #$(TEST_OBJ_DIR)/main.o
+
+GCDA=$(shell find $(TEST_OBJ_DIR) -maxdepth 1 -name "*.gcda")
+GCNO=$(shell find $(TEST_OBJ_DIR) -maxdepth 1 -name "*.gcno")
+
+AR:= ar rc
+RAN:= ranlib
+RM:= rm -f
+MK:=mkdir -p
+
+ASAN:=#-fsanitize=address -g
+STDFLAGS=-c -Wall -Wextra -std=c11 #-Werror
+CFLAGS?= $(STDFLAGS) $(ASAN)
+TST_CFLAGS:= -g $(STDFLAGS) #$(shell pkg-config --cflags check)
+GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
+
+TST_LIBS?=-lcheck
+ifeq ($(shell uname), Linux)
+TST_LIBS=-lcheck_pic $(shell pkg-config --libs check) -lpthread -lrt -lm -lsubunit
 endif
 
-TARGET=s21_matrix.a
+all: $(TARGET) test gcov_report
 
-INC:=$(shell find . -name "*.h")
-SRC:=$(shell find . -name "s21*.c")
-OBJS:=$(SRC:%.c=%.o)
+gcov_obj: $(GCOV_OBJ) Makefile
 
-# s21_matrix.a
-all: $(TARGET)
+$(TARGET): $(OBJS) Makefile
+	$(AR) $(TARGET) $(OBJS)
+	$(RAN) $(TARGET)
 
-$(TARGET): $(OBJS)
-	ar rc $(TARGET) $(OBJS)
-	ranlib $(TARGET)
+$(TEST_TARGET): $(GCOV_OBJS) $(INC)
+	$(AR) $(TEST_TARGET) $(GCOV_OBJS)
+	$(RAN) $(TEST_TARGET)
 
-$(OBJS): $(SRC) $(INC)
+test: $(TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) $(TEST_INC) Makefile
+	$(CC) $(TEST_OBJS) $(TEST_OBJ_DIR)/main.o $(ASAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(TST_LIBS) -L. $(TARGET)
+	./test
+
+test_gcov: $(TEST_TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) 
+	$(CC) $(TEST_OBJS) $(TEST_OBJ_DIR)/main.o $(GCOV_FLAGS) -o $(TEST_GCOV_EXE) $(TST_LIBS) -L. $(TEST_TARGET)
+
+$(TEST_OBJ_DIR)/main.o: main.c 
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $(TEST_OBJ_DIR)/main.o main.c  
+
+$(TEST_OBJ_DIR)%.o: $(TEST_SRC_DIR)%.c $(TEST_INC) 
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(TST_CFLAGS) -o $@ -c $<
+
+$(OBJS): $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INC) 
+	@$(MK) $(OBJ_DIR)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-# TESTS & COVERAGE
-GCOV_FLAGS:=$(CFLAGS) -fprofile-arcs -ftest-coverage $(ASAN)
-TEST_LIBS:=$(shell pkg-config --cflags --libs check)
+$(GCOV_OBJS): $(TEST_OBJ_DIR)%.o: $(SRC_DIR)%.c $(TEST_INC)
+	@$(MK) $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -o $@ -c $<
 
-TARGET_TEST=test
-TARGET_TEST_LIB=s21_matrix_test.a
-TEST_DIR=./tests
+gcov_report: $(GCOV_TARGET)
 
-TEST_INC:=$(shell find $(TEST_DIR) -name "*.h")
-TEST_SRC:=$(shell find $(TEST_DIR) -name "*.c")
+$(GCOV_TARGET): CFLAGS += $(GCOV_FLAGS)
+$(GCOV_TARGET): $(GCOV_INFO)
+	genhtml $(GCOV_INFO) -o $(GCOV_TARGET)
 
-GCOV_OBJS:=$(SRC:%.c=%.o)
-TEST_OBJS:=$(TEST_SRC:%.c=%.o)
+$(GCOV_INFO): test_gcov
+	./$(TEST_GCOV_EXE)
+	geninfo $(TEST_OBJ_DIR) -b . -o ./$(GCOV_INFO)
 
-# GENERATE TEST.EXE FOR GCOV
-$(TARGET_TEST): $(TEST_OBJS) $(TARGET_TEST_LIB)
-	$(CC) $(GCOV_FLAGS) $(CFLAGS) main.c $(TARGET_TEST_LIB) -o $@ $< $(TEST_LIBS)
-	./test
-	
-# GET ALL OBJS FROM TEST_DIR
-$(TEST_OBJS): $(TEST_SRC) $(TEST_INC)
-	$(CC) $(GCOV_FLAGS) $(CFLAGS) -o $@ -c $<
-
-# BUILD THE LIB AGAIN FOR TESTS
-$(TARGET_TEST_LIB): $(GCOV_OBJS) $(INC)
-	ar rc $(TARGET_TEST_LIB) $(GCOV_OBJS)
-	ranlib $(TARGET_TEST_LIB)
-
-# OBJS FOR LIB AGAIN
-$(GCOV_OBJS): $(SRC) $(TEST_INC)
-	$(CC) $(GCOV_FLAGS) $(CFLAGS) -o $@ -c $<
-
-gcov: $(TARGET_TEST)
-	gcov $(TEST_SRC) $(SRC)
-
-coverage.info: gcov
-	lcov --capture --directory . --output-file coverage.info
-
-report: coverage.info
-	genhtml coverage.info --output-directory coverage
 
 open:
-	open coverage/index.html
+	open coverage/math.h/index.html
 
 clean:
-	@rm -rf $(TEST_DIR)/*.gcno $(TEST_DIR)/*.gcda $(TEST_DIR)/*.o *.gcno *.gcda *.o coverag* *.gcov
+	$(RM) $(TEST_OBJ_DIR)/main.o
+	$(RM) $(OBJS)
+	$(RM) $(GCDA)
+	$(RM) $(GCNO)
+	$(RM) $(TEST_OBJS)
+	$(RM) $(GCOV_OBJS)
 
 fclean: clean
-	@rm -rf $(TARGET) $(TARGET_TEST_LIB) $(TARGET_TEST)
+	$(RM) $(TARGET)
+	$(RM) $(TEST_TARGET)
+	$(RM) $(TEST_EXE)
+	$(RM) $(TEST_GCOV_EXE)
+	$(RM) $(GCOV_INFO)
+	$(RM) -r $(GCOV_TARGET)
 
 re: fclean all
 
-.PHONY: all clean fclean open
+.PHONY: all clean fclean re open 
