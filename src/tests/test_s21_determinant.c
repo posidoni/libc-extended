@@ -35,15 +35,15 @@ START_TEST(determinant_no_zeros) {
     }
     double result = 0;
     int got = s21_determinant(&m1, &result);
-    ck_assert_double_eq_tol(result, 11, 1e-6);
+    ck_assert_double_eq_tol(result, 0, 1e-6);
     ck_assert_int_eq(got, OK);
     s21_remove_matrix(&m1);
 }
 END_TEST
 
 START_TEST(determinant_nan) {
-    const int rows = rand();
-    const int cols = rows + 1;
+    int rows = get_rand(3, 100);
+    int cols = rows + 1;
     matrix_t m1 = {0};
     s21_create_matrix(rows, cols, &m1);
     double result = 0;
@@ -82,8 +82,8 @@ Suite *suite_s21_determinant(void) {
 
     // TODO: add test cases of calculating determinant from custom python script
     tcase_add_test(tc, determinant_hardcoded);
-    // tcase_add_test(tc, determinant_no_zeros);
-    // tcase_add_loop_test(tc, determinant_nan, 0, 100);
+    tcase_add_test(tc, determinant_no_zeros);
+    tcase_add_test(tc, determinant_nan);
 
     suite_add_tcase(s, tc);
     return s;
