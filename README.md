@@ -1,30 +1,27 @@
 # S21_Cat & S21_Grep
 
 ## Table of contents
-* [General info](https://github.com/MikhailKuzntsov1/s21_cat_grep/tree/main#general-info)
-* [Goal & requirements](https://github.com/MikhailKuzntsov1/s21_cat_grep/tree/main#goal--requirements)
-* [Key learnings](https://github.com/MikhailKuzntsov1/s21_cat_grep/tree/main#key-learnings)
-* [Build](https://github.com/MikhailKuzntsov1/s21_cat_grep/tree/main#build)
-
-* [s21_cat](https://github.com/MikhailKuzntsov1/s21_cat_grep/tree/main#s21_cat)
-   * [s21_cat usage](https://github.com/MikhailKuzntsov1/s21_cat_grep/tree/main#s21_cat-usage)
-
-
-* [Credits](https://github.com/MikhailKuzntsov1/s21_cat_grep/tree/main#credits)
+* [General info](https://github.com/MikhailKuzntsov1/s21_matrix/tree/main#general-info)
+* [Goal & requirements](https://github.com/MikhailKuzntsov1/s21_matrix/tree/main#goal--requirements)
+* [Key learnings](https://github.com/MikhailKuzntsov1/s21_matrix/tree/main#key-learnings)
+* [Build](https://github.com/MikhailKuzntsov1/s21_matrix/tree/main#build)
+* [Library docs](https://github.com/MikhailKuzntsov1/s21_matrix/tree/main#library-docs)
+* [Credits](https://github.com/MikhailKuzntsov1/s21_matrix/tree/main#credits)
 
 ## General info 
 
-Implementation of GNU `cat` and BSD `grep` with all major flags and flags combinations.
+Implementation of matrices processing library in C. 
 
 ## Goal & requirements
 
-The goal of this project was to implement C library for matrices processing and fully cover
-it with unit tests. 
+The goal of this project was to become familiar with major matrices processing routines and
+implement them. The library had to be covered with unit-tests using Check framework.
 
 ## Key learnings
-- Got familiar with basic matrices processing functions & their application
+- Got familiar with basic matrices processing functions & their implementation
+- Became more confident with using recursion (used for `determinant`, `calc_complements`, `inverse_matrix`)
 - Discovered [GSL](https://www.gnu.org/software/gsl/) & used it for testing my functions
-- Tried out [Numpy](https://github.com/numpy/numpy) for testing correctness of my calculations
+- Tried out Python & [Numpy](https://github.com/numpy/numpy) for testing correctness of my calculations
 
 ## Build
 
@@ -34,11 +31,26 @@ $ cd repo/src/
 $ make
 ```
 
-## S21_matrix Library
+## Library docs
 
-// learn to write technical docs for functions
+// maybe see GSL for example of docs (?)
+
+``` c
+/* s21_matrix.h */
+
+// add description of enums & error codes 
+
+```
+
+### s21_create_matrix
+
+``` c
+int s21_create_matrix
+
+```
+
+<!-- write docs to my functions -->
 
 ## Credits
 - Developer: [Mikhail Kuznetsov (@posidoni)](https://github.com/MikhailKuzntsov1)
-- I greatly appreciate the support of [Stepan Fedorov (@nanadaug)](https://github.com/co-cy) & others for providing great python scripts for integration testing
 - SC21 for providing this task as a part of our curriculum 🙂💚
