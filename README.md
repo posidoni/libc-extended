@@ -1,26 +1,22 @@
 <h1 align="center">S21_string.h</h1>
 
 ## Table of contents
-* [General info](##General-info)
-* [Goal & requirements](##Goal-and-requirements)
-* [Key learnings](##Key\learnings)
+* [General info](https://github.com/MikhailKuzntsov1/s21_string/tree/main#general-info)
+* [Goal & requirements](https://github.com/MikhailKuzntsov1/s21_string/tree/main#goal--requirements)
+* [Key learnings](https://github.com/MikhailKuzntsov1/s21_string/tree/main#key-learnings)
 * [Build & usage](https://github.com/MikhailKuzntsov1/s21_string/tree/main#build)
-* [Credits](##Credits)
+* [Credits](https://github.com/MikhailKuzntsov1/s21_string/tree/main#credits)
 
-## General-info 
+## General info 
 Implementation of libc `string.h` functions with some additions, including `sscanf` and `ssprintf` with all specifiers and flags. Fully covered with unit-tests under TDD approach. 
 
-<div align="center">
-    <center>
-        ![build_launch_gif](assets/build_launch.gif)
-        <figcaption>Building & launching unit-tests</figcaption>
-    </center>
-</div>
+![build_launch_gif](assets/build_launch.gif)
+<sub>Build & launching unit-tests.</sub>
 
 ## Goal & requirements 
 The goal of this project was to get comfortable with strings handling in C, explore tokenization and solidify our knowledge & skills of structured programming. 
 
-## Key-learnings
+## Key learnings
 - Working with strings in C
 - Functions with variable number of arguments
 - Creating & linking static libs, building project with Makefile
@@ -38,8 +34,8 @@ $ ./test
 $ make gcov_report /* To check test coverage, requires lcov utility */
 ```
 ## Credits
-- Developers: [Mikhail Kuznetsov (@posidoni)](https://github.com/MikhailKuzntsov1), [Andrey Jhelannikov(@capricey)](https://github.com/AndreyZhelannikov),[Stepan Fedorov (@nanadaug)](https://github.com/co-cy), [Anton Bezludniy(@tarticar)](https://github.com/bezlant) 
-- Peer reviewers: @gerardys (Vlad), [@sparelis (Dasha)](https://github.com/GrusnyDance), [@deltajed (Ramin)](https://github.com/RamaObama) & others 
+- Developers: [Mikhail Kuznetsov (@posidoni)](https://github.com/MikhailKuzntsov1), [Andrey Jhelannikov(@capricey)](https://github.com/AndreyZhelannikov), [Stepan Fedorov (@nanadaug)](https://github.com/co-cy), [Anton Bezludniy(@tarticar)](https://github.com/bezlant).
+- Peer reviewers: @gerardys (Vlad), [@sparelis (Dasha)](https://github.com/GrusnyDance), [@deltajed (Ramin)](https://github.com/RamaObama) & others.
 - Our team's lecture on this project is available on [Youtube (in Russian)](https://www.youtube.com/watch?v=ks3Banj3j7g). Any feedback & bug-reports are highly appreciated! 
 - SC21 for providing this task 🙂💚
 - Unfortunately, commit history was lost after migrating repo from Gitlab to Github :(
