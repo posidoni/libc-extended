@@ -8,9 +8,8 @@
 ## General info 
 Implementation of libc `string.h` functions with some additions, including `sscanf` and `ssprintf` with all specifiers and flags. Fully covered with unit-tests under TDD approach. 
 
-![build_launch_gif](assets/build_launch.gif)
-<br>
-<sub>Build & launching unit-tests</sub>
+<div align="center"><img src="assets/build_launch.gif"></div>
+<div align="center"><sub>Build & launching unit-tests</sub></div>
 
 ## Goal & requirements 
 The goal of this project was to get comfortable with strings handling in C, explore tokenization and solidify our knowledge & skills of structured programming, while trying to replicate libc strings handling functions.
