@@ -1,18 +1,23 @@
 <h1 align="center">S21_string.h</h1>
 
-## General-info 
-Implementation of libc `string.h` functions with some additions, including `sscanf` and `ssprintf` with all specifiers and flags. Fully covered with unit-tests under TDD approach. 
-
-![build_launch_gif](assets/build_launch.gif)
-
 ## Table of contents
 * [General info](##General-info)
 * [Goal & requirements](##Goal-and-requirements)
 * [Key learnings](##Key\learnings)
-* [Build & usage](##Build)
+* [Build & usage](https://github.com/MikhailKuzntsov1/s21_string/tree/main#build)
 * [Credits](##Credits)
 
-## Goal-and-requirements 
+## General-info 
+Implementation of libc `string.h` functions with some additions, including `sscanf` and `ssprintf` with all specifiers and flags. Fully covered with unit-tests under TDD approach. 
+
+<div align="center">
+    <center>
+        ![build_launch_gif](assets/build_launch.gif)
+        <figcaption>Building & launching unit-tests</figcaption>
+    </center>
+</div>
+
+## Goal & requirements 
 The goal of this project was to get comfortable with strings handling in C, explore tokenization and solidify our knowledge & skills of structured programming. 
 
 ## Key-learnings
