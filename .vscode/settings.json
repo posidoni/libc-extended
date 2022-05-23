@@ -1,7 +1,0 @@
-{
-    "makefile.extensionOutputFolder": "./.vscode",
-    "files.associations": {
-        "s21_matrix.h": "c",
-        "test_s21_matrix.h": "c"
-    }
-}
