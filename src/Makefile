@@ -33,12 +33,12 @@ MK:=mkdir -p
 
 UBSAN:=#-fsanitize=undefined -g
 ASAN:=-fsanitize=address
-STDFLAGS=-c -Wall -Wextra -std=c11 -g #-Werror
+STDFLAGS=-c -Wall -Wextra -std=c11 -g -I gsl/include #-Werror
 CFLAGS?= $(STDFLAGS) $(ASAN) $(UBSAN)
 TST_CFLAGS:= -g $(STDFLAGS) #$(shell pkg-config --cflags check)
 GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
 
-TST_LIBS?=-lcheck
+TST_LIBS?=-lcheck gsl/lib/libgsl.a -I gsl/include
 ifeq ($(shell uname), Linux)
 TST_LIBS=-lcheck_pic $(shell pkg-config --libs check) -lpthread -lrt -lm -lsubunit
 endif

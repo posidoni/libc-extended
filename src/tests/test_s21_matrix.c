@@ -22,6 +22,20 @@ START_TEST(no_rows) {
     const int cols = 10;
     matrix_t m = {0};
     ck_assert_int_eq(s21_create_matrix(rows, cols, &m), INCORRECT_MATRIX);
+
+//       int i, j;
+//   gsl_matrix * z = gsl_matrix_alloc (10, 3);
+
+//   for (i = 0; i < 10; i++)
+//     for (j = 0; j < 3; j++)
+//       gsl_matrix_set (z, i, j, 0.23 + 100*i + j);
+
+//   for (i = 0; i < 10; i++)
+//     for (j = 0; j < 3; j++)
+//       printf ("m(%d,%d) = %g\n", i, j,
+//               gsl_matrix_get (z, i, j));
+
+//   gsl_matrix_free (z);
 }
 END_TEST
 
