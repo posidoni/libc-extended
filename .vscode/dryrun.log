@@ -1,4 +1,4 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/posidoni/s21_matrix'
 make: Leaving directory `/Users/posidoni/s21_matrix'
  

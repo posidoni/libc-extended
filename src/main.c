@@ -32,8 +32,8 @@ void run_tests(void) {
         // suite_s21_mult_number(),    // DONE
         // suite_s21_mult_matrix(), // DONE
         // suite_s21_transpose(),    // DONE
-        suite_s21_determinant(),  //
-        //    suite_s21_calc_complements(),  //
+        // suite_s21_determinant(),  // DONE
+        //    suite_s21_calc_complements(),  // 
         //    suite_s21_inverse_matrix(),    //
         NULL};
 
