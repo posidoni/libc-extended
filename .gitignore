@@ -7,8 +7,10 @@
 *.obj
 *.elf
 *.gcda
+*.gcno
 *.gdo
 test
+test_gcov
 s21_test_runner
 
 # Linker output
