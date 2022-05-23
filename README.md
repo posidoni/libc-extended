@@ -1,5 +1,3 @@
-<h1 align="center">S21_string.h</h1>
-
 ## Table of contents
 * [General info](https://github.com/MikhailKuzntsov1/s21_string/tree/main#general-info)
 * [Goal & requirements](https://github.com/MikhailKuzntsov1/s21_string/tree/main#goal--requirements)
@@ -12,10 +10,10 @@ Implementation of libc `string.h` functions with some additions, including `ssca
 
 ![build_launch_gif](assets/build_launch.gif)
 <br>
-<sub>Build & launching unit-tests.</sub>
+<sub>Build & launching unit-tests</sub>
 
 ## Goal & requirements 
-The goal of this project was to get comfortable with strings handling in C, explore tokenization and solidify our knowledge & skills of structured programming. 
+The goal of this project was to get comfortable with strings handling in C, explore tokenization and solidify our knowledge & skills of structured programming, while trying to replicate libc strings handling functions.
 
 ## Key learnings
 - Working with strings in C
