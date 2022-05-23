@@ -1,16 +1,17 @@
 #include "s21_math.h"
 
-static long double s21_atan_pos_neg(long double magic, long double res, int mod, int *sp, long double x);
+static long double s21_atan_pos_neg(long double magic, long double res, int mod,
+                                    int *sp, long double x);
 static int check_inf(double x);
 
 long double s21_atan(double x) {
-    // TODO Remove unnecessary returns
     long double res = 0.0;
 
     const long double one_atan = 0.7853981633974480L;
 <<<<<<< HEAD
     int modulo_x = (fabsl(x) < 0.0L);
 
+<<<<<<< HEAD:s21_atan.c
 <<<<<<< HEAD
     /* Warning! Replaced sqrt(x^2) with fabs(x) in the original formula */
     long double magic = (M_PI * fabsl(x)) / (2 * x);
@@ -30,15 +31,19 @@ long double s21_atan(double x) {
 =======
     int modulo_x = (s21_fabs(x) < 1.0);
 >>>>>>> 79b848b (Fixed acos / asin (stable), added correct doubles equality, added good tests)
+=======
+    int modulo_x = (s21_fabs(x) - 1.0 < EPS);
+>>>>>>> 21502c1 (Fix project structure):src/s21_atan.c
 
     /* Warning! Replaced sqrt(x^2) with fabs(x) in the original formula */
     long double magic = (S21_M_PI * s21_fabs(x)) / (2.0 * x);
     int special = check_inf(x);
 
-    if (!is_finite(x) && s21_fabs(x) > 0) {
+    if (!is_finite(x) && s21_fabs(x) > EPS) {
         return S21_M_PI_2;
     }
 
+<<<<<<< HEAD:s21_atan.c
 <<<<<<< HEAD
 <<<<<<< HEAD
     if (x != 0.0 && !special && s21_fabs(x) != 1.0) {
@@ -51,6 +56,14 @@ long double s21_atan(double x) {
     /* Constants for atan 1.0. This case is special, Taylor series can't count this */
     if (s21_ldeq(x, 1.0)) res = atan(x);
     if (s21_ldeq(x, -1.0)) res = atan(x);
+=======
+    /* Constants for atan 1.0. This case is special, Taylor series can't count
+     * this */
+    if (s21_ldeq(x, 1.0))
+        res = one_atan;
+    if (s21_ldeq(x, -1.0))
+        res = -one_atan;
+>>>>>>> 21502c1 (Fix project structure):src/s21_atan.c
 
     if (!s21_ldeq(x, 0.0) && !special && !s21_ldeq(s21_fabs(res), one_atan)) {
 <<<<<<< HEAD:s21_atan.c
@@ -69,27 +82,28 @@ long double s21_atan(double x) {
         for (int i = 0; i < good_precision; i++) {
 >>>>>>> 3b6eab5 (Minor fix, uncommented targets in makefile, removed math.h, GCOV untested):src/s21_atan.c
             if (modulo_x) {
-                // TODO replace s21_pow to s21_pow or (create func s21_s21_pow)
                 res += (s21_pow(-1.0, i) * s21_pow(x, 1 + 2 * i)) / (1 + 2 * i);
             } else {
-                // TODO replace s21_pow to s21_pow or (create func s21_s21_pow)
-                res += (s21_pow(-1.0, i) * s21_pow(x, (-1 - 2 * i))) / (1 + 2 * i);
+                res +=
+                    (s21_pow(-1.0, i) * s21_pow(x, (-1 - 2 * i))) / (1 + 2 * i);
             }
         }
     }
 
-    return (is_nan(x)) ? S21_NAN : s21_atan_pos_neg(magic, res, modulo_x, &special, x);
+    return (is_nan(x)) ? S21_NAN
+                       : s21_atan_pos_neg(magic, res, modulo_x, &special, x);
 }
 
-static long double s21_atan_pos_neg(long double magic, long double res, int mod, int *sp, long double x) {
+static long double s21_atan_pos_neg(long double magic, long double res, int mod,
+                                    int *sp, long double x) {
     if (!mod && !s21_ldeq(res, 0.0) && !(*sp)) {
         res = magic - res;
     }
 
     if (*sp) {
-        if (s21_fabs(x) > 0) {
+        if (s21_fabs(x) > EPS) {
             res = S21_M_PI_2;
-            return S21_M_PI_2;
+            return res;
         } else {
             res = -1.0L * S21_M_PI_2;
         }

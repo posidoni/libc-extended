@@ -1,12 +1,17 @@
 #include "s21_math.h"
 
 long double s21_cos(double x) {
+<<<<<<< HEAD:s21_cos.c
 <<<<<<< HEAD
     if (is_nan(x) || !is_finite(x)) return S21_NAN;
 =======
     // TODO Replace the comparison of doubles
     if (x == S21_NAN || x == S21_INF || x == -S21_INF) return S21_NAN;
 >>>>>>> 85ddb17 (Add TODO)
+=======
+    if (is_nan(x) || !is_finite(x))
+        return S21_NAN;
+>>>>>>> 21502c1 (Fix project structure):src/s21_cos.c
 
     int sign = 1;
     x = s21_fmod(x, 2 * S21_M_PI);

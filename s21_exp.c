@@ -1,9 +1,12 @@
 #include "s21_math.h"
 
 long double s21_exp(double x) {
-    if (x == S21_NAN) return S21_NAN;
-    if (x == -S21_INF) return 0;
-    if (x == S21_INF) return S21_INF;
+    if (x == S21_NAN)
+        return S21_NAN;
+    if (x == -S21_INF)
+        return 0;
+    if (x == S21_INF)
+        return S21_INF;
 
     long double arg = (long double)x;
 <<<<<<< HEAD

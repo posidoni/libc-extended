@@ -8,21 +8,20 @@ long double s21_log(double x) {
         return 0.0L;
     }
 
-    if (!is_finite(x) && x > 0) {
+    if (!is_finite(x) && x > EPS) {
         return S21_INF;
     }
-    if (x < 0.0 || (!is_finite(x)) || is_nan(x)) {
+    if (x < EPS || (!is_finite(x)) || is_nan(x)) {
         errno = EINVAL;
         return S21_NAN;
     }
 
-    // TODO Replace the comparison of doubles
-    if (x == 0.0L) {
+    if (s21_fabs(x) < EPS) {
         errno = ERANGE;
         return -S21_INF;
     }
 
-    if (x < 2.0) {
+    if (x - 2.0 < EPS) {
         for (int i = 1; i < 100000; i++) {
             long double a = (i % 2) ? -1 : 1;
             long double b = s21_pow((x - 1), i);
@@ -32,7 +31,7 @@ long double s21_log(double x) {
         long double m = 0.0L;
         long double p = 0.0L;
 
-        while (x > 2.0) {
+        while (x - 2.0 > EPS) {
             m = x / 2.0;
             x /= 2.0;
             p++;
