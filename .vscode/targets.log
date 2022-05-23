@@ -6,12 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
-make: *** No rule to make target `all'
-.  Stop.
 
-
-# Make data base, printed on Sun May 22 15:13:18 2022
+# Make data base, printed on Mon May 23 16:52:50 2022
 
 # Variables
 
@@ -48,9 +44,9 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n00025gr000jby/T/vscode-ipc-55d186e3-e02e-4c74-8777-20ff500e834c.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n00025gr000jby/T/vscode-ipc-5eeecb1c-5758-4837-9155-688ee7aef22f.sock
 # environment
-VSCODE_CWD = /Users/posidoni/s21_matrix
+VSCODE_CWD = /Users/posidoni
 # environment
 PATH = /Users/posidoni/.brew/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/posidoni/.brew/bin/
 # environment
@@ -64,7 +60,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.igKWufYkU1/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.C7R5enAEqy/Listeners
 # environment
 CPLUS_INCLUDE_PATH = /usr/local/include/
 # automatic
@@ -110,7 +106,7 @@ LC_TERMINAL = iTerm2
 # environment
 HOMEBREW_CACHE = /tmp/posidoni/Homebrew/Caches
 # environment
-SHLVL = 5
+SHLVL = 3
 # default
 MAKE_VERSION := 3.81
 # environment
@@ -120,7 +116,7 @@ USER = posidoni
 # default
 MAKECMDGOALS := all
 # environment
-TERM_SESSION_ID = w0t0p0:B9D26BA7-3AE2-4EB0-AE99-EB60257BBD9A
+TERM_SESSION_ID = w0t1p0:2AD4ED65-3B13-497C-9534-DB0946024B57
 # environment
 LESS = -R
 # automatic
@@ -130,7 +126,7 @@ MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
 # environment
 VSCODE_GIT_ASKPASS_EXTRA_ARGS = --ms-enable-electron-run-as-node
 # environment
-TERM_PROGRAM = vscode
+TERM_PROGRAM = iTerm.app
 # default
 .VARIABLES := 
 # environment
@@ -148,9 +144,9 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 1.66.2
+TERM_PROGRAM_VERSION = 3.4.15
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.12886798721.12886798929.A5A286A3-7D6A-40BB-B11A-623933B5EC08
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.12886798721.12886798929.61C22C31-6DF6-41DB-8EF4-5CAFE877923F
 # environment
 LC_TERMINAL_VERSION = 3.4.15
 # automatic
@@ -158,12 +154,11 @@ LC_TERMINAL_VERSION = 3.4.15
 # automatic
 +F = $(notdir $+)
 # environment
-ITERM_SESSION_ID = w0t0p0:B9D26BA7-3AE2-4EB0-AE99-EB60257BBD9A
+ITERM_SESSION_ID = w0t1p0:2AD4ED65-3B13-497C-9534-DB0946024B57
 # environment
 COLORFGBG = 7;0
 # environment
 __CF_USER_TEXT_ENCODING = 0x457E:0:0
- 
 # environment
 COMMAND_MODE = unix2003
 # environment
@@ -187,13 +182,13 @@ C_INCLUDE_PATH = /usr/local/include/
 # default
 .INCLUDE_DIRS = /usr/local/include
 # environment
-VSCODE_GIT_IPC_HANDLE = /var/folders/zz/zyxvpxvq6csfxvn_n00025gr000jby/T/vscode-git-b179a5e7e8.sock
+VSCODE_GIT_IPC_HANDLE = /var/folders/zz/zyxvpxvq6csfxvn_n00025gr000jby/T/vscode-git-0207c4145c.sock
 # environment
 LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 27576
+VSCODE_PID = 3578
 # variable set hash-table stats:
 # Load=89/1024=9%, Rehash=0, Collisions=7/110=6%
 
@@ -203,9 +198,9 @@ VSCODE_PID = 27576
 
 # Directories
 
-# . (device 16777230, inode 1032339): 9 files, no impossibilities.
+# . (device 16777232, inode 1032339): 8 files, no impossibilities.
 
-# 9 files, no impossibilities in 1 directories.
+# 8 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -277,6 +272,8 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Sun May 22 15:13:18 2022
+# Finished Make data base on Mon May 23 16:52:50 2022
 
  
+make: *** No rule to make target `all'.  Stop.
+
