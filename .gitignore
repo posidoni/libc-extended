@@ -6,6 +6,10 @@
 *.ko
 *.obj
 *.elf
+*.gcda
+*.gdo
+test
+s21_test_runner
 
 # Linker output
 *.ilk
