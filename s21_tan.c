@@ -1,7 +1,10 @@
 #include "s21_math.h"
 
 long double s21_tan(double x) {
+<<<<<<< HEAD:s21_tan.c
 <<<<<<< HEAD
+=======
+>>>>>>> 21502c1 (Fix project structure):src/s21_tan.c
     if (is_nan(x) || !is_finite(x)) return S21_NAN;
 =======
     // TODO Remove unnecessary returns

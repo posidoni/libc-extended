@@ -17,14 +17,19 @@ s21_bool s21_deq(double a, double b) {
     return (a < b + EPS_8 && a > b - EPS_8);
 }
 
+<<<<<<< HEAD:s21_helpers.c
 s21_bool s21_feq(float a, float b) {
     return (a < b + EPS_8 && a > b - EPS_8);
 }
 <<<<<<< HEAD
 >>>>>>> 85ddb17 (Add TODO)
 =======
+=======
+s21_bool s21_feq(float a, float b) { return (a < b + EPS_8 && a > b - EPS_8); }
+>>>>>>> 21502c1 (Fix project structure):src/s21_helpers.c
 
-static long double s21_atan_custom_pos_neg(long double magic, long double res, int mod, int *sp, long double x);
+static long double s21_atan_custom_pos_neg(long double magic, long double res,
+                                           int mod, int *sp, long double x);
 static int check_inf_custom(double x);
 
 long double s21_atan_custom(double x) {
@@ -42,24 +47,31 @@ long double s21_atan_custom(double x) {
         return S21_M_PI_2;
     }
 
-    /* Constants for atan 1.0. This case is special, Taylor series can't count this */
-    if (s21_ldeq(x, 1.0)) res = one_atan;
-    if (s21_ldeq(x, -1.0)) res = -one_atan;
+    /* Constants for atan 1.0. This case is special, Taylor series can't count
+     * this */
+    if (s21_ldeq(x, 1.0))
+        res = one_atan;
+    if (s21_ldeq(x, -1.0))
+        res = -one_atan;
 
     if (!s21_ldeq(x, 0.0) && !special && !s21_ldeq(s21_fabs(res), one_atan)) {
         for (int i = 0; i < 100000; i++) {
             if (modulo_x) {
                 res += (s21_pow(-1.0, i) * s21_pow(x, 1 + 2 * i)) / (1 + 2 * i);
             } else {
-                res += (s21_pow(-1.0, i) * s21_pow(x, (-1 - 2 * i))) / (1 + 2 * i);
+                res +=
+                    (s21_pow(-1.0, i) * s21_pow(x, (-1 - 2 * i))) / (1 + 2 * i);
             }
         }
     }
 
-    return (is_nan(x)) ? S21_NAN : s21_atan_custom_pos_neg(magic, res, modulo_x, &special, x);
+    return (is_nan(x))
+               ? S21_NAN
+               : s21_atan_custom_pos_neg(magic, res, modulo_x, &special, x);
 }
 
-static long double s21_atan_custom_pos_neg(long double magic, long double res, int mod, int *sp, long double x) {
+static long double s21_atan_custom_pos_neg(long double magic, long double res,
+                                           int mod, int *sp, long double x) {
     if (!mod && !s21_ldeq(res, 0.0) && !(*sp)) {
         res = magic - res;
     }
@@ -67,7 +79,6 @@ static long double s21_atan_custom_pos_neg(long double magic, long double res, i
     if (*sp) {
         if (s21_fabs(x) > 0) {
             res = S21_M_PI_2;
-            return S21_M_PI_2;
         } else {
             res = -1.0L * S21_M_PI_2;
         }
@@ -85,4 +96,7 @@ static int check_inf_custom(double x) {
 
     return flag;
 }
+<<<<<<< HEAD:s21_helpers.c
 >>>>>>> 83195a0 (Fix bugs in acos, atan, asin. Add s21_atan_custom helper)
+=======
+>>>>>>> 21502c1 (Fix project structure):src/s21_helpers.c

@@ -5,7 +5,6 @@
 #define s21_false 0
 #define s21_bool int
 
-#pragma region STD_HEADERS
 #include <errno.h>
 #include <float.h>
 #include <stdbool.h>
@@ -13,7 +12,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#pragma endregion STD_HEADERS
 
 #define EPS 1e-6
 #define EPS_8 1e-7
