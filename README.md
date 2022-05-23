@@ -28,7 +28,7 @@ The most valuable discovery out of all of them is definitely TDD methodology. Th
 $ git clone ...
 $ cd repo/src/
 $ make test
-$ ./test
+$ ./s21_test_runner
 $ make gcov_report /* To check test coverage, requires lcov utility */
 ```
 ## Credits
