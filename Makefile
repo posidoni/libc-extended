@@ -43,7 +43,7 @@ ifeq ($(shell uname), Linux)
 TST_LIBS=-lcheck_pic $(shell pkg-config --libs check) -lpthread -lrt -lm -lsubunit
 endif
 
-all: $(TARGET) test gcov_report
+all: $(TARGET) test # gcov_report
 
 gcov_obj: $(GCOV_OBJ) Makefile
 
