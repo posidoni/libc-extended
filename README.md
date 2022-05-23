@@ -11,16 +11,18 @@
 Implementation of some libc `math.h` functions with at least 1e-6 precision. Fully covered by
 unit-tests.
 
-Implementation of libc `string.h` functions with some additions, including `sscanf` and `ssprintf` with all specifiers and flags. Fully covered with unit-tests under TDD approach. 
-
 ## Goal & requirements 
-The goal of this project was to get comfortable with strings handling in C, explore tokenization and solidify our knowledge & skills of structured programming, while trying to replicate libc strings handling functions.
+
+The goal of this project was to learn how core mathematical functions are implemented in computers. In order to achieve
+desired precision with reasonable performance our team had to learn different optimization methods. This project was
+especially valuable for those team members who were not familiar with Taylor polynomial series and underlying
+mathematical formulas.
 
 ## Key learnings
-- Taylor polynomial series
 - 'Peculiarities' of working with floats (correct comparison, role of EPS, precision, etc.)
-- Some interesting math algos (Quake 3 fast isqrt, Newthon method, Taylor series, etc.)
+- Some interesting math algos (Quake 3 fast isqrt, Newton method, Taylor series, etc.)
 - Refreshed trigonometry, learned useful optimization formulas
+- Taylor polynomial series
 
 ## Overview of implemented "math.h" functions
 
