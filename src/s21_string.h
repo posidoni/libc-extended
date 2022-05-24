@@ -24,7 +24,7 @@
 #endif
 
 typedef long unsigned int s21_size_t;
-typedef long unsigned s21_size_t;
+
 #define S21_NULL ((void *)0)
 
 int s21_isdigit(char c);
