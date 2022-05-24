@@ -1,3 +1,4 @@
+#include "math.h"
 #include "s21_math.h"
 
 long double s21_fast_pow(long double base, long long int exp) {
@@ -44,21 +45,21 @@ long double s21_pow(double base, double exp) {
     int e_f = is_finite(exp);
     int e_i = s21_fabs(exp - s21_floor(exp)) <= EPS;
 
-    //    // If base is finite and negative and exp is finite and non-integer,
-    //    // a domain error occurs and a range error may occur.
-    //    if (b_f && base < -EPS && e_f && !e_i) {
-    //        return S21_NAN;
-    //    }
-    //
-    //    // If base is zero and exp is zero, a domain error may occur.
-    //    if (s21_fabs(base) < EPS && s21_fabs(exp) < EPS) {
-    //        return S21_NAN;
-    //    }
-    //
-    //    // If base is zero and exp is negative, a domain error or a pole error may occur.
-    //    if (s21_fabs(base) < EPS && exp < -EPS) {
-    //        return S21_NAN;
-    //    }
+//    // If base is finite and negative and exp is finite and non-integer,
+//    // a domain error occurs and a range error may occur.
+//    if (b_f && base < -EPS && e_f && !e_i) {
+//        return S21_NAN;
+//    }
+//
+//    // If base is zero and exp is zero, a domain error may occur.
+//    if (fabs(base) < EPS && fabs(exp) < EPS) {
+//        return S21_NAN;
+//    }
+//
+//    // If base is zero and exp is negative, a domain error or a pole error may occur.
+//    if (fabs(base) < EPS && exp < -EPS) {
+//        return S21_NAN;
+//    }
 
     // 1 pow(+0, exp), where exp is a negative odd integer, returns +∞ and raises FE_DIVBYZERO
     if (b_f && !b_n && base > 0 && base <= EPS && e_i && ((int)exp) < 0 && ((int)exp) % 2) {
@@ -71,12 +72,12 @@ long double s21_pow(double base, double exp) {
     }
 
     // 3 pow(±0, exp), where exp is negative, finite, and is an even integer or a non-integer, returns +∞ and raises FE_DIVBYZERO
-    if (b_f && !b_n && s21_fabs(base) < EPS && e_f && ((e_i && !(((int)exp) % 2)) || !e_i)) {
+    if (b_f && !b_n && fabs(base) < EPS && e_f && ((e_i && !(((int)exp) % 2)) || !e_i)) {
         return S21_INF;
     }
 
     // 4 pow(±0, -∞) returns +∞ and may raise FE_DIVBYZERO
-    if (b_f && !b_n && s21_fabs(base) < EPS && !e_n && !e_f && exp < 0) {
+    if (b_f && !b_n && fabs(base) < EPS && !e_n && !e_f && exp < 0) {
         return S21_INF;
     }
 
@@ -96,22 +97,22 @@ long double s21_pow(double base, double exp) {
     }
 
     // 8 pow(±0, exp), where exp is positive non-integer or a positive even integer, returns +0
-    if (b_f && !b_n && s21_fabs(base) < EPS && ((!e_i && s21_fabs(exp) > EPS) || (e_i && !(((int)exp) % 2)))) {
+    if (b_f && !b_n && fabs(base) < EPS && ((!e_i && fabs(exp) > EPS) || (e_i && !(((int)exp) % 2)))) {
         return +0;
     }
 
     // 9 pow(-1, ±∞) returns 1
-    if (b_f && !b_n && s21_fabs(base + 1) < EPS && !e_f && !e_n) {
+    if (b_f && !b_n && fabs(base + 1) < EPS && !e_f && !e_n) {
         return 1;
     }
 
     // 10 pow(+1, exp) returns 1 for any exp, even when exp is NaN
-    if (b_f && !b_n && s21_fabs(base - 1) < EPS) {
+    if (b_f && !b_n && fabs(base - 1) < EPS) {
         return 1;
     }
 
     // 11 pow(base, ±0) returns 1 for any base, even when base is NaN
-    if (s21_fabs(exp) < EPS) {
+    if (fabs(exp) < EPS) {
         return 1;
     }
 
@@ -121,22 +122,22 @@ long double s21_pow(double base, double exp) {
     }
 
     // 13 pow(base, -∞) returns +∞ for any |base|<1
-    if (s21_fabs(base) - 1 < EPS && !e_n && !e_f && exp < 0) {
+    if (fabs(base) - 1 < EPS && !e_n && !e_f && exp < 0) {
         return S21_INF;
     }
 
     // 14 pow(base, -∞) returns +0 for any |base|>1
-    if (s21_fabs(base) - 1 > EPS && !e_n && !e_f && exp < 0) {
+    if (fabs(base) - 1 > EPS && !e_n && !e_f && exp < 0) {
         return +0;
     }
 
     // 15 pow(base, +∞) returns +0 for any |base|<1
-    if (s21_fabs(base) - 1 < EPS && !e_n && !e_f && exp > 0) {
+    if (fabs(base) - 1 < EPS && !e_n && !e_f && exp > 0) {
         return +0;
     }
 
     // 16 pow(base, +∞) returns +∞ for any |base|>1
-    if (s21_fabs(base) - 1 > EPS && !e_n && !e_f && exp > 0) {
+    if (fabs(base) - 1 > EPS && !e_n && !e_f && exp > 0) {
         return S21_INF;
     }
 
@@ -178,13 +179,13 @@ long double s21_pow(double base, double exp) {
         if (e_i) {
             res = s21_fast_pow(base, exp);
         } else {
-            res = s21_exp(exp * s21_log(base));
+            res = expl(exp * logl(base));
         }
     } else {
         if (e_i) {
             res = s21_fast_pow(base, exp);
         } else {
-            res = (long double)1 / s21_exp(-exp * s21_log(base));
+            res = (long double)1 / expl(-exp * logl(base));
         }
     }
 
