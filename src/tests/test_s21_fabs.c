@@ -22,7 +22,7 @@ END_TEST
 
 START_TEST(large) {
     double a = -9519359135915.53151413431;
-    ck_assert_ldouble_eq(s21_fabs(a), fabs(a));
+    ck_assert_ldouble_eq_tol(s21_fabs(a), fabs(a), EPS);
 }
 END_TEST
 
@@ -30,11 +30,14 @@ START_TEST(fabs_loop_test_1) {
     double n = fRand(-513.43141, 9159.531151351351);
     if (rand() % 2)
         n = -n;
-    ck_assert_int_eq(s21_fabs(n), fabs(n));
+    ck_assert_ldouble_eq_tol(s21_fabs(n), fabs(n), EPS);
 }
 END_TEST
 
-START_TEST(not_a_num) { ck_assert_int_eq(s21_fabs(NAN), fabs(NAN)); }
+START_TEST(not_a_num) {
+    ck_assert_ldouble_nan(s21_fabs(NAN));
+    ck_assert_ldouble_nan(fabs(NAN));
+}
 END_TEST
 
 Suite *suite_s21_fabs(void) {

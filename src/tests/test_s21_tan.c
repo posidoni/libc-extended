@@ -3,12 +3,16 @@
 
 START_TEST(tan_test_1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     double x = RandomReal(-2 * M_PI, 2 * M_PI);
 =======
     // double x = RandomReal(-2 * M_PI, 2 * M_PI);
     double x = S21_M_PI_2;
     // double x = RandomReal(-1e5, 1e5);
 >>>>>>> 85ddb17 (Add TODO)
+=======
+    double x = RandomReal(-2 * S21_M_PI, 2 * S21_M_PI);
+>>>>>>> 144f1f3 (Fix pow edge cases)
     ck_assert_ldouble_eq_tol(s21_tan(x), tanl(x), 1e-06);
 }
 END_TEST

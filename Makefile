@@ -33,7 +33,7 @@ RM:= rm -f
 MK:=mkdir -p
 
 ASAN:=#-fsanitize=address -g
-STDFLAGS=-c -Wall -Wextra -std=c11 -Werror
+STDFLAGS=-c -Wall -Wextra -std=c11 # -Werror
 CFLAGS?= $(STDFLAGS) $(ASAN)
 TST_CFLAGS:= -g $(STDFLAGS) #$(shell pkg-config --cflags check)
 GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
