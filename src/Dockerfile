@@ -12,7 +12,13 @@ RUN apk --no-cache --upgrade add \
     cppcheck \
 	alpine-sdk \
 	pcre-dev \
-    pip3 \
+    clang \
+    automake \
+    autoconf \
+    linux-headers \
+    libc-dev \
+    bash \
+    check-dev
 
 RUN mkdir /s21_matrix
 
@@ -20,6 +26,9 @@ COPY . /s21_matrix
 
 WORKDIR "/s21_matrix"
 
+RUN make
+
 # RUN (?) test.exe OR python test.txt
 # (?) ENTRYPOINT ["/bin/bash",""]
-    
+
+CMD ["/bin/bash"]
