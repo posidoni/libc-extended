@@ -54,6 +54,15 @@ $ ./test
 $ make gcov_report /* To check test coverage, requires lcov utility */
 ```
 
+OR in `Docker`:
+
+```
+$ cd repo/src/
+$ docker build -t s21_math:1.0
+$ docker run -it s21_math:1.0
+$ ./test
+```
+
 ## Credits
 - Developers: [Mikhail Kuznetsov (@posidoni)](https://github.com/MikhailKuzntsov1), [Andrey Jhelannikov(@capricey)](https://github.com/AndreyZhelannikov), [Stepan Fedorov (@nanadaug)](https://github.com/co-cy), [Anton Bezludniy(@tarticar)](https://github.com/bezlant).
 - Any feedback & bug-reports are highly appreciated! 
