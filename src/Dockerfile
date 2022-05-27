@@ -13,10 +13,6 @@ RUN apk --no-cache --upgrade add \
 	alpine-sdk \
 	pcre-dev \
     clang \
-    automake \
-    autoconf \
-    linux-headers \
-    libc-dev \
     bash \
     check-dev
 
@@ -28,7 +24,5 @@ WORKDIR "/s21_matrix"
 
 RUN make
 
-# RUN (?) test.exe OR python test.txt
-# (?) ENTRYPOINT ["/bin/bash",""]
 
 CMD ["/bin/bash"]
