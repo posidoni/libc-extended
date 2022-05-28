@@ -31,19 +31,21 @@ RAN:= ranlib
 RM:= rm -f
 MK:=mkdir -p
 
+GSL:=-I gsl/include gsl/lib/libgsl.a gsl/lib/libgslcblas.a
 UBSAN:=#-fsanitize=undefined -g
 ASAN:=-fsanitize=address
-STDFLAGS=-c -Wall -Wextra -std=c11 -g -I gsl/include #-Werror
+STDFLAGS=-c -Wall -Wextra -std=c11 -g #-Werror
 CFLAGS?= $(STDFLAGS) $(ASAN) $(UBSAN)
 TST_CFLAGS:= -g $(STDFLAGS) #$(shell pkg-config --cflags check)
 GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
 
-TST_LIBS?=-lcheck gsl/lib/libgsl.a -I gsl/include
+TST_LIBS?=-lcheck $(GSL)
 ifeq ($(shell uname), Linux)
-TST_LIBS=-lcheck_pic $(shell pkg-config --libs check) -lpthread -lrt -lm -lsubunit
+TST_LIBS=-lcheck_pic $(shell pkg-config --libs check) -lpthread -lrt -lm -lsubunit $(GSL)
 endif
 
-all: $(TARGET) # test # gcov_report
+
+all: $(TARGET) test # gcov_report
 
 gcov_obj: $(GCOV_OBJ) Makefile
 
@@ -56,7 +58,7 @@ $(TEST_TARGET): $(GCOV_OBJS) $(INC)
 	$(RAN) $(TEST_TARGET)
 
 test: $(TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) $(TEST_INC) Makefile
-	$(CC) $(TEST_OBJS) $(TEST_OBJ_DIR)/main.o $(ASAN) $(UBSAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(TST_LIBS) -L. $(TARGET)
+	$(CC) $(TEST_OBJS) $(GSL) $(TEST_OBJ_DIR)/main.o $(ASAN) $(UBSAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(TST_LIBS) -L. $(TARGET)
 	./test
 
 test_gcov: $(TEST_TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) 
@@ -64,11 +66,11 @@ test_gcov: $(TEST_TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS)
 
 $(TEST_OBJ_DIR)/main.o: main.c 
 	@$(MK) $(TEST_OBJ_DIR)
-	$(CC) $(CFLAGS) -o $(TEST_OBJ_DIR)/main.o main.c  
+	$(CC) $(CFLAGS) -I gsl/include -o $(TEST_OBJ_DIR)/main.o main.c  
 
 $(TEST_OBJ_DIR)%.o: $(TEST_SRC_DIR)%.c $(TEST_INC) 
 	@$(MK) $(TEST_OBJ_DIR)
-	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	$(CC) $(TST_CFLAGS) -I gsl/include -o $@ -c $<
 
 $(OBJS): $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INC) 
 	@$(MK) $(OBJ_DIR)
@@ -76,7 +78,7 @@ $(OBJS): $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INC)
 
 $(GCOV_OBJS): $(TEST_OBJ_DIR)%.o: $(SRC_DIR)%.c $(TEST_INC)
 	@$(MK) $(TEST_OBJ_DIR)
-	$(CC) $(CFLAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) -I gsl/include -o $@ -c $<
 
 gcov_report: $(GCOV_TARGET)
 

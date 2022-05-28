@@ -14,7 +14,10 @@ RUN apk --no-cache --upgrade add \
 	pcre-dev \
     clang \
     bash \
-    check-dev
+    check-dev \ 
+    libgsl-dev 
+
+# ligsl - dev untested (!)
 
 RUN mkdir /s21_matrix
 
