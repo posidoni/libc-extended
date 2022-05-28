@@ -53,4 +53,6 @@ int s21_create_matrix
 
 ## Credits
 - Developer: [Mikhail Kuznetsov (@posidoni)](https://github.com/MikhailKuzntsov1)
+- [GSL](https://www.gnu.org/software/gsl/) is used for unit testing. GSL is distributed under the terms of the [GNU General Public License (GPL)](https://www.gnu.org/licenses/gpl-3.0.html).
+I greatly appreciate the work of Free Software Foundation & GSL developers.
 - SC21 for providing this task as a part of our curriculum 🙂💚
