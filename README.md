@@ -20,8 +20,6 @@ The russian version of the task can be found in the repository.
 
 ## Chapter I
 
-![s21_decimal](misc/images/s21_decimal.png)
-
 Planet Earth, 1990s. 
 
 The world economy is growing exponentially, the stock exchange increases many times year after year, more and more companies go public and their shares start to be quoted. The number of users, the number of transactions, price, commission, interest, calculation of financial technical indicators... It's hard to overestimate the accuracy of all this data, and there are serious problems with the current obsolete data types used in the financial sector.
