@@ -11,8 +11,10 @@
 #define ADD_BIT(X, POS) (X |= (1U << POS))
 // sets multiple bits at poisition by the givev bit value
 #define SET_BIT(X, BIT, POS) (X |= (BIT << POS))
-// bit becomes 0
-#define ZERO_BIT(X, POS) (X &= (0U << POS))
+// bit becomes 0 P.S. ALL INT NUMBER BECOMES 0 !
+#define INIT_ZERO(X) (X &= (0U << 32))
+// real zero_bit
+#define ZERO_BIT(X, POS) (X &= ~(1UL << POS));
 
 typedef enum {
     D_START_EXP = 16,  // Beginning of the Exponent Bits
@@ -55,4 +57,16 @@ s21_decimal sum_right(s21_decimal a, s21_decimal b);
 s21_decimal sum_left(s21_decimal a, s21_decimal b);
 int check_overflow(s21_decimal val, int exponent);
 
+void set_bit_1(s21_decimal *n, int pos);
+void set_bit_0(s21_decimal *n, int pos);
+
+int get_bit(s21_decimal n, int pos);
+void init_zero(s21_decimal *n);
+
+void shift_r_one(s21_decimal *a);
+void shift_r(s21_decimal *a, int n);
+void shift_l_one(s21_decimal *a);
+void shift_l(s21_decimal *a, int n);
+
+// void print_bits(s21_decimal d);
 #endif  // S21_DECIMAL_CORE_H

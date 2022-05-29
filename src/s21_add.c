@@ -5,7 +5,10 @@
 void print_bits(s21_decimal d);
 #endif
 
-int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
+int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
+    //
+    init_zero(result);
+}
 // int s21_add(s21_decimal a, s21_decimal b) {
 //     s21_decimal res = {0};
 //     // a negative b positive
@@ -63,18 +66,3 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
 //     return res;
 // }
 //
-#ifdef DEBUG
-void print_bits(s21_decimal d) {
-    for (int i = 0; i < 3; i++) {
-        int x = 3;
-        for (int j = 0; j < 32; j++) {
-            printf("%u", IS_SET(d.bits[i], j));
-            if (j == x && !(i == 2 && j == 31)) {
-                x += 4;
-                printf(" ");
-            }
-        }
-    }
-    printf("\n");
-}
-#endif

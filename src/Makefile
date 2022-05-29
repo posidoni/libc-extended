@@ -42,22 +42,23 @@ ifeq ($(shell uname), Linux)
 TST_LIBS=-lcheck_pic $(shell pkg-config --libs check) -lpthread -lrt -lm -lsubunit
 endif
 
-all: $(TARGET) test gcov_report 
+all: $(TARGET) test #gcov_report 
 
 gcov_obj: $(GCOV_OBJ)
 
-$(TARGET): $(OBJS)
+$(TARGET): $(OBJS) 
 	$(AR) $(TARGET) $(OBJS)
 	$(RAN) $(TARGET)
 
-$(TEST_TARGET): $(GCOV_OBJS) $(INC)
+$(TEST_TARGET): $(GCOV_OBJS) $(INC) 
 	$(AR) $(TEST_TARGET) $(GCOV_OBJS)
 	$(RAN) $(TEST_TARGET)
 
-test: $(TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) $(TEST_INC) 
+test: $(TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) $(TEST_INC) Makefile
 	$(CC) $(TEST_OBJS) $(TEST_OBJ_DIR)/main.o $(ASAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(TST_LIBS) -L. $(TARGET)
+	./test
 
-test_gcov: $(TEST_TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) 
+test_gcov: $(TEST_TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) Makefile
 	$(CC) $(TEST_OBJS) $(TEST_OBJ_DIR)/main.o $(GCOV_FLAGS) -o $(TEST_GCOV_EXE) $(TST_LIBS) -L. $(TEST_TARGET)
 
 $(TEST_OBJ_DIR)/main.o: main.c 

@@ -1,6 +1,15 @@
 #ifndef TEST
 #define TEST
 
+#define RED "\e[0;31m"
+#define BRED "\e[1;31m"
+#define URED "\e[4;31m"
+#define RESET "\e[0m"
+#define REDB "\e[41m"
+#define REDHB "\e[0;101m"
+#define HRED "\e[0;91m"
+#define BHRED "\e[1;91m"
+
 #include <check.h>
 
 #include "../s21_decimal.h"
@@ -27,5 +36,7 @@ Suite *suite_s21_negate(void);
 
 void run_tests(void);
 void run_testcase(Suite *testcase);
+
+void print_bits(s21_decimal d);
 
 #endif  //  TEST
