@@ -37,17 +37,16 @@ typedef enum {
     TRUE = 1,
 } comparison_result;
 
-typedef enum {
-    CONVERTATION_OK = 0,
-    CONVERTATION_ERROR = 1
-} convertation_result;
+typedef enum { CONVERTATION_OK = 0, CONVERTATION_ERROR = 1 } convertation_result;
 
 void init_decimal(s21_decimal *decimal);
 // returns 0 meaning positive 1 negative
 bool get_sign(s21_decimal decimal);
-void set_sign(s21_decimal *decimal);
+void set_sign_neg(s21_decimal *decimal);
+void set_sign_pos(s21_decimal *decimal);
 int get_exponent(s21_decimal decimal);
 void set_exponent(s21_decimal *decimal, int new_exponent);
+// helpers
 s21_decimal add(s21_decimal a, s21_decimal b);
 s21_decimal add_integers(s21_decimal a, s21_decimal b);
 s21_decimal add_floats(s21_decimal a, s21_decimal b);

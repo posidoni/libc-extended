@@ -8,7 +8,7 @@ int s21_from_int_to_decimal(int src, s21_decimal *dst) {
         if (src >= 0) {
             dst->bits[0] = src;
         } else {
-            set_sign(dst);
+            set_sign_neg(dst);
             dst->bits[0] = src;
         }
     } else {
