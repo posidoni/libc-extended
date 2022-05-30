@@ -1,3 +1,14 @@
+*/objs/
+*/coverage
+/src/coverage.info
+*.out
+/src/tests/objs/*
+*.o
+.vscode
+.vsc
+.vs
+.DS_Store
+
 .gcda
 .gcno
 tags*
