@@ -44,7 +44,7 @@ GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
 
 TST_LIBS?=-lcheck
 ifeq ($(shell uname), Linux)
-TST_LIBS=-lcheck_pic $(shell pkg-config --libs check) -lpthread -lrt -lm -lsubunit
+TST_LIBS=$(shell pkg-config --libs check) -lsubunit -lm -lrt -lpthread -lcheck_pic
 endif
 
 all: $(TARGET) test #gcov_report 
