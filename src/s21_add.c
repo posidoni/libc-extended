@@ -3,7 +3,7 @@
 s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2);
 void handle_exponent(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
 s21_decimal get_power_of_ten(int pow);
-s21_decimal binary_substraction(s21_decimal value_1, s21_decimal value_2);
+s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2);
 s21_decimal binary_multiplication(s21_decimal value_1, s21_decimal value_2);
 #define DEBUG
 
@@ -45,7 +45,7 @@ s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2) {
     return value_1;
 }
 
-s21_decimal binary_substraction(s21_decimal value_1, s21_decimal value_2) {
+s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2) {
     s21_decimal carry;
     value_2 = binary_addition(bit_not(value_2), get_power_of_ten(0));
     while (!eq_zero(value_2)) {
