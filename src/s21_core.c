@@ -26,22 +26,22 @@ void init_zero(s21_decimal *n) {
     INIT_ZERO(n->bits[2]);
 }
 
-void bit_xor(s21_decimal *a, s21_decimal b) {
-    a->bits[0] ^= b.bits[0];
-    a->bits[1] ^= b.bits[1];
-    a->bits[2] ^= b.bits[2];
+void bit_xor(s21_decimal a, s21_decimal b, s21_decimal *result) {
+    result->bits[0] = a.bits[0] ^ b.bits[0];
+    result->bits[1] = a.bits[1] ^ b.bits[1];
+    result->bits[2] = a.bits[2] ^ b.bits[2];
 }
 
-void bit_and(s21_decimal *a, s21_decimal b) {
-    a->bits[0] &= b.bits[0];
-    a->bits[1] &= b.bits[1];
-    a->bits[2] &= b.bits[2];
+void bit_and(s21_decimal a, s21_decimal b, s21_decimal *result) {
+    result->bits[0] = a.bits[0] & b.bits[0];
+    result->bits[1] = a.bits[1] & b.bits[1];
+    result->bits[2] = a.bits[2] & b.bits[2];
 }
 
-void bit_or(s21_decimal *a, s21_decimal b) {
-    a->bits[0] |= b.bits[0];
-    a->bits[1] |= b.bits[1];
-    a->bits[2] |= b.bits[2];
+void bit_or(s21_decimal a, s21_decimal b, s21_decimal *result) {
+    result->bits[0] = a.bits[0] | b.bits[0];
+    result->bits[1] = a.bits[1] | b.bits[1];
+    result->bits[2] = a.bits[2] | b.bits[2];
 }
 
 void shift_l_one(s21_decimal *a) {

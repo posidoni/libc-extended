@@ -38,5 +38,6 @@ void run_tests(void);
 void run_testcase(Suite *testcase);
 
 void print_bits(s21_decimal d);
+void print_bits_r(s21_decimal d);
 
 #endif  //  TEST

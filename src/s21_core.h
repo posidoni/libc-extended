@@ -68,5 +68,9 @@ void shift_r(s21_decimal *a, int n);
 void shift_l_one(s21_decimal *a);
 void shift_l(s21_decimal *a, int n);
 
+void bit_and(s21_decimal a, s21_decimal b, s21_decimal *result);
+void bit_or(s21_decimal a, s21_decimal b, s21_decimal *result);
+void bit_xor(s21_decimal a, s21_decimal b, s21_decimal *result);
+int eq_zero(s21_decimal value);
 // void print_bits(s21_decimal d);
 #endif  // S21_DECIMAL_CORE_H

@@ -24,7 +24,7 @@ void print_bits_r(s21_decimal d) {
             printf("%u", IS_SET(d.bits[i], j));
             if (j == x && !(i == 0 && j == 0)) {
                 x -= 4;
-                printf(" ");
+                printf("");
             }
             printf("%s", RESET);
         }
