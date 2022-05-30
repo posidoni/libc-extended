@@ -1,9 +1,15 @@
 #include "tests/s21_decimal_test.h"
 
+static int failed_tests = 0;
+
 int main(void) {
     run_tests();
 
-    return 0;
+    if (failed_tests) {
+        fprintf(stderr, "%d\n", failed_tests);
+    }
+
+    return EXIT_SUCCESS;
 }
 
 void run_testcase(Suite *testcase) {
@@ -17,6 +23,8 @@ void run_testcase(Suite *testcase) {
 
     srunner_set_fork_status(sr, CK_NOFORK);
     srunner_run_all(sr, CK_NORMAL);
+
+    failed_tests += srunner_ntests_failed(sr);
 
     srunner_free(sr);
 }

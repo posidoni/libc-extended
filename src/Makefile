@@ -7,7 +7,10 @@ TEST_GCOV_EXE?=test_gcov
 GCOV_TARGET=./coverage
 GCOV_INFO=coverage.info
 
-SRC_DIR?=.
+MODULES:=$(shell find . -maxdepth 1 -type d | grep -v -E "docker|objs|tests")
+
+SRC_DIR?=$(MODULES)
+
 TEST_SRC_DIR?=./tests
 
 OBJ_DIR?=./objs
@@ -26,9 +29,11 @@ TEST_OBJS:=$(addprefix $(TEST_OBJ_DIR)/, $(notdir $(TEST_SRC:.c=.o))) #$(TEST_OB
 GCDA=$(shell find $(TEST_OBJ_DIR) -maxdepth 1 -name "*.gcda")
 GCNO=$(shell find $(TEST_OBJ_DIR) -maxdepth 1 -name "*.gcno")
 
-AR:= ar rc
-RAN:= ranlib
-RM:= rm -f
+VPATH:=$(MODULES)
+
+AR:=ar rc
+RAN:=ranlib
+RM:=rm -f
 MK:=mkdir -p
 
 ASAN:=#-fsanitize=address
@@ -46,7 +51,14 @@ all: $(TARGET) test #gcov_report
 
 gcov_obj: $(GCOV_OBJ)
 
-$(TARGET): $(OBJS) 
+lint: Makefile
+	-cp ../materials/linters/CPPLINT.cfg .
+	-find . -type f -name "*.c" | xargs python3 ../materials/linters/cpplint.py --extensions=c
+	-find . -type f -name "*.h" | xargs python3 ../materials/linters/cpplint.py --extensions=c
+	-find . -type f -name "*.c" | xargs cppcheck --enable=all --suppress=missingIncludeSystem
+	rm -f CPPLINT.cfg
+
+$(TARGET): $(OBJS) Makefile
 	$(AR) $(TARGET) $(OBJS)
 	$(RAN) $(TARGET)
 
@@ -69,7 +81,7 @@ $(TEST_OBJ_DIR)%.o: $(TEST_SRC_DIR)%.c $(TEST_INC)
 	@$(MK) $(TEST_OBJ_DIR)
 	$(CC) $(TST_CFLAGS) -o $@ -c $<
 
-$(OBJS): $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INC) 
+$(OBJS): $(OBJ_DIR)/%.o:%.c $(INC) 
 	@$(MK) $(OBJ_DIR)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
