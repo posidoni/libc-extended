@@ -1,0 +1,21 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ develop, main ]
+  pull_request:
+    branches: [ develop, main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+ 
+    - name: Build Container
+      run: |
+      cd src/docker && chmod +x run_daemon.sh && ./run_daemon.sh
+ 
+  
