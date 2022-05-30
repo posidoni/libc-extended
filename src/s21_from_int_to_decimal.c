@@ -1,6 +1,7 @@
 #include "s21_decimal.h"
 
 int s21_from_int_to_decimal(int src, s21_decimal *dst) {
+    init_zero(dst);
     convertation_result status = CONVERTATION_OK;
     if (dst) {
         init_decimal(dst);
