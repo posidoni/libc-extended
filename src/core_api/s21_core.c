@@ -26,22 +26,36 @@ void init_zero(s21_decimal *n) {
     INIT_ZERO(n->bits[2]);
 }
 
-void bit_xor(s21_decimal a, s21_decimal b, s21_decimal *result) {
-    result->bits[0] = a.bits[0] ^ b.bits[0];
-    result->bits[1] = a.bits[1] ^ b.bits[1];
-    result->bits[2] = a.bits[2] ^ b.bits[2];
+s21_decimal bit_xor(s21_decimal a, s21_decimal b) {
+    s21_decimal result;
+    result.bits[0] = a.bits[0] ^ b.bits[0];
+    result.bits[1] = a.bits[1] ^ b.bits[1];
+    result.bits[2] = a.bits[2] ^ b.bits[2];
+    return result;
 }
 
-void bit_and(s21_decimal a, s21_decimal b, s21_decimal *result) {
-    result->bits[0] = a.bits[0] & b.bits[0];
-    result->bits[1] = a.bits[1] & b.bits[1];
-    result->bits[2] = a.bits[2] & b.bits[2];
+s21_decimal bit_and(s21_decimal a, s21_decimal b) {
+    s21_decimal result;
+    result.bits[0] = a.bits[0] & b.bits[0];
+    result.bits[1] = a.bits[1] & b.bits[1];
+    result.bits[2] = a.bits[2] & b.bits[2];
+    return result;
 }
 
-void bit_or(s21_decimal a, s21_decimal b, s21_decimal *result) {
-    result->bits[0] = a.bits[0] | b.bits[0];
-    result->bits[1] = a.bits[1] | b.bits[1];
-    result->bits[2] = a.bits[2] | b.bits[2];
+s21_decimal bit_not(s21_decimal a) {
+    s21_decimal result;
+    result.bits[0] = ~a.bits[0];
+    result.bits[1] = ~a.bits[1];
+    result.bits[2] = ~a.bits[2];
+    return result;
+}
+
+s21_decimal bit_or(s21_decimal a, s21_decimal b) {
+    s21_decimal result;
+    result.bits[0] = a.bits[0] | b.bits[0];
+    result.bits[1] = a.bits[1] | b.bits[1];
+    result.bits[2] = a.bits[2] | b.bits[2];
+    return result;
 }
 
 void shift_l_one(s21_decimal *a) {
@@ -87,6 +101,9 @@ void set_exponent(s21_decimal *decimal, int new_exponent) {
         fprintf(stderr, "VERY BIG EXPONENT (0 - 28): exp = %d\n", new_exponent);
     }
 }
+
+int max(int a, int b) { return a > b ? a : b; }
+int min(int a, int b) { return a < b ? a : b; }
 
 // void print_bits(s21_decimal d) {
 //     for (int i = 0; i < 3; i++) {
