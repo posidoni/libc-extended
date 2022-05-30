@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "s21_core.h"
+#include "core_api/s21_core.h"
 
 int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
 int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);

@@ -28,7 +28,7 @@ START_TEST(add_test1) {
     printf("\n");
 
     ck_assert_int_eq(get_bit(sum, 1), 1);
-    //  ck_assert_
+    ck_assert_int_eq(1, 0);
 }
 END_TEST
 

@@ -1,3 +1,5 @@
+
+notes.md
 test
 */objs/
 */coverage
@@ -13,7 +15,8 @@ test
 .gcda
 .gcno
 tags*
-
+src/test
+s21_decimal.a
 # Mac
 .DS_Store
 

@@ -22,7 +22,7 @@ COPY . /s21_decimal
 
 WORKDIR "/s21_decimal"
 
-RUN "pwd"
+RUN "chmod +x docker/test_s21_decimal"
 
+ENTRYPOINT ["/bin/bash","docker/test_s21_decimal.sh"]
 
-CMD ["/bin/bash"]
