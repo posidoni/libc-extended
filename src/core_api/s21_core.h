@@ -66,9 +66,12 @@ s21_decimal binary_multiplication(s21_decimal value_1, s21_decimal value_2, int 
 void shiftnr(s21_decimal *a, int n);
 void shiftr(s21_decimal *a);
 int shiftnl(s21_decimal *a, int n);
+s21_decimal shiftnl_ret(s21_decimal a, int n);
+s21_decimal shiftnr_ret(s21_decimal a, int n);
 int shiftl(s21_decimal *a);
 
 int eq_zero(s21_decimal value);
+s21_decimal get_0(void);
 s21_decimal get_05(void);
 int max(int a, int b);
 int min(int a, int b);

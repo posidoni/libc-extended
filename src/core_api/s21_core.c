@@ -55,6 +55,14 @@ s21_decimal get_05(void) {
     s21_decimal result;
     s21_from_int_to_decimal(5, &result);
     set_exponent(&result, 1);
+    set_sign_pos(&result);
+    return result;
+}
+s21_decimal get_0(void) {
+    s21_decimal result;
+    init_zero(&result);
+    set_exponent(&result, 0);
+    set_sign_pos(&result);
     return result;
 }
 

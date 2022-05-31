@@ -79,6 +79,15 @@ int shiftnl(s21_decimal *a, int n) {
     return code;
 }
 
+s21_decimal shiftnl_ret(s21_decimal a, int n) {
+    int code = 0;
+    while (n--) {
+        code = shiftl(&a);
+        if (code) break;
+    }
+    return a;
+}
+
 int shiftl(s21_decimal *a) {
     int b1_tmp = get_bit(*a, 31);
     a->bits[0] <<= 1;
@@ -95,6 +104,11 @@ int shiftl(s21_decimal *a) {
 
 void shiftnr(s21_decimal *a, int n) {
     while (n--) shiftr(a);
+}
+
+s21_decimal shiftnr_ret(s21_decimal a, int n) {
+    while (n--) shiftr(&a);
+    return a;
 }
 
 void shiftr(s21_decimal *a) {
