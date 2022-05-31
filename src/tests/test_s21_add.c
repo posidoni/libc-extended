@@ -18,7 +18,7 @@ START_TEST(add_test1) {
     s21_from_int_to_decimal(1, &v2);
 
     set_exponent(&v1, 0);
-    set_exponent(&v2, 5);
+    set_exponent(&v2, 1);
     int code = s21_add(v1, v2, &sum);
 
     printf("\nNUMBERS:\n");

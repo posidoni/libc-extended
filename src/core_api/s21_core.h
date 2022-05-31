@@ -55,11 +55,7 @@ void set_bit_0(s21_decimal *n, int pos);
 int get_bit(s21_decimal n, int pos);
 void init_zero(s21_decimal *n);
 
-void shift_r_one(s21_decimal *a);
-void shift_r(s21_decimal *a, int n);
-int shift_l_one(s21_decimal *a);
-void shift_l(s21_decimal *a, int n);
-
+// BINARY OPERATIONS
 s21_decimal bit_and(s21_decimal a, s21_decimal b);
 s21_decimal bit_or(s21_decimal a, s21_decimal b);
 s21_decimal bit_xor(s21_decimal a, s21_decimal b);
@@ -67,10 +63,16 @@ s21_decimal bit_not(s21_decimal a);
 s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2, int *err);
 s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2, int *err);
 s21_decimal binary_multiplication(s21_decimal value_1, s21_decimal value_2, int *err);
+void shiftnr(s21_decimal *a, int n);
+void shiftr(s21_decimal *a);
+int shiftnl(s21_decimal *a, int n);
+int shiftl(s21_decimal *a);
 
 int eq_zero(s21_decimal value);
+s21_decimal get_05(void);
 int max(int a, int b);
 int min(int a, int b);
+void swap(s21_decimal *a, s21_decimal *b);
 s21_decimal get_power_of_ten(int pow);
 
 static const char *const binary_powers_of_ten[29] = {
