@@ -36,15 +36,15 @@ RAN:=ranlib
 RM:=rm -f
 MK:=mkdir -p
 
-ASAN:=#-fsanitize=address
+ASAN:=-fsanitize=address
 STDFLAGS=-c -Wall -Wextra -std=c11 #-Werror
 CFLAGS?= $(STDFLAGS) $(ASAN)
 TST_CFLAGS:= -g $(STDFLAGS) #$(shell pkg-config --cflags check)
 GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
 
-TST_LIBS?=-lcheck
+TST_LIBS?=-lcheck -lgmp
 ifeq ($(shell uname), Linux)
-TST_LIBS=$(shell pkg-config --libs check) -lm -lrt -lpthread
+	TST_LIBS=$(shell pkg-config --libs check) -lm -lrt -lpthread -lgmp
 endif
 
 all: $(TARGET) test #gcov_report 

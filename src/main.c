@@ -3,6 +3,7 @@
 static int failed_tests = 0;
 
 int main(void) {
+    srand(time(0));
     run_tests();
 
     if (failed_tests) {
@@ -44,7 +45,7 @@ void run_tests(void) {
                            //    suite_s21_is_not_equal(),
                            //    suite_s21_from_int_to_decimal(),
                            //    suite_s21_from_float_to_decimal(),
-                           //    suite_s21_from_decimal_to_int(),
+                           suite_s21_from_decimal_to_int(),
                            //    suite_s21_from_decimal_to_float(),
                            //    suite_s21_floor(),
                            //    suite_s21_round(),
@@ -55,4 +56,9 @@ void run_tests(void) {
     for (Suite **current_testcase = list_cases; *current_testcase != NULL; current_testcase++) {
         run_testcase(*current_testcase);
     }
+}
+
+int get_rand(int min, int max) {
+    int val = (int)rand() % 2;
+    return min + val * (max - min);
 }
