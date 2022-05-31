@@ -1,5 +1,7 @@
 #include "s21_decimal_test.h"
 
+static s21_decimal s21_copy_128_bits(__int128_t src);
+
 START_TEST(add_test1) {
     //
     s21_decimal v1, v2, sum;
@@ -32,15 +34,45 @@ START_TEST(add_test1) {
 
     printf("ERR : %d\n", code);
     ck_assert_int_eq(get_bit(sum, 1), 1);
-    ck_assert_int_eq(1, 0);
 }
 END_TEST
+
+START_TEST(gcc_128_bits) {
+    int random1 = rand(), random2 = rand();
+
+    __int128_t el1 = random1;
+    __int128_t el2 = random2;
+    __int128_t expected = el1 + el2;
+
+    s21_decimal dec1, dec2, got;
+
+    int test = 0;
+
+    dec1 = s21_copy_128_bits(el1);
+    s21_from_decimal_to_int(dec1, &test);
+
+    ck_assert_int_eq(el1, test);
+}
+
+static s21_decimal s21_copy_128_bits(__int128_t src) {
+    s21_decimal res;
+
+    for (int i = 0, j = 0; i < 96; i++, j++) {
+        if (j % 32 == 0) {
+            j = 0;
+        }
+        res.bits[j] = IS_SET(src, i);
+    }
+
+    return res;
+}
 
 Suite *suite_s21_add(void) {
     Suite *s = suite_create("suite_s21_add");
     TCase *tc = tcase_create("s21_add_tc");
 
     tcase_add_test(tc, add_test1);
+    tcase_add_test(tc, gcc_128_bits);
 
     suite_add_tcase(s, tc);
     return s;
