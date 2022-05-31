@@ -58,7 +58,7 @@ s21_decimal bit_or(s21_decimal a, s21_decimal b) {
     return result;
 }
 
-void shift_l_one(s21_decimal *a) {
+int shift_l_one(s21_decimal *a) {
     int b1_tmp = get_bit(*a, 31);
     a->bits[0] <<= 1;
 
@@ -66,8 +66,10 @@ void shift_l_one(s21_decimal *a) {
     a->bits[1] <<= 1;
     if (b1_tmp) set_bit_1(a, 32);
 
+    int is_of = get_bit(*a, 95);
     a->bits[2] <<= 1;
     if (b2_tmp) set_bit_1(a, 64);
+    return is_of;
 }
 
 void shift_l(s21_decimal *a, int n) {
@@ -89,6 +91,22 @@ void shift_r_one(s21_decimal *a) {
 void shift_r(s21_decimal *a, int n) {
     while (n--) shift_r_one(a);
 }
+
+s21_decimal get_power_of_ten(int pow) {
+    s21_decimal result;
+    init_zero(&result);
+    set_exponent(&result, 0);
+    for (int i = 0; i < 96; ++i) {
+        if (binary_powers_of_ten[pow][95 - i] == '1') {
+            set_bit_1(&result, i);
+        } else {
+            set_bit_0(&result, i);
+        }
+    }
+    return result;
+}
+
+int eq_zero(s21_decimal value) { return (value.bits[0] == 0 && value.bits[1] == 0 && value.bits[2] == 0); }
 
 void set_exponent(s21_decimal *decimal, int new_exponent) {
     if (new_exponent <= 28) {

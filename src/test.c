@@ -5,6 +5,7 @@
 
 void foo() {
     mpq_t quotient;
+    mpz_t quotient1;
     //
 }
 
