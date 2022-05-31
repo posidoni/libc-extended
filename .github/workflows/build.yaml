@@ -1,48 +1,37 @@
-# name: Makefile CI
+name: Build Pipeline
 
-# on:
-#   push:
-#     branches: [ develop ]
-#   pull_request:
-#     branches: [ develop ]
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
 
-# jobs:
-#   build_ubuntu:
-#     runs-on: ubuntu-latest
+jobs:   
+  build_macos:
+    name: Build on Mac
+    runs-on: macos-latest
 
-#     steps:
-#     - uses: actions/checkout@v3
+    steps:
+    - uses: actions/checkout@v3
 
-#     - name: Build with Make
-#       run: |
-              
- 
+    - name: Install dependencies
+      run: brew install check
 
-#   build_mac:
-#     runs-on: macos-latest
+    - name: Build with Make & launch tests
+      working-directory: ${{github.workspace}}/docker
+      run: |
+        chmod +x test_s21_decimal.sh
+        ./test_s21_decimal.sh
+    
+  build_docker:
+    name: Build on Docker Container (Apline Linux)
+    runs-on: ubuntu-latest
 
-#   build_docker:
+    steps:
+    - uses: actions/checkout@v3
 
-
-#     steps:
-#     - uses: actions/checkout@v3
-#     - name: Set default Xamarin SDK versions
-#       run: |
-#         $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=14.10
-
-#     - name: Set default Xcode 12.3
-#       run: |
-#         XCODE_ROOT=/Applications/Xcode_12.3.0.app
-#         echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
-#         sudo xcode-select -s $XCODE_ROOT
-
-#     - name: Setup .NET Core SDK 5.0.x
-#       uses: actions/setup-dotnet@v2
-#       with:
-#         dotnet-version: '5.0.x'
-
-#     - name: Install dependencies
-#       run: nuget restore <sln_file_path>
-
-#     - name: Build
-#       run: msbuild <csproj_file_path> /p:Configuration=Debug /p:Platform=iPhoneSimulator /t:Rebuild
+    - name: Build Docker container & run it
+      working-directory: ${{github.workspace}}/docker
+      run: |
+        chmod +x run_daemon.sh
+        ./run_daemon.sh

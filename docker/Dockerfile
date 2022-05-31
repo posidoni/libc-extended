@@ -20,9 +20,8 @@ RUN mkdir /s21_decimal
 
 COPY . /s21_decimal
 
-WORKDIR "/s21_decimal"
+WORKDIR "/s21_decimal/docker"
 
-RUN "chmod +x docker/test_s21_decimal"
+CMD ["./test_s21_decimal.sh"]
 
-ENTRYPOINT ["/bin/bash","docker/test_s21_decimal.sh"]
 
