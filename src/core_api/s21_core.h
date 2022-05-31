@@ -49,14 +49,6 @@ void set_sign_pos(s21_decimal *decimal);
 int get_exponent(s21_decimal decimal);
 void set_exponent(s21_decimal *decimal, int new_exponent);
 // helpers
-s21_decimal add(s21_decimal a, s21_decimal b);
-s21_decimal add_integers(s21_decimal a, s21_decimal b);
-s21_decimal add_floats(s21_decimal a, s21_decimal b);
-s21_decimal add_floats(s21_decimal a, s21_decimal b);
-s21_decimal sum_right(s21_decimal a, s21_decimal b);
-s21_decimal sum_left(s21_decimal a, s21_decimal b);
-int check_overflow(s21_decimal val, int exponent);
-
 void set_bit_1(s21_decimal *n, int pos);
 void set_bit_0(s21_decimal *n, int pos);
 
@@ -65,16 +57,21 @@ void init_zero(s21_decimal *n);
 
 void shift_r_one(s21_decimal *a);
 void shift_r(s21_decimal *a, int n);
-void shift_l_one(s21_decimal *a);
+int shift_l_one(s21_decimal *a);
 void shift_l(s21_decimal *a, int n);
 
 s21_decimal bit_and(s21_decimal a, s21_decimal b);
 s21_decimal bit_or(s21_decimal a, s21_decimal b);
 s21_decimal bit_xor(s21_decimal a, s21_decimal b);
 s21_decimal bit_not(s21_decimal a);
+s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2, int *err);
+s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2, int *err);
+s21_decimal binary_multiplication(s21_decimal value_1, s21_decimal value_2, int *err);
+
 int eq_zero(s21_decimal value);
 int max(int a, int b);
 int min(int a, int b);
+s21_decimal get_power_of_ten(int pow);
 
 static const char *const binary_powers_of_ten[29] = {
     [0] = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
