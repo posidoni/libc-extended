@@ -1,7 +1,8 @@
 #include "s21_decimal_test.h"
 
 START_TEST(no_exp_decimals_to_int) {
-    int got = rand(), expected = rand();
+    int got = rand();
+    int expected;
 
     s21_decimal input = get_random_int_decimal();
     expected = reverse_bits_int(input.bits[0]);
@@ -31,7 +32,9 @@ START_TEST(exp_decimals_to_int_hardcoded2) {
     int got2 = 2;
     s21_decimal a2 = {0};
 
-    a2.bits[0] = 0b11001100011100011100011100011010; /* Dec: 8.8888888888888888888888883 */
+    a2.bits[0] =
+        0b11001100011100011100011100011010; /* Dec: 8.8888888888888888888888883
+                                             */
     a2.bits[1] = 0b00101111011101110001111001001010;
     a2.bits[2] = 0b00101111011000011001001000000000;
     set_exponent(&a2, 25);
