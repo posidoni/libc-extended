@@ -16,8 +16,7 @@ int main(void) {
 void run_testcase(Suite *testcase) {
     static int counter_testcase = 1;
 
-    if (counter_testcase > 1)
-        putchar('\n');
+    if (counter_testcase > 1) putchar('\n');
     printf("%s%d%s", "CURRENT TEST: ", counter_testcase, "\n");
     counter_testcase++;
 
@@ -34,10 +33,10 @@ void run_testcase(Suite *testcase) {
 void run_tests(void) {
     Suite *list_cases[] = {/* */
                            /* suite_s21_add(), */
-                           suite_convert_gmp_to_decimal(),
-                           //    suite_s21_sub(),
+                           //    suite_convert_gmp_to_decimal(),
+                           //   suite_s21_sub(),
                            //    suite_s21_mul(),
-                           /* suite_s21_div(), */
+                           suite_s21_div(),
                            //    suite_s21_mod(),
                            //    suite_s21_is_less(),
                            //    suite_s21_is_less_or_equal(),
@@ -55,8 +54,7 @@ void run_tests(void) {
                            //    suite_s21_negate(),
                            NULL};
 
-    for (Suite **current_testcase = list_cases; *current_testcase != NULL;
-         current_testcase++) {
+    for (Suite **current_testcase = list_cases; *current_testcase != NULL; current_testcase++) {
         run_testcase(*current_testcase);
     }
 }

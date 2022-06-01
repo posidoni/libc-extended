@@ -13,8 +13,8 @@ START_TEST(div_test1) {
     // for (int i = 0; i < 33; ++i)
     // if (rand() % 2) set_bit_1(&v2, i);
 
-    s21_from_int_to_decimal(100, &v1);
-    s21_from_int_to_decimal(10, &v2);
+    s21_from_int_to_decimal(124, &v1);
+    s21_from_int_to_decimal(2, &v2);
 
     set_exponent(&v1, 0);
     set_exponent(&v2, 0);
