@@ -3,12 +3,12 @@
 static s21_decimal s21_copy_128_bits(__int128_t src);
 
 START_TEST(add_test1) {
-    //
     s21_decimal v1, v2, sum;
 
     init_zero(&v1);
     init_zero(&v2);
-    for (int i = 0; i < 96; ++i) set_bit_1(&v1, i);
+    for (int i = 0; i < 96; ++i)
+        set_bit_1(&v1, i);
     set_bit_0(&v1, 92);
     set_bit_0(&v1, 93);
     set_bit_0(&v1, 94);

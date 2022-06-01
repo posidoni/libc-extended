@@ -42,10 +42,7 @@ CFLAGS?= $(STDFLAGS) $(ASAN)
 TST_CFLAGS:= -g $(STDFLAGS) #$(shell pkg-config --cflags check)
 GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
 
-TST_LIBS?=-lcheck -lgmp
-ifeq ($(shell uname), Linux)
-	TST_LIBS=$(shell pkg-config --libs check) -lm -lrt -lpthread -lgmp
-endif
+TST_LIBS:=$(shell pkg-config --libs --cflags check) $(shell pkg-config --libs --cflags gmp)
 
 all: $(TARGET) test #gcov_report 
 
@@ -75,11 +72,13 @@ test_gcov: $(TEST_TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) Makefile
 
 $(TEST_OBJ_DIR)/main.o: main.c 
 	@$(MK) $(TEST_OBJ_DIR)
-	$(CC) $(CFLAGS) -o $(TEST_OBJ_DIR)/main.o main.c  
+	echo $(TST_LIBS)
+	$(CC) $(CFLAGS) -o $(TEST_OBJ_DIR)/main.o main.c $(TST_LIBS)
 
 $(TEST_OBJ_DIR)%.o: $(TEST_SRC_DIR)%.c $(TEST_INC) 
 	@$(MK) $(TEST_OBJ_DIR)
-	$(CC) $(TST_CFLAGS) -o $@ -c $<
+	$(CC) $(TST_CFLAGS) -o $@ -c $< $(TST_LIBS)
+
 
 $(OBJS): $(OBJ_DIR)/%.o:%.c $(INC) 
 	@$(MK) $(OBJ_DIR)
