@@ -28,7 +28,25 @@ public static void DivMod (Int128 dividend, Int128 divisor, out Int128 quotient,
         }
     }
 }
+*/
 
+// s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code) {
+//     s21_decimal quotient = value_2;
+//     s21_decimal remainder = {0};
+
+//     for (int i = 0; i < 96; ++i) {
+//         shiftl(&remainder);
+//         shiftl(&quotient);
+
+//         if (s21_is_greater_or_equal(remainder, value_2)) {
+//             remainder = binary_subtraction(remainder, value_2, code);
+//             quotient = binary_addition(quotient, get_power_of_ten(0), code);
+//         }
+//     }
+//     return quotient;
+// }
+
+/*
  for i in range(31,-1,-1): # starting our loop
 
         if b << i <= a  : # checking if b multiplied by 2**i is <= a
@@ -36,6 +54,25 @@ public static void DivMod (Int128 dividend, Int128 divisor, out Int128 quotient,
             ans += 1 << i # adding 2 power i to the answer
 
 */
+s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code) {
+    s21_decimal result = {0};
+
+    for (int i = 94; i >= 0; --i) {
+        if (s21_is_less_or_equal(shiftnl_ret(value_2, i), value_1)) {
+            // printf("%d : ", i);
+            // print_bits_r(shiftnl_ret(get_power_of_ten(0), i));
+            // print_bits_r(result);
+            // print_bits_r(value_1);
+            // print_bits_r(value_2);
+            // printf("\n");
+
+            value_1 = binary_subtraction(value_1, shiftnl_ret(value_2, i), code);
+            result = bit_or(result, shiftnl_ret(get_power_of_ten(0), i));
+        }
+    }
+    return result;
+}
+
 /*
   long long quotient = 0, temp = 0;
 
@@ -54,17 +91,16 @@ public static void DivMod (Int128 dividend, Int128 divisor, out Int128 quotient,
 
   return quotient;
 */
-s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code) {
-    s21_decimal one;
-    s21_decimal quotient;
-    s21_decimal temp;
-    init_zero(&one);
-    init_zero(&quotient);
-    init_zero(&temp);
+/*s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code) {
+    s21_decimal one = {0};
+    s21_decimal quotient = {0};
+    s21_decimal temp = {0};
 
     set_bit_1(&one, 95);
 
     for (int i = 95; i >= 0; --i) {
+        // printf("%d : ", i);
+        // print_bits_r(one);
         if (s21_is_less_or_equal(binary_addition(temp, shiftnl_ret(value_2, i), code), value_1)) {
             printf("I: %d\n", i);
             temp = binary_addition(temp, shiftnl_ret(value_2, i), code);
@@ -72,7 +108,7 @@ s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code)
         }
         shiftr(&one);
     }
-    print_bits_r(temp);
     set_exponent(&quotient, 0);
     return quotient;
 }
+*/
