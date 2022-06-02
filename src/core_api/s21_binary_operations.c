@@ -1,6 +1,7 @@
 #include "s21_core.h"
 
-s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2, int *err) {
+s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2,
+                            bool *err) {
     s21_decimal carry;
     while (!eq_zero(value_2)) {
         init_zero(&carry);
@@ -12,7 +13,8 @@ s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2, int *err) 
     return value_1;
 }
 
-s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2, int *err) {
+s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2,
+                               bool *err) {
     s21_decimal carry;
     value_2 = binary_addition(bit_not(value_2), get_power_of_ten(0), err);
     while (!eq_zero(value_2)) {
@@ -25,7 +27,8 @@ s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2, int *er
     return value_1;
 }
 
-s21_decimal binary_multiplication(s21_decimal value_1, s21_decimal value_2, int *err) {
+s21_decimal binary_multiplication(s21_decimal value_1, s21_decimal value_2,
+                                  bool *err) {
     s21_decimal result;
     init_zero(&result);
     while (!eq_zero(value_2)) {
@@ -71,19 +74,19 @@ s21_decimal bit_or(s21_decimal a, s21_decimal b) {
 }
 
 int shiftnl(s21_decimal *a, int n) {
-    int code = 0;
+    bool code = 0;
     while (n--) {
         code = shiftl(a);
-        if (code) break;
+        if (code)
+            break;
     }
     return code;
 }
 
 s21_decimal shiftnl_ret(s21_decimal a, int n) {
-    int code = 0;
     while (n--) {
-        code = shiftl(&a);
-        if (code) break;
+        if (shiftl(&a))
+            break;
     }
     return a;
 }
@@ -94,20 +97,24 @@ int shiftl(s21_decimal *a) {
 
     int b2_tmp = get_bit(*a, 63);
     a->bits[1] <<= 1;
-    if (b1_tmp) set_bit_1(a, 32);
+    if (b1_tmp)
+        set_bit_1(a, 32);
 
     int is_overflow = get_bit(*a, 95);
     a->bits[2] <<= 1;
-    if (b2_tmp) set_bit_1(a, 64);
+    if (b2_tmp)
+        set_bit_1(a, 64);
     return is_overflow;
 }
 
 void shiftnr(s21_decimal *a, int n) {
-    while (n--) shiftr(a);
+    while (n--)
+        shiftr(a);
 }
 
 s21_decimal shiftnr_ret(s21_decimal a, int n) {
-    while (n--) shiftr(&a);
+    while (n--)
+        shiftr(&a);
     return a;
 }
 
@@ -117,8 +124,10 @@ void shiftr(s21_decimal *a) {
 
     int b2_tmp = get_bit(*a, 32);
     a->bits[1] >>= 1;
-    if (b1_tmp) set_bit_1(a, 63);
+    if (b1_tmp)
+        set_bit_1(a, 63);
 
     a->bits[0] >>= 1;
-    if (b2_tmp) set_bit_1(a, 31);
+    if (b2_tmp)
+        set_bit_1(a, 31);
 }
