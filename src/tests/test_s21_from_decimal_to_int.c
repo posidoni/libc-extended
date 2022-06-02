@@ -5,7 +5,7 @@ START_TEST(no_exp_decimals_to_int) {
     int expected;
 
     s21_decimal input = get_random_int_decimal();
-    expected = reverse_bits_int(input.bits[0]);
+    expected = reverse_bits(input.bits[0]);
     int code = s21_from_decimal_to_int(input, &got);
     ck_assert_int_eq(code, ARITHMETIC_OK);
     ck_assert_int_eq(got, expected);
@@ -61,23 +61,21 @@ END_TEST;
 START_TEST(exp_decimals_to_int_gmp) {
     int got = 1;
     s21_decimal in = {0};
-    mpz_t in_npz_copy;
-
-    int flag = s21_get_random_decimal_and_npz_copy(&in, &in_npz_copy);
-
-    /* If the conversion from string to NPZ was successfull */
+    mpz_t in_mpz_copy;
+    mpz_init(in_mpz_copy);
+    bool flag = get_random_pair(&in, &in_mpz_copy);
 
     if (!flag) {
         int expected = 13333333;
-        expected = mpz_get_si(in_npz_copy);
-        mpz_clear(in_npz_copy);
+        expected = mpz_get_si(in_mpz_copy);
+        mpz_clear(in_mpz_copy);
 
         int code = s21_from_decimal_to_int(in, &got);
 
         ck_assert_int_eq(code, ARITHMETIC_OK);
         ck_assert_int_eq(got, expected);
     } else {
-        mpz_clear(in_npz_copy);
+        mpz_clear(in_mpz_copy);
     }
 }
 END_TEST;

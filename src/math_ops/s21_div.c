@@ -1,60 +1,12 @@
 #include "../s21_decimal.h"
 
-s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *err);
-
 int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
-    int code = 0;
+    bool code = 0;
     *result = binary_division(value_1, value_2, &code);
     return code;
 }
-
-/*
-public static void DivMod (Int128 dividend, Int128 divisor, out Int128 quotient, out Int128 remainder)
-{
-    quotient = dividend;
-    remainder = 0;
-    for (int i = 0; i < 128; i++)
-    {
-        // Left shift Remainder:Quotient by 1
-        remainder <<= 1;
-        if (quotient < 0)
-            remainder._lo |= 1;
-        quotient <<= 1;
-
-        if (remainder >= divisor)
-        {
-            remainder -= divisor;
-            quotient++;
-        }
-    }
-}
-*/
-
-// s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code) {
-//     s21_decimal quotient = value_2;
-//     s21_decimal remainder = {0};
-
-//     for (int i = 0; i < 96; ++i) {
-//         shiftl(&remainder);
-//         shiftl(&quotient);
-
-//         if (s21_is_greater_or_equal(remainder, value_2)) {
-//             remainder = binary_subtraction(remainder, value_2, code);
-//             quotient = binary_addition(quotient, get_power_of_ten(0), code);
-//         }
-//     }
-//     return quotient;
-// }
-
-/*
- for i in range(31,-1,-1): # starting our loop
-
-        if b << i <= a  : # checking if b multiplied by 2**i is <= a
-            a -= b << i   # subtracting b << i from a
-            ans += 1 << i # adding 2 power i to the answer
-
-*/
-s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code) {
+s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2,
+                            bool *code) {
     s21_decimal result = {0};
 
     for (int i = 94; i >= 0; --i) {
@@ -66,7 +18,8 @@ s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code)
             // print_bits_r(value_2);
             // printf("\n");
 
-            value_1 = binary_subtraction(value_1, shiftnl_ret(value_2, i), code);
+            value_1 =
+                binary_subtraction(value_1, shiftnl_ret(value_2, i), code);
             result = bit_or(result, shiftnl_ret(get_power_of_ten(0), i));
         }
     }
@@ -91,24 +44,71 @@ s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code)
 
   return quotient;
 */
-/*s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code) {
-    s21_decimal one = {0};
-    s21_decimal quotient = {0};
-    s21_decimal temp = {0};
+/*s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int
+*code) { s21_decimal one = {0}; s21_decimal quotient = {0}; s21_decimal temp =
+{0};
 
     set_bit_1(&one, 95);
 
     for (int i = 95; i >= 0; --i) {
         // printf("%d : ", i);
         // print_bits_r(one);
-        if (s21_is_less_or_equal(binary_addition(temp, shiftnl_ret(value_2, i), code), value_1)) {
-            printf("I: %d\n", i);
-            temp = binary_addition(temp, shiftnl_ret(value_2, i), code);
-            quotient = bit_or(quotient, one);
+        if (s21_is_less_or_equal(binary_addition(temp, shiftnl_ret(value_2, i),
+code), value_1)) { printf("I: %d\n", i); temp = binary_addition(temp,
+shiftnl_ret(value_2, i), code); quotient = bit_or(quotient, one);
         }
         shiftr(&one);
     }
     set_exponent(&quotient, 0);
     return quotient;
 }
+*/
+
+/*
+public static void DivMod (Int128 dividend, Int128 divisor, out Int128 quotient,
+out Int128 remainder)
+{
+    quotient = dividend;
+    remainder = 0;
+    for (int i = 0; i < 128; i++)
+    {
+        // Left shift Remainder:Quotient by 1
+        remainder <<= 1;
+        if (quotient < 0)
+            remainder._lo |= 1;
+        quotient <<= 1;
+
+        if (remainder >= divisor)
+        {
+            remainder -= divisor;
+            quotient++;
+        }
+    }
+}
+*/
+
+// s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int
+// *code) {
+//     s21_decimal quotient = value_2;
+//     s21_decimal remainder = {0};
+
+//     for (int i = 0; i < 96; ++i) {
+//         shiftl(&remainder);
+//         shiftl(&quotient);
+
+//         if (s21_is_greater_or_equal(remainder, value_2)) {
+//             remainder = binary_subtraction(remainder, value_2, code);
+//             quotient = binary_addition(quotient, get_power_of_ten(0), code);
+//         }
+//     }
+//     return quotient;
+// }
+
+/*
+ for i in range(31,-1,-1): # starting our loop
+
+        if b << i <= a  : # checking if b multiplied by 2**i is <= a
+            a -= b << i   # subtracting b << i from a
+            ans += 1 << i # adding 2 power i to the answer
+
 */

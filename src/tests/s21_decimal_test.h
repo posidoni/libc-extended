@@ -21,12 +21,11 @@ s21_decimal get_random_int_decimal(void);
 
 // gmp manipulation
 s21_decimal convert_gmp_to_decimal(mpz_t input);
-int s21_get_random_decimal_and_npz_copy(s21_decimal *in, mpz_t *in_npz_copy);
-void s21_apply_exponent_to_npz(mpz_t *src, int exp);
+int get_random_pair(s21_decimal *in, mpz_t *in_mpz_copy);
+void apply_exponent_to_mpz(mpz_t *src, int exp);
 
 // helpers
-unsigned int reverse_bits_u32(unsigned int n);
-int reverse_bits_int(int in);
+uint32_t reverse_bits(uint32_t n);
 int get_rand(int min, int max);
 
 // debug
