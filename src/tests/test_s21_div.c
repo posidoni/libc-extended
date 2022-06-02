@@ -10,16 +10,20 @@ START_TEST(div_test1) {
     // set_bit_0(&v1, 93);
     // set_bit_0(&v1, 94);
     // set_bit_0(&v1, 95);
-    // for (int i = 0; i < 95; ++i)
-    // if (rand() % 2) set_bit_1(&v1, i);
+    for (int i = 0; i < 60; ++i) {
+        if (rand() % 2) set_bit_1(&v1, i);
+    }
+    // for (int i = 0; i < 78; ++i) {
+    // if (rand() % 2) set_bit_1(&v2, i);
+    // }
 
-    set_bit_1(&v1, 2);
-    set_bit_1(&v2, 2);
+    // set_bit_1(&v1, _i);
+    // set_bit_1(&v2, _i);
     // s21_from_int_to_decimal(15, &v1);
-    // s21_from_int_to_decimal(2, &v2);
+    s21_from_int_to_decimal(1, &v2);
 
-    set_exponent(&v1, 0);
-    set_exponent(&v2, 0);
+    set_exponent(&v1, 1);
+    set_exponent(&v2, 12);
     int code = s21_div(v1, v2, &div);
 
     printf("\nNUMBERS:\n");
@@ -32,8 +36,8 @@ START_TEST(div_test1) {
     printf("\n");
 
     printf("ERR : %d\n", code);
-    ck_assert_int_eq(get_bit(div, 1), 1);
-    ck_assert_int_eq(1, 0);
+    // ck_assert_int_eq(get_bit(div, 1), 1);
+    // ck_assert_int_eq(1, 0);
 }
 END_TEST
 Suite *suite_s21_div(void) {
