@@ -16,6 +16,8 @@ int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
         handle_exponent_sub(value_2, value_1, result, &code);
     }
 
+    code = code == 1 ? get_sign(*result) ? S21_NEGATIVE_INFINITY : S21_INFINITY : 0;
+
     return code;
 }
 
