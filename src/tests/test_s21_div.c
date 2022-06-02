@@ -13,9 +13,10 @@ START_TEST(div_test1) {
     // for (int i = 0; i < 95; ++i)
     // if (rand() % 2) set_bit_1(&v1, i);
 
-    set_bit_1(&v1, 95);
+    set_bit_1(&v1, 2);
+    set_bit_1(&v2, 2);
     // s21_from_int_to_decimal(15, &v1);
-    s21_from_int_to_decimal(2, &v2);
+    // s21_from_int_to_decimal(2, &v2);
 
     set_exponent(&v1, 0);
     set_exponent(&v2, 0);
