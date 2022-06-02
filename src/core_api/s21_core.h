@@ -55,8 +55,6 @@ void set_bit_0(s21_decimal *n, int pos);
 int get_bit(s21_decimal n, int pos);
 void init_zero(s21_decimal *n);
 
-s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code);
-
 // BINARY OPERATIONS
 s21_decimal bit_and(s21_decimal a, s21_decimal b);
 s21_decimal bit_or(s21_decimal a, s21_decimal b);
@@ -65,6 +63,7 @@ s21_decimal bit_not(s21_decimal a);
 s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2, int *err);
 s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2, int *err);
 s21_decimal binary_multiplication(s21_decimal value_1, s21_decimal value_2, int *err);
+s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code);
 void shiftnr(s21_decimal *a, int n);
 void shiftr(s21_decimal *a);
 int shiftnl(s21_decimal *a, int n);
@@ -73,6 +72,7 @@ s21_decimal shiftnr_ret(s21_decimal a, int n);
 int shiftl(s21_decimal *a);
 
 int eq_zero(s21_decimal value);
+int byte_len(s21_decimal n);
 s21_decimal get_0(void);
 s21_decimal get_05(void);
 int max(int a, int b);

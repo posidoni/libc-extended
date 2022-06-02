@@ -2,6 +2,7 @@
 
 void init_decimal(s21_decimal *decimal) { memset(decimal, 0, sizeof(*decimal)); }
 
+
 // returns 0 meaning positive 1 negative
 bool get_sign(s21_decimal decimal) { return IS_SET(decimal.bits[3], D_SIGN); }
 void set_sign_neg(s21_decimal *decimal) { ADD_BIT(decimal->bits[3], D_SIGN); }
@@ -72,6 +73,14 @@ void init_zero(s21_decimal *n) {
     n->bits[0] = 0;
     n->bits[1] = 0;
     n->bits[2] = 0;
+}
+
+int byte_len(s21_decimal n) {
+    int pos;
+    for (pos = 95; pos >= 0; --pos) {
+        if (get_bit(n, pos)) break;
+    }
+    return pos;
 }
 
 int max(int a, int b) { return a > b ? a : b; }

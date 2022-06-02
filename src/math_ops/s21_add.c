@@ -4,11 +4,18 @@ void handle_exponent_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *
 
 int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     int code = ARITHMETIC_OK;
-    if (get_sign(value_1) == get_sign(value_2)) {
+
+    if (get_sign(value_1) == 0 && get_sign(value_2) == 0) {
         handle_exponent_add(value_1, value_2, result, &code);
-    } else {
-        code = s21_sub(value_1, value_2, result);
+    } else if (get_sign(value_1) == 0 && get_sign(value_2) == 1) {
+        s21_sub(value_1, value_2, code);
+    } else if (get_sign(value_1) == 1 && get_sign(value_2) == 0) {
+        s21_sub(value_2, value_1, code);
+    } else if (get_sign(value_1) == 1 && get_sign(value_2) == 1) {
+        handle_exponent_add(value_1, value_2, result, &code);
+        set_sign_neg(result);
     }
+
     return code;
 }
 
