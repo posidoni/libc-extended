@@ -1,31 +1,23 @@
 #include "../s21_decimal.h"
 
 int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
-    bool code = 0;
+    int code = 0;
     *result = binary_division(value_1, value_2, &code);
     return code;
 }
-s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2,
-                            bool *code) {
-    s21_decimal result = {0};
 
+s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code) {
+    if (s21_is_equal(value_2, get_power_of_ten(0))) return value_1;
+
+    s21_decimal result = {0};
     for (int i = 94; i >= 0; --i) {
         if (s21_is_less_or_equal(shiftnl_ret(value_2, i), value_1)) {
-            // printf("%d : ", i);
-            // print_bits_r(shiftnl_ret(get_power_of_ten(0), i));
-            // print_bits_r(result);
-            // print_bits_r(value_1);
-            // print_bits_r(value_2);
-            // printf("\n");
-
-            value_1 =
-                binary_subtraction(value_1, shiftnl_ret(value_2, i), code);
+            value_1 = binary_subtraction(value_1, shiftnl_ret(value_2, i), code);
             result = bit_or(result, shiftnl_ret(get_power_of_ten(0), i));
         }
     }
     return result;
 }
-
 /*
   long long quotient = 0, temp = 0;
 
@@ -87,12 +79,11 @@ out Int128 remainder)
 }
 */
 
-// s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int
-// *code) {
+// s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code) {
 //     s21_decimal quotient = value_2;
 //     s21_decimal remainder = {0};
 
-//     for (int i = 0; i < 96; ++i) {
+//     for (int i = 95; i >= 0; --i) {
 //         shiftl(&remainder);
 //         shiftl(&quotient);
 
