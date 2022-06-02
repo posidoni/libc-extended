@@ -15,11 +15,23 @@ START_TEST(convert_test) {
     }
 
     /* TODO: Apply exponent to the gotten number */
-    /* bool err_code; */
-    /* expected = binary_division( */
-    /*     expected, get_power_of_ten(get_exponent(expected)), &err_code); */
+    bool err_code;
+    printf("\nNUMBERS:\n");
+    printf("EXP = %d ", get_exponent(expected));
+    print_bits_r(expected);
+    s21_decimal pot = get_power_of_ten(get_exponent(expected));
+    printf("POT : ");
+    print_bits_r(pot);
+    expected = binary_division(expected, pot, &err_code);
 
-#define DEBUG
+    // printf("EXP = %d ", get_exponent(get_power_of_ten(get_exponent(expected))));
+    // print_bits_r(get_power_of_ten(get_exponent(expected)));
+
+    printf("EXP = %d ", get_exponent(expected));
+    print_bits_r(expected);
+    printf("\n");
+
+// #define DEBUG
 #ifdef DEBUG
     static int test = 0;
     printf("TEST = %d\n", test++);

@@ -10,10 +10,11 @@ START_TEST(div_test1) {
     // set_bit_0(&v1, 93);
     // set_bit_0(&v1, 94);
     // set_bit_0(&v1, 95);
-    // for (int i = 0; i < 33; ++i)
-    // if (rand() % 2) set_bit_1(&v2, i);
+    // for (int i = 0; i < 95; ++i)
+    // if (rand() % 2) set_bit_1(&v1, i);
 
-    s21_from_int_to_decimal(124, &v1);
+    set_bit_1(&v1, 95);
+    // s21_from_int_to_decimal(15, &v1);
     s21_from_int_to_decimal(2, &v2);
 
     set_exponent(&v1, 0);
@@ -38,7 +39,7 @@ Suite *suite_s21_div(void) {
     Suite *s = suite_create("suite_s21_div");
     TCase *tc = tcase_create("s21_div_tc");
 
-    tcase_add_test(tc, div_test1);
+    tcase_add_loop_test(tc, div_test1, 0, 1);
 
     suite_add_tcase(s, tc);
     return s;
