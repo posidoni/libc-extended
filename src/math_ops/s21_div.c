@@ -1,5 +1,8 @@
 #include "../s21_decimal.h"
 
+int first_bit(s21_decimal n);
+int byte_len(s21_decimal n);
+
 int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     int code = 0;
     *result = binary_division(value_1, value_2, &code);
@@ -10,13 +13,29 @@ s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code)
     if (s21_is_equal(value_2, get_power_of_ten(0))) return value_1;
 
     s21_decimal result = {0};
-    for (int i = 94; i >= 0; --i) {
+    for (int i = 95 - first_bit(value_2); i >= 0; --i) {
         if (s21_is_less_or_equal(shiftnl_ret(value_2, i), value_1)) {
             value_1 = binary_subtraction(value_1, shiftnl_ret(value_2, i), code);
             result = bit_or(result, shiftnl_ret(get_power_of_ten(0), i));
         }
     }
     return result;
+}
+
+int byte_len(s21_decimal n) {
+    int pos;
+    for (pos = 95; pos >= 0; --pos) {
+        if (get_bit(n, pos)) break;
+    }
+    return pos;
+}
+
+int first_bit(s21_decimal n) {
+    int pos;
+    for (pos = 0; pos < 96; ++pos) {
+        if (get_bit(n, pos)) break;
+    }
+    return pos;
 }
 /*
   long long quotient = 0, temp = 0;
