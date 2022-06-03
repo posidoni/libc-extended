@@ -1,8 +1,5 @@
 #include "../s21_decimal.h"
 
-int byte_len(s21_decimal n);
-void handle_exponent_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code);
-
 int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     if (eq_zero(value_2)) return S21_NAN;
 

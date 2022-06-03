@@ -1,122 +1,145 @@
-CC=gcc
+# Compiler config
+CC 				:=	gcc
 
-TARGET?=s21_decimal.a
-TEST_TARGET?=test_s21_decimal.a
-TEST_EXE?=test
-TEST_GCOV_EXE?=test_gcov
-GCOV_TARGET=./coverage
-GCOV_INFO=coverage.info
-
-MODULES:=$(shell find . -maxdepth 1 -type d | grep -v -E "docker|objs|tests")
-
-SRC_DIR?=$(MODULES)
-
-TEST_SRC_DIR?=./tests
-
-OBJ_DIR?=./objs
-TEST_OBJ_DIR?=./tests/objs
-
-INC:=$(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.h")
-SRC:=$(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.c")
-
-TEST_INC:=$(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.h")
-TEST_SRC:=$(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.c")
-
-OBJS:=$(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
-GCOV_OBJS:=$(addprefix $(TEST_OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
-TEST_OBJS:=$(addprefix $(TEST_OBJ_DIR)/, $(notdir $(TEST_SRC:.c=.o))) #$(TEST_OBJ_DIR)/main.o
-
-GCDA=$(shell find $(TEST_OBJ_DIR) -maxdepth 1 -name "*.gcda")
-GCNO=$(shell find $(TEST_OBJ_DIR) -maxdepth 1 -name "*.gcno")
-
-VPATH:=$(MODULES)
-
-AR:=ar rc
-RAN:=ranlib
-RM:=rm -f
-MK:=mkdir -p
-
-ASAN:=-fsanitize=address
-STDFLAGS=-c -Wall -Wextra -std=c11 #-Werror
-CFLAGS?= $(STDFLAGS) $(ASAN)
-TST_CFLAGS:= -g $(STDFLAGS) #$(shell pkg-config --cflags check)
-GCOV_FLAGS?=-fprofile-arcs -ftest-coverage
-
-TST_LIBS:=$(shell pkg-config --libs --cflags check) $(shell pkg-config --libs --cflags gmp)
-
-all: $(TARGET) test #gcov_report 
-
-gcov_obj: $(GCOV_OBJ)
-
-lint: Makefile
-	-cp ../materials/linters/CPPLINT.cfg .
-	-find . -type f -name "*.c" | xargs python3 ../materials/linters/cpplint.py --extensions=c
-	-find . -type f -name "*.h" | xargs python3 ../materials/linters/cpplint.py --extensions=c
-	-find . -type f -name "*.c" | xargs cppcheck --enable=all --suppress=missingIncludeSystem
-	rm -f CPPLINT.cfg
-
-$(TARGET): $(OBJS) Makefile
-	$(AR) $(TARGET) $(OBJS)
-	$(RAN) $(TARGET)
-
-$(TEST_TARGET): $(GCOV_OBJS) $(INC) 
-	$(AR) $(TEST_TARGET) $(GCOV_OBJS)
-	$(RAN) $(TEST_TARGET)
-
-test: $(TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) $(TEST_INC) Makefile
-	$(CC) $(TEST_OBJS) $(TEST_OBJ_DIR)/main.o $(ASAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(TST_LIBS) -L. $(TARGET)
-	./test
-
-test_gcov: $(TEST_TARGET) $(TEST_OBJ_DIR)/main.o $(TEST_OBJS) Makefile
-	$(CC) $(TEST_OBJS) $(TEST_OBJ_DIR)/main.o $(GCOV_FLAGS) -o $(TEST_GCOV_EXE) $(TST_LIBS) -L. $(TEST_TARGET)
-
-$(TEST_OBJ_DIR)/main.o: main.c 
-	@$(MK) $(TEST_OBJ_DIR)
-	echo $(TST_LIBS)
-	$(CC) $(CFLAGS) -o $(TEST_OBJ_DIR)/main.o main.c $(TST_LIBS)
-
-$(TEST_OBJ_DIR)%.o: $(TEST_SRC_DIR)%.c $(TEST_INC) 
-	@$(MK) $(TEST_OBJ_DIR)
-	$(CC) $(TST_CFLAGS) -o $@ -c $< $(TST_LIBS)
+# Compilation flags configuration
+ALL_TARGETS 	?= $(TARGET) test gcov_report 
+ASAN 			:= 	#-fsanitize=address
+UBSAN			:=	#-fsanitize=undefined
+STDFLAGS 		:=	-g -c -Wall -Wextra -std=c11 #-Werror
 
 
-$(OBJS): $(OBJ_DIR)/%.o:%.c $(INC) 
-	@$(MK) $(OBJ_DIR)
-	$(CC) $(CFLAGS) -o $@ -c $<
+# Linking flags configuration
+LIBS 			?=	$(CHECK_LIB) $(GMP_LIB)
+CHECK_LIB 		:= 	$(shell pkg-config --libs --cflags check)
+GMP_LIB 		:= 	$(shell pkg-config --libs --cflags gmp)
 
-$(GCOV_OBJS): $(TEST_OBJ_DIR)%.o: $(SRC_DIR)%.c $(TEST_INC)
-	@$(MK) $(TEST_OBJ_DIR)
-	$(CC) $(CFLAGS) -o $@ -c $<
+# Names config
+TARGET 			?=	s21_decimal.a
+TEST_TARGET		?=	test_s21_decimal.a
+TEST_EXE 		?=	test
+TEST_GCOV_EXE	?=	test_gcov
+GCOV_TARGET		 =	./coverage
+GCOV_INFO		 =	coverage.info
 
+# Modules - dirs with source code. Grep'ed dirs are excluded from search.
+MODULES 		:=	$(shell find . -maxdepth 1 -type d | grep -v -E "docker|objs|tests")
+TEST_MODULES 	:=	$(shell find tests -maxdepth 1 -type d | grep -v -E "objs")
+
+# Dirs configuration
+SRC_DIR 		?=	$(MODULES)
+TEST_SRC_DIR	?=	$(TEST_MODULES)
+OBJ_DIR 		:=	./objs
+GCOV_OBJ_DIR	:=	./tests/gcov_obj
+
+# Source code files configuration
+SRC 			:=	$(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.c")
+TEST_SRC 		:=  $(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.c")
+INC 			:=	$(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.h")
+TEST_INC		:=	$(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.h")
+
+# Objects configuration
+ALL_OBJS		:=	$(shell find . -name "*.o")
+OBJS 			:=	$(notdir $(SRC:.c=.o))
+TEST_OBJS 		:=	$(notdir $(TEST_SRC:.c=.o))
+
+# GCOV-specific objects configuration
+GCOV_OBJS		:=	$(addprefix $(GCOV_OBJ_DIR)/gcov_, $(notdir $(SRC:.c=.o)))
+GCOV_TEST_OBJS 	:=	$(addprefix $(OBJ_DIR)/, $(notdir $(TEST_SRC:.c=.o)))
+
+# GCOV configuration
+GCDA 			:= 	$(shell find . -name "*.gcda")
+GCNO 			:= 	$(shell find . -name "*.gcno")
+GCOV_FLAGS 		:=	-fprofile-arcs -ftest-coverage
+
+# VPath configuration. Order of args is their priority. 
+vpath %.c $(MODULES) : $(TEST_MODULES)
+vpath %.o $(OBJ_DIR) : $(GCOV_OBJ_DIR)
+
+
+# Default system utilities
+AR 	:=	ar rc
+RAN :=	ranlib
+RM 	:= 	rm -f
+MK 	:=	mkdir -p
+
+# Assignment of configured flags
+CFLAGS 		?= 	$(STDFLAGS) $(ASAN) $(UBSAN)
+TST_CFLAGS 	:= 	$(STDFLAGS) #$(shell pkg-config --cflags check)
+
+all 			: 	$(ALL_TARGETS)
+
+debug: 
+	echo $(GCOV_OBJ_DIR)
+	echo $(GCOV_OBJS)
+	echo $(GCOV_TEST_OBJS)
+
+# General compilation rule
+%.o 			: %.c $(INC) 
+				@$(MK) $(OBJ_DIR)
+				$(CC) $(CFLAGS) -o $(OBJ_DIR)/$(notdir $@) -c $<
+
+
+# Building static library
+$(TARGET) 		: $(OBJS) Makefile
+				$(AR) $(TARGET) $(OBJ_DIR)/*
+				$(RAN) $(TARGET)
+
+$(TEST_TARGET)	: $(GCOV_OBJS) $(INC)
+				$(AR) $(TEST_TARGET) $(GCOV_OBJ_DIR)/*
+				$(RAN) $(TEST_TARGET)
+
+test 			: $(TARGET) $(TEST_OBJS) $(TEST_INC) Makefile
+				$(CC) $(OBJ_DIR)/* $(ASAN) $(UBSAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(LIBS) -L. $(TARGET)
+				./test
+
+# GCOV stage
 gcov_report: $(GCOV_TARGET)
 
-$(GCOV_TARGET): CFLAGS += $(GCOV_FLAGS)
-$(GCOV_TARGET): $(GCOV_INFO)
-	genhtml $(GCOV_INFO) -o $(GCOV_TARGET)
+# GCOV sets GCOV-specific variables & generates separate set of objects
+$(GCOV_TARGET) 	: OBJ_DIR=$(GCOV_OBJ_DIR)
+$(GCOV_TARGET) 	: CFLAGS += $(GCOV_FLAGS)
+$(GCOV_TARGET) 	: $(GCOV_INFO)
+				genhtml $(GCOV_INFO) -o $(GCOV_TARGET)
 
-$(GCOV_INFO): test_gcov
-	./$(TEST_GCOV_EXE)
-	geninfo $(TEST_OBJ_DIR) -b . -o ./$(GCOV_INFO)
+# GCOV objects compilation rule
+$(GCOV_OBJ_DIR)/gcov_%.o : %.c $(INC) 
+				@$(MK) $(OBJ_DIR)
+				$(CC) $(CFLAGS) -o $(GCOV_OBJ_DIR)/$(notdir $@) -c $<
 
+# Linking of GCOV objects
+test_gcov 		: $(TEST_TARGET) $(GCOV_OBJS) $(GCOV_TEST_OBJS) Makefile
+				$(CC) $(GCOV_OBJS) $(GCOV_TEST_OBJS) $(GCOV_FLAGS) -o $(TEST_GCOV_EXE) $(LIBS) -L. $(TEST_TARGET)
 
-open:
-	open coverage/src/index.html
+# Launching of executable & generating HTML report
+$(GCOV_INFO) 	: test_gcov
+				./$(TEST_GCOV_EXE)
+				geninfo $(GCOV_OBJ_DIR) -b . -o ./$(GCOV_INFO)
+				
+# Utility targets
 
-clean:
-	$(RM) $(OBJS)
-	$(RM) $(GCDA)
-	$(RM) $(GCNO)
-	$(RM) $(TEST_OBJS)
-	$(RM) $(GCOV_OBJS)
+open 			:
+				open coverage/index.html
 
-fclean: clean
-	$(RM) $(TARGET)
-	$(RM) $(TEST_TARGET)
-	$(RM) $(TEST_EXE)
-	$(RM) $(TEST_GCOV_EXE)
-	$(RM) $(GCOV_INFO)
-	$(RM) -r $(GCOV_TARGET)
+clean 			:
+				$(RM) $(ALL_OBJS)
+				$(RM) $(GCDA)
+				$(RM) $(GCNO)
 
-re: fclean all
+fclean 			: clean
+				$(RM) $(TARGET)
+				$(RM) $(TEST_TARGET)
+				$(RM) $(TEST_EXE)
+				$(RM) $(TEST_GCOV_EXE)
+				$(RM) $(GCOV_INFO)
+				$(RM) -r $(GCOV_TARGET)
 
-.PHONY: all clean fclean re open 
+lint 			: Makefile
+				-cp ../materials/linters/CPPLINT.cfg .
+				-find . -type f -name "*.c" | xargs python3 ../materials/linters/cpplint.py --extensions=c
+				-find . -type f -name "*.h" | xargs python3 ../materials/linters/cpplint.py --extensions=c
+				-find . -type f -name "*.c" | xargs cppcheck --enable=all --suppress=missingIncludeSystem
+				rm -f CPPLINT.cfg
+
+re 				: fclean all
+
+.PHONY 			: all clean fclean re open lint

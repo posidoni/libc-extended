@@ -1,5 +1,4 @@
-#include "s21_decimal_test.h"
-#include <float.h>
+#include "../s21_decimal_test.h"
 
 typedef union {
     float f;

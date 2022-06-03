@@ -11,9 +11,10 @@ test
 .vsc
 .vs
 .DS_Store
-
-.gcda
-.gcno
+*.gcda
+*.gcno
+gcov_*
+test_gcov
 tags*
 src/test
 s21_decimal.a

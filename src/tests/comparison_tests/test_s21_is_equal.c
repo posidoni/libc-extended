@@ -1,4 +1,4 @@
-#include "s21_decimal_test.h"
+#include "../s21_decimal_test.h"
 
 Suite *suite_s21_is_equal(void) {
     Suite *s = suite_create("suite_s21_is_equal");
@@ -9,3 +9,4 @@ Suite *suite_s21_is_equal(void) {
     suite_add_tcase(s, tc);
     return s;
 }
+//    

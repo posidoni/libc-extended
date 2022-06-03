@@ -1,4 +1,4 @@
-#include "s21_decimal_test.h"
+#include "../s21_decimal_test.h"
 
 s21_decimal convert_gmp_to_decimal(mpz_t input) {
     s21_decimal res = {0};

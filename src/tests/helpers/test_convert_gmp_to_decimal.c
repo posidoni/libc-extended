@@ -1,4 +1,4 @@
-#include "s21_decimal_test.h"
+#include "../s21_decimal_test.h"
 
 START_TEST(convert_test) {
     s21_decimal expected = {0};

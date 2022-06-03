@@ -1,4 +1,4 @@
-#include "tests/s21_decimal_test.h"
+#include "s21_decimal_test.h"
 
 static int failed_tests = 0;
 
@@ -33,8 +33,8 @@ void run_testcase(Suite *testcase) {
 
 void run_tests(void) {
     Suite *list_cases[] = {
-        // suite_s21_add(),
-        //    suite_convert_gmp_to_decimal(),
+        suite_s21_add(),
+        suite_convert_gmp_to_decimal(),
         //   suite_s21_sub(),
         //    suite_s21_mul(),
         // suite_s21_div(),

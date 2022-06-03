@@ -1,6 +1,6 @@
-#include "s21_decimal_test.h"
+#include "../s21_decimal_test.h"
 
-START_TEST(mul_loop) {
+START_TEST(mod_test) {
     mpz_t mpz_val1;
     mpz_init(mpz_val1);
     mpz_set_ui(mpz_val1, 0);
@@ -14,7 +14,7 @@ START_TEST(mul_loop) {
     mpz_set_ui(mpz_res, 0);
 
     s21_decimal val1 = {0};
-    get_random_pair(&val1, &mpz_val1, 1);
+    get_random_pair(&val1, &mpz_val1, 2);
     s21_decimal val2 = {0};
     get_random_pair(&val2, &mpz_val2, 1);
     s21_decimal res = {0};
@@ -30,10 +30,9 @@ START_TEST(mul_loop) {
     printf("mpz_val2 = ");
     print_bits_r(convert_gmp_to_decimal(mpz_val2));
 #endif
-
     /* NOTE: GMP library works incorrectly or other functioned needed */
-    mpz_mul(mpz_res, mpz_val1, mpz_val2);
-    s21_mul(val1, val2, &res);
+    mpz_tdiv_r(mpz_res, mpz_val1, mpz_val2);
+    s21_mod(val1, val2, &res);
 
 #ifdef DEBUG
     puts("-------------RESULT----------------");
@@ -48,11 +47,11 @@ START_TEST(mul_loop) {
 }
 END_TEST
 
-Suite *suite_s21_mul(void) {
-    Suite *s = suite_create("suite_s21_mul");
-    TCase *tc = tcase_create("s21_mul_tc");
+Suite *suite_s21_mod(void) {
+    Suite *s = suite_create("suite_s21_mod");
+    TCase *tc = tcase_create("s21_mod_tc");
 
-    tcase_add_loop_test(tc, mul_loop, 0, 1);
+    tcase_add_loop_test(tc, mod_test, 0, 1);
 
     suite_add_tcase(s, tc);
     return s;
