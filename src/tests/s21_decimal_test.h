@@ -21,7 +21,7 @@ s21_decimal get_random_int_decimal(void);
 
 // gmp manipulation
 s21_decimal convert_gmp_to_decimal(mpz_t input);
-int get_random_pair(s21_decimal *in, mpz_t *in_mpz_copy);
+int get_random_pair(s21_decimal *in, mpz_t *in_mpz_copy, int size);
 void apply_exponent_to_mpz(mpz_t *src, int exp);
 
 // helpers
@@ -29,6 +29,8 @@ uint32_t reverse_bits(uint32_t n);
 int get_rand(int min, int max);
 
 // debug
+void print_mpz_binary(mpz_t mpz_val);
+void print_mpz_decimal(mpz_t mpz_val);
 void print_bits_set(s21_decimal d, int set_n);
 void print_bits_r_set(s21_decimal d, int set_n);
 void print_bits(s21_decimal d);

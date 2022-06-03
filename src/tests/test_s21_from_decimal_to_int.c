@@ -63,7 +63,7 @@ START_TEST(exp_decimals_to_int_gmp) {
     s21_decimal in = {0};
     mpz_t in_mpz_copy;
     mpz_init(in_mpz_copy);
-    bool flag = get_random_pair(&in, &in_mpz_copy);
+    bool flag = get_random_pair(&in, &in_mpz_copy, 3);
 
     if (!flag) {
         int expected = 13333333;
