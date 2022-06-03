@@ -1,4 +1,5 @@
-#include "s21_decimal_test.h"
+#include "../s21_decimal_test.h"
+
 
 START_TEST(NULL_POINTER) {
     int test_int = 0;

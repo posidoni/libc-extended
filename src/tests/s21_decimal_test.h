@@ -11,13 +11,16 @@
 #define BHRED "\e[1;91m"
 
 #include <check.h>
+#include <float.h>
+#include <stdio.h>
 #include <time.h>
 
-#include "../gmp.h"
 #include "../s21_decimal.h"
+#include "gmp.h"
 
 // decimal manipulation
-s21_decimal get_random_int_decimal(void);
+s21_decimal
+get_random_int_decimal(void);
 
 // gmp manipulation
 s21_decimal convert_gmp_to_decimal(mpz_t input);

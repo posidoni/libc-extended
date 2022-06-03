@@ -1,4 +1,4 @@
-#include "s21_decimal_test.h"
+#include "../s21_decimal_test.h"
 
 START_TEST(loop_division_mpz) {
     s21_decimal val = {0};

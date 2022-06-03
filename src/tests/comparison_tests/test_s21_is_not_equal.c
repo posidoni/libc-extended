@@ -1,4 +1,5 @@
-#include "s21_decimal_test.h"
+#include "../s21_decimal_test.h"
+
 
 Suite *suite_s21_is_not_equal(void) {
     Suite *s = suite_create("suite_s21_is_not_equal");

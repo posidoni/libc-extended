@@ -1,4 +1,5 @@
-#include "s21_decimal_test.h"
+#include "../s21_decimal_test.h"
+
 
 START_TEST(negate) {
     s21_decimal n = {0};

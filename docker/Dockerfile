@@ -14,14 +14,14 @@ RUN apk --no-cache --upgrade add \
 	pcre-dev \
     clang \
     bash \
-    check-dev
-
+    check-dev \
+    gmp-dev \
+    pkgconfig
+    
 RUN mkdir /s21_decimal
 
 COPY . /s21_decimal
 
 WORKDIR "/s21_decimal/docker"
 
-CMD ["./test_s21_decimal.sh"]
-
-
+CMD ["./test_s21_decimal_light.sh"]

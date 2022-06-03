@@ -1,4 +1,5 @@
-#include "s21_decimal_test.h"
+#include "../s21_decimal_test.h"
+
 
 START_TEST(no_exp_decimals_to_int) {
     int got = rand();

@@ -1,4 +1,4 @@
-#include "s21_decimal_test.h"
+#include "../s21_decimal_test.h"
 
 /* static s21_decimal s21_copy_128_bits(__int128_t src); */
 
