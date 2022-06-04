@@ -18,7 +18,7 @@ void run_testcase(Suite *testcase) {
 
     if (counter_testcase > 1)
         putchar('\n');
-    printf("%s%d%s", "CURRENT TEST: ", counter_testcase, "\n");
+    printf(GRN "%s%d%s" ENDCOLOR, "CURRENT TEST: ", counter_testcase, "\n");
     counter_testcase++;
 
     SRunner *sr = srunner_create(testcase);
@@ -33,18 +33,18 @@ void run_testcase(Suite *testcase) {
 
 void run_tests(void) {
     Suite *list_cases[] = {
-        suite_s21_add(),
-        suite_convert_gmp_to_decimal(),
+        // suite_s21_add(),
+        // suite_convert_gmp_to_decimal(),
+        // suite_convert_decimal_to_gmp(),
         //   suite_s21_sub(),
         //    suite_s21_mul(),
         // suite_s21_div(),
         //    suite_s21_mod(),
-        //    suite_s21_is_less(),
-        //    suite_s21_is_less_or_equal(),
-        //    suite_s21_is_greater(),
-        //    suite_s21_is_greater_or_equal(),
-        //    suite_s21_is_equal(),
-        //    suite_s21_is_not_equal(),
+           suite_s21_is_less(),
+           suite_s21_is_less_or_equal(),
+           suite_s21_is_greater(),
+           suite_s21_is_greater_or_equal(),
+        suite_s21_is_or_not_equal(),
         //    suite_s21_from_int_to_decimal(),
         //                           suite_s21_from_float_to_decimal(),
         //                           suite_s21_from_decimal_to_int(),
