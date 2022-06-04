@@ -1,70 +1,68 @@
 # Compiler config
-CC 				:=	gcc
+CC 				 =	gcc
 
 # Compilation flags configuration
-ALL_TARGETS 	?= $(TARGET) test # gcov_report 
-ASAN 			:= 	#-fsanitize=address
-UBSAN			:=	#-fsanitize=undefined
-STDFLAGS 		:=	-g -c -Wall -Wextra -std=c11 #-Werror
-
+ALL_TARGETS 	 = $(TARGET) test # gcov_report 
+ASAN 			 = 	#-fsanitize=address
+UBSAN			 =	#-fsanitize=undefined
+STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 # -fanalyzer # -Werror
 
 # Linking flags configuration
-LIBS 			?=	$(CHECK_LIB) $(GMP_LIB)
-CHECK_LIB 		:= 	$(shell pkg-config --libs --cflags check)
-GMP_LIB 		:= 	$(shell pkg-config --libs --cflags gmp)
+LIBS 			 =	$(CHECK_LIB) $(GMP_LIB)
+CHECK_LIB 		 = 	$(shell pkg-config --libs --cflags check)
+GMP_LIB 		 = 	$(shell pkg-config --libs --cflags gmp)
 
 # Names config
-TARGET 			?=	s21_decimal.a
-TEST_TARGET		?=	test_s21_decimal.a
-TEST_EXE 		?=	test
-TEST_GCOV_EXE	?=	test_gcov
+TARGET 			 =	s21_decimal.a
+TEST_TARGET		 =	test_s21_decimal.a
+TEST_EXE 		 =	test
+TEST_GCOV_EXE	 =	test_gcov
 GCOV_TARGET		 =	./coverage
 GCOV_INFO		 =	coverage.info
 
 # Modules - dirs with source code. Grep'ed dirs are excluded from search.
-MODULES 		:=	$(shell find . -maxdepth 1 -type d | grep -v -E "docker|objs|tests")
-TEST_MODULES 	:=	$(shell find tests -maxdepth 1 -type d | grep -v -E "objs")
+MODULES 		 =	$(shell find . -maxdepth 1 -type d | grep -v -E "docker|objs|tests")
+TEST_MODULES 	 =	$(shell find tests -maxdepth 1 -type d | grep -v -E "objs")
 
 # Dirs configuration
-SRC_DIR 		?=	$(MODULES)
-TEST_SRC_DIR	?=	$(TEST_MODULES)
-OBJ_DIR 		:=	./objs
-GCOV_OBJ_DIR	:=	./tests/gcov_obj
+SRC_DIR 		 =	$(MODULES)
+TEST_SRC_DIR	 =	$(TEST_MODULES)
+OBJ_DIR 		 =	./objs
+GCOV_OBJ_DIR	 =	./tests/gcov_obj
 
 # Source code files configuration
-SRC 			:=	$(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.c")
-TEST_SRC 		:=  $(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.c")
-INC 			:=	$(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.h")
-TEST_INC		:=	$(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.h")
+SRC 			 =	$(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.c")
+TEST_SRC 		 =  $(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.c")
+INC 			 =	$(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.h")
+TEST_INC		 =	$(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.h")
 
 # Objects configuration
-ALL_OBJS		:=	$(shell find . -name "*.o")
-OBJS 			:=	$(notdir $(SRC:.c=.o))
-TEST_OBJS 		:=	$(notdir $(TEST_SRC:.c=.o))
+ALL_OBJS		 =	$(shell find . -name "*.o")
+OBJS 			 =	$(notdir $(SRC:.c=.o))
+TEST_OBJS 		 =	$(notdir $(TEST_SRC:.c=.o))
 
 # GCOV-specific objects configuration
-GCOV_OBJS		:=	$(addprefix $(GCOV_OBJ_DIR)/gcov_, $(notdir $(SRC:.c=.o)))
+GCOV_OBJS		 =	$(addprefix $(GCOV_OBJ_DIR)/gcov_, $(notdir $(SRC:.c=.o)))
+# ":=" is used here, because (1) later obj_dir changes; (2) we need objs from ./objs
 GCOV_TEST_OBJS 	:=	$(addprefix $(OBJ_DIR)/, $(notdir $(TEST_SRC:.c=.o)))
 
 # GCOV configuration
-GCDA 			:= 	$(shell find . -name "*.gcda")
-GCNO 			:= 	$(shell find . -name "*.gcno")
-GCOV_FLAGS 		:=	-fprofile-arcs -ftest-coverage
+GCDA 			 = 	$(shell find . -name "*.gcda")
+GCNO 			 = 	$(shell find . -name "*.gcno")
+GCOV_FLAGS 		 =	-fprofile-arcs -ftest-coverage
 
 # VPath configuration. Order of args is their priority. 
 vpath %.c $(MODULES) : $(TEST_MODULES)
 vpath %.o $(OBJ_DIR) : $(GCOV_OBJ_DIR)
 
-
 # Default system utilities
-AR 	:=	ar rc
-RAN :=	ranlib
-RM 	:= 	rm -f
-MK 	:=	mkdir -p
+AR 	 =	ar rc
+RAN  =	ranlib
+RM 	 = 	rm -f
+MK 	 =	mkdir -p
 
 # Assignment of configured flags
-CFLAGS 		?= 	$(STDFLAGS) $(ASAN) $(UBSAN)
-TST_CFLAGS 	:= 	$(STDFLAGS) #$(shell pkg-config --cflags check)
+CFLAGS 			= 	$(STDFLAGS) $(ASAN) $(UBSAN)
 
 all 			: 	$(ALL_TARGETS)
 
@@ -93,7 +91,7 @@ test 			: $(TARGET) $(TEST_OBJS) $(TEST_INC) Makefile
 				./test
 
 # GCOV stage
-gcov_report: $(GCOV_TARGET)
+gcov_report 	: $(GCOV_TARGET)
 
 # GCOV sets GCOV-specific variables & generates separate set of objects
 $(GCOV_TARGET) 	: OBJ_DIR=$(GCOV_OBJ_DIR)
