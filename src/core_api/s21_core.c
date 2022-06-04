@@ -2,7 +2,6 @@
 
 void init_decimal(s21_decimal *decimal) { memset(decimal, 0, sizeof(*decimal)); }
 
-
 // returns 0 meaning positive 1 negative
 bool get_sign(s21_decimal decimal) { return IS_SET(decimal.bits[3], D_SIGN); }
 void set_sign_neg(s21_decimal *decimal) { ADD_BIT(decimal->bits[3], D_SIGN); }
@@ -28,9 +27,15 @@ s21_decimal get_power_of_ten(int pow) {
 
 int get_exponent(s21_decimal decimal) {
     int exponent = 0;
+    
     for (int i = D_START_EXP, j = 0; i <= D_END_EXP; i++, j++) {
         if (IS_SET(decimal.bits[3], i)) ADD_BIT(exponent, j);
     }
+
+    if (exponent > 28) {
+        fprintf(stderr, "VERY BIG EXPONENT (0 - 28): exp = %d\n", exponent);
+    }
+
     return exponent;
 }
 
@@ -73,6 +78,7 @@ void init_zero(s21_decimal *n) {
     n->bits[0] = 0;
     n->bits[1] = 0;
     n->bits[2] = 0;
+    n->bits[3] = 0;
 }
 
 int byte_len(s21_decimal n) {

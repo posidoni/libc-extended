@@ -7,9 +7,6 @@ test
 *.out
 /src/tests/objs/*
 *.o
-.vscode
-.vsc
-.vs
 .DS_Store
 *.gcda
 *.gcno
@@ -27,7 +24,7 @@ s21_decimal.a
 # Prerequisites
 *.d
 
-# Object files
+# Object filesls
 *.o
 *.ko
 *.obj
