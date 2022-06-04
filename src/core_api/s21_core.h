@@ -16,6 +16,9 @@
 // real zero_bit
 #define ZERO_BIT(X, POS) (X &= ~(1UL << POS));
 
+#define MAX_DECIMAL 7.92281625143e+28
+#define MIN_DECIMAL -7.92281625143e+28
+
 typedef enum {
     D_START_EXP = 16,  // Beginning of the Exponent Bits
     D_END_EXP = 23,    // End of the Exponent Bits
