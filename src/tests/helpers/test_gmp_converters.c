@@ -3,7 +3,7 @@
 s21_decimal convert_gmp_to_decimal(mpz_t input) {
     s21_decimal res = {0};
     /* https://gmplib.org/manual/Integer-Import-and-Export */
-    mpz_export(res.bits, 0, 1, sizeof(res.bits[0]), -1, 0, input);
+    mpz_export(res.bits, 0, -1, sizeof(res.bits[0]), -1, 0, input);
 
     // Macro: int mpz_sgn (const mpz_t op)
     // Return +1 if op > 0, 0 if op = 0, and -1 if op < 0.
@@ -15,7 +15,8 @@ s21_decimal convert_gmp_to_decimal(mpz_t input) {
 }
 
 void convert_decimal_to_gmp(mpz_t *gmp, s21_decimal *dec) {
-    mpz_import(*gmp, 3, 1, sizeof(dec->bits[0]), 0, 0, dec->bits);
+    // changed to -1 because we work in litte endian & reversed bytes
+    mpz_import(*gmp, 3, -1, sizeof(dec->bits[0]), -1, 0, dec->bits);
 
     apply_exponent_to_mpz(gmp, get_exponent(*dec));
 
@@ -31,7 +32,7 @@ void convert_decimal_to_gmp(mpz_t *gmp, s21_decimal *dec) {
  */
 
 void tmp_normalize_exponent(s21_decimal *dec) {
-    int exponent = get_exponent(*dec);
+    /* int exponent = get_exponent(*dec); */
 
     mpz_t tmp;
     mpz_init(tmp);

@@ -66,24 +66,6 @@ void apply_exponent_to_mpz(mpz_t *src, int exp) {
     mpz_clear(mpz_ten_const);
 }
 
-uint32_t reverse_bits(uint32_t n) {
-    uint32_t m = 0;
-    for (int i = 0; i < 32; i++, n >>= 1) {
-        m <<= 1;
-        m |= n & 1;
-    }
-    return m;
-}
-
-int reverse_bits_int(int n) {
-    int m = 0;
-    for (int i = 0; i < 32; i++, n >>= 1) {
-        m <<= 1;
-        m |= n & 1;
-    }
-    return m;
-}
-
 s21_decimal get_random_int_decimal(void) {
     s21_decimal res = {0};
 
@@ -93,8 +75,9 @@ s21_decimal get_random_int_decimal(void) {
         set_sign_pos(&res);
 
     for (int j = 0; j < 1; j++) {
-        for (int i = 31; i >0; i--) {
-            SET_BIT(res.bits[0], (rand() % 2), i);
+        for (int i = 31; i > 0; i--) {
+            unsigned int x = rand() % 2;
+            SET_BIT(res.bits[0], x, i);
         }
     }
 
@@ -112,6 +95,8 @@ void print_mpz_decimal(mpz_t mpz_val) {
 
 void print_bits(s21_decimal d) {
     for (int i = 0; i < 4; i++) {
+        if (i == 3)
+            printf(" ");
         int x = 3;
         for (int j = 0; j < 32; j++) {
             if (IS_SET(d.bits[i], j))
@@ -178,6 +163,4 @@ void print_bits_set(s21_decimal d, int set_n) {
     printf("\n");
 }
 
-int get_rand(int min, int max) {
-    return (rand() % (max - min + 1)) + min;
-}
+int get_rand(int min, int max) { return (rand() % (max - min + 1)) + min; }
