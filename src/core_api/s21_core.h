@@ -4,6 +4,7 @@
 #define S21_DECIMAL_CORE_H
 
 #include <math.h>
+#include <stdint.h>
 
 // checks if a bit is set
 #define IS_SET(X, POS) ((X >> POS) & 1U)
