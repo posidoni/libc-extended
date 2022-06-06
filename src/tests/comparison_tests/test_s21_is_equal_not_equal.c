@@ -18,6 +18,7 @@ START_TEST(gmp_random) {
     /* (!) Hack. Change this to our own function */
     tmp_normalize_exponent(&a1);
 
+    /* Negation is done to match mpz_cmp output (0 in case of equality) */
     int got = !(s21_is_equal(a1, res));
     int expected = mpz_cmp(mpz_val, mpz_copy);
 
@@ -99,16 +100,32 @@ START_TEST(equality_all_zeros) {
 }
 END_TEST
 
+START_TEST(hardcoded_decimal_loop) {
+    s21_decimal n1 = get_random_decimal_size(get_rand(0, 96), 0, get_rand(0, 26));
+    s21_decimal n2 = n1;
+    s21_decimal n3 = get_random_decimal_size(get_rand(0, 96), 0, get_rand(0, 26));
+
+    int got_eq = s21_is_equal(n1, n2);
+    int got_ineq = s21_is_not_equal(n1, n3);
+
+    ck_assert_int_eq(got_eq, true);
+
+    if (!both_all_zeroes(n1, n3)) {
+        ck_assert_int_eq(got_ineq, true);
+    } else {
+        ck_assert_int_eq(got_ineq, false);
+    }
+}
+END_TEST
+
 Suite *suite_s21_is_or_not_equal(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_is_or_not_equal"));
     TCase *tc = tcase_create("s21_is_or_not_equal_tc");
 
-    /* Tests: (1) sign, (2) exponent (0 - 28), (3) numbers */
+    tcase_add_loop_test(tc, hardcoded_decimal_loop, 0, 100);
     tcase_add_loop_test(tc, gmp_random, 0, 100);
-    /* All zeroes are the only possible special case here */
-    tcase_add_test(tc, equality_all_zeros);
-    /* Randomly tests inequality in ~50% of cases */
     tcase_add_loop_test(tc, gmp_random_inequality, 0, 100);
+    tcase_add_test(tc, equality_all_zeros);
 
     suite_add_tcase(s, tc);
     return s;
