@@ -37,9 +37,7 @@ int get_random_pair(s21_decimal *in, mpz_t *in_mpz_copy, int size);
 void apply_exponent_to_mpz(mpz_t *src, int exp);
 
 // helpers
-uint32_t reverse_bits(uint32_t n);
 int get_rand(int min, int max);
-int reverse_bits_int(int n);
 // debug
 void print_mpz_binary(mpz_t mpz_val);
 void print_mpz_decimal(mpz_t mpz_val);
@@ -53,8 +51,7 @@ Suite *suite_convert_gmp_to_decimal(void);
 Suite *suite_convert_decimal_to_gmp(void);
 
 /* Decimal function tests */
-Suite *
-suite_s21_add(void);
+Suite *suite_s21_add(void);
 Suite *suite_s21_sub(void);
 Suite *suite_s21_mul(void);
 Suite *suite_s21_div(void);

@@ -88,6 +88,7 @@ void print_mpz_binary(mpz_t mpz_val) {
     mpz_out_str(stdout, 2, mpz_val);
     puts("");
 }
+
 void print_mpz_decimal(mpz_t mpz_val) {
     mpz_out_str(stdout, 10, mpz_val);
     puts("");
@@ -95,7 +96,7 @@ void print_mpz_decimal(mpz_t mpz_val) {
 
 void print_bits(s21_decimal d) {
     for (int i = 0; i < 4; i++) {
-        if (i == 3)
+        if (i == 2)
             printf(" ");
         int x = 3;
         for (int j = 0; j < 32; j++) {
