@@ -48,6 +48,10 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
     char bits[96] = {'\0'};
     get_bit_string(src, bits);
 
+#ifdef DEBUG
+    printf("res bits=");
+    print_bits_r(res);
+#endif
     if (strlen(bits) > 96)
         return CONVERTATION_ERROR;
 

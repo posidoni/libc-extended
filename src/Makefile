@@ -74,7 +74,7 @@ debug:
 # General compilation rule
 %.o 			: %.c $(INC) 
 				@$(MK) $(OBJ_DIR)
-				$(CC) $(CFLAGS) -o $(OBJ_DIR)/$(notdir $@) -c $<
+				$(CC) $(CFLAGS) -o $(OBJ_DIR)/$(notdir $@) -c $< $(LIBS)
 
 
 # Building static library
@@ -99,8 +99,7 @@ $(GCOV_TARGET) 	: CFLAGS += $(GCOV_FLAGS)
 $(GCOV_TARGET) 	: $(GCOV_INFO)
 				genhtml $(GCOV_INFO) -o $(GCOV_TARGET)
 
-# GCOV objects compilation rule
-$(GCOV_OBJ_DIR)/gcov_%.o : %.c $(INC) 
+# GCOV objects compilation rule $(GCOV_OBJ_DIR)/gcov_%.o : %.c $(INC) 
 				@$(MK) $(OBJ_DIR)
 				$(CC) $(CFLAGS) -o $(GCOV_OBJ_DIR)/$(notdir $@) -c $<
 
