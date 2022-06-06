@@ -17,7 +17,7 @@ static bool both_all_zeroes(s21_decimal a, s21_decimal b) {
     
     for (int i = 0; i < 3 && res; i++) {
         for (int j = 0; j < 32; j++) {
-            if (IS_SET(a.bits[i], j) || IS_SET(a.bits[i], j)) {
+            if (IS_SET(a.bits[i], j) || IS_SET(b.bits[i], j)) {
                 res = false;
                 break;
             }
