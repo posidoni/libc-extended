@@ -82,6 +82,7 @@ int max(int a, int b);
 int min(int a, int b);
 void swap(s21_decimal *a, s21_decimal *b);
 s21_decimal get_power_of_ten(int pow);
+uint32_t reverse_bits(uint32_t n);
 
 static const char *const binary_powers_of_ten[29] = {
     [0] = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
