@@ -2,6 +2,7 @@
 
 int s21_is_greater(s21_decimal a, s21_decimal b) {
     bool res = 0;
+    
     /* if (get_sign(a) > get_sign(b)) { */
     /*     res = 1; */
     /* } else if (get_sign(a) == get_sign(b)) { */
@@ -27,5 +28,6 @@ int s21_is_greater(s21_decimal a, s21_decimal b) {
     /* } else { */
     /*     res = 0; */
     /* } */
+
     return res;
 }
