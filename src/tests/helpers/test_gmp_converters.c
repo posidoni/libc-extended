@@ -15,7 +15,7 @@ s21_decimal convert_gmp_to_decimal(mpz_t input) {
 }
 
 void convert_decimal_to_gmp(mpz_t *gmp, s21_decimal *dec) {
-    // changed to -1 because we work in litte endian & reversed bytes
+    // changed to -1 because we work in litte endian & reversed bites
     mpz_import(*gmp, 3, -1, sizeof(dec->bits[0]), -1, 0, dec->bits);
 
     apply_exponent_to_mpz(gmp, get_exponent(*dec));
