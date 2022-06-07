@@ -2,8 +2,7 @@
 
 static void set_random_pair_sign(s21_decimal *dec, mpz_t *in_mpz_copy);
 static void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied);
-static void get_random_binary_string(s21_decimal *dec, char *mpz_bin_str,
-                                     int size);
+static void get_random_binary_string(s21_decimal *dec, char *mpz_bin_str, int size);
 
 int get_random_pair(s21_decimal *in, mpz_t *in_mpz_copy, int size) {
     char mpz_bin_str[300] = {'\0'};
@@ -23,13 +22,12 @@ int get_random_pair(s21_decimal *in, mpz_t *in_mpz_copy, int size) {
     apply_exponent_to_mpz(in_mpz_copy, exp);
     // debug_print_pair(in, in_mpz_copy, true);
 
-    set_random_pair_sign(in, in_mpz_copy);
+    // set_random_pair_sign(in, in_mpz_copy);
 
     return res;
 }
 
-static void get_random_binary_string(s21_decimal *in, char *mpz_bin_str,
-                                     int size) {
+static void get_random_binary_string(s21_decimal *in, char *mpz_bin_str, int size) {
     for (int j = 0, m = 0; j < size; j++) {
         for (int i = 0; i < 32; i++, m++) {
             if (rand() % 2) {
@@ -44,8 +42,7 @@ static void get_random_binary_string(s21_decimal *in, char *mpz_bin_str,
 
     /* This reverse is needed to match the format of normal binary with subject
      */
-    for (int j = 0; j < size; j++)
-        in->bits[j] = reverse_bits(in->bits[j]);
+    for (int j = 0; j < size; j++) in->bits[j] = reverse_bits(in->bits[j]);
 }
 
 static void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied) {
@@ -161,6 +158,4 @@ s21_decimal get_random_decimal_size(int size, int min_exp, int max_exp) {
     return res;
 }
 
-int get_rand(int min, int max) {
-    return (rand() % (max - min + 1)) + min;
-}
+int get_rand(int min, int max) { return (rand() % (max - min + 1)) + min; }

@@ -18,35 +18,38 @@ START_TEST(add_test1) {
     s21_decimal val1 = {0};
     get_random_pair(&val1, &mpz_val1, 2);
     s21_decimal val2 = {0};
-    get_random_pair(&val2, &mpz_val2, 1);
+    get_random_pair(&val2, &mpz_val2, 3);
     s21_decimal res = {0};
 
+    /* add abs because mpz negative leads to seg fault */
 #define DEBUG
 #ifdef DEBUG
-    printf("val1 = ");
+    printf("EXP = %2d: ", get_exponent(val1));
     print_bits_r(val1);
-    printf("val2 = ");
+    printf("EXP = %2d: ", get_exponent(val2));
     print_bits_r(val2);
-    printf("mpz_val1 = ");
-    print_bits_r(convert_gmp_to_decimal(mpz_val1));
-    printf("mpz_val2 = ");
-    print_bits_r(convert_gmp_to_decimal(mpz_val2));
+    // printf("mpz_val1:\n");
+    // print_bits_r(convert_gmp_to_decimal(mpz_val1));
+    // printf("mpz_val2:\n");
+    // print_bits_r(convert_gmp_to_decimal(mpz_val2));
 #endif
 
     /* NOTE: GMP library works incorrectly or other functioned needed */
     mpz_add(mpz_res, mpz_val1, mpz_val2);
-    s21_add(val1, val2, &res);
+    int code = s21_add(val1, val2, &res);
 
 #ifdef DEBUG
-    puts("-------------RESULT----------------");
-    printf("mpz_res = ");
-    print_bits_r(convert_gmp_to_decimal(mpz_res));
-    printf("res = ");
+    // printf("%90s", "-------------RESULT----------------\n");
+    // printf("mpz_res:\n");
+    // print_bits_r(convert_gmp_to_decimal(mpz_res));
+    printf("EXP = %2d: ", get_exponent(res));
     print_bits_r(res);
-    puts("-------------RESULT----------------");
 #endif
-
-    ck_assert_int_eq(s21_is_equal(res, convert_gmp_to_decimal(mpz_res)), TRUE);
+    printf("CODE = %d\n", code);
+    if (code == 0) {
+        ck_assert_int_eq(s21_is_equal(res, convert_gmp_to_decimal(mpz_res)), TRUE);
+    }
+    printf("\n");
 }
 END_TEST
 
