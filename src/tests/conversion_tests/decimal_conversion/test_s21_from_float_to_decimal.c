@@ -1,4 +1,4 @@
-#include "../s21_decimal_test.h"
+#include "../../s21_decimal_test.h"
 #define DEBUG
 
 START_TEST(float_to_dec) {

@@ -1,41 +1,40 @@
 #include "../s21_decimal_test.h"
 
 START_TEST(gmp_random) {
-    s21_decimal a1 = {0};
-    init_zero(&a1);
-
+    s21_decimal dec1 = {0};
     mpz_t mpz_val, mpz_copy;
-    mpz_init(mpz_val);
-    mpz_init(mpz_copy);
-    mpz_set_ui(mpz_val, 0);
-    mpz_set_ui(mpz_copy, 0);
 
-    get_random_pair(&a1, &mpz_val, 3);
+    mpz_init_set_ui(mpz_val, 0);
+    mpz_init_set_ui(mpz_copy, 0);
 
-    convert_decimal_to_gmp(&mpz_copy, &a1);
-    s21_decimal res = convert_gmp_to_decimal(mpz_val);
+    get_random_pair(&dec1, &mpz_val, 3);
 
-    /* Produces randomly smaller / greater numbers */
-    if (rand() % 2)
-        set_exponent(&a1, (get_exponent(a1) + 1) % 28);
+    convert_decimal_to_gmp(&mpz_copy, &dec1);
+    s21_decimal dec2 = convert_gmp_to_decimal(mpz_val);
 
-    /* (!) Hack. Change this to our own function */
-    tmp_normalize_exponent(&a1);
+    /* d1 is sometimes < d2, else they are equal */
+    if (get_rand(0, 1)) {
+        int current_exp = get_exponent(dec1);
+        /* Make d1 smaller or d2 larger */
+        if (current_exp < 28) {
+            set_exponent(&dec1, (current_exp + 1));
+        } else {
+            SET_BIT(dec2.bits[3], 1, 31);
+        }
+        gmp_sum_int(mpz_copy, 100);
+    }
 
     // Compare op1 and op2. Return a positive value if op1 > op2, zero if op1 = op2, or a negative value if op1 < op2.
-    int got1 = (s21_is_less_or_equal(a1, res));
-    int got2 = (s21_is_less_or_equal(a1, res));
-    int expected1 = mpz_cmp(mpz_val, mpz_copy);
-    int expected2 = mpz_cmp(mpz_val, mpz_copy);
+    int got = (s21_is_less_or_equal(dec1, dec2));
+    int expected = mpz_cmp(mpz_val, mpz_copy);
 
     mpz_clear(mpz_copy);
     mpz_clear(mpz_val);
 
-    if (got1 == 1 && (expected1 == 0 || expected2 == -1)) {
-        /* Test is passed */
-        ck_assert_int_eq(1, 1);
+    if (got == 1 && expected <= 0) {
+        ck_assert_int_eq(got, 1);
     } else {
-        ck_assert_int_eq(got1, expected1 + expected2);
+        ck_assert_int_eq(1, 0);
     }
 }
 END_TEST

@@ -16,6 +16,7 @@
 #include <time.h>
 
 #include "../s21_decimal.h"
+
 #include "gmp.h"
 
 #define GRN "\e[0;92m"
@@ -25,7 +26,7 @@
 #define ENDCOLOR "\e[0m"
 
 // (!) HACK
-void tmp_normalize_exponent(s21_decimal *dec);
+void apply_exponent_to_decimal(s21_decimal *dec);
 
 // decimal manipulation
 s21_decimal get_random_int_decimal(void);
@@ -35,6 +36,10 @@ s21_decimal convert_gmp_to_decimal(mpz_t input);
 void convert_decimal_to_gmp(mpz_t *gmp, s21_decimal *dec);
 int get_random_pair(s21_decimal *in, mpz_t *in_mpz_copy, int size);
 void apply_exponent_to_mpz(mpz_t *src, int exp);
+void mpz_sint_sum(mpz_t *res, int64_t compound_val);
+
+/* GMP wrappers */
+void gmp_sum_int(mpz_t *res, int64_t compound_val);
 
 // helpers
 int get_rand(int min, int max);

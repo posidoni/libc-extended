@@ -1,13 +1,12 @@
-#include "../s21_decimal_test.h"
+#include "../../s21_decimal_test.h"
 
 START_TEST(convert_test) {
     s21_decimal expected = {0};
     mpz_t mpz_val;
-    mpz_init(mpz_val);
-    mpz_set_ui(mpz_val, 0);
+    mpz_init_set_ui(mpz_val, 0);
 
     get_random_pair(&expected, &mpz_val, 3);
-    tmp_normalize_exponent(&expected);
+    apply_exponent_to_decimal(&expected);
 
     s21_decimal got = convert_gmp_to_decimal(mpz_val);
     mpz_clear(mpz_val);

@@ -21,7 +21,7 @@ void print_bits(s21_decimal d) {
             printf("%u", IS_SET(d.bits[i], j));
             if (j == x && !(i == 2 && j == 31)) {
                 x += 4;
-                printf("");
+                // printf("");
             }
             printf("%s", RESET);
         }
@@ -31,7 +31,7 @@ void print_bits(s21_decimal d) {
 
 void print_bits_no_exp(s21_decimal d) {
     int no_set = 0;
-    
+
     for (int i = 0; i < 3; i++) {
         int x = 3;
         for (int j = 0; j < 32; j++) {
@@ -46,7 +46,7 @@ void print_bits_no_exp(s21_decimal d) {
             printf("%u", IS_SET(d.bits[i], j));
             if (j == x && !(i == 2 && j == 31)) {
                 x += 4;
-                printf("");
+                // printf("");
             }
             printf("%s", RESET);
         }
@@ -65,7 +65,7 @@ void print_bits_r(s21_decimal d) {
             printf("%u", IS_SET(d.bits[i], j));
             if (j == x && !(i == 0 && j == 0)) {
                 x -= 4;
-                printf("");
+                // printf("");
             }
             printf("%s", RESET);
         }
@@ -81,7 +81,7 @@ void print_bits_r_set(s21_decimal d, int set_n) {
         printf("%u", IS_SET(d.bits[set_n], j));
         if (j == x && !(set_n == 0 && j == 0)) {
             x -= 4;
-            printf("");
+            // printf("");
         }
         printf("%s", RESET);
     }
@@ -97,7 +97,7 @@ void print_bits_set(s21_decimal d, int set_n) {
         printf("%u", IS_SET(d.bits[set_n], j));
         if (j == x && !(set_n == 0 && j == 0)) {
             x -= 4;
-            printf("");
+            // printf("");
         }
         printf("%s", RESET);
     }

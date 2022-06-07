@@ -24,7 +24,7 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 void handle_exponent_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code) {
     int exp_v1 = get_exponent(value_1);
     int exp_v2 = get_exponent(value_2);
-    if (exp_v2 > exp_v1) swap(&value_1, &value_2);
+    if (exp_v2 > exp_v1) s21_swap(&value_1, &value_2);
     int res_exp = min(exp_v1, exp_v2);
 
     s21_decimal value_2_origin = value_2;
