@@ -30,6 +30,7 @@ void apply_exponent_to_decimal(s21_decimal *dec);
 
 // decimal manipulation
 s21_decimal get_random_int_decimal(void);
+s21_decimal get_random_decimal(int size, int exp);
 
 // gmp manipulation
 s21_decimal convert_gmp_to_decimal(mpz_t input);
@@ -43,6 +44,7 @@ void gmp_sum_int(mpz_t *res, int64_t compound_val);
 
 // helpers
 int get_rand(int min, int max);
+
 // debug
 void print_mpz_binary(mpz_t mpz_val);
 void print_mpz_decimal(mpz_t mpz_val);
