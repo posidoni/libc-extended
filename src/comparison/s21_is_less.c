@@ -31,24 +31,21 @@ static bool s21_is_less_positive(s21_decimal a, s21_decimal b) {
 
     */
 
-
     // s21_decimal_apply_exponent(&a);
     // s21_decimal_apply_exponent(&b);
 
-    printf("FINAL SHIT\n");
+    /* printf("FINAL SHIT\n"); */
     print_bits_r(a);
     print_bits_r(b);
 
     for (int i = 2; i >= 0; i--) {
-        printf("[%d] A: %u B: %u\n", i, a.bits[i], b.bits[i]);
+        /* printf("[%d] A: %u B: %u\n", i, a.bits[i], b.bits[i]); */
 
         if (a.bits[i] == b.bits[i]) {
             continue;
         } else {
             return a.bits[i] < b.bits[i];
         }
-
-
     }
 
     return false;

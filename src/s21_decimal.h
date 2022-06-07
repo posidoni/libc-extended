@@ -1,6 +1,7 @@
 #ifndef S21_DECIMAL
 #define S21_DECIMAL
 
+#include <float.h>
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -36,5 +37,8 @@ int s21_floor(s21_decimal value, s21_decimal *result);
 int s21_round(s21_decimal value, s21_decimal *result);
 int s21_truncate(s21_decimal value, s21_decimal *result);
 int s21_negate(s21_decimal value, s21_decimal *result);
+void get_bit_string(float res, char bits[static 1]);
+void set_bits_from_string(char bits[static 1], s21_decimal *result);
+float add_exponent(float val, int exp);
 
 #endif  //  S21_DECIMAL

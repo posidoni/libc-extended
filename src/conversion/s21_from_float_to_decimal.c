@@ -11,27 +11,6 @@ static int get_float_exponent(float val) {
     return exp;
 }
 
-static void get_bit_string(float src, char bits[static 1]) {
-    for (int i = 0; src > 1e-6; i++) {
-        src = floor(src) / 2;
-        if (src - floor(src) > 1e-6)
-            bits[i] = '1';
-        else
-            bits[i] = '0';
-    }
-
-#ifdef DEBUG
-    printf("bits string=");
-    puts(bits);
-#endif
-}
-
-static void str_to_set_bits(s21_decimal *dst, char bits[static 1]) {
-    for (int i = strlen(bits) - 1; i >= 0; i--)
-        if (bits[i] - '0')
-            ADD_BIT(dst->bits[i / 32], i % 32);
-}
-
 int s21_from_float_to_decimal(float src, s21_decimal *dst) {
     if (!isnormal(src))
         return CONVERTATION_ERROR;
@@ -55,7 +34,7 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
     if (strlen(bits) > 96)
         return CONVERTATION_ERROR;
 
-    str_to_set_bits(dst, bits);
+    set_bits_from_string(bits, dst);
 
     /* set exponent */
     int exp = get_float_exponent(src);

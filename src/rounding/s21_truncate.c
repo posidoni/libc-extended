@@ -13,18 +13,10 @@ int s21_truncate(s21_decimal value, s21_decimal *result) {
 
     /* handle left part */
     char bits[96] = {'\0'};
-    for (int i = 0; res > 1e-6; i++) {
-        res = floor(res) / 2;
-        if (res - floor(res) > 1e-6)
-            bits[i] = '1';
-        else
-            bits[i] = '0';
-    }
+    get_bit_string(res, bits);
 
     /* set the bits from string */
-    for (int i = strlen(bits) - 1; i >= 0; i--)
-        if (bits[i] - '0')
-            ADD_BIT(result->bits[i / 32], i % 32);
+    set_bits_from_string(bits, result);
 
-    return 0;
+    return CONVERTATION_OK;
 }

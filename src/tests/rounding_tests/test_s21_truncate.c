@@ -1,4 +1,5 @@
 #include "../s21_decimal_test.h"
+
 START_TEST(simple_truncate) {
     s21_decimal value = get_random_decimal(1, 5);
     s21_decimal res = {0};
@@ -11,8 +12,7 @@ START_TEST(simple_truncate) {
 
     printf("before=");
     print_bits_r(value);
-    /* NOTE: normalize is how div should work */
-    /* tmp_normalize_exponent(&value); */
+
     printf("after= ");
     print_bits_r(res);
 }
