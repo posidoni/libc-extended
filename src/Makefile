@@ -21,8 +21,8 @@ GCOV_TARGET		 =	./coverage
 GCOV_INFO		 =	coverage.info
 
 # Modules - dirs with source code. Grep'ed dirs are excluded from search.
-MODULES 		 =	$(shell find . -maxdepth 1 -type d | grep -v -E "docker|objs|tests")
-TEST_MODULES 	 =	$(shell find tests -maxdepth 1 -type d | grep -v -E "objs")
+MODULES 		 =	$(shell find . -type d | grep -v -E "docker|objs|tests")
+TEST_MODULES 	 =	$(shell find tests -type d | grep -v -E "objs")
 
 # Dirs configuration
 SRC_DIR 		 =	$(MODULES)

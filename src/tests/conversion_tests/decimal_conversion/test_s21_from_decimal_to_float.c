@@ -1,5 +1,4 @@
-#include "../s21_decimal_test.h"
-
+#include "../../s21_decimal_test.h"
 
 Suite *suite_s21_from_decimal_to_float(void) {
     Suite *s = suite_create("suite_s21_from_decimal_to_float");

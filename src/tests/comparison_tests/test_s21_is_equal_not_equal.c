@@ -5,10 +5,8 @@ START_TEST(gmp_random) {
     init_zero(&a1);
 
     mpz_t mpz_val, mpz_copy;
-    mpz_init(mpz_val);
-    mpz_init(mpz_copy);
-    mpz_set_ui(mpz_val, 0);
-    mpz_set_ui(mpz_copy, 0);
+    mpz_init_set_ui(mpz_val, 0);
+    mpz_init_set_ui(mpz_copy, 0);
 
     get_random_pair(&a1, &mpz_val, 3);
 
@@ -16,7 +14,7 @@ START_TEST(gmp_random) {
     s21_decimal res = convert_gmp_to_decimal(mpz_val);
 
     /* (!) Hack. Change this to our own function */
-    tmp_normalize_exponent(&a1);
+    apply_exponent_to_decimal(&a1);
 
     /* Negation is done to match mpz_cmp output (0 in case of equality) */
     int got = !(s21_is_equal(a1, res));
@@ -35,11 +33,8 @@ START_TEST(gmp_random_inequality) {
     init_zero(&a1);
 
     mpz_t mpz_val, mpz_copy;
-    mpz_init(mpz_val);
-    mpz_init(mpz_copy);
-    mpz_set_ui(mpz_val, 0);
-    mpz_set_ui(mpz_copy, 0);
-
+    mpz_init_set_ui(mpz_val, 0);
+    mpz_init_set_ui(mpz_copy, 0);
     get_random_pair(&a1, &mpz_val, 3);
 
     convert_decimal_to_gmp(&mpz_copy, &a1);
@@ -58,7 +53,7 @@ START_TEST(gmp_random_inequality) {
         ck_assert_int_eq(s21_is_not_equal(res, a1), 1);
     } else {
         /* (!) Hack. Change this to our own function */
-        tmp_normalize_exponent(&a1);
+        apply_exponent_to_decimal(&a1);
 
         int expected = mpz_cmp(mpz_val, mpz_copy);
         int got = !(s21_is_equal(a1, res));

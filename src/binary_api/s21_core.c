@@ -19,49 +19,7 @@ void set_bit_0(s21_decimal *n, int pos) {
     ZERO_BIT(n->bits[pos / 32], pos % 32);
 }
 
-s21_decimal get_power_of_ten(int pow) {
-    s21_decimal result;
-    init_zero(&result);
-    set_exponent(&result, 0);
-    for (int i = 0; i < 96; ++i) {
-        if (binary_powers_of_ten[pow][95 - i] == '1') {
-            set_bit_1(&result, i);
-        } else {
-            set_bit_0(&result, i);
-        }
-    }
-    return result;
-}
-
-int get_exponent(s21_decimal decimal) {
-    int exponent = 0;
-
-    for (int i = D_START_EXP, j = 0; i <= D_END_EXP; i++, j++) {
-        if (IS_SET(decimal.bits[3], i))
-            ADD_BIT(exponent, j);
-    }
-
-    if (exponent > 28) {
-        fprintf(stderr, "VERY BIG EXPONENT (0 - 28): exp = %d\n", exponent);
-    }
-
-    return exponent;
-}
-
-void set_exponent(s21_decimal *decimal, int new_exponent) {
-    if (new_exponent <= 28) {
-        short sign = IS_SET(decimal->bits[3], D_SIGN);
-        decimal->bits[3] = 0;
-        if (sign)
-            set_sign_neg(decimal);
-        SET_BIT(decimal->bits[3], new_exponent, D_START_EXP);
-    } else {
-        // TODO: Replace with a system function call
-        fprintf(stderr, "VERY BIG EXPONENT (0 - 28): exp = %d\n", new_exponent);
-    }
-}
-
-void swap(s21_decimal *a, s21_decimal *b) {
+void s21_swap(s21_decimal *a, s21_decimal *b) {
     s21_decimal tmp = *a;
     *a = *b;
     *b = tmp;

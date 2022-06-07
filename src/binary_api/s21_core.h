@@ -43,7 +43,8 @@ typedef enum {
     TRUE = 1,
 } comparison_result;
 
-typedef enum { CONVERTATION_OK = 0, CONVERTATION_ERROR = 1 } convertation_result;
+typedef enum { CONVERTATION_OK = 0,
+               CONVERTATION_ERROR = 1 } convertation_result;
 
 void init_decimal(s21_decimal *decimal);
 // returns 0 meaning positive 1 negative
@@ -75,13 +76,15 @@ s21_decimal shiftnl_ret(s21_decimal a, int n);
 s21_decimal shiftnr_ret(s21_decimal a, int n);
 int shiftl(s21_decimal *a);
 
+void s21_decimal_apply_exponent(s21_decimal *dec);
+
 int eq_zero(s21_decimal value);
 int byte_len(s21_decimal n);
 s21_decimal get_0(void);
 s21_decimal get_05(void);
 int max(int a, int b);
 int min(int a, int b);
-void swap(s21_decimal *a, s21_decimal *b);
+void s21_swap(s21_decimal *a, s21_decimal *b);
 s21_decimal get_power_of_ten(int pow);
 uint32_t reverse_bits(uint32_t n);
 
