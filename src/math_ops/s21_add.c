@@ -44,6 +44,7 @@ void handle_exponent_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *
             *result = binary_addition(value_2, get_power_of_ten(0), code);
         else
             *result = value_2_origin;
+        *code = 1;
     } else {
         *result = binary_addition(value_1, value_2, code);
     }
