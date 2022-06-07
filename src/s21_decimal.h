@@ -1,6 +1,7 @@
 #ifndef S21_DECIMAL
 #define S21_DECIMAL
 
+#include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,7 +24,8 @@ int s21_is_not_equal(s21_decimal a, s21_decimal b);
 bool both_all_zeroes(s21_decimal a, s21_decimal b);
 
 int byte_len(s21_decimal n);
-void handle_exponent_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code);
+void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
+                         s21_decimal *result, int *code);
 
 int s21_from_int_to_decimal(int src, s21_decimal *dst);
 int s21_from_float_to_decimal(float src, s21_decimal *dst);
