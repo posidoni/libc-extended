@@ -2,10 +2,10 @@
 CC 				 =	gcc
 
 # Compilation flags configuration
-ALL_TARGETS 	 = $(TARGET) test # gcov_report 
+ALL_TARGETS 	 = $(TARGET) test gcov_report 
 ASAN 			 = 	#-fsanitize=address
 UBSAN			 =	#-fsanitize=undefined
-STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic -Werror #-fanalyzer 
+STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic #-Werror -fanalyzer 
 
 # Linking flags configuration
 LIBS 			 =	$(CHECK_LIB) $(GMP_LIB)
@@ -74,8 +74,7 @@ debug:
 # General compilation rule
 %.o 			: %.c $(INC) 
 				@$(MK) $(OBJ_DIR)
-				$(CC) $(CFLAGS) -o $(OBJ_DIR)/$(notdir $@) -c $< $(LIBS)
-
+				$(CC) $(CFLAGS) -o $(OBJ_DIR)/$(notdir $@) -c $<
 
 # Building static library
 $(TARGET) 		: $(OBJS) Makefile
@@ -99,7 +98,8 @@ $(GCOV_TARGET) 	: CFLAGS += $(GCOV_FLAGS)
 $(GCOV_TARGET) 	: $(GCOV_INFO)
 				genhtml $(GCOV_INFO) -o $(GCOV_TARGET)
 
-# GCOV objects compilation rule $(GCOV_OBJ_DIR)/gcov_%.o : %.c $(INC) 
+# GCOV objects compilation rule
+$(GCOV_OBJ_DIR)/gcov_%.o : %.c $(INC) 
 				@$(MK) $(OBJ_DIR)
 				$(CC) $(CFLAGS) -o $(GCOV_OBJ_DIR)/$(notdir $@) -c $<
 
