@@ -19,12 +19,13 @@ START_TEST(gmp_random) {
         if (current_exp < 28) {
             set_exponent(&dec1, (current_exp + 1));
         } else {
-            SET_BIT(dec2.bits[3], 1, 31);
+            SET_BIT(dec2.bits[3], 1U, 31);
         }
-        gmp_sum_int(mpz_copy, 100);
+        gmp_sum_int(&mpz_copy, 100);
     }
 
-    // Compare op1 and op2. Return a positive value if op1 > op2, zero if op1 = op2, or a negative value if op1 < op2.
+    // Compare op1 and op2. Return a positive value if op1 > op2, zero if op1 =
+    // op2, or a negative value if op1 < op2.
     int got = (s21_is_less_or_equal(dec1, dec2));
     int expected = mpz_cmp(mpz_val, mpz_copy);
 

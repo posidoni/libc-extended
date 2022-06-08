@@ -13,9 +13,10 @@ START_TEST(gmp_random) {
     s21_decimal dec2 = convert_gmp_to_decimal(mpz_val);
 
     /* d1 is always > d2 */
-    gmp_sum_int(mpz_val, 100);
+    gmp_sum_int(&mpz_val, 100);
 
-    // Compare op1 and op2. Return a positive value if op1 > op2, zero if op1 = op2, or a negative value if op1 < op2.
+    // Compare op1 and op2. Return a positive value if op1 > op2, zero if op1 =
+    // op2, or a negative value if op1 < op2.
     int got = (s21_is_greater(dec1, dec2));
     int expected = mpz_cmp(mpz_val, mpz_copy);
 

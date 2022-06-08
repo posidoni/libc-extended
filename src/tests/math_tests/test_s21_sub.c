@@ -127,8 +127,8 @@ Suite *suite_s21_sub(void) {
     Suite *s = suite_create("suite_s21_sub");
     TCase *tc = tcase_create("s21_sub_tc");
 
-    /* tcase_add_test(tc, sub_test1); */
-    // tcase_add_test(tc, sub_test2);
+    tcase_add_test(tc, sub_test1);
+    tcase_add_test(tc, sub_test2);
     tcase_add_loop_test(tc, sub_loop, 0, 1);
 
     suite_add_tcase(s, tc);

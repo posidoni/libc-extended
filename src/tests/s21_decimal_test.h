@@ -1,14 +1,14 @@
 #ifndef TEST
 #define TEST
 
-#define RED "\e[0;31m"
-#define BRED "\e[1;31m"
-#define URED "\e[4;31m"
-#define RESET "\e[0m"
-#define REDB "\e[41m"
-#define REDHB "\e[0;101m"
-#define HRED "\e[0;91m"
-#define BHRED "\e[1;91m"
+#define RED "\033[0;31m"
+#define BRED "\033[1;31m"
+#define URED "\033[4;31m"
+#define RESET "\033[0m"
+#define REDB "\033[41m"
+#define REDHB "\033[0;101m"
+#define HRED "\033[0;91m"
+#define BHRED "\033[1;91m"
 
 #include <check.h>
 #include <float.h>
@@ -19,11 +19,11 @@
 
 #include "gmp.h"
 
-#define GRN "\e[0;92m"
+#define GRN "\033[0;92m"
 
 #define PRETTY_PRINT(name) (UGRN name ENDCOLOR)
-#define UGRN "\e[4;32m"
-#define ENDCOLOR "\e[0m"
+#define UGRN "\033[4;32m"
+#define ENDCOLOR "\033[0m"
 
 // (!) HACK
 void apply_exponent_to_decimal(s21_decimal *dec);

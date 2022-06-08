@@ -56,7 +56,7 @@ int s21_is_less(s21_decimal a, s21_decimal b) {
     apply_exponent_to_decimal(&b);
 
     bool both_zeroes = both_all_zeroes(a, b);
-    bool res = false;
+    // bool res = false;
     bool sign1 = get_sign(a), sign2 = get_sign(b);
 
     /* NEG < NEG */
@@ -64,8 +64,8 @@ int s21_is_less(s21_decimal a, s21_decimal b) {
         // set_sign_pos(&a);
         // set_sign_pos(&b);
 
-        SET_BIT(a.bits[3], 1, 31);
-        SET_BIT(b.bits[3], 1, 31);
+        SET_BIT(a.bits[3], 1U, 31);
+        SET_BIT(b.bits[3], 1U, 31);
 
         return s21_is_greater(a, b);
     }
