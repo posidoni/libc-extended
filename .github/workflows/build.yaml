@@ -1,12 +1,14 @@
-name: Build Pipeline
+name: 'Build Pipeline'
 
 on:
   push:
-    branches: [ develop ]
+    branches:
+      - '*'
   pull_request:
-    branches: [ develop ]
+    branches:
+      - '*'
 
-jobs:   
+jobs:
   build_macos:
     name: Build on Mac
     runs-on: macos-latest

@@ -1,0 +1,24 @@
+name: 'Launch Complete Tests on MacOS'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_macos:
+    name: Build on Mac
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        brew install check
+        brew install pkg-config
+        brew install gmp
+
+    - name: Build with Make & launch tests
+      working-directory: ${{github.workspace}}/docker
+      run: |
+        chmod +x test_s21_decimal_strict.sh
+        ./test_s21_decimal_strict.sh

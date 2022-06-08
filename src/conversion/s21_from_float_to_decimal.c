@@ -1,6 +1,4 @@
 #include "../s21_decimal.h"
-#include <float.h>
-/* #define DEBUG */
 
 static int get_float_exponent(float val) {
     int exp = 0;
