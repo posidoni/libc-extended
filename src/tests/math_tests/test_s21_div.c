@@ -100,7 +100,7 @@ Suite *suite_s21_div(void) {
     Suite *s = suite_create("suite_s21_div");
     TCase *tc = tcase_create("s21_div_tc");
 
-    /* tcase_add_loop_test(tc, div_test1, 0, 1); */
+    tcase_add_loop_test(tc, div_test1, 0, 1);
     tcase_add_loop_test(tc, loop_division_mpz, 0, 10000);
 
     suite_add_tcase(s, tc);
