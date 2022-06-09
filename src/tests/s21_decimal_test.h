@@ -39,6 +39,11 @@ int get_random_pair(s21_decimal *in, mpz_t *in_mpz_copy, int size);
 void apply_exponent_to_mpz(mpz_t *src, int exp);
 void mpz_sint_sum(mpz_t *res, int64_t compound_val);
 
+// int128 manipulation
+s21_decimal bigint_to_decimal(__int128_t src);
+s21_decimal ll_to_decimal(long long val);
+long long get_random_ll();
+
 /* GMP wrappers */
 void gmp_sum_int(mpz_t *res, int64_t compound_val);
 
