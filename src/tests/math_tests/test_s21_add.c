@@ -72,7 +72,7 @@ START_TEST(gcc_128_bits) {
 }
 
 Suite *suite_s21_add(void) {
-    Suite *s = suite_create("suite_s21_add");
+    Suite *s = suite_create(PRETTY_PRINT("s21_add"));
     TCase *tc = tcase_create("s21_add_tc");
 
     /* tcase_add_loop_test(tc, add_test1, 0, 1); */

@@ -1,6 +1,8 @@
 Session.vim
 notes.md
 test
+.vscode/*
+!.vscode/launch.json    
 */objs/
 */coverage
 /src/coverage.info

@@ -1,4 +1,4 @@
-#include "s21_core.h"
+#include "../s21_decimal.h"
 
 int shiftnl(s21_decimal *a, int n) {
     bool code = 0;

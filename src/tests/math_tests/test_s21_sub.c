@@ -140,13 +140,16 @@ START_TEST(gcc_128_bits) {
 
     s21_sub(dec_a, dec_b, &dec_sub);
 
+#ifdef DEBUG
     print_bits_r(res128);
     print_bits_r(dec_sub);
+#endif
+
     ck_assert_int_eq(s21_is_equal(res128, dec_sub), TRUE);
 }
 
 Suite *suite_s21_sub(void) {
-    Suite *s = suite_create("suite_s21_sub");
+    Suite *s = suite_create(PRETTY_PRINT("s21_sub"));
     TCase *tc = tcase_create("s21_sub_tc");
 
     /* tcase_add_test(tc, sub_test1); */

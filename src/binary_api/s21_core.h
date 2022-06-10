@@ -1,10 +1,10 @@
-#include "../s21_decimal.h"
-
 #ifndef S21_DECIMAL_CORE_H
 #define S21_DECIMAL_CORE_H
 
 #include <math.h>
+#include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 
 // checks if a bit is set
 #define IS_SET(X, POS) ((X >> POS) & 1U)
@@ -46,7 +46,6 @@ typedef enum {
 typedef enum { CONVERTATION_OK = 0,
                CONVERTATION_ERROR = 1 } convertation_result;
 
-void init_decimal(s21_decimal *decimal);
 // returns 0 meaning positive 1 negative
 bool get_sign(s21_decimal decimal);
 void set_sign_neg(s21_decimal *decimal);
@@ -56,6 +55,8 @@ void set_exponent(s21_decimal *decimal, int new_exponent);
 // helpers
 void set_bit_1(s21_decimal *n, int pos);
 void set_bit_0(s21_decimal *n, int pos);
+
+void s21_normalize_decimal_pair(s21_decimal *a, s21_decimal *b, int *overflow);
 
 int get_bit(s21_decimal n, int pos);
 void init_zero(s21_decimal *n);

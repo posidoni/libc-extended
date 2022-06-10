@@ -1,5 +1,4 @@
-#include "s21_core.h"
-
+#include "../s21_decimal.h"
 s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2,
                             int *err) {
     s21_decimal carry;
@@ -48,7 +47,6 @@ s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2,
         result = value_1;
     } else {
         for (int i = 95 - byte_len(value_2); i >= 0; --i) {
-            /* printf("DIVISION\n"); */
             if (s21_is_less_or_equal(shiftnl_ret(value_2, i), value_1)) {
                 value_1 =
                     binary_subtraction(value_1, shiftnl_ret(value_2, i), code);

@@ -5,7 +5,11 @@ START_TEST(simple) {
 
     int res = 0;
     s21_from_decimal_to_int(value, &res);
+
+#ifdef DEBUG
     printf("%d\n", res);
+#endif
+
     print_bits_r(value);
 }
 END_TEST

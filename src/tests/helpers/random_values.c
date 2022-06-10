@@ -1,7 +1,11 @@
 #include "../s21_decimal_test.h"
 
 static void set_random_pair_sign(s21_decimal *dec, mpz_t *in_mpz_copy);
+
+#ifdef DEBUG
 static void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied);
+#endif
+
 static void get_random_binary_string(s21_decimal *dec, char *mpz_bin_str,
                                      int size);
 
@@ -19,9 +23,15 @@ int get_random_pair(s21_decimal *in, mpz_t *in_mpz_copy, int size) {
      * indeed */
     /* get equal numbers (if we reverse our decimal representation) */
 
+#ifdef DEBUG
     debug_print_pair(in, in_mpz_copy, false);
+#endif
+
     apply_exponent_to_mpz(in_mpz_copy, exp);
-    debug_print_pair(in, in_mpz_copy, true);
+
+#ifdef DEBUG
+    debug_print_pair(in, in_mpz_copy, false);
+#endif
 
     set_random_pair_sign(in, in_mpz_copy);
 
@@ -48,6 +58,8 @@ static void get_random_binary_string(s21_decimal *in, char *mpz_bin_str,
         in->bits[j] = reverse_bits(in->bits[j]);
 }
 
+#ifdef DEBUG
+
 static void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied) {
     printf("=================\n");
 
@@ -65,6 +77,8 @@ static void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied) {
     printf("=================\n");
 }
 
+#endif
+
 static void set_random_pair_sign(s21_decimal *dec, mpz_t *in_mpz_copy) {
     if (get_rand(0, 1)) {
         set_sign_neg(dec);
@@ -72,29 +86,6 @@ static void set_random_pair_sign(s21_decimal *dec, mpz_t *in_mpz_copy) {
     } else {
         set_sign_pos(dec);
     }
-}
-
-/**
- * @brief Returns random decimal that is in range of [-MAX_UINT32; +MAX_UINT32]
- * @return s21_decimal
- */
-
-s21_decimal get_random_int_decimal(void) {
-    s21_decimal res = {0};
-
-    if (rand() % 2)
-        set_sign_neg(&res);
-    else
-        set_sign_pos(&res);
-
-    for (int j = 0; j < 1; j++) {
-        for (int i = 31; i > 0; i--) {
-            unsigned int x = rand() % 2;
-            SET_BIT(res.bits[0], x, i);
-        }
-    }
-
-    return res;
 }
 
 /**
@@ -120,41 +111,6 @@ s21_decimal get_random_decimal(int size, int exp) {
         for (int i = 31; i > 0; i--) {
             unsigned int x = rand() % 2;
             SET_BIT(res.bits[j], x, i);
-        }
-    }
-
-    return res;
-}
-/**
- * @brief Returns random signed decimal of specified size with exponent in range
- * [min; max].
- *
- * @param size - Number of bits that will be set in the integer
- * @param min_exp - min possible exponent
- * @param max_exp - max possible exponent
- *
- * @return s21_decimal
- */
-
-/* NOTE: This often gives 0, so I wrote my version above [tarticar] */
-/* NOTE: maybe some bug inside, keeping for now for other funcs */
-s21_decimal get_random_decimal_size(int size, int min_exp, int max_exp) {
-    s21_decimal res = {0};
-
-    int n_words = size / 32;
-
-    if (rand() % 2)
-        set_sign_neg(&res);
-    else
-        set_sign_pos(&res);
-
-    set_exponent(&res, get_rand(min_exp, max_exp));
-
-    for (int j = 0, m = 0; j < n_words && m <= size; j++) {
-        for (int i = 0; i < 32 && m <= size; i++) {
-            unsigned int x = rand() % 2;
-            SET_BIT(res.bits[0], x, i);
-            m++;
         }
     }
 
