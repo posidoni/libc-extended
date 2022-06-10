@@ -2,10 +2,10 @@
 CC 				 =	gcc
 
 # Compilation flags configuration
-ALL_TARGETS 	 = $(TARGET) test gcov_report 
+ALL_TARGETS 	 = $(TARGET) test gcov_report
 ASAN 			 = 	#-fsanitize=address
 UBSAN			 =	#-fsanitize=undefined
-STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic #-Werror -fanalyzer 
+STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic #-Werror -fanalyzer
 
 # Linking flags configuration
 LIBS 			 =	$(CHECK_LIB) $(GMP_LIB)
@@ -51,7 +51,7 @@ GCDA 			 = 	$(shell find . -name "*.gcda")
 GCNO 			 = 	$(shell find . -name "*.gcno")
 GCOV_FLAGS 		 =	-fprofile-arcs -ftest-coverage
 
-# VPath configuration. Order of args is their priority. 
+# VPath configuration. Order of args is their priority.
 vpath %.c $(MODULES) : $(TEST_MODULES)
 vpath %.o $(OBJ_DIR) : $(GCOV_OBJ_DIR)
 
@@ -66,13 +66,13 @@ CFLAGS 			= 	$(STDFLAGS) $(ASAN) $(UBSAN)
 
 all 			: 	$(ALL_TARGETS)
 
-debug: 
+debug:
 	echo $(GCOV_OBJ_DIR)
 	echo $(GCOV_OBJS)
 	echo $(GCOV_TEST_OBJS)
 
 # General compilation rule
-%.o 			: %.c $(INC) 
+%.o 			: %.c $(INC)
 				@$(MK) $(OBJ_DIR)
 				$(CC) $(CFLAGS) -o $(OBJ_DIR)/$(notdir $@) -c $<
 
@@ -99,7 +99,7 @@ $(GCOV_TARGET) 	: $(GCOV_INFO)
 				genhtml $(GCOV_INFO) -o $(GCOV_TARGET)
 
 # GCOV objects compilation rule
-$(GCOV_OBJ_DIR)/gcov_%.o : %.c $(INC) 
+$(GCOV_OBJ_DIR)/gcov_%.o : %.c $(INC)
 				@$(MK) $(OBJ_DIR)
 				$(CC) $(CFLAGS) -o $(GCOV_OBJ_DIR)/$(notdir $@) -c $<
 
@@ -111,7 +111,7 @@ test_gcov 		: $(TEST_TARGET) $(GCOV_OBJS) $(GCOV_TEST_OBJS) Makefile
 $(GCOV_INFO) 	: test_gcov
 				./$(TEST_GCOV_EXE)
 				geninfo $(GCOV_OBJ_DIR) -b . -o ./$(GCOV_INFO)
-				
+
 # Utility targets
 
 open 			:

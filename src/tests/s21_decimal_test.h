@@ -16,7 +16,6 @@
 #include <time.h>
 
 #include "../s21_decimal.h"
-
 #include "gmp.h"
 
 #define GRN "\033[0;92m"
@@ -29,11 +28,10 @@
 void apply_exponent_to_decimal(s21_decimal *dec);
 
 // decimal manipulation
-s21_decimal get_random_int_decimal(void);
 s21_decimal get_random_decimal(int size, int exp);
 
-// gmp manipulation
 s21_decimal convert_gmp_to_decimal(mpz_t input);
+
 void convert_decimal_to_gmp(mpz_t *gmp, s21_decimal *dec);
 int get_random_pair(s21_decimal *in, mpz_t *in_mpz_copy, int size);
 void apply_exponent_to_mpz(mpz_t *src, int exp);
@@ -58,8 +56,6 @@ void print_bits_r_set(s21_decimal d, int set_n);
 void print_bits(s21_decimal d);
 void print_bits_r(s21_decimal d);
 void print_bits_no_exp(s21_decimal d);
-
-s21_decimal get_random_decimal_size(int size, int min_exp, int max_exp);
 
 /* Our functions test */
 Suite *suite_convert_gmp_to_decimal(void);

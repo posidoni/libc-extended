@@ -52,32 +52,48 @@
 START_TEST(gcc_128_bits) {
     long long long_a = get_random_ll() * rand();
     long long long_b = get_random_ll() * rand();
+
+#ifdef DEBUG
     printf("long_a  =%lld\n", long_a);
     printf("long_b  =%lld\n", long_b);
+#endif
+
     __int128_t a = long_a;
     __int128_t b = long_b;
     __int128_t mul = a * b;
     s21_decimal res128 = bigint_to_decimal(mul);
 
+
     s21_decimal dec_a = ll_to_decimal(long_a);
+
+#ifdef DEBUG
     printf("dec_a=");
     print_bits_r(dec_a);
+#endif
+
     s21_decimal dec_b = ll_to_decimal(long_b);
+
+#ifdef DEBUG
     printf("dec_b=");
     print_bits_r(dec_a);
+#endif
+
     s21_decimal dec_mul = {0};
 
     s21_mul(dec_a, dec_b, &dec_mul);
+
+#ifdef DEBUG
     printf("dec_mul=");
     print_bits_r(dec_mul);
     printf("res128_=");
     print_bits_r(res128);
+#endif
 
     ck_assert_int_eq(s21_is_equal(res128, dec_mul), TRUE);
 }
 
 Suite *suite_s21_mul(void) {
-    Suite *s = suite_create("suite_s21_mul");
+    Suite *s = suite_create(PRETTY_PRINT("s21_mult"));
     TCase *tc = tcase_create("s21_mul_tc");
 
     /* tcase_add_loop_test(tc, mul_loop, 0, 1); */

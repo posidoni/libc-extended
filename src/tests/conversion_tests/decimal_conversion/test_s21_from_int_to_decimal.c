@@ -9,20 +9,20 @@ START_TEST(NULL_POINTER) {
 
 START_TEST(ZERO_INT) {
     int test_int = 0;
-    s21_decimal *decimal = malloc(sizeof(s21_decimal));
+    s21_decimal *decimal = {0};
     convertation_result status = s21_from_int_to_decimal(test_int, decimal);
+
     ck_assert_int_eq(status, CONVERTATION_OK);
     ck_assert_int_eq(test_int, decimal->bits[0]);
     ck_assert_int_eq(0, decimal->bits[1]);
     ck_assert_int_eq(0, decimal->bits[2]);
     ck_assert_int_eq(0, get_sign(*decimal));
     ck_assert_int_eq(0, get_exponent(*decimal));
-    free(decimal);
 }
 
 START_TEST(MAX_INT) {
     int test_int = INT32_MAX;
-    s21_decimal *decimal = malloc(sizeof(s21_decimal));
+    s21_decimal *decimal = {0};
     convertation_result status = s21_from_int_to_decimal(test_int, decimal);
     ck_assert_int_eq(status, CONVERTATION_OK);
     ck_assert_int_eq(test_int, decimal->bits[0]);
@@ -30,12 +30,11 @@ START_TEST(MAX_INT) {
     ck_assert_int_eq(0, decimal->bits[2]);
     ck_assert_int_eq(0, get_sign(*decimal));
     ck_assert_int_eq(0, get_exponent(*decimal));
-    free(decimal);
 }
 
 START_TEST(MIN_INT) {
     int test_int = INT32_MIN + 1;
-    s21_decimal *decimal = malloc(sizeof(s21_decimal));
+    s21_decimal *decimal = {0};
     convertation_result status = s21_from_int_to_decimal(-test_int, decimal);
     ck_assert_int_eq(status, CONVERTATION_OK);
     ck_assert_int_eq(-test_int, decimal->bits[0]);
@@ -43,12 +42,11 @@ START_TEST(MIN_INT) {
     ck_assert_int_eq(0, decimal->bits[2]);
     ck_assert_int_eq(0, get_sign(*decimal));
     ck_assert_int_eq(0, get_exponent(*decimal));
-    free(decimal);
 }
 
 START_TEST(NEG_INT) {
     int test_int = -126123;
-    s21_decimal *decimal = malloc(sizeof(s21_decimal));
+    s21_decimal *decimal = {0};
     convertation_result status = s21_from_int_to_decimal(-test_int, decimal);
     ck_assert_int_eq(status, CONVERTATION_OK);
     ck_assert_int_eq(-test_int, decimal->bits[0]);
@@ -56,12 +54,11 @@ START_TEST(NEG_INT) {
     ck_assert_int_eq(0, decimal->bits[2]);
     ck_assert_int_eq(0, get_sign(*decimal));
     ck_assert_int_eq(0, get_exponent(*decimal));
-    free(decimal);
 }
 
 START_TEST(POS_INT) {
     int test_int = 3752;
-    s21_decimal *decimal = malloc(sizeof(s21_decimal));
+    s21_decimal *decimal = {0};
     convertation_result status = s21_from_int_to_decimal(test_int, decimal);
     ck_assert_int_eq(status, CONVERTATION_OK);
     ck_assert_int_eq(test_int, decimal->bits[0]);
@@ -69,11 +66,10 @@ START_TEST(POS_INT) {
     ck_assert_int_eq(0, decimal->bits[2]);
     ck_assert_int_eq(0, get_sign(*decimal));
     ck_assert_int_eq(0, get_exponent(*decimal));
-    free(decimal);
 }
 
 Suite *suite_s21_from_int_to_decimal(void) {
-    Suite *s = suite_create("suite_s21_from_int_to_decimal");
+    Suite *s = suite_create(PRETTY_PRINT("suite_s21_from_int_to_decimal"));
     TCase *tc = tcase_create("s21_from_int_to_decimal_tc");
 
     tcase_add_test(tc, NULL_POINTER);

@@ -1,5 +1,4 @@
 #include "../s21_decimal.h"
-#include "../tests/s21_decimal_test.h"
 
 static bool s21_is_less_positive(s21_decimal a, s21_decimal b);
 
@@ -15,58 +14,22 @@ static bool s21_is_less_positive(s21_decimal a, s21_decimal b);
     Thus, we have the right to compare raw value of unsigned ints.
 */
 
-static bool s21_is_less_positive(s21_decimal a, s21_decimal b) {
-    // printf("BEFORE division: \n");
-    // print_bits_r(a);
-    // print_bits_r(b);
-
-    /*
-    (!) GET RID OF EXPONENT!
-
-        1. Compare exponents
-            if equal => start bit-by-bit comparison.
-
-        2. If exponent A is bigger => A is smaller than B
-        2. If exponent B is bigger => B is smaller than A
-
-    */
-
-    // s21_decimal_apply_exponent(&a);
-    // s21_decimal_apply_exponent(&b);
-
-    /* printf("FINAL SHIT\n"); */
-    /* print_bits_r(a); */
-    /* print_bits_r(b); */
-
-    for (int i = 2; i >= 0; i--) {
-        /* printf("[%d] A: %u B: %u\n", i, a.bits[i], b.bits[i]); */
-
-        if (a.bits[i] == b.bits[i]) {
-            continue;
-        } else {
-            return a.bits[i] < b.bits[i];
-        }
+int s21_is_less(s21_decimal a, s21_decimal b) {
+    if (both_all_zeroes(a, b)) {
+        return false;
     }
 
-    return false;
-}
-
-int s21_is_less(s21_decimal a, s21_decimal b) {
-    apply_exponent_to_decimal(&a);
-    apply_exponent_to_decimal(&b);
-
-    bool both_zeroes = both_all_zeroes(a, b);
-    // bool res = false;
     bool sign1 = get_sign(a), sign2 = get_sign(b);
+
+    /* POS < NEG */
+    if (!sign1 && sign2) {
+        return false;
+    }
 
     /* NEG < NEG */
     if (sign1 && sign2) {
-        // set_sign_pos(&a);
-        // set_sign_pos(&b);
-
-        SET_BIT(a.bits[3], 1U, 31);
-        SET_BIT(b.bits[3], 1U, 31);
-
+        set_sign_pos(&a);
+        set_sign_pos(&b);
         return s21_is_greater(a, b);
     }
 
@@ -75,16 +38,27 @@ int s21_is_less(s21_decimal a, s21_decimal b) {
         return true;
     }
 
-    /* POS < NEG */
-    if (!sign1 && sign2) {
-        return false;
+    int res = s21_is_less_positive(a, b);
+
+    return res;
+}
+
+static bool s21_is_less_positive(s21_decimal a, s21_decimal b) {
+    int overflow = 0;
+    s21_normalize_decimal_pair(&a, &b, &overflow);
+
+    if (overflow) {
+        int e1 = get_exponent(a), e2 = get_exponent(b);
+        return (e1 < e2);
     }
 
-    /* POS < POS */
-    if (!both_zeroes && !sign1 && !sign2) {
-        int res = s21_is_less_positive(a, b);
-        return res;
+    for (int i = 2; i >= 0; i--) {
+        if (a.bits[i] == b.bits[i]) {
+            continue;
+        } else {
+            return a.bits[i] < b.bits[i];
+        }
     }
-
-    return both_zeroes;
+    
+    return false;
 }

@@ -1,5 +1,4 @@
 #include "../s21_decimal.h"
-#include "../tests/s21_decimal_test.h"
 
 static bool s21_is_greater_positive(s21_decimal a, s21_decimal b);
 
@@ -15,27 +14,17 @@ static bool s21_is_greater_positive(s21_decimal a, s21_decimal b);
     Thus, we have the right to compare raw value of unsigned ints.
 */
 
-static bool s21_is_greater_positive(s21_decimal a, s21_decimal b) {
-    for (int i = 2; i >= 0; i--) {
-        printf("[%d] A: %u B: %u\n", i, a.bits[i], b.bits[i]);
-
-        if (a.bits[i] == b.bits[i]) {
-            continue;
-        } else {
-            return a.bits[i] > b.bits[i];
-        }
+int s21_is_greater(s21_decimal a, s21_decimal b) {
+    if (both_all_zeroes(a, b)) {
+        return false;
     }
 
-    return false;
-}
-
-int s21_is_greater(s21_decimal a, s21_decimal b) {
-    apply_exponent_to_decimal(&a);
-    apply_exponent_to_decimal(&b);
-
-    bool both_zeroes = both_all_zeroes(a, b);
-    bool res = false;
     bool sign1 = get_sign(a), sign2 = get_sign(b);
+
+    /* POS > NEG */
+    if (!sign1 && sign2) {
+        return true;
+    }
 
     /* NEG > NEG */
     if (sign1 && sign2) {
@@ -49,15 +38,27 @@ int s21_is_greater(s21_decimal a, s21_decimal b) {
         return false;
     }
 
-    /* POS > NEG */
-    if (!sign1 && sign2) {
-        return true;
+    int res = s21_is_greater_positive(a, b);
+
+    return res;
+}
+
+static bool s21_is_greater_positive(s21_decimal a, s21_decimal b) {
+    int overflow = 0;
+    s21_normalize_decimal_pair(&a, &b, &overflow);
+
+    if (overflow) {
+        int e1 = get_exponent(a), e2 = get_exponent(b);
+        return (e1 < e2);
     }
 
-    /* POS > POS */
-    if (!both_zeroes) {
-        return s21_is_greater_positive(a, b);
+    for (int i = 2; i >= 0; i--) {
+        if (a.bits[i] == b.bits[i]) {
+            continue;
+        } else {
+            return a.bits[i] > b.bits[i];
+        }
     }
 
-    return both_zeroes ? false : res;
+    return false;
 }

@@ -1,8 +1,4 @@
-#include "s21_core.h"
-
-void init_decimal(s21_decimal *decimal) {
-    memset(decimal, 0, sizeof(*decimal));
-}
+#include "../s21_decimal.h"
 
 // returns 0 meaning positive 1 negative
 bool get_sign(s21_decimal decimal) { return IS_SET(decimal.bits[3], D_SIGN); }
@@ -18,6 +14,16 @@ void set_bit_1(s21_decimal *n, int pos) {
 void set_bit_0(s21_decimal *n, int pos) {
     ZERO_BIT(n->bits[pos / 32], pos % 32);
 }
+
+/**
+ * @brief
+ *
+ * @
+ * @
+ *
+ * @param a
+ * @param b
+ */
 
 void s21_swap(s21_decimal *a, s21_decimal *b) {
     s21_decimal tmp = *a;

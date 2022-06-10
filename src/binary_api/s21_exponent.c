@@ -1,19 +1,34 @@
-#include "s21_core.h"
+#include "../s21_decimal.h"
 
-// s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code) {
-//     s21_decimal result = {0};
-//     if (s21_is_equal(value_2, get_power_of_ten(0))) {
-//         result = value_1;
-//     } else {
-//         for (int i = 95 - byte_len(value_2); i >= 0; --i) {
-//             if (s21_is_less_or_equal(shiftnl_ret(value_2, i), value_1)) {
-//                 value_1 = binary_subtraction(value_1, shiftnl_ret(value_2, i), code);
-//                 result = bit_or(result, shiftnl_ret(get_power_of_ten(0), i));
-//             }
-//         }
-//     }
-//     return result;
-// }
+/**
+ * @brief Normalizes pair of two decimals. To normalize => match their
+ * exponent. This is done via multiplication by 10 of decimal with the
+ * smallest exponent.
+ *
+ * In case of overflow the flag is raised.
+ *
+ * @param [a, b] - pair of decimals that need to be normalized to the same
+ * exponent
+ */
+
+void s21_normalize_decimal_pair(s21_decimal *a, s21_decimal *b, int *overflow) {
+    int e1 = get_exponent(*a), e2 = get_exponent(*b);
+    int cur_exp = min(e1, e2);
+    int target_exp = max(e1, e2);
+
+    s21_decimal cur = (e1 < e2) ? *a : *b;
+
+    while (cur_exp != target_exp && !(*overflow)) {
+        cur = binary_multiplication(cur, get_power_of_ten(1), overflow);
+        cur_exp++;
+        set_exponent(&cur, cur_exp);
+    }
+
+    if (e1 < e2)
+        *a = cur;
+    else
+        *b = cur;
+}
 
 void s21_decimal_apply_exponent(s21_decimal *dec) {
     /* TODO: add code checking & respective logic */
