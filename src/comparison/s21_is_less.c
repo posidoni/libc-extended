@@ -1,7 +1,5 @@
 #include "../s21_decimal.h"
 
-static bool s21_is_less_positive(s21_decimal a, s21_decimal b);
-
 /*
     We assume that 1 (dec) is represented like this in s21_decimal:
 
@@ -13,6 +11,8 @@ static bool s21_is_less_positive(s21_decimal a, s21_decimal b);
 
     Thus, we have the right to compare raw value of unsigned ints.
 */
+
+static bool s21_is_less_positive(s21_decimal a, s21_decimal b);
 
 int s21_is_less(s21_decimal a, s21_decimal b) {
     if (both_all_zeroes(a, b)) {
@@ -52,13 +52,11 @@ static bool s21_is_less_positive(s21_decimal a, s21_decimal b) {
         return (e1 < e2);
     }
 
-    for (int i = 2; i >= 0; i--) {
-        if (a.bits[i] == b.bits[i]) {
-            continue;
-        } else {
-            return a.bits[i] < b.bits[i];
+    for (int i = 95; i >= 0; i--) {
+        if (!smart_get_bit(a, i) && smart_get_bit(b, i)) {
+            return true;
         }
     }
-    
+
     return false;
 }

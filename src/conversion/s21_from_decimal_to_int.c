@@ -1,24 +1,32 @@
 #include "../s21_decimal.h"
 
 int s21_from_decimal_to_int(s21_decimal src, int *dst) {
+    s21_decimal truncated = {0};
+
+    // ISSUE #41
+    int code = s21_truncate(src, &truncated);
+
     int sign = get_sign(src);
-    if (!dst)
+
+    if (!dst || code == CONVERTATION_ERROR)
         return CONVERTATION_ERROR;
 
-    int exp = get_exponent(src);
+    if (get_bit(truncated, 31) || truncated.bits[1] || truncated.bits[2]) {
+        return CONVERTATION_ERROR;
+    }
 
-    float tmp = 0;
-    for (int i = 0; i < 96; i++)
-        tmp += pow(2, i) * get_bit(src, i);
+    int tmp = 0;
 
-    while (exp--)
-        tmp /= 10;
+    for (int i = 0; i < 31; i++) {
+        tmp += pow(2, i) * get_bit(truncated, i);
+    }
+
+    if (tmp == INT_MIN && sign) {
+        return CONVERTATION_ERROR;
+    }
 
     if (sign)
-        tmp *= -1.0F;
-
-    if (tmp > INT_MAX || tmp < INT_MIN)
-        return CONVERTATION_ERROR;
+        tmp = -tmp;
 
     *dst = tmp;
 

@@ -15,16 +15,6 @@ void set_bit_0(s21_decimal *n, int pos) {
     ZERO_BIT(n->bits[pos / 32], pos % 32);
 }
 
-/**
- * @brief
- *
- * @
- * @
- *
- * @param a
- * @param b
- */
-
 void s21_swap(s21_decimal *a, s21_decimal *b) {
     s21_decimal tmp = *a;
     *a = *b;
