@@ -9,63 +9,84 @@ START_TEST(NULL_POINTER) {
 
 START_TEST(ZERO_INT) {
     int test_int = 0;
-    s21_decimal *decimal = {0};
-    convertation_result status = s21_from_int_to_decimal(test_int, decimal);
+    s21_decimal decimal = {0};
+    convertation_result status = s21_from_int_to_decimal(test_int, &decimal);
 
     ck_assert_int_eq(status, CONVERTATION_OK);
-    ck_assert_int_eq(test_int, decimal->bits[0]);
-    ck_assert_int_eq(0, decimal->bits[1]);
-    ck_assert_int_eq(0, decimal->bits[2]);
-    ck_assert_int_eq(0, get_sign(*decimal));
-    ck_assert_int_eq(0, get_exponent(*decimal));
+    ck_assert_int_eq(test_int, decimal.bits[0]);
+    ck_assert_int_eq(0, decimal.bits[1]);
+    ck_assert_int_eq(0, decimal.bits[2]);
+    ck_assert_int_eq(0, get_sign(decimal));
+    ck_assert_int_eq(0, get_exponent(decimal));
 }
 
 START_TEST(MAX_INT) {
     int test_int = INT32_MAX;
-    s21_decimal *decimal = {0};
-    convertation_result status = s21_from_int_to_decimal(test_int, decimal);
+    s21_decimal decimal = {0};
+    convertation_result status = s21_from_int_to_decimal(test_int, &decimal);
+
     ck_assert_int_eq(status, CONVERTATION_OK);
-    ck_assert_int_eq(test_int, decimal->bits[0]);
-    ck_assert_int_eq(0, decimal->bits[1]);
-    ck_assert_int_eq(0, decimal->bits[2]);
-    ck_assert_int_eq(0, get_sign(*decimal));
-    ck_assert_int_eq(0, get_exponent(*decimal));
+    ck_assert_int_eq(test_int, decimal.bits[0]);
+    ck_assert_int_eq(0, decimal.bits[1]);
+    ck_assert_int_eq(0, decimal.bits[2]);
+    ck_assert_int_eq(0, get_sign(decimal));
+    ck_assert_int_eq(0, get_exponent(decimal));
 }
 
 START_TEST(MIN_INT) {
     int test_int = INT32_MIN + 1;
-    s21_decimal *decimal = {0};
-    convertation_result status = s21_from_int_to_decimal(-test_int, decimal);
+    s21_decimal decimal = {0};
+    convertation_result status = s21_from_int_to_decimal(-test_int, &decimal);
+
     ck_assert_int_eq(status, CONVERTATION_OK);
-    ck_assert_int_eq(-test_int, decimal->bits[0]);
-    ck_assert_int_eq(0, decimal->bits[1]);
-    ck_assert_int_eq(0, decimal->bits[2]);
-    ck_assert_int_eq(0, get_sign(*decimal));
-    ck_assert_int_eq(0, get_exponent(*decimal));
+    ck_assert_int_eq(-test_int, decimal.bits[0]);
+    ck_assert_int_eq(0, decimal.bits[1]);
+    ck_assert_int_eq(0, decimal.bits[2]);
+    ck_assert_int_eq(0, get_sign(decimal));
+    ck_assert_int_eq(0, get_exponent(decimal));
 }
 
 START_TEST(NEG_INT) {
     int test_int = -126123;
-    s21_decimal *decimal = {0};
-    convertation_result status = s21_from_int_to_decimal(-test_int, decimal);
+    s21_decimal decimal = {0};
+    convertation_result status = s21_from_int_to_decimal(-test_int, &decimal);
+
     ck_assert_int_eq(status, CONVERTATION_OK);
-    ck_assert_int_eq(-test_int, decimal->bits[0]);
-    ck_assert_int_eq(0, decimal->bits[1]);
-    ck_assert_int_eq(0, decimal->bits[2]);
-    ck_assert_int_eq(0, get_sign(*decimal));
-    ck_assert_int_eq(0, get_exponent(*decimal));
+    ck_assert_int_eq(-test_int, decimal.bits[0]);
+    ck_assert_int_eq(0, decimal.bits[1]);
+    ck_assert_int_eq(0, decimal.bits[2]);
+    ck_assert_int_eq(0, get_sign(decimal));
+    ck_assert_int_eq(0, get_exponent(decimal));
 }
 
 START_TEST(POS_INT) {
     int test_int = 3752;
-    s21_decimal *decimal = {0};
-    convertation_result status = s21_from_int_to_decimal(test_int, decimal);
+    s21_decimal decimal = {0};
+    convertation_result status = s21_from_int_to_decimal(test_int, &decimal);
+
     ck_assert_int_eq(status, CONVERTATION_OK);
-    ck_assert_int_eq(test_int, decimal->bits[0]);
-    ck_assert_int_eq(0, decimal->bits[1]);
-    ck_assert_int_eq(0, decimal->bits[2]);
-    ck_assert_int_eq(0, get_sign(*decimal));
-    ck_assert_int_eq(0, get_exponent(*decimal));
+    ck_assert_int_eq(test_int, decimal.bits[0]);
+    ck_assert_int_eq(0, decimal.bits[1]);
+    ck_assert_int_eq(0, decimal.bits[2]);
+    ck_assert_int_eq(0, get_sign(decimal));
+    ck_assert_int_eq(0, get_exponent(decimal));
+}
+
+START_TEST(loop1) {
+    int test_int = get_rand(0, INT_MAX);
+
+    if (rand() % 2)
+        test_int = -test_int;
+
+    s21_decimal decimal = {0};
+    convertation_result status = s21_from_int_to_decimal(test_int, &decimal);
+
+    ck_assert_int_eq(status, CONVERTATION_OK);
+    ck_assert_int_eq(test_int, decimal.bits[0]);
+    ck_assert_int_eq(0, decimal.bits[1]);
+    ck_assert_int_eq(0, decimal.bits[2]);
+    ck_assert_int_eq((test_int < 0), get_sign(decimal));
+    ck_assert_int_eq(0, get_exponent(decimal));
 }
 
 Suite *suite_s21_from_int_to_decimal(void) {
@@ -78,6 +99,7 @@ Suite *suite_s21_from_int_to_decimal(void) {
     tcase_add_test(tc, MIN_INT);
     tcase_add_test(tc, NEG_INT);
     tcase_add_test(tc, POS_INT);
+    tcase_add_loop_test(tc, loop1, 0, 100);
 
     suite_add_tcase(s, tc);
     return s;
