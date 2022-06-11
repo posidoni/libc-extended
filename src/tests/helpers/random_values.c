@@ -52,7 +52,8 @@ static void get_random_binary_string(s21_decimal *in, char *mpz_bin_str,
         }
     }
 
-    /* This reverse is needed to match the format of normal binary with subject
+    /* TODO: This reverse is needed to match the format of normal binary with
+     * subject
      */
     for (int j = 0; j < size; j++)
         in->bits[j] = reverse_bits(in->bits[j]);
@@ -102,10 +103,7 @@ s21_decimal get_random_decimal(int size, int exp) {
     s21_decimal res = {0};
     set_exponent(&res, get_rand(0, exp));
 
-    if (rand() % 2)
-        set_sign_neg(&res);
-    else
-        set_sign_pos(&res);
+    set_random_sign(&res);
 
     for (int j = 0; j < size; j++) {
         for (int i = 31; i > 0; i--) {
@@ -119,4 +117,11 @@ s21_decimal get_random_decimal(int size, int exp) {
 
 int get_rand(int min, int max) {
     return (rand() % (max - min + 1)) + min;
+}
+
+void set_random_sign(s21_decimal *dec) {
+    if (rand() % 2)
+        set_sign_neg(dec);
+    else
+        set_sign_pos(dec);
 }

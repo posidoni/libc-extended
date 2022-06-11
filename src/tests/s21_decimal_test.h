@@ -47,6 +47,7 @@ void gmp_sum_int(mpz_t *res, int64_t compound_val);
 
 // helpers
 int get_rand(int min, int max);
+void set_random_sign(s21_decimal *dec);
 
 // debug
 void print_mpz_binary(mpz_t mpz_val);
