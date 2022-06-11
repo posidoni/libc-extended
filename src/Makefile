@@ -2,8 +2,8 @@
 CC 				 =	gcc
 
 # Compilation flags configuration
-ALL_TARGETS 	 = $(TARGET) test gcov_report
-ASAN 			 = 	#-fsanitize=address
+ALL_TARGETS 	 = $(TARGET) test # gcov_report
+ASAN 			 = 	-fsanitize=address
 UBSAN			 =	#-fsanitize=undefined
 STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic #-Werror -fanalyzer
 

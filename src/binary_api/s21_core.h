@@ -6,6 +6,12 @@
 #include <stdint.h>
 #include <stdio.h>
 
+typedef struct {
+    int bits[4];
+} s21_decimal;
+
+void smart_set_bit(s21_decimal *a, int pos);
+int smart_get_bit(s21_decimal a, int pos);
 // checks if a bit is set
 #define IS_SET(X, POS) ((X >> POS) & 1U)
 // sets the bit to 1 at a give position
@@ -34,9 +40,6 @@ typedef enum {
     S21_NAN = 3
 } arithmetic_result;
 
-typedef struct {
-    unsigned int bits[4];
-} s21_decimal;
 
 typedef enum {
     FALSE = 0,

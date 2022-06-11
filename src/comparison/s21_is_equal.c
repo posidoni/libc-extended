@@ -1,7 +1,7 @@
 #include "../s21_decimal.h"
 
-static bool bits_eq(const unsigned int bits_a[4],
-                    const unsigned int bits_b[4]) {
+static bool bits_eq(const int bits_a[4],
+                    const int bits_b[4]) {
     return bits_a[0] == bits_b[0] && bits_a[1] == bits_b[1] &&
            bits_a[2] == bits_b[2] && bits_a[3] == bits_b[3];
 }

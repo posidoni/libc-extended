@@ -1,4 +1,5 @@
 #include "../s21_decimal.h"
+
 s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2,
                             int *err) {
     s21_decimal carry;
@@ -9,6 +10,7 @@ s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2,
         value_1 = bit_xor(value_1, value_2);
         value_2 = carry;
     }
+
     return value_1;
 }
 
