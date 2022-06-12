@@ -45,18 +45,30 @@ int s21_is_less(s21_decimal a, s21_decimal b) {
 
 static bool s21_is_less_positive(s21_decimal a, s21_decimal b) {
     int overflow = 0;
-    s21_normalize_decimal_pair(&a, &b, &overflow);
+    // s21_normalize_decimal_pair(&a, &b, &overflow);
 
     if (overflow) {
         int e1 = get_exponent(a), e2 = get_exponent(b);
         return (e1 < e2);
     }
 
-    for (int i = 95; i >= 0; i--) {
-        if (!smart_get_bit(a, i) && smart_get_bit(b, i)) {
+    for (int i = 3; i >= 0; i--) {
+        if (a.bits[i] == b.bits[i]) {
+            continue;
+        }
+
+        if (a.bits[i] < b.bits[i]) {
             return true;
+        } else if (a.bits[i] != b.bits[i]) {
+            return false;
         }
     }
+
+    // for (int i = 95; i >= 0; i--) {
+    //     if (!get_bit(a, i) && get_bit(b, i)) {
+    //         return true;
+    //     }
+    // }
 
     return false;
 }

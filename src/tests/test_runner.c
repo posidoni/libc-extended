@@ -33,11 +33,12 @@ void run_testcase(Suite *testcase) {
 void run_tests(void) {
     Suite *list_cases[] = {
 
-        // suite_s21_mul(),
-        suite_s21_div(),
-        // suite_s21_mod(),
-        // suite_s21_floor(),
-        // suite_s21_is_less(), // 🌱 [ A FEW TESTS FAILED ]
+        // suite_s21_mul(), //
+        // suite_s21_floor(), //
+
+        suite_s21_mod(),  // 🌱 [ FEW TESTS FAILED ]
+        suite_s21_div(),  // 🌱 [ FEW TESTS FAILED ]
+        // suite_s21_is_less(), // 🌱 [ FEW TESTS FAILED ]
         // suite_s21_truncate(), // 🌱 [ Needs DIV & tests<gmp> ]
         // suite_s21_round(), // 🌱 [ Needs truncate & tests<gmp> ]
 

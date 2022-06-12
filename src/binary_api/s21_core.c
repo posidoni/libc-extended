@@ -22,12 +22,9 @@ void s21_swap(s21_decimal *a, s21_decimal *b) {
 }
 
 /**
- * @brief This function is used for bank rounding
- *
- * Note on the numbers that do not fit into the mantissa:
-
-    When getting numbers that do not fit into the mantissa during arithmetic operations, use bank rounding  (for example, 79,228,162,514,264,337,593,543,950,335 - 0.6 = 79,228,162,514,264,337,593,543,950,334)
- *
+ * @brief This function is used to generate 0,5 decimal value that is
+ * needed by bank rounding.
+ * 
  * @return s21_decimal
  */
 
