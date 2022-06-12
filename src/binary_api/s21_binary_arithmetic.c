@@ -1,4 +1,5 @@
 #include "../s21_decimal.h"
+#include "../tests/s21_decimal_test.h"
 
 /**
     1. Init
@@ -38,8 +39,10 @@ s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2, int *err) 
 }
 
 s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2, int *err) {
-    s21_decimal carry;
+    s21_decimal carry = {0};
+
     value_2 = binary_addition(bit_not(value_2), get_power_of_ten(0), err);
+
     while (!eq_zero(value_2)) {
         init_zero(&carry);
         carry = bit_and(value_1, value_2);
@@ -65,18 +68,29 @@ s21_decimal binary_multiplication(s21_decimal value_1, s21_decimal value_2, int 
     return result;
 }
 
+/**
+ *
+ * @deprecated:
+ *
+ * @param value_1
+ * @param value_2
+ * @param code
+ * @return s21_decimal
+ */
+
 s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2, int *code) {
     s21_decimal result = {0};
+
     if (s21_is_equal(value_2, get_power_of_ten(0))) {
         result = value_1;
     } else {
         for (int i = 95 - byte_len(value_2); i >= 0; --i) {
-            if (s21_is_less_or_equal(shiftnl_ret(value_2, i), value_1)) {
+            if (s21_is_less_or_equal(shiftnr_ret(value_2, i), value_1)) {
                 value_1 = binary_subtraction(value_1, shiftnl_ret(value_2, i), code);
                 result = bit_or(result, shiftnl_ret(get_power_of_ten(0), i));
             }
-            // print_bits_r(result);
         }
     }
+
     return result;
 }

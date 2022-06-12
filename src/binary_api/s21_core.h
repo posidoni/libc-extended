@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 typedef struct {
-    int bits[4];
+    unsigned int bits[4];
 } s21_decimal;
 
 void smart_set_bit(s21_decimal *a, int pos);

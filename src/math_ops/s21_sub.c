@@ -50,6 +50,7 @@ void handle_exponent_sub(s21_decimal value_1, s21_decimal value_2,
         res_exp++;
         value_2 = value_2_check_overflow;
     }
+
     if (*code == 1) {
         if (s21_is_greater_or_equal(value_1, get_05())) {
             printf("WAS1\n");
@@ -61,5 +62,6 @@ void handle_exponent_sub(s21_decimal value_1, s21_decimal value_2,
     } else {
         *result = binary_subtraction(value_2, value_1, code);
     }
+
     set_exponent(result, res_exp);
 }
