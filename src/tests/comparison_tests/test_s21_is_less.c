@@ -128,7 +128,7 @@ Suite *suite_s21_is_less(void) {
 
     tcase_add_loop_test(tc, decimal_random_noexp_unsigned, 0, 1000);
     tcase_add_loop_test(tc, decimal_random_noexp_signed, 0, 1000);
-    // tcase_add_loop_test(tc, decimal_random_exp_unsigned, 0, 10);
+    tcase_add_loop_test(tc, decimal_random_exp_unsigned, 0, 10);
     tcase_add_test(tc, all_zeroes);
 
     suite_add_tcase(s, tc);

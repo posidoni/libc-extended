@@ -6,19 +6,23 @@ void handle_exponent_sub(s21_decimal value_1, s21_decimal value_2,
 int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     int code = ARITHMETIC_OK;
 
-    if (get_sign(value_1) == 0 && get_sign(value_2) == 0) {
+    int s1 = get_sign(value_1), s2 = get_sign(value_2);
+
+    if (s1 == POS && s2 == POS) {
         handle_exponent_sub(value_1, value_2, result, &code);
-    } else if (get_sign(value_1) == 0 && get_sign(value_2) == 1) {
-        s21_add(value_1, value_2, result);
-    } else if (get_sign(value_1) == 1 && get_sign(value_2) == 0) {
-        s21_add(value_1, value_2, result);
+    } else if (s1 == POS && s2 == NEG) {
+        set_sign_pos(&value_2);
+        code = s21_add(value_1, value_2, result);
+    } else if (s1 == NEG && s2 == POS) {
+        set_sign_pos(&value_1);
+        code = s21_add(value_1, value_2, result);
         set_sign_neg(result);
-    } else if (get_sign(value_1) == 1 && get_sign(value_2) == 1) {
-        handle_exponent_sub(value_2, value_1, result, &code);
+    } else if (s1 == NEG && s2 == NEG) {
+        set_sign_pos(&value_2);
+        code = s21_add(value_1, value_2, result);
     }
 
-    code = code == 1 ? get_sign(*result) ? S21_NEGATIVE_INFINITY : S21_INFINITY
-                     : 0;
+    code = s21_check_infinity(code, get_sign(*result));
 
     return code;
 }

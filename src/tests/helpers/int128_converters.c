@@ -7,9 +7,9 @@ s21_decimal ll_to_decimal(long long val) {
         val = -val;
     }
 
-    for (int i = 0; val; i++, val /= 2) {
+    for (uint64_t i = 0; val; i++, val /= 2) {
         if (val % 2)
-            ADD_BIT(res.bits[i / 32], i);
+            res.bits[i / 32] |= (1U << i);
     }
 
     return res;
@@ -26,9 +26,19 @@ s21_decimal bigint_to_decimal(__int128_t src) {
     return res;
 }
 
-long long get_random_ll() {
-    unsigned long long val = 0;
-    for (int i = 0; i < 64; i++)
+long long get_random_ll(void) {
+    long long int val = 0;
+
+    for (uint64_t i = 0; i < 64; i++)
+        if (rand() % 2)
+            val |= (1U << i);
+
+    return val;
+}
+
+short int get_random_short(void) {
+    short int val = 0;
+    for (uint64_t i = 0; i < 16; i++)
         if (rand() % 2)
             ADD_BIT(val, i);
 
