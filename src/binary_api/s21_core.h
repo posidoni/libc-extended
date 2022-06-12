@@ -40,6 +40,10 @@ typedef enum {
     S21_NAN = 3
 } arithmetic_result;
 
+typedef enum {
+    POS = 0,
+    NEG = 1
+} arithmetic_consts;
 
 typedef enum {
     FALSE = 0,

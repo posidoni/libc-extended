@@ -25,6 +25,8 @@ int s21_is_equal(s21_decimal a, s21_decimal b);
 int s21_is_not_equal(s21_decimal a, s21_decimal b);
 bool both_all_zeroes(s21_decimal a, s21_decimal b);
 
+int s21_check_infinity(int code, int sign);
+
 int byte_len(s21_decimal n);
 void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
                          s21_decimal *result, int *code);

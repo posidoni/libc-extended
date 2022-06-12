@@ -40,7 +40,9 @@ void mpz_sint_sum(mpz_t *res, int64_t compound_val);
 // int128 manipulation
 s21_decimal bigint_to_decimal(__int128_t src);
 s21_decimal ll_to_decimal(long long val);
-long long get_random_ll();
+long long get_random_ll(void);
+
+short int get_random_short(void);
 
 /* GMP wrappers */
 void gmp_sum_int(mpz_t *res, int64_t compound_val);
