@@ -1,7 +1,7 @@
 #include "../s21_decimal.h"
 
 /**
- * @brief Truncates a floating point number and discards the floating part.
+ * @brief Truncates a floating point number and discards the floating part
  * (i.e 4.513513515 becomes 4)
  * Implemented by simply dividing our large number by the power of 10
  * (i.e exp = 1, 110110110 (182)
@@ -11,9 +11,9 @@
  *                   10010 (18)
  * )
  *
- * @param value Given value to truncate.
- * @param result Truncated value.
- * @return Error code is returned.
+ * @param value Given value to truncate
+ * @param result Truncated value
+ * @return Error code is returned
  */
 
 int s21_truncate(s21_decimal value, s21_decimal *result) {
