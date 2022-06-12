@@ -91,12 +91,17 @@ int shiftl(s21_decimal *a) {
 void shiftr(s21_decimal *a) {
     int b1_tmp = get_bit(*a, 64);
     a->bits[2] >>= 1;
+    set_bit_0(a, 95);
 
     int b2_tmp = get_bit(*a, 32);
     a->bits[1] >>= 1;
+    set_bit_0(a, 63);
     if (b1_tmp) set_bit_1(a, 63);
 
     a->bits[0] >>= 1;
+
+    set_bit_0(a, 31);
+
     if (b2_tmp) set_bit_1(a, 31);
 }
 

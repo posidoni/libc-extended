@@ -1,4 +1,22 @@
 #include "../s21_decimal_test.h"
+#define DEBUG
+START_TEST(overflow_test) {
+    s21_decimal a = {0};
+    s21_decimal b = {0};
+    s21_decimal res = {0};
+
+    set_bit_1(&a, 95);
+    set_bit_1(&a, 94);
+    set_bit_1(&b, 95);
+    set_bit_1(&b, 94);
+    int code = s21_add(a, b, &res);
+
+    print_bits_r(a);
+    print_bits_r(b);
+    print_bits_r(res);
+    printf("CODE : %d\n", code);
+}
+END_TEST
 
 START_TEST(gcc_128_bits) {
     long long long_a = get_random_ll() * rand();
@@ -29,7 +47,6 @@ START_TEST(gcc_128_bits) {
 #endif
 
     if (code == ARITHMETIC_OK) {
-
 #ifdef DEBUG
         print_bits_r(res128);
         print_bits_r(dec_sum);
@@ -67,10 +84,10 @@ START_TEST(random_decimal_exp) {
 #ifdef DEBUG
     print_bits_r(dec_sum);
     print_bits_r(short_dec);
-    printf("DEC: %d \t SHORT: %d \n", dec_sum.bits[0], short_dec.bits[0]);
-    printf("DEC: %d \t SHORT: %d \n", dec_sum.bits[1], short_dec.bits[1]);
-    printf("DEC: %d \t SHORT: %d \n", dec_sum.bits[2], short_dec.bits[2]);
-    printf("DEC: %d \t SHORT: %d \n", dec_sum.bits[3], short_dec.bits[3]);
+    // printf("DEC: %d \t SHORT: %d \n", dec_sum.bits[0], short_dec.bits[0]);
+    // printf("DEC: %d \t SHORT: %d \n", dec_sum.bits[1], short_dec.bits[1]);
+    // printf("DEC: %d \t SHORT: %d \n", dec_sum.bits[2], short_dec.bits[2]);
+    // printf("DEC: %d \t SHORT: %d \n", dec_sum.bits[3], short_dec.bits[3]);
 #endif
 
     ck_assert_int_eq(abs(dec_sum.bits[0]), abs(short_dec.bits[0]));
@@ -111,10 +128,11 @@ Suite *suite_s21_add(void) {
 
     /* Add works great. Tested with binary calculator */
 
-    tcase_add_loop_test(tc, gcc_128_bits, 0, 10000);
-    tcase_add_loop_test(tc, random_decimal_exp, 0, 10000);
+    // tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
+    // tcase_add_loop_test(tc, random_decimal_exp, 0, 100);
     /* tcase_add_loop_test(tc, sum_with_arbitrary_exp, 0, 10000); */
     /* tcase_add_loop_test(tc, edge_cases, 0, 10000); */
+    tcase_add_test(tc, overflow_test);
 
     suite_add_tcase(s, tc);
     return s;
