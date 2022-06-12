@@ -96,6 +96,24 @@
 /* // ck_assert_int_eq(1, 0); */
 /* } */
 /* END_TEST */
+START_TEST(simple_test) {
+    s21_decimal a = {0};
+    s21_decimal b = {0};
+
+    set_bit_1(&a, 1);
+    // set_bit_1(&a, 32);
+
+    set_bit_1(&b, 1);
+    // set_bit_1(&b, 32);
+
+    print_bits_r(a);
+    print_bits_r(b);
+    s21_decimal res = {0};
+    int code = s21_div(a, b, &res);
+    print_bits_r(res);
+    printf("CODE : %d\n", code);
+}
+END_TEST
 
 START_TEST(gcc_128_bits) {
     long long long_a = get_random_ll() * rand();
@@ -108,10 +126,12 @@ START_TEST(gcc_128_bits) {
     s21_decimal res128 = bigint_to_decimal(div);
 
     s21_decimal dec_a = ll_to_decimal(long_a);
-    printf("ll_to_decimal=\n");
+
     print_bits_r(dec_a);
     s21_decimal dec_b = ll_to_decimal(long_b);
     s21_decimal dec_div = {0};
+
+    print_bits_r(dec_b);
 
     s21_div(dec_a, dec_b, &dec_div);
     printf("dec_div=");
@@ -128,7 +148,8 @@ Suite *suite_s21_div(void) {
 
     /* tcase_add_loop_test(tc, div_test1, 0, 1); */
     /* tcase_add_loop_test(tc, loop_division_mpz, 0, 10000); */
-    tcase_add_loop_test(tc, gcc_128_bits, 0, 10);
+    // tcase_add_loop_test(tc, gcc_128_bits, 0, 1);
+    tcase_add_loop_test(tc, simple_test, 0, 1);
 
     suite_add_tcase(s, tc);
     return s;

@@ -1,7 +1,6 @@
 #include "../s21_decimal.h"
 
-static void handle_exponent_add(s21_decimal value_1, s21_decimal value_2,
-                                s21_decimal *result, int *code);
+static void handle_exponent_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code);
 
 int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     int code = ARITHMETIC_OK;
@@ -27,13 +26,11 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     return code;
 }
 
-static void handle_exponent_add(s21_decimal value_1, s21_decimal value_2,
-                                s21_decimal *result, int *code) {
+static void handle_exponent_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code) {
     int exp_v1 = get_exponent(value_1);
     int exp_v2 = get_exponent(value_2);
 
-    if (exp_v2 > exp_v1)
-        s21_swap(&value_1, &value_2);
+    if (exp_v2 > exp_v1) s21_swap(&value_1, &value_2);
     int res_exp = min(exp_v1, exp_v2);
 
     s21_decimal value_2_origin = value_2;
@@ -42,10 +39,9 @@ static void handle_exponent_add(s21_decimal value_1, s21_decimal value_2,
         s21_decimal value_2_check_overflow = {0};
 
         /* NORMALIZATION OF EXPONENT */
-        for (int i = 0; i < abs(exp_v1 - exp_v2) && *code != OVERFLOW; i++) {
+        for (int i = 0; i < abs(exp_v1 - exp_v2) && *code != S21_INFINITY; i++) {
             value_2_check_overflow = binary_multiplication(value_2, get_power_of_ten(1), code);
-            if (*code == S21_INFINITY)
-                break;
+            if (*code == S21_INFINITY) break;
             set_exponent(&value_1, get_exponent(value_1) - 1);
             res_exp++;
             value_2 = value_2_check_overflow;
