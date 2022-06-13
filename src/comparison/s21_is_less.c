@@ -14,6 +14,12 @@
 
 static bool s21_is_less_positive(s21_decimal a, s21_decimal b);
 
+int s21_is_less_abs(s21_decimal a, s21_decimal b) {
+    set_sign_pos(&a);
+    set_sign_pos(&b);
+    return s21_is_less_positive(a, b);
+}
+
 int s21_is_less(s21_decimal a, s21_decimal b) {
     if (both_all_zeroes(a, b)) {
         return false;

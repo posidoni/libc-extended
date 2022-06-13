@@ -5,7 +5,7 @@ CC 				 =	gcc
 ALL_TARGETS 	 = $(TARGET) test #gcov_report
 ASAN 			 = 	#-fsanitize=address
 UBSAN			 =	#-fsanitize=undefined
-STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic #-Werror -fanalyzer
+STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic #-fanalyzer #-Werror
 
 # Linking flags configuration
 LIBS 			 =	$(CHECK_LIB) $(GMP_LIB)

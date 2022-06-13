@@ -9,7 +9,13 @@ int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     int s1 = get_sign(value_1), s2 = get_sign(value_2);
 
     if (s1 == POS && s2 == POS) {
-        handle_exponent_sub(value_1, value_2, result, &code);
+        if (s21_is_greater(value_1, value_2)) {
+            handle_exponent_sub(value_1, value_2, result, &code);
+        } else {
+            handle_exponent_sub(value_2, value_1, result, &code);
+            set_sign_neg(result);
+        }
+
     } else if (s1 == POS && s2 == NEG) {
         set_sign_pos(&value_2);
         code = s21_add(value_1, value_2, result);
@@ -32,7 +38,6 @@ void handle_exponent_sub(s21_decimal value_1, s21_decimal value_2,
     int exp_v1 = get_exponent(value_1);
     int exp_v2 = get_exponent(value_2);
 
-    if (exp_v2 > exp_v1) s21_swap(&value_1, &value_2);
     int res_exp = min(exp_v1, exp_v2);
 
     s21_decimal value_2_origin = value_2;

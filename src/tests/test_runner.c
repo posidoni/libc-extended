@@ -34,6 +34,8 @@ void run_testcase(Suite *testcase) {
 void run_tests(void) {
     Suite *list_cases[] = {
 
+        // suite_s21_div(),  // 🌱 [ FEW TESTS FAILED ]
+
         // suite_s21_mul(),
         // suite_s21_round(),  // 🌱 [ Needs sub (sub is buggy) ]
 

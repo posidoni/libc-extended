@@ -17,6 +17,8 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
         set_sign_pos(&value_1);
         code = s21_sub(value_2, value_1, result);
     } else if (s1 == NEG && s2 == NEG) {
+        set_sign_pos(&value_1);
+        set_sign_pos(&value_2);
         handle_exponent_add(value_1, value_2, result, &code);
         set_sign_neg(result);
     }
