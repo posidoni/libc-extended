@@ -4,20 +4,36 @@
 /* simply dividing by 10^exp to truncate & multiplying by 10^exp afterwards*/
 /* i.e 764183413481 / 10000 = 76418341 */
 
-START_TEST(simple_floor) {
-    s21_decimal value = get_random_decimal(1, 5);
-    s21_decimal res = {0};
+START_TEST(gcc_128_bits) {
+    /* get random value */
+    __int128_t a = llabs(get_random_ll() * rand());
 
-    int code = s21_floor(value, &res);
+    /* discard fraction & return it with zeroes*/
+    int exp = get_rand(3, 10);
+    __int128_t b = int128_pow(10, exp);
+    __int128_t sum = a / b * b;
+
+    /* get expected */
+    s21_decimal expected = bigint_to_decimal(sum);
+    set_exponent(&expected, exp);
+
+    s21_decimal val = bigint_to_decimal(a);
+    set_exponent(&val, exp);
+    s21_decimal got = {0};
+
+    int ret = s21_floor(val, &got);
 
 #ifdef DEBUG
-    printf("before=");
-    print_bits_r(value);
-    printf("after= ");
-    print_bits_r(res);
+    printf("val=     ");
+    print_bits_r(val);
+    printf("expected=");
+    print_bits_r(expected);
+    printf("got     =");
+    print_bits_r(got);
 #endif
 
-    ck_assert_int_eq(code, CONVERTATION_OK);
+    ck_assert_int_eq(s21_is_equal(expected, got), TRUE);
+    ck_assert_int_eq(ret, CONVERTATION_OK);
 }
 END_TEST
 
@@ -25,7 +41,7 @@ Suite *suite_s21_floor(void) {
     Suite *s = suite_create("suite_s21_floor");
     TCase *tc = tcase_create("s21_floor_tc");
 
-    tcase_add_loop_test(tc, simple_floor, 0, 1);
+    tcase_add_loop_test(tc, gcc_128_bits, 0, 100000);
 
     suite_add_tcase(s, tc);
     return s;
