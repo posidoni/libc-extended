@@ -12,24 +12,23 @@ START_TEST(gcc_128_bits) {
     /* get expected */
     s21_decimal expected = bigint_to_decimal(sum);
 
-    s21_decimal got = bigint_to_decimal(a);
-    set_exponent(&got, exp);
+    s21_decimal val = bigint_to_decimal(a);
+    set_exponent(&val, exp);
 
-    s21_decimal res = {0};
+    s21_decimal got = {0};
 
-    int ret = s21_truncate(got, &res);
+    int ret = s21_truncate(val, &got);
 
 #ifdef DEBUG
-    printf("before=");
-    print_bits_r(got);
+    printf("before  =");
+    print_bits_r(val);
     printf("expected=");
     print_bits_r(expected);
-    printf("res_dec =");
-    print_bits_r(res);
+    printf("got     =");
+    print_bits_r(got);
 #endif
 
-    /* HACK: res == res */
-    ck_assert_float_eq(s21_is_equal(expected, res), TRUE);
+    ck_assert_int_eq(s21_is_equal(expected, got), TRUE);
     ck_assert_int_eq(ret, CONVERTATION_OK);
 }
 END_TEST
