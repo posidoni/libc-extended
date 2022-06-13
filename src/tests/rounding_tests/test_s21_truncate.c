@@ -34,7 +34,7 @@ START_TEST(gcc_128_bits) {
 END_TEST
 
 Suite *suite_s21_truncate(void) {
-    Suite *s = suite_create("suite_s21_truncate");
+    Suite *s = suite_create(PRETTY_PRINT("s21_truncate"));
     TCase *tc = tcase_create("s21_truncate_tc");
 
     tcase_add_loop_test(tc, gcc_128_bits, 0, 10000);

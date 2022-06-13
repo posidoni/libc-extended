@@ -15,7 +15,7 @@ START_TEST(negate_loop) {
 END_TEST
 
 Suite *suite_s21_negate(void) {
-    Suite *s = suite_create(PRETTY_PRINT("suite_s21_negate"));
+    Suite *s = suite_create(PRETTY_PRINT("s21_negate"));
     TCase *tc = tcase_create("s21_negate_tc");
 
     tcase_add_loop_test(tc, negate_loop, 0, 6969);

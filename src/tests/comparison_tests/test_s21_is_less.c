@@ -73,15 +73,15 @@ START_TEST(decimal_random_exp_unsigned) {
 
     int res = s21_is_less(dec1, dec2);
 
-    printf("before norma: \n");
-    print_bits_r(dec1);
-    print_bits_r(dec2);
+    // printf("before norma: \n");
+    // print_bits_r(dec1);
+    // print_bits_r(dec2);
 
     s21_normalize_decimal_pair(&dec1, &dec2, &overflow);
 
-    printf("after norma: \n");
-    print_bits_r(dec1);
-    print_bits_r(dec2);
+    // printf("after norma: \n");
+    // print_bits_r(dec1);
+    // print_bits_r(dec2);
 
     if (!zeroes && !overflow) {
         if (e1 > e2) {

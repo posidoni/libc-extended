@@ -25,6 +25,11 @@ void handle_exponent_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *
 
     int res_exp = exp_v1 - exp_v2;
 
+    /* TODO add floating point division logic */
+
+    /* 2 / 3 => 2 * 10^3 / 3 => 2000 / 3 => 666 / 10^3 => 0.66666666(6) */
+    /* Last bit is rounded, i.e. 2/3 = 0.6666666666(6) => 0.66666666667 */
+
     /* Edge case. Division by 1 */
     if (s21_is_equal(value_2, get_power_of_ten(0))) {
         *result = value_1;

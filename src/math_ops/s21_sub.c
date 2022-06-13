@@ -53,10 +53,10 @@ void handle_exponent_sub(s21_decimal value_1, s21_decimal value_2,
 
     if (*code == 1) {
         if (s21_is_greater_or_equal(value_1, get_05())) {
-            printf("WAS1\n");
+            // printf("WAS1\n");
             *result = binary_subtraction(value_2, get_power_of_ten(0), code);
         } else {
-            printf("WAS2\n");
+            // printf("WAS2\n");
             *result = value_2_origin;
         }
     } else {
