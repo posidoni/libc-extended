@@ -16,7 +16,8 @@ int main(void) {
 void run_testcase(Suite *testcase) {
     static int counter_testcase = 1;
 
-    if (counter_testcase > 1) putchar('\n');
+    if (counter_testcase > 1)
+        putchar('\n');
     printf(GRN "%s%d%s" ENDCOLOR, "CURRENT TEST: ", counter_testcase, "\n");
     counter_testcase++;
 
@@ -33,15 +34,15 @@ void run_testcase(Suite *testcase) {
 void run_tests(void) {
     Suite *list_cases[] = {
 
-        // suite_s21_mul(), //
-        // suite_s21_floor(), //
+        // suite_s21_mul(),
+        // suite_s21_round(),
 
-        suite_s21_mod(),  // 🌱 [ FEW TESTS FAILED ]
-        suite_s21_div(),  // 🌱 [ FEW TESTS FAILED ]
+        // suite_s21_mod(),  // 🌱 [ FEW TESTS FAILED ]
+        // suite_s21_div(),  // 🌱 [ FEW TESTS FAILED ]
         // suite_s21_is_less(), // 🌱 [ FEW TESTS FAILED ]
-        // suite_s21_truncate(), // 🌱 [ Needs DIV & tests<gmp> ]
-        // suite_s21_round(), // 🌱 [ Needs truncate & tests<gmp> ]
+        // suite_s21_floor(), // 🌱 [ Needs truncate & tests<gmp> ]
 
+        // suite_s21_truncate(),  // ✅
         // suite_s21_from_int_to_decimal(),  // ✅
         // suite_s21_add(),  // ✅
         // suite_s21_sub(),  // ✅
@@ -57,7 +58,8 @@ void run_tests(void) {
         // suite_s21_negate(),  // ✅
         NULL};
 
-    for (Suite **current_testcase = list_cases; *current_testcase != NULL; current_testcase++) {
+    for (Suite **current_testcase = list_cases; *current_testcase != NULL;
+         current_testcase++) {
         run_testcase(*current_testcase);
     }
 }

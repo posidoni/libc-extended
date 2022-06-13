@@ -1,5 +1,5 @@
 #include "../s21_decimal_test.h"
-#define DEBUG
+
 START_TEST(overflow_test) {
     s21_decimal a = {0};
     s21_decimal b = {0};
@@ -84,13 +84,13 @@ START_TEST(random_decimal_exp) {
 #ifdef DEBUG
     print_bits_r(dec_sum);
     print_bits_r(short_dec);
-    // printf("DEC: %d \t SHORT: %d \n", dec_sum.bits[0], short_dec.bits[0]);
-    // printf("DEC: %d \t SHORT: %d \n", dec_sum.bits[1], short_dec.bits[1]);
-    // printf("DEC: %d \t SHORT: %d \n", dec_sum.bits[2], short_dec.bits[2]);
-    // printf("DEC: %d \t SHORT: %d \n", dec_sum.bits[3], short_dec.bits[3]);
+    printf("DEC: %u \t SHORT: %u \n", dec_sum.bits[0], short_dec.bits[0]);
+    printf("DEC: %u \t SHORT: %u \n", dec_sum.bits[1], short_dec.bits[1]);
+    printf("DEC: %u \t SHORT: %u \n", dec_sum.bits[2], short_dec.bits[2]);
+    printf("DEC: %u \t SHORT: %u \n", dec_sum.bits[3], short_dec.bits[3]);
 #endif
 
-    ck_assert_int_eq(abs(dec_sum.bits[0]), abs(short_dec.bits[0]));
+    ck_assert_int_eq(dec_sum.bits[0], short_dec.bits[0]);
 }
 END_TEST
 
@@ -111,16 +111,16 @@ END_TEST
 /* } */
 /* END_TEST */
 
-/* START_TEST(edge_cases) { */
-/*     s21_decimal a = {{1, 0, 0, get_rand(0, INT_MAX)}}; */
-/*     s21_decimal b = get_random_decimal(3, get_rand(1, 20)); */
-/*     s21_decimal got = {0}; */
-/*     set_random_sign(&a); */
-/*     set_random_sign(&b); */
-/*     int code = s21_add(a, b, &got); */
-/*     ck_assert_int_eq(code, ARITHMETIC_OK); */
-/* } */
-/* END_TEST */
+START_TEST(edge_cases) {
+    s21_decimal a = {{1, 0, 0, get_rand(0, INT_MAX)}};
+    s21_decimal b = get_random_decimal(3, get_rand(1, 20));
+    s21_decimal got = {0};
+    set_random_sign(&a);
+    set_random_sign(&b);
+    int code = s21_add(a, b, &got);
+    ck_assert_int_eq(code, ARITHMETIC_OK);
+}
+END_TEST
 
 Suite *suite_s21_add(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_add"));
@@ -128,10 +128,10 @@ Suite *suite_s21_add(void) {
 
     /* Add works great. Tested with binary calculator */
 
-    // tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
-    // tcase_add_loop_test(tc, random_decimal_exp, 0, 100);
+    tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
+    tcase_add_loop_test(tc, random_decimal_exp, 0, 100);
     /* tcase_add_loop_test(tc, sum_with_arbitrary_exp, 0, 10000); */
-    /* tcase_add_loop_test(tc, edge_cases, 0, 10000); */
+    tcase_add_loop_test(tc, edge_cases, 0, 10000);
     tcase_add_test(tc, overflow_test);
 
     suite_add_tcase(s, tc);

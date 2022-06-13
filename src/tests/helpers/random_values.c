@@ -2,9 +2,7 @@
 
 static void set_random_pair_sign(s21_decimal *dec, mpz_t *in_mpz_copy);
 
-#ifdef DEBUG
-static void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied);
-#endif
+void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied);
 
 static void get_random_binary_string(s21_decimal *dec, char *mpz_bin_str,
                                      int size);
@@ -14,7 +12,7 @@ int get_random_pair(s21_decimal *in, mpz_t *in_mpz_copy, int size) {
 
     get_random_binary_string(in, mpz_bin_str, size);
 
-    int exp = get_rand(0, 28);
+    int exp = get_rand(0, 3);
     set_exponent(in, exp);
 
     bool res = mpz_set_str(*in_mpz_copy, mpz_bin_str, 2);
@@ -59,9 +57,7 @@ static void get_random_binary_string(s21_decimal *in, char *mpz_bin_str,
         in->bits[j] = reverse_bits(in->bits[j]);
 }
 
-#ifdef DEBUG
-
-static void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied) {
+void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied) {
     printf("=================\n");
 
     if (exp_applied)
@@ -70,15 +66,14 @@ static void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied) {
         printf("Before exponent: \n");
 
     printf("Exponent value: [%d]\n", get_exponent(*dec));
-    printf("Decimal: \n");
+    printf("Decimal:");
     print_bits_no_exp(*dec);
+    printf("Mpz_bin:");
     print_mpz_binary(*big);
-    printf("MPZ decimal: \n");
+    printf("MPZ_dec: ");
     print_mpz_decimal(*big);
     printf("=================\n");
 }
-
-#endif
 
 static void set_random_pair_sign(s21_decimal *dec, mpz_t *in_mpz_copy) {
     if (get_rand(0, 1)) {
