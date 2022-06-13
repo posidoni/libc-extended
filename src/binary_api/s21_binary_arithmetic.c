@@ -47,10 +47,12 @@ s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2, int *er
         init_zero(&carry);
         carry = bit_and(value_1, value_2);
         *err = shiftl(&carry);
-        if (*err) break;
         value_1 = bit_xor(value_1, value_2);
+
+        if (*err) break;
         value_2 = carry;
     }
+
     return value_1;
 }
 
