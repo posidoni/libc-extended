@@ -21,6 +21,7 @@ int s21_truncate(s21_decimal value, s21_decimal *result) {
 
     int sign = get_sign(value);
     int exp = get_exponent(value);
+    set_sign_pos(&value);
 
     /* set sign & exp to 0 for future division */
     value.bits[3] = 0;
