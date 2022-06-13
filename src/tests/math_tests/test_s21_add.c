@@ -66,6 +66,11 @@ START_TEST(random_decimal_exp) {
         long_b *= -1;
     }
 
+    // If we sum positive numbers, everything works great (!)
+    // BUG: sum of numbers with different signs fails, because sub doesn't work correctly
+    // long_a = llabs(long_a);
+    // long_b = llabs(long_b);
+
     long long expected = long_a + long_b;
 
     /* FIXME: THIS WORKS INCORRECTLY FOR SHORTS! */
@@ -143,11 +148,11 @@ Suite *suite_s21_add(void) {
 
     /* Add works great. Tested with binary calculator */
 
-    // tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
+    tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
     tcase_add_loop_test(tc, random_decimal_exp, 0, 100);
     // tcase_add_loop_test(tc, sum_with_arbitrary_exp, 0, 10000);
-    // tcase_add_loop_test(tc, edge_cases, 0, 10000);
-    // tcase_add_test(tc, overflow_test);
+    tcase_add_loop_test(tc, edge_cases, 0, 10000);
+    tcase_add_test(tc, overflow_test);
 
     suite_add_tcase(s, tc);
     return s;

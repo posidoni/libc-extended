@@ -102,7 +102,8 @@ static s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
 
     /* DIRTY HACK (!) Sometimes for unknown reasons sub incorrectly sets 95th bit. */
     /* But, generally, values are correct.  */
-    set_bit_0(&modified_dividend, 95);
+    /* BUG: IF BIT IS SET IN SUB, IT WILL BE OKAY */
+    // set_bit_0(&modified_dividend, 95);
 
     /**
      * @arg (original_divisor) is nesessary to modide by non-modified version of divisor,
