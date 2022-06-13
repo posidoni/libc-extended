@@ -160,31 +160,14 @@ Suite *suite_s21_div(void) {
     TCase *tc = tcase_create("s21_div_tc");
 
     /* ✅ Heavily tested. Passed all 40000 tests several times */
-    tcase_add_loop_test(tc, divison_by_one, 0, 100);
-    tcase_add_loop_test(tc, divison_by_two, 0, 100);
-    tcase_add_loop_test(tc, gcc_128_division_by_ten, 0, 100);
-
-    /* ⚠️ VERY rarely fails on this test. Around ~7 times out of 100000.
-     * Fails by 1 */
-    tcase_add_loop_test(tc, gcc_128_bits, 0, 1000);
-
-    /* ⚠️ VERY rarely fails on this test */
-    tcase_add_loop_test(tc, divison_by_rand_int, 0, 100);
-
-    /* Examples of failure. IDK what causes this. Maybe 95th bit hack?.. */
-    /* Overflow is also highly possible here, because we do not suffer from it
-     * (unlike vanilla int) */
-
-    // 99%: Checks: 40100, Failures: 2, Errors: 0
-    // tests/math_tests/test_s21_div.c:83:F:s21_div_tc:divison_by_rand_int:3472:
-    // Assertion 'res.bits[0] == expected' failed: res.bits[0] == 4042, expected
-    // == 4043
-    // tests/math_tests/test_s21_div.c:83:F:s21_div_tc:divison_by_rand_int:9085:
-    // Assertion 'res.bits[0] == expected' failed: res.bits[0] == 2006, expected
-    // == 2007
+    tcase_add_loop_test(tc, divison_by_one, 0, 10000);
+    tcase_add_loop_test(tc, divison_by_two, 0, 10000);
+    tcase_add_loop_test(tc, gcc_128_division_by_ten, 0, 10000);
+    tcase_add_loop_test(tc, gcc_128_bits, 0, 10000);
+    tcase_add_loop_test(tc, divison_by_rand_int, 0, 1000);
 
     /* 🌃 Edge cases */
-    tcase_add_loop_test(tc, division_by_zero_and_zero_like_vals, 0, 100);
+    tcase_add_loop_test(tc, division_by_zero_and_zero_like_vals, 0, 10000);
 
     /**
      * [#38] TODO: (!) - SEEN BY @bezlant WILL WORK ON IT TOMORROW (14.06)

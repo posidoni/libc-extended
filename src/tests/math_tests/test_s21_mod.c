@@ -201,22 +201,6 @@ Suite *suite_s21_mod(void) {
     tcase_add_loop_test(tc, mod_by_rand_int, 0, 1000);
     tcase_add_loop_test(tc, mod_exists, 0, 10000);
 
-    /**
-     *   @info: Test stats for mod:
-     *      ~300k tests - 0 failures
-     *
-     *   @bug (potential 🧐):
-     *      see line n. 35
-     *      Very rarely tests with GCC 128 failed (about 70 failures in 250k tests)
-     *
-     *      In failed tests the only difference between two decimals were the sign.
-     *      I suspect that this problem arises due to int128 being unsigned.
-     *
-     *      I don't think that we've messed up sign logic, as it is quite trivial.
-     *
-     *      If we compare decimals by absolute value everything works just fine.
-     */
-
     suite_add_tcase(s, tc);
     return s;
 }

@@ -1,6 +1,6 @@
 #include "../s21_decimal.h"
 
-static s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor, s21_decimal *result, int *code);
+static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code);
 
 int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     if (eq_zero(value_2)) return S21_NAN;
@@ -16,7 +16,7 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     return code;
 }
 
-void handle_exponent_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code) {
+static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code) {
     int exp_v1 = get_exponent(value_1);
     int exp_v2 = get_exponent(value_2);
 
@@ -48,69 +48,4 @@ void handle_exponent_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *
 
         set_exponent(result, res_exp);
     }
-}
-
-static s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor, s21_decimal *result, int *code) {
-    s21_decimal original_divisor = divisor;
-    s21_decimal modified_dividend = {0};
-    s21_decimal one = {0};
-    one.bits[0] = 1;
-
-    if (s21_is_equal(dividend, divisor)) {
-        return one;
-    } else if (s21_is_less(dividend, divisor)) {
-        return modified_dividend;
-    }
-
-    /* Our goal is to align divisor & dividend, so we are shifting divisor to the left */
-
-    /**
-     * dividend: 0101010101010101
-     * divisor: 0000000000000101 <---
-     *
-     * As dividend result we will get something like this:
-     *
-     * dividend: 0101010101010101
-     * divisor: 1010000000000000 <---
-     *
-     * We got too far by one bit. Thus, we need to shift (divisor) to the right once.
-     */
-
-    while (s21_is_less_or_equal(divisor, dividend)) {
-        shiftl(&divisor);
-        shiftl(result);
-    }
-
-    /* Shifting (@divisor) once to correctly align it with dividend */
-    if (s21_is_less(dividend, divisor)) {
-        shiftr(&divisor);
-        shiftr(result);
-    }
-
-    /**
-     *  dividend: 0101010101010101
-     *  divisor: 0101000000000000
-     *
-     *  An actial division is done via substraction.
-     *
-     * @arg (modified_dividend) stores new value of (dividend) after substraction. It will later be passed to the recursive call of sivision.
-     */
-
-    *code = s21_sub(dividend, divisor, &modified_dividend);
-
-    /* DIRTY HACK (!) Sometimes for unknown reasons sub incorrectly sets 95th bit. */
-    /* But, generally, values are correct.  */
-    // set_bit_0(&modified_dividend, 95);
-
-    /**
-     * @arg (original_divisor) is nesessary to divide by non-modified version of divisor,
-     * because our original divisor was modified by shifting to the left.
-     */
-
-    one = s21_integer_div(modified_dividend, original_divisor, &one, code);
-
-    /* @arg (result) accumulates result of division */
-    *code = s21_add(*result, one, result);
-
-    return *result;
 }

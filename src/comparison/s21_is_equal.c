@@ -9,6 +9,12 @@ int s21_is_equal(s21_decimal a, s21_decimal b) {
     return (both_all_zeroes(a, b)) ? TRUE : bits_eq(a.bits, b.bits);
 }
 
+int s21_is_equal_abs(s21_decimal a, s21_decimal b) {
+    set_sign_pos(&a);
+    set_sign_pos(&b);
+    return (both_all_zeroes(a, b)) ? TRUE : bits_eq(a.bits, b.bits);
+}
+
 bool both_all_zeroes(s21_decimal a, s21_decimal b) {
     int res = TRUE;
 
