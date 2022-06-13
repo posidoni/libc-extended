@@ -38,6 +38,6 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
         return CONVERTATION_ERROR;
 
     set_exponent(result, exp);
-    sign ? set_sign_neg(result) : set_sign_pos(result);
+    set_sign(result, sign);
     return CONVERTATION_OK;
 }

@@ -1,9 +1,5 @@
 #include "../s21_decimal_test.h"
 
-/* TODO: Implement tests using gmp(suicide) */
-/* simply dividing by 10^exp to truncate & multiplying by 10^exp afterwards*/
-/* i.e 764183413481 / 10000 = 76418341 */
-
 START_TEST(gcc_128_bits) {
     /* get random value */
     __int128_t a = llabs(get_random_ll() * rand());

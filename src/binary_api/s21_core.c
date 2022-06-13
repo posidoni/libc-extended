@@ -1,9 +1,18 @@
 #include "../s21_decimal.h"
 
 // returns 0 meaning positive 1 negative
-bool get_sign(s21_decimal decimal) { return IS_SET(decimal.bits[3], D_SIGN); }
-void set_sign_neg(s21_decimal *decimal) { ADD_BIT(decimal->bits[3], D_SIGN); }
-void set_sign_pos(s21_decimal *decimal) { ZERO_BIT(decimal->bits[3], D_SIGN); }
+bool get_sign(s21_decimal decimal) {
+    return IS_SET(decimal.bits[3], D_SIGN);
+}
+void set_sign_neg(s21_decimal *decimal) {
+    ADD_BIT(decimal->bits[3], D_SIGN);
+}
+void set_sign_pos(s21_decimal *decimal) {
+    ZERO_BIT(decimal->bits[3], D_SIGN);
+}
+void set_sign(s21_decimal *decimal, int sign) {
+    sign ? set_sign_neg(decimal) : set_sign_pos(decimal);
+}
 
 int get_bit(s21_decimal n, int pos) {
     return (n.bits[pos / 32] >> (pos % 32)) & 1;
@@ -24,7 +33,7 @@ void s21_swap(s21_decimal *a, s21_decimal *b) {
 /**
  * @brief This function is used to generate 0,5 decimal value that is
  * needed by bank rounding.
- * 
+ *
  * @return s21_decimal
  */
 
@@ -63,8 +72,12 @@ int byte_len(s21_decimal n) {
     return pos;
 }
 
-int max(int a, int b) { return a > b ? a : b; }
-int min(int a, int b) { return a < b ? a : b; }
+int max(int a, int b) {
+    return a > b ? a : b;
+}
+int min(int a, int b) {
+    return a < b ? a : b;
+}
 
 uint32_t reverse_bits(uint32_t n) {
     uint32_t m = 0;
