@@ -60,7 +60,8 @@ int get_exponent(s21_decimal decimal) {
     }
 
     if (exponent > 28) {
-        fprintf(stderr, "VERY BIG EXPONENT (0 - 28): exp = %d\n", exponent);
+        /* fprintf(stderr, "VERY BIG EXPONENT (0 - 28): exp = %d\n", exponent);
+         */
     }
 
     return exponent;
@@ -75,6 +76,7 @@ void set_exponent(s21_decimal *decimal, int new_exponent) {
         SET_BIT(decimal->bits[3], new_exponent, D_START_EXP);
     } else {
         // TODO: Replace with a system function call
-        fprintf(stderr, "VERY BIG EXPONENT (0 - 28): exp = %d\n", new_exponent);
+        /* fprintf(stderr, "VERY BIG EXPONENT (0 - 28): exp = %d\n",
+         * new_exponent); */
     }
 }

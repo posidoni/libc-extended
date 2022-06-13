@@ -10,7 +10,7 @@ int s21_from_int_to_decimal(int src, s21_decimal *dst) {
             dst->bits[0] = src;
         } else {
             set_sign_neg(dst);
-            dst->bits[0] = src;
+            dst->bits[0] = -src;
         }
     } else {
         status = CONVERTATION_ERROR;

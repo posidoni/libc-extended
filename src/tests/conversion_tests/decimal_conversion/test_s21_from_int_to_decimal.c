@@ -82,7 +82,11 @@ START_TEST(loop1) {
     convertation_result status = s21_from_int_to_decimal(test_int, &decimal);
 
     ck_assert_int_eq(status, CONVERTATION_OK);
-    ck_assert_int_eq(test_int, decimal.bits[0]);
+    /* NOTE: I had to add this logic because of the specific way our sign is
+     * stored in our decimal Otherwise all negative values fail tests */
+    int got = decimal.bits[0];
+    got = test_int > 0 ? got : -got;
+    ck_assert_int_eq(test_int, got);
     ck_assert_int_eq(0, decimal.bits[1]);
     ck_assert_int_eq(0, decimal.bits[2]);
     ck_assert_int_eq((test_int < 0), get_sign(decimal));
@@ -99,7 +103,7 @@ Suite *suite_s21_from_int_to_decimal(void) {
     tcase_add_test(tc, MIN_INT);
     tcase_add_test(tc, NEG_INT);
     tcase_add_test(tc, POS_INT);
-    tcase_add_loop_test(tc, loop1, 0, 100);
+    tcase_add_loop_test(tc, loop1, 0, 1000);
 
     suite_add_tcase(s, tc);
     return s;
