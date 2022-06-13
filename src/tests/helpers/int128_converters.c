@@ -54,7 +54,7 @@ long long get_random_ll(void) {
 
 short int get_random_short(void) {
     short int val = 0;
-    for (uint64_t i = 0; i < 16; i++)
+    for (int i = 0; i < 16; i++)
         if (rand() % 2)
             ADD_BIT(val, i);
 

@@ -50,7 +50,7 @@ START_TEST(float_to_dec_gmp) {
 END_TEST
 
 Suite *suite_s21_from_float_to_decimal(void) {
-    Suite *s = suite_create("suite_s21_from_float_to_decimal");
+    Suite *s = suite_create(PRETTY_PRINT("s21_from_float_to_decimal"));
     TCase *tc = tcase_create("s21_from_float_to_decimal_tc");
 
     tcase_add_test(tc, float_to_dec_gmp);
