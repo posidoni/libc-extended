@@ -33,7 +33,7 @@ int s21_truncate(s21_decimal value, s21_decimal *result) {
     if (s21_div(value, divisor, result))
         return CONVERTATION_ERROR;
 
-    sign ? set_sign_neg(result) : set_sign_pos(result);
+    set_sign(result, sign);
 
     return CONVERTATION_OK;
 }
