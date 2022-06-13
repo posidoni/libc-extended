@@ -41,6 +41,7 @@ void mpz_sint_sum(mpz_t *res, int64_t compound_val);
 s21_decimal bigint_to_decimal(__int128_t src);
 s21_decimal ll_to_decimal(long long val);
 long long get_random_ll(void);
+__int128_t int128_pow(int val, int exp);
 
 short int get_random_short(void);
 
@@ -59,6 +60,7 @@ void print_bits_r_set(s21_decimal d, int set_n);
 void print_bits(s21_decimal d);
 void print_bits_r(s21_decimal d);
 void print_bits_no_exp(s21_decimal d);
+void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied);
 
 /* Our functions test */
 Suite *suite_convert_gmp_to_decimal(void);

@@ -1,5 +1,12 @@
 #include "../s21_decimal_test.h"
 
+__int128_t int128_pow(int val, int exp) {
+    __int128_t res = 1;
+    while (exp--)
+        res *= val;
+    return res;
+}
+
 s21_decimal ll_to_decimal(long long val) {
     s21_decimal res = {0};
     if (val < 0) {
