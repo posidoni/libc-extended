@@ -31,7 +31,9 @@ START_TEST(gcc_128_bits) {
         /* I suspect that it is not our problem that signs do not match here */
         /* GCC __int128_t are unsigned, thus, they discard sign */
         /* In observed failed tests our decimal had sign & int 128 didn't */
-        printf(GRN "WARNING! SIGNS DO NOT MATCH! COMPARING ABS VALUES 📌 \n" ENDCOLOR);
+        printf(
+            GRN
+            "WARNING! SIGNS DO NOT MATCH! COMPARING ABS VALUES 📌 \n" ENDCOLOR);
         set_sign_pos(&dec_div);
         comp_res = s21_is_equal(res128, dec_div);
     }
@@ -72,7 +74,9 @@ START_TEST(gcc_128_division_by_ten) {
         /* I suspect that it is not our problem that signs do not match here */
         /* GCC __int128_t are unsigned, thus, they discard sign */
         /* In observed failed tests our decimal had sign & int 128 didn't */
-        printf(GRN "WARNING! SIGNS DO NOT MATCH! COMPARING ABS VALUES 📌 \n" ENDCOLOR);
+        printf(
+            GRN
+            "WARNING! SIGNS DO NOT MATCH! COMPARING ABS VALUES 📌 \n" ENDCOLOR);
         set_sign_pos(&dec_div);
         comp_res = s21_is_equal(res128, dec_div);
     }
@@ -160,38 +164,48 @@ Suite *suite_s21_div(void) {
     tcase_add_loop_test(tc, divison_by_two, 0, 100);
     tcase_add_loop_test(tc, gcc_128_division_by_ten, 0, 100);
 
-    /* ⚠️ VERY rarely fails on this test. Around ~7 times out of 100000. Fails by 1 */
+    /* ⚠️ VERY rarely fails on this test. Around ~7 times out of 100000.
+     * Fails by 1 */
     tcase_add_loop_test(tc, gcc_128_bits, 0, 1000);
 
     /* ⚠️ VERY rarely fails on this test */
     tcase_add_loop_test(tc, divison_by_rand_int, 0, 100);
 
     /* Examples of failure. IDK what causes this. Maybe 95th bit hack?.. */
-    /* Overflow is also highly possible here, because we do not suffer from it (unlike vanilla int) */
+    /* Overflow is also highly possible here, because we do not suffer from it
+     * (unlike vanilla int) */
 
     // 99%: Checks: 40100, Failures: 2, Errors: 0
-    // tests/math_tests/test_s21_div.c:83:F:s21_div_tc:divison_by_rand_int:3472: Assertion 'res.bits[0] == expected' failed: res.bits[0] == 4042, expected == 4043
-    // tests/math_tests/test_s21_div.c:83:F:s21_div_tc:divison_by_rand_int:9085: Assertion 'res.bits[0] == expected' failed: res.bits[0] == 2006, expected == 2007
+    // tests/math_tests/test_s21_div.c:83:F:s21_div_tc:divison_by_rand_int:3472:
+    // Assertion 'res.bits[0] == expected' failed: res.bits[0] == 4042, expected
+    // == 4043
+    // tests/math_tests/test_s21_div.c:83:F:s21_div_tc:divison_by_rand_int:9085:
+    // Assertion 'res.bits[0] == expected' failed: res.bits[0] == 2006, expected
+    // == 2007
 
     /* 🌃 Edge cases */
     tcase_add_loop_test(tc, division_by_zero_and_zero_like_vals, 0, 100);
 
     /**
-     * [#38] TODO:
+     * [#38] TODO: (!) - SEEN BY @bezlant WILL WORK ON IT TOMORROW (14.06)
      * @bezlant - I will really appreciate your help! 😊
      *
-     * -[x] test return code. This is VERY important & will be checked by Verter.
+     * -[x] test return code. This is VERY important & will be checked by
+     * Verter.
      *
-     * -[] 📌 Add division with different exponents. Test our exponent logic & normalizing capabilities.
-     *  @bezlant, @AndreyZhelannikov I don't really grasp the logic with exponent handling ;(
-     *  Need explanation by Andrey.
+     * -[] 📌 Add division with different exponents. Test our exponent logic &
+     * normalizing capabilities.
+     *  @bezlant, @AndreyZhelannikov I don't really grasp the logic with
+     * exponent handling ;( Need explanation by Andrey.
      *
      * -[] add more edgecases
      *      -[x] division by zero -> check NAN
      *      -[] bank rounding case
-     *      -[] really large / small numbers (around 96 bit) divided by large / small numbers
+     *      -[] really large / small numbers (around 96 bit) divided by large /
+     * small numbers
      *
-     * -[] test floating point div (this is detected when MOD is not zero, i.e. 5/3 or 3/5)
+     * -[] test floating point div (this is detected when MOD is not zero, i.e.
+     * 5/3 or 3/5)
      *
      */
 
