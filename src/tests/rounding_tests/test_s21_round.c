@@ -4,17 +4,13 @@ START_TEST(simple_round) {
     s21_decimal value = get_random_decimal(1, 5);
     s21_decimal res = {0};
 
-    float flt;
-    s21_from_decimal_to_float(value, &flt);
-    printf("flt=%f\n", flt);
-
     s21_round(value, &res);
 
-    printf("before=");
-    print_bits_r(value);
+    /* printf("before="); */
+    /* print_bits_r(value); */
 
-    printf("after= ");
-    print_bits_r(res);
+    /* printf("after= "); */
+    /* print_bits_r(res); */
 }
 END_TEST
 

@@ -20,6 +20,7 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
     memset(result, 0, sizeof(*result));
     int exp = get_exponent(value);
     int sign = get_sign(value);
+    set_sign_pos(&value);
 
     s21_decimal truncated = {0};
     s21_truncate(value, &truncated);
@@ -27,6 +28,7 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
     /* Round down for negative numbers -12.321351 becomes -13.00000 */
     if (sign == NEG) {
         s21_decimal tmp = {0};
+        /* i.e -420.00 - 1 = -421.00*/
         if (s21_add(truncated, get_power_of_ten(0), &tmp))
             return CONVERTATION_ERROR;
         truncated = tmp;
@@ -36,6 +38,6 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
         return CONVERTATION_ERROR;
 
     set_exponent(result, exp);
-
+    sign ? set_sign_neg(result) : set_sign_pos(result);
     return CONVERTATION_OK;
 }
