@@ -18,7 +18,7 @@ START_TEST(gcc_128_bits) {
 
     // print_bits_r(dec_b);
 
-    int code = s21_div(dec_a, dec_b, &dec_div);
+    int code = s21_integer_div_wrapper(dec_a, dec_b, &dec_div);
 
     // printf("dec_div=");
     // print_bits_r(dec_div);
@@ -61,7 +61,7 @@ START_TEST(gcc_128_division_by_ten) {
 
     // print_bits_r(dec_b);
 
-    int code = s21_div(dec_a, dec_b, &dec_div);
+    int code = s21_integer_div_wrapper(dec_a, dec_b, &dec_div);
 
     // printf("dec_div=");
     // print_bits_r(dec_div);
@@ -97,7 +97,7 @@ START_TEST(divison_by_one) {
     /* This is same as bits[0] = 1 */
     set_bit_1(&b, 0);
 
-    int code = s21_div(a, b, &res);
+    int code = s21_integer_div_wrapper(a, b, &res);
 
     ck_assert_int_eq(code, ARITHMETIC_OK);
     ck_assert_int_eq(a.bits[0], res.bits[0]);
@@ -114,7 +114,7 @@ START_TEST(divison_by_two) {
     a.bits[0] = get_rand(0, INT_MAX);
     b.bits[0] = a.bits[0] / 2;
 
-    int code = s21_div(a, b, &res);
+    int code = s21_integer_div_wrapper(a, b, &res);
 
     ck_assert_int_eq(code, ARITHMETIC_OK);
     ck_assert_int_eq(res.bits[0], 2);
@@ -132,7 +132,7 @@ START_TEST(divison_by_rand_int) {
         b.bits[0] = get_rand(0, INT_MAX);
     }
 
-    int code = s21_div(a, b, &res);
+    int code = s21_integer_div_wrapper(a, b, &res);
     int64_t expected = a.bits[0] / b.bits[0];
 
     ck_assert_int_eq(code, ARITHMETIC_OK);
@@ -150,14 +150,14 @@ START_TEST(division_by_zero_and_zero_like_vals) {
     set_random_sign(&a);
     set_random_sign(&b);
 
-    int code = s21_div(a, b, &res);
+    int code = s21_integer_div_wrapper(a, b, &res);
     ck_assert_int_eq(code, S21_NAN);
 }
 END_TEST
 
-Suite *suite_s21_div(void) {
-    Suite *s = suite_create(PRETTY_PRINT("s21_div"));
-    TCase *tc = tcase_create("s21_div_tc");
+Suite *suite_s21_integer_div_wrapper(void) {
+    Suite *s = suite_create(PRETTY_PRINT("s21_integer_div_wrapper"));
+    TCase *tc = tcase_create("s21_integer_div_wrapper_tc");
 
     /* ✅ Heavily tested. Passed all 40000 tests several times */
     tcase_add_loop_test(tc, divison_by_one, 0, 10000);

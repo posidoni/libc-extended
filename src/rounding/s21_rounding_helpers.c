@@ -16,8 +16,8 @@ void set_bits_from_string(char *bits, s21_decimal *result) {
             ADD_BIT(result->bits[i / 32], i % 32);
 }
 
-float add_exponent(float val, int exp) {
-    while (exp--)
-        val *= 10.0F;
-    return val;
-}
+// float add_exponent(float val, int exp) {
+//     while (exp--)
+//         val *= 10.0F;
+//     return val;
+// }

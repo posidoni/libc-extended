@@ -3,7 +3,7 @@
 s21_decimal convert_gmp_to_decimal(mpz_t input) {
     s21_decimal res = {0};
 
-    /* https://gmplib.org/manual/Integer-Import-and-Export */
+    //  https://gmplib.org/manual/Integer-Import-and-Export
     mpz_export(res.bits, 0, -1, sizeof(res.bits[0]), 1, 0, input);
 
     if (mpz_sgn(input) == -1) set_sign_neg(&res);
@@ -11,9 +11,6 @@ s21_decimal convert_gmp_to_decimal(mpz_t input) {
     return res;
 }
 
-/* Signature is different, because we don't want to silently malloc gmp here.
- * Thus, we are using pointer to result gmp.
- */
 void convert_decimal_to_gmp(mpz_t *gmp, s21_decimal *dec) {
     mpz_import(*gmp, 3, 0, sizeof(dec->bits[0]), 0, 0, dec->bits);
 

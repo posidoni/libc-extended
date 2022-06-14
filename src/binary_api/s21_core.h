@@ -1,5 +1,5 @@
-#ifndef S21_DECIMAL_CORE_H
-#define S21_DECIMAL_CORE_H
+#ifndef SRC_BINARY_API_S21_CORE_H_
+#define SRC_BINARY_API_S21_CORE_H_
 
 #include <math.h>
 #include <stdbool.h>
@@ -161,4 +161,4 @@ static const char *const binary_powers_of_ten[29] = {
         "001000000100111111001110010111100011111000100101000000100110000100010000000000000000000000000000",
 };
 
-#endif  // S21_DECIMAL_CORE_H
+#endif  // SRC_BINARY_API_S21_CORE_H_

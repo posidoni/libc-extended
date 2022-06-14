@@ -17,21 +17,21 @@
  * operation is equivalent to pow(a, 2) n times.
  */
 
-int shiftnl(s21_decimal *a, int n) {
-    bool code = 0;
-    while (n--) {
-        code = shiftl(a);
-        if (code) break;
-    }
-    return code;
-}
+// int shiftnl(s21_decimal *a, int n) {
+//     bool code = 0;
+//     while (n--) {
+//         code = shiftl(a);
+//         if (code) break;
+//     }
+//     return code;
+// }
 
-s21_decimal shiftnl_ret(s21_decimal a, int n) {
-    while (n--) {
-        if (shiftl(&a)) break;
-    }
-    return a;
-}
+// s21_decimal shiftnl_ret(s21_decimal a, int n) {
+//     while (n--) {
+//         if (shiftl(&a)) break;
+//     }
+//     return a;
+// }
 
 int shiftl(s21_decimal *a) {
     // Check if the 31th bit is set
@@ -74,11 +74,11 @@ void shiftr(s21_decimal *a) {
     if (b2_tmp) set_bit_1(a, 31);
 }
 
-void shiftnr(s21_decimal *a, int n) {
-    while (n--) shiftr(a);
-}
+// void shiftnr(s21_decimal *a, int n) {
+//     while (n--) shiftr(a);
+// }
 
-s21_decimal shiftnr_ret(s21_decimal a, int n) {
-    while (n--) shiftr(&a);
-    return a;
-}
+// s21_decimal shiftnr_ret(s21_decimal a, int n) {
+//     while (n--) shiftr(&a);
+//     return a;
+// }
