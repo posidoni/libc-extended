@@ -10,6 +10,7 @@
 #define HRED "\033[0;91m"
 #define BHRED "\033[1;91m"
 
+#include <assert.h>
 #include <check.h>
 #include <float.h>
 #include <stdio.h>
@@ -52,6 +53,7 @@ void gmp_sum_int(mpz_t *res, int64_t compound_val);
 // helpers
 int get_rand(int min, int max);
 void set_random_sign(s21_decimal *dec);
+float get_random_float(float min, float max);
 
 // debug
 void print_mpz_binary(mpz_t mpz_val);

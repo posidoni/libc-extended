@@ -120,3 +120,10 @@ void set_random_sign(s21_decimal *dec) {
     else
         set_sign_pos(dec);
 }
+
+float get_random_float(float min, float max) {
+    assert(max > min);
+    float random = ((float)rand()) / (float)RAND_MAX;
+    float range = max - min;
+    return random * range + min;
+}
