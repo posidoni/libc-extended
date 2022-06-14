@@ -15,42 +15,49 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
     if (src > MAX_DECIMAL || src < MIN_DECIMAL)
         return CONVERTATION_ERROR;
 
-    /* handle sign */
+    bool is_negative = 0;
     if (signbit(src)) {
         src = -src;
-        set_sign_neg(dst);
+        is_negative = 1;
     }
-    /* handle left part */
 
-    char bits[96] = {'\0'};
+    /* handle left part */
+    char bits[128] = {'\0'};
     get_bit_string(src, bits);
 
-#ifdef DEBUG
-    printf("res bits=");
-    print_bits_r(res);
-#endif
     if (strlen(bits) > 96)
         return CONVERTATION_ERROR;
 
-    set_bits_from_string(bits, dst);
+    s21_decimal left = {0};
+    set_bits_from_string(bits, &left);
 
     /* set exponent */
     int exp = get_float_exponent(src);
-    set_exponent(dst, exp);
 
     /* handle right part */
-    float right = (src - floor(src)) * pow(10, D_MAX_EXP_VAL - exp);
-    unsigned idx = strlen(bits) - 1;
-    memset(bits, '\0', 96);
-    get_bit_string(right, bits);
+    const int total_digits = 29;
+    float fright = (src - floor(src)) * pow(10, total_digits - exp);
 
-    for (unsigned i = 0, j = idx; i < strlen(bits) && j < 96; i++, j++) {
+    memset(bits, '\0', 128);
+    get_bit_string(fright, bits);
+
+    /* remove trailing zeros */
+    for (size_t i = strlen(bits) - 1; bits[i] == '0'; i--)
+        bits[i] = '\0';
+
+    s21_decimal right = {0};
+    for (size_t i = 0; i < strlen(bits); i++) {
         if (bits[i] - '0')
-            ADD_BIT(dst->bits[j / 32], j % 32);
+            ADD_BIT(right.bits[i / 32], i % 32);
     }
 
-#ifdef DEBUG
-    printf("right=%f\n", right);
-#endif
+    s21_add(left, right, dst);
+    /* handle sign */
+    if (is_negative)
+        set_sign_neg(dst);
+
+    /* handle exponent */
+    set_exponent(dst, exp);
+
     return CONVERTATION_OK;
 }

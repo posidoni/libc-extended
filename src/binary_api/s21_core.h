@@ -13,7 +13,7 @@ typedef struct {
 // checks if a bit is set
 #define IS_SET(X, POS) ((X >> POS) & 1U)
 // sets the bit to 1 at a give position
-#define ADD_BIT(X, POS) (X |= (1U << POS))
+#define ADD_BIT(X, POS) ((X) |= (1U << (POS)))
 // sets multiple bits at poisition by the givev bit value
 #define SET_BIT(X, BIT, POS) (X |= (BIT << POS))
 // bit becomes 0 P.S. ALL INT NUMBER BECOMES 0 !
