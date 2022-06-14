@@ -130,21 +130,21 @@ START_TEST(gcc_128_bits) {
     s21_decimal dec_mul = {0};
 
     // #ifdef DEBUG
-    printf("1 \t 2 \n");
-    print_bits_r(dec_a);
-    print_bits_r(dec_b);
+    // printf("1 \t 2 \n");
+    // print_bits_r(dec_a);
+    // print_bits_r(dec_b);
     // #endif
 
     int code = s21_mul(dec_a, dec_b, &dec_mul);
 
     // #ifdef DEBUG
-    printf("CODE %d \n", code);
+    // printf("CODE %d \n", code);
     // #endif
 
     if (code == ARITHMETIC_OK) {
         // #ifdef DEBUG
-        print_bits_r(res128);
-        print_bits_r(dec_mul);
+        // print_bits_r(res128);
+        // print_bits_r(dec_mul);
         // #endif
 
         ck_assert_int_eq(code, ARITHMETIC_OK);
@@ -176,16 +176,16 @@ START_TEST(random_decimal_exp) {
 
     s21_add(a, b, &dec_mul);
 
-#ifdef DEBUG
-    print_bits_r(dec_mul);
-    print_bits_r(short_dec);
-    printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[0], short_dec.bits[0]);
-    printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[1], short_dec.bits[1]);
-    printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[2], short_dec.bits[2]);
-    printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[3], short_dec.bits[3]);
-#endif
+    // #ifdef DEBUG
+    //     print_bits_r(dec_mul);
+    //     print_bits_r(short_dec);
+    //     printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[0], short_dec.bits[0]);
+    //     printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[1], short_dec.bits[1]);
+    //     printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[2], short_dec.bits[2]);
+    //     printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[3], short_dec.bits[3]);
+    // #endif
 
-    ck_assert_int_eq(abs(dec_mul.bits[0]), abs(short_dec.bits[0]));
+    ck_assert_int_eq(abs((int)dec_mul.bits[0]), abs((int)short_dec.bits[0]));
 }
 END_TEST
 
@@ -194,8 +194,8 @@ Suite *suite_s21_mul(void) {
     TCase *tc = tcase_create("s21_mul_tc");
 
     /* tcase_add_loop_test(tc, mul_loop, 0, 1); */
-    tcase_add_loop_test(tc, gcc_128_bits, 0, 1);
-    // tcase_add_test(tc, simple_test);
+    tcase_add_loop_test(tc, gcc_128_bits, 0, 1000);
+    tcase_add_loop_test(tc, random_decimal_exp, 0, 1000);
 
     suite_add_tcase(s, tc);
     return s;

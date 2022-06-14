@@ -80,46 +80,12 @@ START_TEST(decimal_random_noexp_signed) {
 }
 END_TEST
 
-START_TEST(decimal_random_exp_unsigned) {
-    s21_decimal dec1 = {0};
-    s21_decimal dec2 = {0};
-
-    dec1.bits[1] = 500, dec2.bits[1] = 500;
-    dec1.bits[2] = 500, dec2.bits[2] = 500;
-    dec1.bits[3] = 500, dec2.bits[3] = 500;
-
-    set_sign_pos(&dec1);
-    set_sign_pos(&dec2);
-
-    int e1 = get_rand(0, 28), e2 = get_rand(0, 28);
-
-    set_exponent(&dec1, e1);
-    set_exponent(&dec2, e2);
-
-    int zeroes = both_all_zeroes(dec1, dec2);
-
-    int res = s21_is_greater(dec1, dec2);
-
-    int overflow = 0;
-    s21_normalize_decimal_pair(&dec1, &dec2, &overflow);
-
-    if (!zeroes && !overflow && e1 != e2) {
-        if (e1 < e2) {
-            ck_assert_int_eq(res, true);
-        } else {
-            ck_assert_int_eq(res, false);
-        }
-    }
-}
-END_TEST
-
 Suite *suite_s21_is_greater(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_is_greater"));
     TCase *tc = tcase_create("s21_is_greater_tc");
 
     tcase_add_loop_test(tc, decimal_random_noexp_unsigned, 0, 5100);
     tcase_add_loop_test(tc, decimal_random_noexp_signed, 0, 5100);
-    // tcase_add_loop_test(tc, decimal_random_exp_unsigned, 0, 5100);
 
     tcase_add_test(tc, all_zeroes);
 

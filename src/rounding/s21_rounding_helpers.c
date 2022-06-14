@@ -11,9 +11,8 @@ void get_bit_string(float res, char *bits) {
 }
 
 void set_bits_from_string(char *bits, s21_decimal *result) {
-    for (int i = 0; i < strlen(bits); i++)
-        if (bits[i] - '0')
-            ADD_BIT(result->bits[2 - i / 32], (i % 32));
+    for (int i = 0; i < (int)strlen(bits); i++)
+        if (bits[i] - '0') ADD_BIT(result->bits[2 - i / 32], (i % 32));
 
     s21_decimal temp = *result;
     while (!shiftl(&temp)) {

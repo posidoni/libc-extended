@@ -86,7 +86,6 @@ START_TEST(random_decimal_exp) {
     bool comp_res = s21_is_equal(dec_sum, short_dec);
 
     if (!comp_res) {
-#define DEBUG
 #ifdef DEBUG
         printf("ERROR\n");
         printf("1: \t");
@@ -147,8 +146,7 @@ Suite *suite_s21_add(void) {
 
     tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
     tcase_add_loop_test(tc, random_decimal_exp, 0, 100);
-    // tcase_add_loop_test(tc, sum_with_arbitrary_exp, 0, 10000);
-    // /* tcase_add_loop_test(tc, edge_cases, 0, 10000); */
+    tcase_add_loop_test(tc, edge_cases, 0, 10000);
     tcase_add_test(tc, overflow_test);
 
     suite_add_tcase(s, tc);

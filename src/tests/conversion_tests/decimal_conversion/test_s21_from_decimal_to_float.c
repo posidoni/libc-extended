@@ -14,14 +14,13 @@ START_TEST(simple_loop) {
     float expected = int_expected;
 
     /* recover the exponent */
-    while (exp_expected--)
-        expected /= 10;
+    while (exp_expected--) expected /= 10.0;
 
     float got = 0;
     int code = s21_from_decimal_to_float(value, &got);
 
     if (overflow == CONVERTATION_OK) {
-        ck_assert_float_eq_tol(expected, got, 1e-06);
+        ck_assert_float_eq_tol(expected, got, 1e-6);
         ck_assert_int_eq(code, CONVERTATION_OK);
     }
 }
@@ -31,7 +30,7 @@ Suite *suite_s21_from_decimal_to_float(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_from_decimal_to_float"));
     TCase *tc = tcase_create("s21_from_decimal_to_float_tc");
 
-    tcase_add_loop_test(tc, simple_loop, 0, 100);
+    tcase_add_loop_test(tc, simple_loop, 0, 10);
 
     suite_add_tcase(s, tc);
     return s;
