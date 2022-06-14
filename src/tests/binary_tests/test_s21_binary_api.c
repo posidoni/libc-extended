@@ -11,7 +11,7 @@
 
 #include "../s21_decimal_test.h"
 
-// TODO: implement this file to boost gcov % test coverage
+// TODO(tartica): implement this file to boost gcov % test coverage
 
 // Suite *suite_convert_decimal_to_gmp(void) {
 //     Suite *s = suite_create(PRETTY_PRINT("s21_convert_decimal_to_gmp"));

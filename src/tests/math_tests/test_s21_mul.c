@@ -179,10 +179,10 @@ START_TEST(random_decimal_exp) {
 #ifdef DEBUG
     print_bits_r(dec_mul);
     print_bits_r(short_dec);
-    printf("DEC: %d \t SHORT: %d \n", dec_mul.bits[0], short_dec.bits[0]);
-    printf("DEC: %d \t SHORT: %d \n", dec_mul.bits[1], short_dec.bits[1]);
-    printf("DEC: %d \t SHORT: %d \n", dec_mul.bits[2], short_dec.bits[2]);
-    printf("DEC: %d \t SHORT: %d \n", dec_mul.bits[3], short_dec.bits[3]);
+    printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[0], short_dec.bits[0]);
+    printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[1], short_dec.bits[1]);
+    printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[2], short_dec.bits[2]);
+    printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[3], short_dec.bits[3]);
 #endif
 
     ck_assert_int_eq(abs(dec_mul.bits[0]), abs(short_dec.bits[0]));

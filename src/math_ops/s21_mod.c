@@ -8,11 +8,10 @@ int s21_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 
     int code = ARITHMETIC_OK;
 
-    /* TODO: add mod checking to determine which version of modision to launch (INT) vs (FLOAT) */
-
     if (s21_is_greater(value_2, value_1)) {
-        /* Please, note, that this behaviour is just conventional. It is not universally accepted. */
-        /* Another common option: result = sub(val2, val1) */
+        // Please, note, that this behaviour is just conventional. It is not universally accepted.
+        // Another common option: result = sub(val2, val1)
+        // code = s21_sub(value_1, value_2, result);
         *result = value_1;
     } else {
         handle_exponent_mod(value_1, value_2, result, &code);
@@ -32,13 +31,13 @@ void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *
 
     int res_exp = exp_v1 - exp_v2;
 
-    /* Edge case. modision by 1 */
+    // Edge case. mod by 1
     if (s21_is_equal(value_2, get_power_of_ten(0)) || s21_is_equal(value_1, value_2)) {
         const s21_decimal zero = {0};
         *result = zero;
         *code = ARITHMETIC_OK;
     } else {
-        /* We must set 1 bit in result, because we will move this bit in mod to the left */
+        // We must set 1 bit in result, because we will move this bit in mod to the left
         init_zero(result);
         result->bits[0] = 1;
 
@@ -65,7 +64,7 @@ static s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
         return dividend;
     }
 
-    /* Our goal is to align divisor & dividend, so we are shifting divisor to the left */
+    // Our goal is to align divisor & dividend, so we are shifting divisor to the left
 
     /**
      * dividend: 0101010101010101
@@ -83,7 +82,7 @@ static s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
         shiftl(&divisor);
     }
 
-    /* Shifting (divisor) once to correctly align it with dividend */
+    // Shifting (divisor) once to correctly align it with dividend
     if (s21_is_less(dividend, divisor)) {
         shiftr(&divisor);
     }

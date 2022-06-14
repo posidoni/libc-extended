@@ -30,12 +30,12 @@ void s21_normalize_decimal_pair(s21_decimal *a, s21_decimal *b, int *overflow) {
         *b = cur;
 }
 
-void s21_decimal_apply_exponent(s21_decimal *dec) {
-    /* TODO: add code checking & respective logic */
-    int code = 0;
-    int expon = get_exponent(*dec);
-    *dec = binary_division(*dec, get_power_of_ten(expon), &code);
-}
+// void s21_decimal_apply_exponent(s21_decimal *dec) {
+//     /* TODO: add code checking & respective logic */
+//     int code = 0;
+//     int expon = get_exponent(*dec);
+//     *dec = binary_division(*dec, get_power_of_ten(expon), &code);
+// }
 
 s21_decimal get_power_of_ten(int pow) {
     s21_decimal result;
@@ -59,11 +59,6 @@ int get_exponent(s21_decimal decimal) {
             ADD_BIT(exponent, j);
     }
 
-    if (exponent > 28) {
-        /* fprintf(stderr, "VERY BIG EXPONENT (0 - 28): exp = %d\n", exponent);
-         */
-    }
-
     return exponent;
 }
 
@@ -74,9 +69,5 @@ void set_exponent(s21_decimal *decimal, int new_exponent) {
         if (sign)
             set_sign_neg(decimal);
         SET_BIT(decimal->bits[3], new_exponent, D_START_EXP);
-    } else {
-        // TODO: Replace with a system function call
-        /* fprintf(stderr, "VERY BIG EXPONENT (0 - 28): exp = %d\n",
-         * new_exponent); */
     }
 }

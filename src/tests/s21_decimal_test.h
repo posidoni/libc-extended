@@ -1,5 +1,5 @@
-#ifndef TEST
-#define TEST
+#ifndef SRC_TESTS_S21_DECIMAL_TEST_H_
+#define SRC_TESTS_S21_DECIMAL_TEST_H_
 
 #define RED "\033[0;31m"
 #define BRED "\033[1;31m"
@@ -86,8 +86,9 @@ Suite *suite_s21_floor(void);
 Suite *suite_s21_round(void);
 Suite *suite_s21_truncate(void);
 Suite *suite_s21_negate(void);
+Suite *suite_s21_integer_div_wrapper(void);
 
 void run_tests(void);
 void run_testcase(Suite *testcase);
 
-#endif  //  TEST
+#endif  //  SRC_TESTS_S21_DECIMAL_TEST_H_

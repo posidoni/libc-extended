@@ -43,7 +43,6 @@ START_TEST(gcc_128_bits) {
 #endif
 
     if (code == ARITHMETIC_OK) {
-
 #ifdef DEBUG
         print_bits_r(res128);
         print_bits_r(dec_sum);
@@ -108,22 +107,22 @@ START_TEST(random_decimal_exp) {
 }
 END_TEST
 
-/* START_TEST(sum_with_arbitrary_exp) { */
-/*     s21_decimal a = {{1, 0, 0, 0}}; */
-/*     s21_decimal b = get_random_decimal(2, get_rand(1, 20)); */
+// /* START_TEST(sum_with_arbitrary_exp) { */
+// /*     s21_decimal a = {{1, 0, 0, 0}}; */
+// /*     s21_decimal b = get_random_decimal(2, get_rand(1, 20)); */
 
-/*     s21_decimal got = {0}; */
+// /*     s21_decimal got = {0}; */
 
-/*     // printf("%d \n", get_exponent(b)); */
-/*     // printf("%d \n", get_exponent(b)); */
+// /*     // printf("%d \n", get_exponent(b)); */
+// /*     // printf("%d \n", get_exponent(b)); */
 
-/*     int code = s21_add(a, b, &got); */
+// /*     int code = s21_add(a, b, &got); */
 
-/*     if (code == ARITHMETIC_OK) { */
-/*         // */
-/*     } */
-/* } */
-/* END_TEST */
+// /*     if (code == ARITHMETIC_OK) { */
+// /*         // */
+// /*     } */
+// /* } */
+// /* END_TEST */
 
 START_TEST(edge_cases) {
     s21_decimal a = {{1, 0, 0, get_rand(0, INT_MAX)}};
@@ -131,12 +130,12 @@ START_TEST(edge_cases) {
     s21_decimal got = {0};
     set_random_sign(&a);
     set_random_sign(&b);
-    int code = s21_add(a, b, &got);
+    (void)s21_add(a, b, &got);
 
-    /* maybe we need to somehow detect POS / NEG infinity and try to catch this
-     * code (?) */
+    // /* maybe we need to somehow detect POS / NEG infinity and try to catch this
+    //  * code (?) */
 
-    /* ck_assert_int_eq(code, ARITHMETIC_OK); */
+    // /* ck_assert_int_eq(code, ARITHMETIC_OK); */
 }
 END_TEST
 
@@ -144,12 +143,12 @@ Suite *suite_s21_add(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_add"));
     TCase *tc = tcase_create("s21_add_tc");
 
-    /* Add works great. Tested with binary calculator */
+    // /* Add works great. Tested with binary calculator */
 
     tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
     tcase_add_loop_test(tc, random_decimal_exp, 0, 100);
     // tcase_add_loop_test(tc, sum_with_arbitrary_exp, 0, 10000);
-    /* tcase_add_loop_test(tc, edge_cases, 0, 10000); */
+    // /* tcase_add_loop_test(tc, edge_cases, 0, 10000); */
     tcase_add_test(tc, overflow_test);
 
     suite_add_tcase(s, tc);
