@@ -40,9 +40,11 @@ int s21_round(s21_decimal value, s21_decimal *result) {
     s21_decimal divided = {0};
 
     s21_decimal ten = get_power_of_ten(1);
+
+    s21_div(rem, ten, &divided);
+
     while (s21_is_greater(divided, ten)) {
-        s21_div(rem, ten, &divided);
-        truncated = divided;
+        s21_div(divided, ten, &divided);
         s21_truncate(divided, &truncated);
     }
 
@@ -54,12 +56,10 @@ int s21_round(s21_decimal value, s21_decimal *result) {
         rounded = binary_addition(truncated, get_power_of_ten(0), &code);
     else
         rounded = truncated;
+    *result = rounded;
 
-    if (code != ARITHMETIC_OK)
-        return CONVERTATION_ERROR;
-
-    if (s21_mul(rounded, get_power_of_ten(exp), result) != ARITHMETIC_OK)
-        return CONVERTATION_ERROR;
+    if (code != ARITHMETIC_OK) return CONVERTATION_ERROR;
+    if (s21_mul(rounded, get_power_of_ten(exp), result) != ARITHMETIC_OK) return CONVERTATION_ERROR;
 
     set_exponent(result, exp);
     set_sign(result, sign);
