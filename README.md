@@ -1,4 +1,4 @@
-# S21_Cat & S21_Grep
+# S21_Matrix
 
 ## Table of contents
 * [General info](https://github.com/MikhailKuzntsov1/s21_matrix/tree/main#general-info)
