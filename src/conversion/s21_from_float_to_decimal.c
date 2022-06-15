@@ -1,14 +1,17 @@
 #include "../s21_decimal.h"
+#include "../tests/s21_decimal_test.h"
 
 static int get_float_exponent(float val) {
-    int exp = 0;
+    int exponent = 0;
     while (val > 1) {
         val /= 10;
-        exp++;
+        exponent++;
     }
-    return exp;
+    return !exponent ? 1 : exponent;
 }
 
+/* NOTE: this works, make sure to set the exponent if testing using online calc
+ */
 int s21_from_float_to_decimal(float src, s21_decimal *dst) {
     if (!isnormal(src))
         return CONVERTATION_ERROR;
@@ -21,43 +24,21 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
         is_negative = 1;
     }
 
+    /* get exponent */
+    int exponent = get_float_exponent(src);
+
     /* handle left part */
     char bits[128] = {'\0'};
-    get_bit_string(src, bits);
+    get_bit_string(src, bits, exponent);
 
-    if (strlen(bits) > 96)
-        return CONVERTATION_ERROR;
+    set_bits_from_string(bits, dst);
 
-    s21_decimal left = {0};
-    set_bits_from_string(bits, &left);
-
-    /* set exponent */
-    int exp = get_float_exponent(src);
-
-    /* handle right part */
-    const int total_digits = 29;
-    float fright = (src - floor(src)) * pow(10, total_digits - exp);
-
-    memset(bits, '\0', 128);
-    get_bit_string(fright, bits);
-
-    /* remove trailing zeros */
-    for (size_t i = strlen(bits) - 1; bits[i] == '0'; i--)
-        bits[i] = '\0';
-
-    s21_decimal right = {0};
-    for (size_t i = 0; i < strlen(bits); i++) {
-        if (bits[i] - '0')
-            ADD_BIT(right.bits[i / 32], i % 32);
-    }
-
-    s21_add(left, right, dst);
-    /* handle sign */
+    /* set sign */
     if (is_negative)
         set_sign_neg(dst);
 
-    /* handle exponent */
-    set_exponent(dst, exp);
+    /* set exponent */
+    set_exponent(dst, D_MAX_EXP_VAL - exponent);
 
     return CONVERTATION_OK;
 }
