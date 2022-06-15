@@ -5,13 +5,13 @@ int s21_from_decimal_to_float(s21_decimal src, float *dst) {
     if (!dst)
         return CONVERTATION_ERROR;
 
-    int exp = get_exponent(src);
+    int exponent = get_exponent(src);
 
     *dst = 0;
     for (int i = 0; i < 96; i++)
         *dst += pow(2, i) * get_bit(src, i);
 
-    while (exp--)
+    while (exponent--)
         *dst /= 10;
 
     if (sign)

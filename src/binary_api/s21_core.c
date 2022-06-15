@@ -45,14 +45,6 @@ s21_decimal get_05(void) {
     return result;
 }
 
-// s21_decimal get_0(void) {
-//     s21_decimal result;
-//     init_zero(&result);
-//     set_exponent(&result, 0);
-//     set_sign_pos(&result);
-//     return result;
-// }
-
 int eq_zero(s21_decimal value) {
     return (value.bits[0] == 0 && value.bits[1] == 0 && value.bits[2] == 0);
 }
@@ -63,15 +55,6 @@ void init_zero(s21_decimal *n) {
     n->bits[2] = 0;
     n->bits[3] = 0;
 }
-
-// int byte_len(s21_decimal n) {
-//     int pos;
-//     for (pos = 95; pos >= 0; --pos) {
-//         if (get_bit(n, pos))
-//             break;
-//     }
-//     return pos;
-// }
 
 int max(int a, int b) {
     return a > b ? a : b;

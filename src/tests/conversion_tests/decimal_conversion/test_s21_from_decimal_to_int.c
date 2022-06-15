@@ -15,7 +15,6 @@ START_TEST(loop1) {
 
     set_exponent(&input, exp);
 
-
     expected = expected / (pow(10, exp));
 
     if (expected < 0)
@@ -36,7 +35,7 @@ Suite *suite_s21_from_decimal_to_int(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_from_decimal_to_int"));
     TCase *tc = tcase_create("s21_from_decimal_to_int_tc");
 
-    tcase_add_loop_test(tc, loop1, 0, 10);
+    tcase_add_loop_test(tc, loop1, 0, 1000);
 
     suite_add_tcase(s, tc);
     return s;

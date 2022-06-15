@@ -1,17 +1,8 @@
 #include "../s21_decimal_test.h"
 
-__int128_t int128_round(int sum) {
-    __int128_t digit = sum;
-    while (digit > 10)
-        digit /= 10;
-    if (digit >= 5)
-        sum++;
-    return sum;
-}
-
-__int128_t int128_pow(int val, int exp) {
+__int128_t int128_pow(int val, int exponent) {
     __int128_t res = 1;
-    while (exp--)
+    while (exponent--)
         res *= val;
     return res;
 }

@@ -3,7 +3,6 @@
 int s21_from_decimal_to_int(s21_decimal src, int *dst) {
     s21_decimal truncated = {0};
 
-    // ISSUE #41
     int code = s21_truncate(src, &truncated);
 
     int sign = get_sign(src);

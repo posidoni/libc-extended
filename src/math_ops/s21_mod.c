@@ -1,28 +1,32 @@
 #include "../s21_decimal.h"
 
 static s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor);
-void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code);
+void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2,
+                         s21_decimal *result, int *code);
 
 int s21_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
-    if (eq_zero(value_2)) return S21_NAN;
+    if (eq_zero(value_2))
+        return S21_NAN;
 
     int code = ARITHMETIC_OK;
 
     if (s21_is_greater(value_2, value_1)) {
-        // Please, note, that this behaviour is just conventional. It is not universally accepted.
-        // Another common option: result = sub(val2, val1)
+        // Please, note, that this behaviour is just conventional. It is not
+        // universally accepted. Another common option: result = sub(val2, val1)
         // code = s21_sub(value_1, value_2, result);
         *result = value_1;
     } else {
         handle_exponent_mod(value_1, value_2, result, &code);
     }
 
-    if (get_sign(value_1) != get_sign(value_2)) set_sign_neg(result);
+    if (get_sign(value_1) != get_sign(value_2))
+        set_sign_neg(result);
 
     return code;
 }
 
-void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code) {
+void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2,
+                         s21_decimal *result, int *code) {
     int exp_v1 = get_exponent(value_1);
     int exp_v2 = get_exponent(value_2);
 
@@ -32,12 +36,14 @@ void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *
     int res_exp = exp_v1 - exp_v2;
 
     // Edge case. mod by 1
-    if (s21_is_equal(value_2, get_power_of_ten(0)) || s21_is_equal(value_1, value_2)) {
+    if (s21_is_equal(value_2, get_power_of_ten(0)) ||
+        s21_is_equal(value_1, value_2)) {
         const s21_decimal zero = {0};
         *result = zero;
         *code = ARITHMETIC_OK;
     } else {
-        // We must set 1 bit in result, because we will move this bit in mod to the left
+        // We must set 1 bit in result, because we will move this bit in mod to
+        // the left
         init_zero(result);
         result->bits[0] = 1;
 
@@ -64,7 +70,8 @@ static s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
         return dividend;
     }
 
-    // Our goal is to align divisor & dividend, so we are shifting divisor to the left
+    // Our goal is to align divisor & dividend, so we are shifting divisor to
+    // the left
 
     /**
      * dividend: 0101010101010101
@@ -75,7 +82,8 @@ static s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
      * dividend: 0101010101010101
      * divisor: 1010000000000000 <---
      *
-     * We got too far by one bit. Thus, we need to shift (divisor) to the right once.
+     * We got too far by one bit. Thus, we need to shift (divisor) to the right
+     * once.
      */
 
     while (s21_is_less_or_equal(divisor, dividend)) {
@@ -93,20 +101,22 @@ static s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
      *
      *  An actial modision is done via substraction.
      *
-     * @arg (modified_dividend) stores new value of (dividend) after substraction. It will later
-     * be passed to the recursive call of sivision.
+     * @arg (modified_dividend) stores new value of (dividend) after
+     * substraction. It will later be passed to the recursive call of sivision.
      */
 
     s21_sub(dividend, divisor, &modified_dividend);
 
-    /* DIRTY HACK (!) Sometimes for unknown reasons sub incorrectly sets 95th bit. */
+    /* DIRTY HACK (!) Sometimes for unknown reasons sub incorrectly sets 95th
+     * bit. */
     /* But, generally, values are correct.  */
     /* BUG: IF BIT IS SET IN SUB, IT WILL BE OKAY */
     // set_bit_0(&modified_dividend, 95);
 
     /**
-     * @arg (original_divisor) is nesessary to modide by non-modified version of divisor,
-     * because our original divisor was modified by shifting to the left.
+     * @arg (original_divisor) is nesessary to modide by non-modified version of
+     * divisor, because our original divisor was modified by shifting to the
+     * left.
      */
 
     res = s21_integer_mod(modified_dividend, original_divisor);

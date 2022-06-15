@@ -43,8 +43,6 @@ s21_decimal bigint_to_decimal(__int128_t src);
 s21_decimal ll_to_decimal(long long val);
 long long get_random_ll(void);
 __int128_t int128_pow(int val, int exp);
-__int128_t int128_round(int sum);
-
 short int get_random_short(void);
 
 /* GMP wrappers */

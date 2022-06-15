@@ -1,5 +1,4 @@
 #include "../s21_decimal.h"
-#include "../tests/s21_decimal_test.h"
 
 /**
  * @brief Rounds a value same as math.h round()
@@ -24,7 +23,8 @@
 
 int s21_round(s21_decimal value, s21_decimal *result) {
     memset(result, 0, sizeof(*result));
-    int exp = get_exponent(value);
+
+    int exponent = get_exponent(value);
 
     /* Working with positive always, set sign later */
     int sign = get_sign(value);
@@ -39,29 +39,34 @@ int s21_round(s21_decimal value, s21_decimal *result) {
 
     s21_decimal divided = {0};
 
-    s21_decimal ten = get_power_of_ten(1);
+    const s21_decimal ten = get_power_of_ten(1);
 
-    s21_div(rem, ten, &divided);
-
-    while (s21_is_greater(divided, ten)) {
-        s21_div(divided, ten, &divided);
-        s21_truncate(divided, &truncated);
+    while (s21_is_greater(rem, ten)) {
+        s21_div(rem, ten, &divided);
+        rem = divided;
     }
 
     s21_decimal rounded = {0};
     int code = ARITHMETIC_OK;
 
     /* +1 or leave it as it was*/
-    if (s21_is_greater_or_equal(divided, get_05()))
-        rounded = binary_addition(truncated, get_power_of_ten(0), &code);
+
+    int bank_rounding = 0;
+    s21_from_decimal_to_int(divided, &bank_rounding);
+
+    if (bank_rounding >= 5)
+        code = s21_add(truncated, get_power_of_ten(0), &rounded);
     else
         rounded = truncated;
+
     *result = rounded;
 
-    if (code != ARITHMETIC_OK) return CONVERTATION_ERROR;
-    if (s21_mul(rounded, get_power_of_ten(exp), result) != ARITHMETIC_OK) return CONVERTATION_ERROR;
+    if (code != ARITHMETIC_OK)
+        return CONVERTATION_ERROR;
+    if (s21_mul(rounded, get_power_of_ten(exponent), result) != ARITHMETIC_OK)
+        return CONVERTATION_ERROR;
 
-    set_exponent(result, exp);
+    set_exponent(result, exponent);
     set_sign(result, sign);
     return CONVERTATION_OK;
 }
