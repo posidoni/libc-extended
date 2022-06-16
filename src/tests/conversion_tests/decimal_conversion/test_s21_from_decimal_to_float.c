@@ -1,8 +1,8 @@
 #include "../../s21_decimal_test.h"
-/* #define DEBUG */
+#define DEBUG
 
 START_TEST(simple_loop) {
-    s21_decimal value = get_random_decimal(1, 6);
+    s21_decimal value = get_random_decimal(1, 8);
 
     int int_expected = 0;
     s21_decimal to_int = value;
@@ -22,11 +22,11 @@ START_TEST(simple_loop) {
     float got = 0;
     int code = s21_from_decimal_to_float(value, &got);
 
-#ifdef DEBUG
-    printf("expected = %.29f\n", expected);
-    printf("got      = %.29f\n", got);
-#endif
     if (overflow == CONVERTATION_OK) {
+#ifdef DEBUG
+        printf("expected = %.29f\n", expected);
+        printf("got      = %.29f\n", got);
+#endif
         ck_assert_float_eq_tol(expected, got, 1e+3);
         ck_assert_int_eq(code, CONVERTATION_OK);
     }

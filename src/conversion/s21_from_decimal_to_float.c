@@ -6,16 +6,18 @@ int s21_from_decimal_to_float(s21_decimal src, float *dst) {
         return CONVERTATION_ERROR;
 
     int exponent = get_exponent(src);
+    long double tmp = 0;
 
-    *dst = 0;
     for (int i = 0; i < 96; i++)
-        *dst += pow(2, i) * get_bit(src, i);
+        tmp += pow(2, i) * get_bit(src, i);
 
     while (exponent--)
-        *dst /= 10;
+        tmp /= 10.0;
 
     if (sign)
-        *dst *= -1.0F;
+        tmp *= -1.0;
+
+    *dst = tmp;
 
     return CONVERTATION_OK;
 }
