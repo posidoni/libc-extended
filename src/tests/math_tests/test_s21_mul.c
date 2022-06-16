@@ -179,10 +179,11 @@ START_TEST(random_decimal_exp) {
     // #ifdef DEBUG
     //     print_bits_r(dec_mul);
     //     print_bits_r(short_dec);
-    //     printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[0], short_dec.bits[0]);
-    //     printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[1], short_dec.bits[1]);
-    //     printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[2], short_dec.bits[2]);
-    //     printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[3], short_dec.bits[3]);
+    //     printf("DEC: %u \t SHORT: %u \n", dec_mul.bits[0],
+    //     short_dec.bits[0]); printf("DEC: %u \t SHORT: %u \n",
+    //     dec_mul.bits[1], short_dec.bits[1]); printf("DEC: %u \t SHORT: %u
+    //     \n", dec_mul.bits[2], short_dec.bits[2]); printf("DEC: %u \t SHORT:
+    //     %u \n", dec_mul.bits[3], short_dec.bits[3]);
     // #endif
 
     ck_assert_int_eq(abs((int)dec_mul.bits[0]), abs((int)short_dec.bits[0]));
@@ -194,8 +195,8 @@ Suite *suite_s21_mul(void) {
     TCase *tc = tcase_create("s21_mul_tc");
 
     /* tcase_add_loop_test(tc, mul_loop, 0, 1); */
-    tcase_add_loop_test(tc, gcc_128_bits, 0, 1000);
-    tcase_add_loop_test(tc, random_decimal_exp, 0, 1000);
+    tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
+    tcase_add_loop_test(tc, random_decimal_exp, 0, 100);
 
     suite_add_tcase(s, tc);
     return s;

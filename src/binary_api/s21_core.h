@@ -100,6 +100,33 @@ void s21_swap(s21_decimal *a, s21_decimal *b);
 s21_decimal get_power_of_ten(int pow);
 uint32_t reverse_bits(uint32_t n);
 
+int s21_integer_div_wrapper(s21_decimal value_1, s21_decimal value_2,
+                            s21_decimal *result);
+
+bool both_all_zeroes(s21_decimal a, s21_decimal b);
+
+/* Abs comparison */
+
+int s21_is_less_abs(s21_decimal a, s21_decimal b);
+int s21_is_less_or_equal_abs(s21_decimal a, s21_decimal b);
+int s21_is_greater_abs(s21_decimal a, s21_decimal b);
+int s21_is_greater_or_equal_abs(s21_decimal a, s21_decimal b);
+int s21_is_equal_abs(s21_decimal a, s21_decimal b);
+int s21_is_not_equal_abs(s21_decimal a, s21_decimal b);
+
+int s21_check_infinity(int code, int sign);
+
+void get_bit_string(float res, char *bits, int exponent);
+void set_bits_from_string(char *bits, s21_decimal *result);
+float add_exponent(float val, int exp);
+
+int s21_integer_div_wrapper(s21_decimal value_1, s21_decimal value_2,
+                            s21_decimal *result);
+
+int byte_len(s21_decimal n);
+// void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
+//                          s21_decimal *result, int *code);
+
 static const char *const binary_powers_of_ten[29] = {
     [0] =
         "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",

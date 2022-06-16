@@ -18,7 +18,7 @@ Suite *suite_s21_negate(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_negate"));
     TCase *tc = tcase_create("s21_negate_tc");
 
-    tcase_add_loop_test(tc, negate_loop, 0, 6969);
+    tcase_add_loop_test(tc, negate_loop, 0, 69);
 
     suite_add_tcase(s, tc);
     return s;

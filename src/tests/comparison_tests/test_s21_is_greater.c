@@ -84,8 +84,8 @@ Suite *suite_s21_is_greater(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_is_greater"));
     TCase *tc = tcase_create("s21_is_greater_tc");
 
-    tcase_add_loop_test(tc, decimal_random_noexp_unsigned, 0, 5100);
-    tcase_add_loop_test(tc, decimal_random_noexp_signed, 0, 5100);
+    tcase_add_loop_test(tc, decimal_random_noexp_unsigned, 0, 100);
+    tcase_add_loop_test(tc, decimal_random_noexp_signed, 0, 100);
 
     tcase_add_test(tc, all_zeroes);
 

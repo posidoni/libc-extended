@@ -15,8 +15,6 @@ int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
 int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
 int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
 int s21_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
-int s21_integer_div_wrapper(s21_decimal value_1, s21_decimal value_2,
-                            s21_decimal *result);
 
 /* Comparison */
 
@@ -26,22 +24,6 @@ int s21_is_greater(s21_decimal a, s21_decimal b);
 int s21_is_greater_or_equal(s21_decimal a, s21_decimal b);
 int s21_is_equal(s21_decimal a, s21_decimal b);
 int s21_is_not_equal(s21_decimal a, s21_decimal b);
-bool both_all_zeroes(s21_decimal a, s21_decimal b);
-
-/* Abs comparison */
-
-int s21_is_less_abs(s21_decimal a, s21_decimal b);
-int s21_is_less_or_equal_abs(s21_decimal a, s21_decimal b);
-int s21_is_greater_abs(s21_decimal a, s21_decimal b);
-int s21_is_greater_or_equal_abs(s21_decimal a, s21_decimal b);
-int s21_is_equal_abs(s21_decimal a, s21_decimal b);
-int s21_is_not_equal_abs(s21_decimal a, s21_decimal b);
-
-int s21_check_infinity(int code, int sign);
-
-int byte_len(s21_decimal n);
-// void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
-//                          s21_decimal *result, int *code);
 
 int s21_from_int_to_decimal(int src, s21_decimal *dst);
 int s21_from_float_to_decimal(float src, s21_decimal *dst);
@@ -52,8 +34,5 @@ int s21_floor(s21_decimal value, s21_decimal *result);
 int s21_round(s21_decimal value, s21_decimal *result);
 int s21_truncate(s21_decimal value, s21_decimal *result);
 int s21_negate(s21_decimal value, s21_decimal *result);
-void get_bit_string(float res, char *bits, int exponent);
-void set_bits_from_string(char *bits, s21_decimal *result);
-float add_exponent(float val, int exp);
 
 #endif  //  SRC_S21_DECIMAL_H_
