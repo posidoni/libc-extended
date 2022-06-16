@@ -117,9 +117,9 @@ Suite *suite_s21_is_or_not_equal(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_is_or_not_equal"));
     TCase *tc = tcase_create("s21_is_or_not_equal_tc");
 
-    tcase_add_loop_test(tc, hardcoded_decimal_loop, 0, 5000);
-    tcase_add_loop_test(tc, gmp_random, 0, 5000);
-    tcase_add_loop_test(tc, gmp_random_inequality, 0, 5000);
+    tcase_add_loop_test(tc, hardcoded_decimal_loop, 0, 100);
+    tcase_add_loop_test(tc, gmp_random, 0, 100);
+    tcase_add_loop_test(tc, gmp_random_inequality, 0, 100);
     tcase_add_test(tc, equality_all_zeros);
 
     suite_add_tcase(s, tc);

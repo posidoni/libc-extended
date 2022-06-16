@@ -37,7 +37,7 @@ Suite *suite_s21_from_decimal_to_float(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_from_decimal_to_float"));
     TCase *tc = tcase_create("s21_from_decimal_to_float_tc");
 
-    tcase_add_loop_test(tc, simple_loop, 0, 10000);
+    tcase_add_loop_test(tc, simple_loop, 0, 100);
 
     suite_add_tcase(s, tc);
     return s;

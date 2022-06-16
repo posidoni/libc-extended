@@ -31,7 +31,9 @@ START_TEST(gcc_128_bits) {
         /* I suspect that it is not our problem that signs do not match here */
         /* GCC __int128_t are unsigned, thus, they discard sign */
         /* In observed failed tests our decimal had sign & int 128 didn't */
-        printf(GRN "WARNING! SIGNS DO NOT MATCH! COMPARING ABS VALUES 📌 \n" ENDCOLOR);
+        printf(
+            GRN
+            "WARNING! SIGNS DO NOT MATCH! COMPARING ABS VALUES 📌 \n" ENDCOLOR);
         set_sign_pos(&dec_div);
         comp_res = s21_is_equal(res128, dec_div);
     }
@@ -72,7 +74,9 @@ START_TEST(gcc_128_division_by_ten) {
         /* I suspect that it is not our problem that signs do not match here */
         /* GCC __int128_t are unsigned, thus, they discard sign */
         /* In observed failed tests our decimal had sign & int 128 didn't */
-        printf(GRN "WARNING! SIGNS DO NOT MATCH! COMPARING ABS VALUES 📌 \n" ENDCOLOR);
+        printf(
+            GRN
+            "WARNING! SIGNS DO NOT MATCH! COMPARING ABS VALUES 📌 \n" ENDCOLOR);
         set_sign_pos(&dec_div);
         comp_res = s21_is_equal(res128, dec_div);
     }
@@ -156,14 +160,14 @@ Suite *suite_s21_div(void) {
     TCase *tc = tcase_create("s21_div_tc");
 
     /* ✅ Heavily tested. Passed all 40000 tests several times */
-    tcase_add_loop_test(tc, divison_by_one, 0, 10000);
-    tcase_add_loop_test(tc, divison_by_two, 0, 10000);
-    tcase_add_loop_test(tc, gcc_128_division_by_ten, 0, 10000);
-    tcase_add_loop_test(tc, gcc_128_bits, 0, 10000);
-    tcase_add_loop_test(tc, divison_by_rand_int, 0, 1000);
+    tcase_add_loop_test(tc, divison_by_one, 0, 100);
+    tcase_add_loop_test(tc, divison_by_two, 0, 100);
+    tcase_add_loop_test(tc, gcc_128_division_by_ten, 0, 100);
+    tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
+    tcase_add_loop_test(tc, divison_by_rand_int, 0, 100);
 
     /* 🌃 Edge cases */
-    tcase_add_loop_test(tc, division_by_zero_and_zero_like_vals, 0, 10000);
+    tcase_add_loop_test(tc, division_by_zero_and_zero_like_vals, 0, 100);
 
     /**
      * [#38] TODO: (!) - SEEN BY @bezlant WILL WORK ON IT TOMORROW (14.06)

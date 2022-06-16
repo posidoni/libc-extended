@@ -31,7 +31,9 @@ START_TEST(gcc_128_bits) {
         /* I suspect that it is not our problem that signs do not match here */
         /* GCC __int128_t are unsigned, thus, they discard sign */
         /* In observed failed tests our decimal had sign & int 128 didn't */
-        printf(GRN "WARNING! SIGNS DO NOT MATCH! COMPARING ABS VALUES 📌 \n" ENDCOLOR);
+        printf(
+            GRN
+            "WARNING! SIGNS DO NOT MATCH! COMPARING ABS VALUES 📌 \n" ENDCOLOR);
         set_sign_pos(&dec_div);
         comp_res = s21_is_equal(res128, dec_div);
     }
@@ -180,7 +182,8 @@ START_TEST(mod_exists) {
 
     // ck_assert_int_eq(code, ARITHMETIC_OK);
 
-    /* In case of overflow (especially if numbers are around zero, no mod will exist) */
+    /* In case of overflow (especially if numbers are around zero, no mod will
+     * exist) */
     if (code == ARITHMETIC_OK) {
         int mod_exists = (res.bits[0] || res.bits[1] || res.bits[2]);
         ck_assert_int_eq(mod_exists, true);
@@ -192,14 +195,14 @@ Suite *suite_s21_mod(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_mod"));
     TCase *tc = tcase_create("s21_mod_tc");
 
-    tcase_add_loop_test(tc, mod_by_one, 0, 1000);
-    tcase_add_loop_test(tc, mod_by_zero, 0, 10000);
+    tcase_add_loop_test(tc, mod_by_one, 0, 100);
+    tcase_add_loop_test(tc, mod_by_zero, 0, 100);
     tcase_add_loop_test(tc, equal_decimals, 0, 100);
-    tcase_add_loop_test(tc, mod_b_greater_than_a, 0, 1000);
-    tcase_add_loop_test(tc, even_or_odd_mod, 0, 1000);
-    tcase_add_loop_test(tc, gcc_128_bits, 0, 1000);
-    tcase_add_loop_test(tc, mod_by_rand_int, 0, 1000);
-    tcase_add_loop_test(tc, mod_exists, 0, 10000);
+    tcase_add_loop_test(tc, mod_b_greater_than_a, 0, 100);
+    tcase_add_loop_test(tc, even_or_odd_mod, 0, 100);
+    tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
+    tcase_add_loop_test(tc, mod_by_rand_int, 0, 100);
+    tcase_add_loop_test(tc, mod_exists, 0, 100);
 
     suite_add_tcase(s, tc);
     return s;

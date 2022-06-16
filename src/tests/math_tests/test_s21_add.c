@@ -131,7 +131,8 @@ START_TEST(edge_cases) {
     set_random_sign(&b);
     (void)s21_add(a, b, &got);
 
-    // /* maybe we need to somehow detect POS / NEG infinity and try to catch this
+    // /* maybe we need to somehow detect POS / NEG infinity and try to catch
+    // this
     //  * code (?) */
 
     // /* ck_assert_int_eq(code, ARITHMETIC_OK); */
@@ -146,7 +147,7 @@ Suite *suite_s21_add(void) {
 
     tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
     tcase_add_loop_test(tc, random_decimal_exp, 0, 100);
-    tcase_add_loop_test(tc, edge_cases, 0, 10000);
+    tcase_add_loop_test(tc, edge_cases, 0, 100);
     tcase_add_test(tc, overflow_test);
 
     suite_add_tcase(s, tc);
