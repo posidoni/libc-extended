@@ -1,5 +1,4 @@
 #include "../s21_decimal.h"
-#include "../tests/s21_decimal_test.h"
 
 /**
     1. Init

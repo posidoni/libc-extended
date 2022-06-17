@@ -5,7 +5,7 @@ CC 				 =	gcc
 ALL_TARGETS 	 = $(TARGET) $(TEST_EXE) # gcov_report
 ASAN 			 = 	#-fsanitize=address
 UBSAN			 =	#-fsanitize=undefined
-STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic $(C_OPTIMIZATION) #-fanalyzer #-Werror
+STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic $(C_OPTIMIZATION) # -fanalyzer -Werror #-Werror
 
 # Optimizaiton (https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html):
 C_OPTIMIZATION	 = -O0
@@ -18,8 +18,9 @@ GMP_LIB 		 = 	$(shell pkg-config --libs --cflags gmp)
 # DevTools config
 VG 				 = valgrind $(VG_FLAGS)
 VG_FLAGS 		 = --leak-check=full --show-leak-kinds=all \
-				   --track-origins=yes --verbose --log-file=valgrind-report.txt
+				   --track-origins=yes --verbose --log-file=$(VG_LOG)
 LEAKS 			 = leaks -atExit --
+VG_LOG 			 = valgrind-report.txt
 
 # Names config
 TARGET 			 =	s21_decimal.a
@@ -143,6 +144,7 @@ fclean 			: clean
 				$(RM) $(TEST_EXE)
 				$(RM) $(TEST_GCOV_EXE)
 				$(RM) $(GCOV_INFO)
+				$(RM) $(VG_LOG)
 				$(RM) -r $(GCOV_TARGET)
 
 lint 			: Makefile

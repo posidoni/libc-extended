@@ -50,7 +50,7 @@ Suite *suite_s21_round(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_round"));
     TCase *tc = tcase_create("s21_round_tc");
 
-    tcase_add_loop_test(tc, random_loop, 0, 10000);
+    tcase_add_loop_test(tc, random_loop, 0, 10);
 
     suite_add_tcase(s, tc);
     return s;
