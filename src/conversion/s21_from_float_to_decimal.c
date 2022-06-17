@@ -27,7 +27,6 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
     /* get exponent */
     int exponent = get_float_exponent(src);
 
-    /* handle left part */
     char bits[128] = {'\0'};
     get_bit_string(src, bits, exponent);
     set_bits_from_string(bits, dst);

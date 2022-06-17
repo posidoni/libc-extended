@@ -1,5 +1,9 @@
 #include "../s21_decimal.h"
 
+#ifdef DEBUG
+#include "../tests/s21_decimal_test.h"
+#endif
+
 /**
  * @brief Rounds a value same as math.h round()
  * Implemented by truncating a value
@@ -33,20 +37,31 @@ int s21_round(s21_decimal value, s21_decimal *result) {
     s21_decimal truncated = {0};
     s21_truncate(value, &truncated);
 
+#ifdef DEBUG
+    printf("value = ");
+    print_bits_r(value);
+    printf("truncated = ");
+    print_bits_r(truncated);
+#endif
+    /* NOTE: multiply by 10, truncate, mod 10 check & round */
+
+    s21_decimal mul_by_10 = value;
+    set_exponent(&mul_by_10, exponent - 1);
+    s21_decimal truncated_mul10 = {0};
+    s21_truncate(mul_by_10, &truncated_mul10);
+
+#ifdef DEBUG
+    printf("truncated_mul10= ");
+    print_bits_r(truncated_mul10);
+#endif
+
     s21_decimal rem = {0};
-    s21_sub(value, truncated, &rem);
-    set_exponent(&rem, 0);
+    s21_mod(truncated_mul10, get_power_of_ten(1), &rem);
 
-    s21_decimal divided = {0};
-
-    const s21_decimal ten = get_power_of_ten(1);
-
-    while (s21_is_greater(rem, ten)) {
-        if (s21_div(rem, ten, &divided) != ARITHMETIC_OK)
-            return CONVERTATION_ERROR;
-
-        rem = divided;
-    }
+#ifdef DEBUG
+    printf("rem = ");
+    print_bits_r(rem);
+#endif
 
     s21_decimal rounded = {0};
     int code = ARITHMETIC_OK;
@@ -54,7 +69,11 @@ int s21_round(s21_decimal value, s21_decimal *result) {
     /* +1 or leave it as it was*/
 
     int bank_rounding = 0;
-    s21_from_decimal_to_int(divided, &bank_rounding);
+    s21_from_decimal_to_int(rem, &bank_rounding);
+
+#ifdef DEBUG
+    printf("bank_round = %d\n", bank_rounding);
+#endif
 
     if (bank_rounding >= 5)
         code = s21_add(truncated, get_power_of_ten(0), &rounded);
