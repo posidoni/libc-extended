@@ -2,15 +2,24 @@
 CC 				 =	gcc
 
 # Compilation flags configuration
-ALL_TARGETS 	 = $(TARGET) test gcov_report
+ALL_TARGETS 	 = $(TARGET) $(TEST_EXE) # gcov_report
 ASAN 			 = 	#-fsanitize=address
 UBSAN			 =	#-fsanitize=undefined
-STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic #-fanalyzer #-Werror
+STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic $(C_OPTIMIZATION) #-fanalyzer #-Werror
+
+# Optimizaiton (https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html):
+C_OPTIMIZATION	 = -O0
 
 # Linking flags configuration
 LIBS 			 =	$(CHECK_LIB) $(GMP_LIB)
 CHECK_LIB 		 = 	$(shell pkg-config --libs --cflags check)
 GMP_LIB 		 = 	$(shell pkg-config --libs --cflags gmp)
+
+# DevTools config
+VG 				 = valgrind $(VG_FLAGS)
+VG_FLAGS 		 = --leak-check=full --show-leak-kinds=all \
+				   --track-origins=yes --verbose --log-file=valgrind-report.txt
+LEAKS 			 = leaks -atExit --
 
 # Names config
 TARGET 			 =	s21_decimal.a
@@ -66,11 +75,6 @@ CFLAGS 			= 	$(STDFLAGS) $(ASAN) $(UBSAN)
 
 all 			: 	$(ALL_TARGETS)
 
-debug:
-	echo $(GCOV_OBJ_DIR)
-	echo $(GCOV_OBJS)
-	echo $(GCOV_TEST_OBJS)
-
 # General compilation rule
 %.o 			: %.c $(INC)
 				@$(MK) $(OBJ_DIR)
@@ -85,9 +89,9 @@ $(TEST_TARGET)	: $(GCOV_OBJS) $(INC)
 				$(AR) $(TEST_TARGET) $(GCOV_OBJ_DIR)/*
 				$(RAN) $(TEST_TARGET)
 
-test 			: $(TARGET) $(TEST_OBJS) $(TEST_INC) Makefile
+$(TEST_EXE) 			: $(TARGET) $(TEST_OBJS) $(TEST_INC) Makefile
 				$(CC) $(OBJ_DIR)/* $(ASAN) $(UBSAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(LIBS) -L. $(TARGET)
-				./test
+				./$(TEST_EXE)
 
 # GCOV stage
 gcov_report 	: $(GCOV_TARGET)
@@ -104,16 +108,27 @@ $(GCOV_OBJ_DIR)/gcov_%.o : %.c $(INC)
 				$(CC) $(CFLAGS) -o $(GCOV_OBJ_DIR)/$(notdir $@) -c $<
 
 # Linking of GCOV objects
-test_gcov 		: $(TEST_TARGET) $(GCOV_OBJS) $(GCOV_TEST_OBJS) Makefile
+$(TEST_GCOV_EXE): $(TEST_TARGET) $(GCOV_OBJS) $(GCOV_TEST_OBJS) Makefile
 				$(CC) $(GCOV_OBJS) $(GCOV_TEST_OBJS) $(GCOV_FLAGS) -o $(TEST_GCOV_EXE) $(LIBS) -L. $(TEST_TARGET)
 
 # Launching of executable & generating HTML report
-$(GCOV_INFO) 	: test_gcov
+$(GCOV_INFO) 	: $(TEST_GCOV_EXE)
 				./$(TEST_GCOV_EXE)
 				geninfo $(GCOV_OBJ_DIR) -b . -o ./$(GCOV_INFO)
 
-# Utility targets
+# DevTools
+vg				: $(TEST_EXE)
+				$(VG) ./$(TEST_EXE)
 
+leaks			: $(TEST_EXE)
+				$(LEAKS) ./$(TEST_EXE)
+
+# Configures clangd language server for VSCode, provides jump tp implementation feature
+clangd			: fclean
+				bear -- make
+				mv compile_commands.json ../.vscode
+
+# Utility targets
 open 			:
 				open coverage/index.html
 

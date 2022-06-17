@@ -148,7 +148,10 @@ Suite *suite_s21_add(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_add"));
     TCase *tc = tcase_create("s21_add_tc");
 
-    // /* Add works great. Tested with binary calculator */
+    // TODO:
+    // 1. compare with existing sub tests
+    // 2. see if the early xoring is needed (probably NO, due to not negating 1 as in sub binary algo)
+    // 3. hardcode very large numbers (decimal has 28 signs -> make up valid sums with that large numbers in binary calculator)
 
     /* tcase_add_loop_test(tc, gcc_128_bits, 0, 100); */
     /* tcase_add_loop_test(tc, random_decimal_exp, 0, 100); */

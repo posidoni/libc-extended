@@ -11,7 +11,7 @@ int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     if (get_sign(value_1) != get_sign(value_2))
         set_sign_neg(result);
 
-    return code;
+    return code; 
 }
 
 void handle_exponent_mul(s21_decimal value_1, s21_decimal value_2,
