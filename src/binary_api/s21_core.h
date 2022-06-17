@@ -91,8 +91,6 @@ s21_decimal shiftnl_ret(s21_decimal a, int n);
 s21_decimal shiftnr_ret(s21_decimal a, int n);
 int shiftl(s21_decimal *a);
 
-void s21_decimal_apply_exponent(s21_decimal *dec);
-
 int eq_zero(s21_decimal value);
 int byte_len(s21_decimal n);
 s21_decimal get_0(void);
