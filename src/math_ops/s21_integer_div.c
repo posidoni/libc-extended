@@ -14,6 +14,7 @@
 
 static s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor,
                                    s21_decimal *result, int *code);
+
 static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
                                 s21_decimal *result, int *code);
 
@@ -23,9 +24,17 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 
     int code = ARITHMETIC_OK;
 
+    /* We should divide unsigned numbers (issue #67) */
+
+    int s1 = get_sign(value_1);
+    int s2 = get_sign(value_2);
+
+    set_sign_pos(&value_1);
+    set_sign_pos(&value_2);
+
     handle_exponent_div(value_1, value_2, result, &code);
 
-    if (get_sign(value_1) != get_sign(value_2))
+    if (s1 != s2)
         set_sign_neg(result);
 
     return code;
