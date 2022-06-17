@@ -42,7 +42,9 @@ int s21_round(s21_decimal value, s21_decimal *result) {
     const s21_decimal ten = get_power_of_ten(1);
 
     while (s21_is_greater(rem, ten)) {
-        s21_div(rem, ten, &divided);
+        if (s21_div(rem, ten, &divided) != ARITHMETIC_OK)
+            return CONVERTATION_ERROR;
+
         rem = divided;
     }
 

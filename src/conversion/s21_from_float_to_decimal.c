@@ -3,7 +3,7 @@
 
 static int get_float_exponent(float val) {
     int exponent = 0;
-    while (val > 1) {
+    while (val >= 1) {
         val /= 10;
         exponent++;
     }
