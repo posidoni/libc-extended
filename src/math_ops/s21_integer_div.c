@@ -35,7 +35,7 @@ static s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor,
                                    s21_decimal *result, int *code) {
     s21_decimal original_divisor = divisor;
     s21_decimal modified_dividend = {0};
-    s21_decimal one = {1};
+    s21_decimal one = {{1}};
 
     if (s21_is_equal(dividend, divisor))
         return one;
