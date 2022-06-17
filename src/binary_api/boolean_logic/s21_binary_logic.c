@@ -1,4 +1,4 @@
-#include "../s21_decimal.h"
+#include "../../s21_decimal.h"
 
 s21_decimal bit_xor(s21_decimal a, s21_decimal b) {
     s21_decimal result = {0};

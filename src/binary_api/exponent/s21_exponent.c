@@ -1,5 +1,4 @@
-#include "../s21_decimal.h"
-#include "s21_core.h"
+#include "../../s21_decimal.h"
 
 /**
  * @brief Normalizes pair of two decimals. To normalize => match their

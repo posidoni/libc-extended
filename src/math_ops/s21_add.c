@@ -41,6 +41,37 @@ static void handle_exponent_add(s21_decimal value_1, s21_decimal value_2,
 
     s21_normalize_decimal_pair(&value_1, &value_2, code);
 
+    /*
+
+        Что тут происходит на русском языке:
+            Если у нас произошло переполнение, но у слагаемых все еще есть некоторая экспонента
+            (то есть их можно округлить путем банковского округления), то мы их округляем и запускаем
+            сложение еще раз
+
+        Вопросы к Степе:
+            1. Что именно делает банк раунд?
+            2. Что банк раунд сделает со следующими числами:
+
+                - 0.1323
+                AB
+                B > 5 - A++
+                B < 5 - A
+                B == 5 - A++ if !A%2 else A
+
+                - 51.5928282823
+
+            Банк раунд полностью убирает часть после запятой?
+
+    */
+
+    // if (exp_1 > 0 && exp_2 > 0 && additional_bit) {
+        // bank_round(&value_1, 1);
+        // bank_round(&value_2, 1);
+    // res = very_stupid_add(value_1, value_2, result, get_exponent(value_1),
+    //                       get_exponent(value_2));
+
+    // ((additional_bit 2^97 % 10) + number % 10) % 10 -> получаем последний знак
+
     /* ADDITION OPERATION */
     if (*code == S21_INFINITY) {
         /* Bank rounding happens when we fail to normalize compounds */
@@ -50,6 +81,7 @@ static void handle_exponent_add(s21_decimal value_1, s21_decimal value_2,
         } else {
             /* +0 (leave as it was) */
             *result = value_2_origin;
+            *code = 0;
         }
     } else {
         /* Normal addition with normalized exponents */

@@ -52,6 +52,7 @@ static void handle_exponent_sub(s21_decimal value_1, s21_decimal value_2,
         } else {
             /* -0 - leave as it was */
             *result = value_2_origin;
+            *code = 0;
         }
     } else {
         *result = binary_subtraction(value_1, value_2, code);

@@ -30,15 +30,8 @@ void s21_swap(s21_decimal *a, s21_decimal *b) {
     *b = tmp;
 }
 
-/**
- * @brief This function is used to generate 0,5 decimal value that is
- * needed by bank rounding.
- *
- * @return s21_decimal
- */
-
 s21_decimal get_05(void) {
-    s21_decimal result;
+    s21_decimal result = {0};
     s21_from_int_to_decimal(5, &result);
     set_exponent(&result, 1);
     set_sign_pos(&result);
@@ -54,13 +47,4 @@ int max(int a, int b) {
 }
 int min(int a, int b) {
     return a < b ? a : b;
-}
-
-uint32_t reverse_bits(uint32_t n) {
-    uint32_t m = 0;
-    for (int i = 0; i < 32; i++, n >>= 1) {
-        m <<= 1;
-        m |= n & 1;
-    }
-    return m;
 }

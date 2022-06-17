@@ -10,13 +10,7 @@
  * @copyright Copyright (c) 2022
  */
 
-#include <stdio.h>
-
 #include "../s21_decimal.h"
-#include "../tests/s21_decimal_test.h"
-
-static s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor,
-                                   s21_decimal *result, int *code);
 
 static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
                                 s21_decimal *result, int *code);
@@ -60,12 +54,12 @@ static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
         memset(result, 0, sizeof(s21_decimal));
         result->bits[0] = 1;
 
-        *result = s21_integer_div(value_1, value_2, result, code);
+        *result = s21_integer_div(value_1, value_2, result);
     }
 }
 
-static s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor,
-                                   s21_decimal *result, int *code) {
+s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor,
+                                   s21_decimal *result) {
     s21_decimal original_divisor = divisor;
     s21_decimal modified_dividend = {0};
     s21_decimal one = {{1}};
@@ -112,7 +106,7 @@ static s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor,
      * substraction. It will later be passed to the recursive call of sivision.
      */
 
-    *code = s21_sub(dividend, divisor, &modified_dividend);
+    s21_sub(dividend, divisor, &modified_dividend);
 
     /**
      * @arg (original_divisor) is nesessary to divide by non-modified version of
@@ -120,10 +114,10 @@ static s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor,
      * left.
      */
 
-    one = s21_integer_div(modified_dividend, original_divisor, &one, code);
+    one = s21_integer_div(modified_dividend, original_divisor, &one);
 
     /* @arg (result) accumulates result of division */
-    *code = s21_add(*result, one, result);
+    s21_add(*result, one, result);
 
     return *result;
 }
