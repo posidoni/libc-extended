@@ -43,7 +43,6 @@ int s21_round(s21_decimal value, s21_decimal *result) {
     printf("truncated = ");
     print_bits_r(truncated);
 #endif
-    /* NOTE: multiply by 10, truncate, mod 10 check & round */
 
     s21_decimal mul_by_10 = value;
     set_exponent(&mul_by_10, exponent - 1);
