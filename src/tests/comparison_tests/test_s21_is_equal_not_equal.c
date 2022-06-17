@@ -2,7 +2,6 @@
 
 START_TEST(gmp_random) {
     s21_decimal a1 = {0};
-    init_zero(&a1);
 
     mpz_t mpz_val, mpz_copy;
     mpz_init_set_ui(mpz_val, 0);
@@ -30,7 +29,6 @@ END_TEST
 START_TEST(gmp_random_inequality) {
     int inequality = rand() % 2;
     s21_decimal a1 = {0};
-    init_zero(&a1);
 
     mpz_t mpz_val, mpz_copy;
     mpz_init_set_ui(mpz_val, 0);

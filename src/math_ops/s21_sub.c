@@ -1,7 +1,7 @@
 #include "../s21_decimal.h"
 
-void handle_exponent_sub(s21_decimal value_1, s21_decimal value_2,
-                         s21_decimal *result, int *code);
+static void handle_exponent_sub(s21_decimal value_1, s21_decimal value_2,
+                                s21_decimal *result, int *code);
 
 int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     int code = ARITHMETIC_OK;
@@ -33,8 +33,8 @@ int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     return code;
 }
 
-void handle_exponent_sub(s21_decimal value_1, s21_decimal value_2,
-                         s21_decimal *result, int *code) {
+static void handle_exponent_sub(s21_decimal value_1, s21_decimal value_2,
+                                s21_decimal *result, int *code) {
     int exp_v1 = get_exponent(value_1);
     int exp_v2 = get_exponent(value_2);
 
@@ -56,8 +56,6 @@ void handle_exponent_sub(s21_decimal value_1, s21_decimal value_2,
     } else {
         *result = binary_subtraction(value_1, value_2, code);
     }
-
-    // set_bit_0(result, 95);
 
     set_exponent(result, res_exp);
 }

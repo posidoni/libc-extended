@@ -49,13 +49,6 @@ int eq_zero(s21_decimal value) {
     return (value.bits[0] == 0 && value.bits[1] == 0 && value.bits[2] == 0);
 }
 
-void init_zero(s21_decimal *n) {
-    n->bits[0] = 0;
-    n->bits[1] = 0;
-    n->bits[2] = 0;
-    n->bits[3] = 0;
-}
-
 int max(int a, int b) {
     return a > b ? a : b;
 }

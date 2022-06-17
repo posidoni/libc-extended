@@ -1,5 +1,4 @@
 #include "../../s21_decimal_test.h"
-#define DEBUG
 
 START_TEST(simple_loop) {
     s21_decimal value = get_random_decimal(1, 8);

@@ -53,27 +53,29 @@ typedef enum {
     CONVERTATION_ERROR = 1
 } convertation_result;
 
-// returns 0 meaning positive 1 negative
+/* returns 0 meaning positive 1 negative */
 bool get_sign(s21_decimal decimal);
 void set_sign_neg(s21_decimal *decimal);
 void set_sign_pos(s21_decimal *decimal);
 void set_sign(s21_decimal *decimal, int sign);
+
+/* exponent handling */
 int get_exponent(s21_decimal decimal);
 void set_exponent(s21_decimal *decimal, int new_exponent);
-// helpers
+
+/* bit setters */
 void set_bit_1(s21_decimal *n, int pos);
 void set_bit_0(s21_decimal *n, int pos);
+int get_bit(s21_decimal n, int pos);
 
 void s21_normalize_decimal_pair(s21_decimal *a, s21_decimal *b, int *overflow);
 
-int get_bit(s21_decimal n, int pos);
-void init_zero(s21_decimal *n);
-
-// BINARY OPERATIONS
+/* binary operations */
 s21_decimal bit_and(s21_decimal a, s21_decimal b);
 s21_decimal bit_or(s21_decimal a, s21_decimal b);
 s21_decimal bit_xor(s21_decimal a, s21_decimal b);
 s21_decimal bit_not(s21_decimal a);
+
 s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2, int *err);
 s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2,
                                int *err);
@@ -81,6 +83,7 @@ s21_decimal binary_multiplication(s21_decimal value_1, s21_decimal value_2,
                                   int *err);
 s21_decimal binary_division(s21_decimal value_1, s21_decimal value_2,
                             int *code);
+
 void shiftnr(s21_decimal *a, int n);
 void shiftr(s21_decimal *a);
 int shiftnl(s21_decimal *a, int n);
@@ -122,10 +125,6 @@ float add_exponent(float val, int exp);
 
 int s21_integer_div_wrapper(s21_decimal value_1, s21_decimal value_2,
                             s21_decimal *result);
-
-int byte_len(s21_decimal n);
-// void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
-//                          s21_decimal *result, int *code);
 
 static const char *const binary_powers_of_ten[29] = {
     [0] =

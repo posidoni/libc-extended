@@ -44,7 +44,7 @@ void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2,
     } else {
         // We must set 1 bit in result, because we will move this bit in mod to
         // the left
-        init_zero(result);
+        memset(result, 0, sizeof(s21_decimal));
         result->bits[0] = 1;
 
         *result = s21_integer_mod(value_1, value_2);
@@ -106,12 +106,6 @@ static s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
      */
 
     s21_sub(dividend, divisor, &modified_dividend);
-
-    /* DIRTY HACK (!) Sometimes for unknown reasons sub incorrectly sets 95th
-     * bit. */
-    /* But, generally, values are correct.  */
-    /* BUG: IF BIT IS SET IN SUB, IT WILL BE OKAY */
-    // set_bit_0(&modified_dividend, 95);
 
     /**
      * @arg (original_divisor) is nesessary to modide by non-modified version of

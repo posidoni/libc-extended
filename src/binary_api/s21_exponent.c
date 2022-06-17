@@ -38,8 +38,7 @@ void s21_normalize_decimal_pair(s21_decimal *a, s21_decimal *b, int *overflow) {
 // }
 
 s21_decimal get_power_of_ten(int pow) {
-    s21_decimal result;
-    init_zero(&result);
+    s21_decimal result = {0};
     set_exponent(&result, 0);
     for (int i = 0; i < 96; ++i) {
         if (binary_powers_of_ten[pow][95 - i] == '1') {
