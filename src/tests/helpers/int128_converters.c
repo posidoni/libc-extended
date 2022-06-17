@@ -25,6 +25,11 @@ s21_decimal ll_to_decimal(long long val) {
 s21_decimal bigint_to_decimal(__int128_t src) {
     s21_decimal res = {0};
 
+    if (src < 0) {
+        set_sign_neg(&res);
+        src = -src;
+    }
+
     for (int i = 0, k = 0; i < 3; i++)
         for (int j = 0; j < 32; j++, k++)
             if (IS_SET(src, k))
