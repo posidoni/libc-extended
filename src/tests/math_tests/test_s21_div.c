@@ -1,8 +1,4 @@
 #include "../s21_decimal_test.h"
-<<<<<<< HEAD
-#include <stdio.h>
-=======
->>>>>>> 5253f65948141b1c73e21f0e3a0c5dbfb9402555
 
 START_TEST(gcc_128_bits) {
     long long long_a = get_random_ll() * rand();
