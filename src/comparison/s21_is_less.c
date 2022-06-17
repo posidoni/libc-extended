@@ -14,12 +14,6 @@
 
 static bool s21_is_less_positive(s21_decimal a, s21_decimal b);
 
-// int s21_is_less_abs(s21_decimal a, s21_decimal b) {
-//     set_sign_pos(&a);
-//     set_sign_pos(&b);
-//     return s21_is_less_positive(a, b);
-// }
-
 int s21_is_less(s21_decimal a, s21_decimal b) {
     if (both_all_zeroes(a, b)) {
         return false;
@@ -59,7 +53,8 @@ static bool s21_is_less_positive(s21_decimal a, s21_decimal b) {
     }
 
     for (int i = 95; i >= 0; i--) {
-        if ((get_bit(a, i) && get_bit(b, i)) || (!get_bit(a, i) && !get_bit(b, i))) {
+        if ((get_bit(a, i) && get_bit(b, i)) ||
+            (!get_bit(a, i) && !get_bit(b, i))) {
             continue;
         }
 
@@ -69,18 +64,6 @@ static bool s21_is_less_positive(s21_decimal a, s21_decimal b) {
             return false;
         }
     }
-
-    // for (int i = 3; i >= 0; i--) {
-    //     if (a.bits[i] == b.bits[i]) {
-    //         continue;
-    //     }
-
-    //     if (a.bits[i] < b.bits[i]) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
     return false;
 }

@@ -6,7 +6,8 @@ s21_decimal convert_gmp_to_decimal(mpz_t input) {
     //  https://gmplib.org/manual/Integer-Import-and-Export
     mpz_export(res.bits, 0, -1, sizeof(res.bits[0]), 1, 0, input);
 
-    if (mpz_sgn(input) == -1) set_sign_neg(&res);
+    if (mpz_sgn(input) == -1)
+        set_sign_neg(&res);
 
     return res;
 }
@@ -16,7 +17,8 @@ void convert_decimal_to_gmp(mpz_t *gmp, s21_decimal *dec) {
 
     apply_exponent_to_mpz(gmp, get_exponent(*dec));
 
-    if (get_sign(*dec)) mpz_neg(*gmp, *gmp);
+    if (get_sign(*dec))
+        mpz_neg(*gmp, *gmp);
 }
 
 void apply_exponent_to_decimal(s21_decimal *dec) {
@@ -25,7 +27,8 @@ void apply_exponent_to_decimal(s21_decimal *dec) {
     mpz_set_ui(tmp, 0);
 
     convert_decimal_to_gmp(&tmp, dec);
-    init_zero(dec);
+
+    memset(dec, 0, sizeof(s21_decimal));
     *dec = convert_gmp_to_decimal(tmp);
 
     mpz_clear(tmp);
