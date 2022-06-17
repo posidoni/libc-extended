@@ -74,6 +74,7 @@ int s21_round(s21_decimal value, s21_decimal *result) {
     printf("bank_round = %d\n", bank_rounding);
 #endif
 
+    // BUG: #76 our bank rounding is broken (5 is special case we need to check even/odd next number)
     if (bank_rounding >= 5)
         code = s21_add(truncated, get_power_of_ten(0), &rounded);
     else

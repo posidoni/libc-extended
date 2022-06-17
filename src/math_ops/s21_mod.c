@@ -1,6 +1,5 @@
 #include "../s21_decimal.h"
 
-static s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor);
 void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2,
                          s21_decimal *result, int *code);
 
@@ -63,7 +62,7 @@ void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2,
     }
 }
 
-static s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
+s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
     s21_decimal original_divisor = divisor;
     s21_decimal res = {0};
     s21_decimal modified_dividend = {0};

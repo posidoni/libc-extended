@@ -2,6 +2,8 @@
 
 static void set_random_pair_sign(s21_decimal *dec, mpz_t *in_mpz_copy);
 
+static uint32_t reverse_bits(uint32_t n);
+
 void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied);
 
 static void get_random_binary_string(s21_decimal *dec, char *mpz_bin_str,
@@ -55,6 +57,15 @@ static void get_random_binary_string(s21_decimal *in, char *mpz_bin_str,
      */
     for (int j = 0; j < size; j++)
         in->bits[j] = reverse_bits(in->bits[j]);
+}
+
+static uint32_t reverse_bits(uint32_t n) {
+    uint32_t m = 0;
+    for (int i = 0; i < 32; i++, n >>= 1) {
+        m <<= 1;
+        m |= n & 1;
+    }
+    return m;
 }
 
 void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied) {
