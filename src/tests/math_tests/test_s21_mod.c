@@ -3,11 +3,20 @@
 START_TEST(gcc_128_bits) {
     long long long_a = get_random_ll() * rand();
     long long long_b = get_random_ll() * rand();
+
+    if (rand() % 2)
+        long_a *= -1;
+
+    if (rand() % 2)
+        long_b *= -1;
+
     // printf("long_a  =%lld\n", long_a);
     // printf("long_b  =%lld\n", long_b);
+
     __int128_t a = long_a;
     __int128_t b = long_b;
     __int128_t mod = a % b;
+
     s21_decimal res128 = bigint_to_decimal(mod);
 
     s21_decimal dec_a = ll_to_decimal(long_a);
@@ -31,11 +40,16 @@ START_TEST(gcc_128_bits) {
         /* I suspect that it is not our problem that signs do not match here */
         /* GCC __int128_t are unsigned, thus, they discard sign */
         /* In observed failed tests our decimal had sign & int 128 didn't */
-        printf(
-            GRN
-            "WARNING! SIGNS DO NOT MATCH! COMPARING ABS VALUES 📌 \n" ENDCOLOR);
-        set_sign_pos(&dec_div);
-        comp_res = s21_is_equal(res128, dec_div);
+
+        print_bits_r(dec_div);
+        print_bits_r(res128);
+        // printf("res  =%lld\n", mod);
+
+        // printf(
+        //     GRN
+        //     "WARNING! SIGNS DO NOT MATCH! COMPARING ABS VALUES 📌 \n" ENDCOLOR);
+        // set_sign_pos(&dec_div);
+        // comp_res = s21_is_equal(res128, dec_div);
     }
 
     ck_assert_int_eq(code, ARITHMETIC_OK);
@@ -200,7 +214,7 @@ Suite *suite_s21_mod(void) {
     tcase_add_loop_test(tc, equal_decimals, 0, 100);
     tcase_add_loop_test(tc, mod_b_greater_than_a, 0, 100);
     tcase_add_loop_test(tc, even_or_odd_mod, 0, 100);
-    tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
+    tcase_add_loop_test(tc, gcc_128_bits, 0, 1000);
     tcase_add_loop_test(tc, mod_by_rand_int, 0, 100);
     tcase_add_loop_test(tc, mod_exists, 0, 100);
 

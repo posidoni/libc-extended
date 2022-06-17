@@ -1,4 +1,5 @@
 #include "../s21_decimal.h"
+#include "s21_core.h"
 
 /**
  * @brief Normalizes pair of two decimals. To normalize => match their
@@ -29,13 +30,6 @@ void s21_normalize_decimal_pair(s21_decimal *a, s21_decimal *b, int *overflow) {
     else
         *b = cur;
 }
-
-// void s21_decimal_apply_exponent(s21_decimal *dec) {
-//     /* TODO: add code checking & respective logic */
-//     int code = 0;
-//     int expon = get_exponent(*dec);
-//     *dec = binary_division(*dec, get_power_of_ten(expon), &code);
-// }
 
 s21_decimal get_power_of_ten(int pow) {
     s21_decimal result = {0};

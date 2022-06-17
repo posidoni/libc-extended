@@ -10,16 +10,21 @@ int s21_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 
     int code = ARITHMETIC_OK;
 
-    if (s21_is_greater(value_2, value_1)) {
-        // Please, note, that this behaviour is just conventional. It is not
-        // universally accepted. Another common option: result = sub(val2, val1)
-        // code = s21_sub(value_1, value_2, result);
+    int s1 = get_sign(value_1);
+
+    s21_decimal copy = value_1;
+    set_sign_pos(&copy);
+
+    if (s21_is_greater(value_2, copy)) {
+        set_sign_pos(&value_1);
         *result = value_1;
     } else {
+        set_sign_pos(&value_1);
+        set_sign_pos(&value_2);
         handle_exponent_mod(value_1, value_2, result, &code);
     }
 
-    if (get_sign(value_1) != get_sign(value_2))
+    if (s1)
         set_sign_neg(result);
 
     return code;
