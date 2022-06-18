@@ -1,4 +1,6 @@
 #include "../s21_decimal.h"
+#include "../tests/s21_decimal_test.h"
+#include <stdio.h>
 
 static void handle_exponent_add(s21_decimal value_1, s21_decimal value_2,
                                 s21_decimal *result, int *code);
@@ -25,6 +27,37 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 
     code = s21_check_infinity(code, get_sign(*result));
 
+
+//     // At this point decimals have equal exponent,
+//     // because it was normalized by s21_normalize_exponent
+    if (code && get_exponent(value_1) && get_exponent(value_2)) {
+
+
+#define DEBUG
+#ifdef DEBUG
+        printf(RED "\tBank rounding\n" ENDCOLOR);
+        float a1, a2, b1, b2;
+
+        s21_from_decimal_to_float(value_1, &a1);
+        s21_from_decimal_to_float(value_2, &b1);
+
+        printf(RED "Before round: %f \n" ENDCOLOR, a1);
+        printf(RED "Before round: %f \n" ENDCOLOR, b1);
+#endif
+
+        s21_bank_rounding(&value_1, 1);
+        s21_bank_rounding(&value_2, 1);
+
+#ifdef DEBUG
+        s21_from_decimal_to_float(value_1, &a2);
+        s21_from_decimal_to_float(value_2, &b2);
+        printf(GRN "After round:  %f \n" ENDCOLOR, a2);
+        printf(GRN "After round:  %f \n" ENDCOLOR, b2);
+#endif
+
+        code = s21_add(value_1, value_2, result);
+    }
+
     return code;
 }
 
@@ -40,37 +73,6 @@ static void handle_exponent_add(s21_decimal value_1, s21_decimal value_2,
     s21_decimal value_2_origin = value_2;
 
     s21_normalize_decimal_pair(&value_1, &value_2, code);
-
-    /*
-
-        Что тут происходит на русском языке:
-            Если у нас произошло переполнение, но у слагаемых все еще есть некоторая экспонента
-            (то есть их можно округлить путем банковского округления), то мы их округляем и запускаем
-            сложение еще раз
-
-        Вопросы к Степе:
-            1. Что именно делает банк раунд?
-            2. Что банк раунд сделает со следующими числами:
-
-                - 0.1323
-                AB
-                B > 5 - A++
-                B < 5 - A
-                B == 5 - A++ if !A%2 else A
-
-                - 51.5928282823
-
-            Банк раунд полностью убирает часть после запятой?
-
-    */
-
-    // if (exp_1 > 0 && exp_2 > 0 && additional_bit) {
-        // bank_round(&value_1, 1);
-        // bank_round(&value_2, 1);
-    // res = very_stupid_add(value_1, value_2, result, get_exponent(value_1),
-    //                       get_exponent(value_2));
-
-    // ((additional_bit 2^97 % 10) + number % 10) % 10 -> получаем последний знак
 
     /* ADDITION OPERATION */
     if (*code == S21_INFINITY) {
