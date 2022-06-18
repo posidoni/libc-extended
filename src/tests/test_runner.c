@@ -34,6 +34,7 @@ void run_testcase(Suite *testcase) {
 void run_tests(void) {
     Suite *list_cases[] = {
            suite_s21_add(),  // ⚠️
+           suite_s21_sub(),                    // ✅
         //    suite_s21_mul(),                    // ⚠️
 
         //    suite_s21_round(),                  // ⚠️
@@ -43,7 +44,6 @@ void run_tests(void) {
         //    suite_s21_floor(),                  // ⚠️
         //    suite_s21_from_decimal_to_float(),  // ⚠️
 
-        //    suite_s21_sub(),                    // ✅
         //    suite_s21_is_less(),                // ✅
         //    suite_s21_truncate(),               // ✅
         //    suite_s21_from_int_to_decimal(),    // ✅

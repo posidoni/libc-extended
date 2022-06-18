@@ -11,6 +11,17 @@ static int get_float_exponent(float val) {
 
 /* NOTE: this works, make sure to set the exponent if testing using online calc
 */
+
+
+
+/*
+
+    I SUPPOSE THAT THE BUG IS THAT WE THINK 11.123123123123 to much for our decimal,
+    because we did not apply bank rounding
+
+*/
+
+
 int s21_from_float_to_decimal(float src, s21_decimal *dst) {
 
     // I suspect that defines are not correct. Please, double check them. I guess, there is a problem with floating point + 28 more digits

@@ -26,5 +26,6 @@ void print_bits(s21_decimal d);
 void print_bits_r(s21_decimal d);
 void print_bits_no_exp(s21_decimal d);
 void debug_print_pair(s21_decimal *dec, mpz_t *big, bool exp_applied);
+void print_string(char *src, s21_decimal d);
 
 #endif  // PRINTERS_H_

@@ -15,6 +15,9 @@
 
 void apply_exponent_to_decimal(s21_decimal *dec);
 
+void print_python(s21_decimal dec);
+char *print_python_debug(s21_decimal dec);
+
 // helpers
 int get_rand(int min, int max);
 void set_random_sign(s21_decimal *dec);

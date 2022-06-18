@@ -18,16 +18,20 @@ void s21_normalize_decimal_pair(s21_decimal *a, s21_decimal *b, int *overflow) {
 
     s21_decimal cur = (e1 < e2) ? *a : *b;
 
-    while (cur_exp != target_exp && !(*overflow)) {
+    while (cur_exp != target_exp && cur_exp < 28 && !(*overflow)) {
         cur = binary_multiplication(cur, get_power_of_ten(1), overflow);
         cur_exp++;
         set_exponent(&cur, cur_exp);
     }
 
-    if (e1 < e2)
-        *a = cur;
-    else
-        *b = cur;
+    if (!*overflow) {
+        if (e1 < e2)
+            *a = cur;
+        else
+            *b = cur;
+    } else {
+        s21_bank_rounding(&cur, target_exp - cur_exp);
+    }
 }
 
 s21_decimal get_power_of_ten(int pow) {

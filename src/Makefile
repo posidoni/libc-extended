@@ -2,7 +2,7 @@
 CC 				 =	gcc
 
 # Compilation flags configuration
-ALL_TARGETS 	 = $(TARGET) $(TEST_EXE) # gcov_report
+ALL_TARGETS 	 = $(TARGET) $(TEST_EXE) #gcov_report
 ASAN 			 = 	#-fsanitize=address
 UBSAN			 =	#-fsanitize=undefined
 STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic $(C_OPTIMIZATION) # -fanalyzer -Werror #-Werror
@@ -41,8 +41,8 @@ OBJ_DIR 		 =	./objs
 GCOV_OBJ_DIR	 =	./tests/gcov_obj
 
 # Source code files configuration
-SRC 			 =	$(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.c")
-TEST_SRC 		 =  $(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.c")
+SRC 			 =	$(notdir $(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.c"))
+TEST_SRC 		 =  $(notdir $(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.c"))
 INC 			 =	$(shell find $(SRC_DIR) -maxdepth 1 -name "s21_*.h")
 TEST_INC		 =	$(shell find $(TEST_SRC_DIR) -maxdepth 1 -name "*.h")
 
@@ -79,19 +79,19 @@ all 			: 	$(ALL_TARGETS)
 # General compilation rule
 %.o 			: %.c $(INC)
 				@$(MK) $(OBJ_DIR)
-				$(CC) $(CFLAGS) -o $(OBJ_DIR)/$(notdir $@) -c $<
+				$(CC) $(CFLAGS) -o $(addprefix $(OBJ_DIR)/, $@) -c $<
 
 # Building static library
 $(TARGET) 		: $(OBJS) Makefile
-				$(AR) $(TARGET) $(OBJ_DIR)/*
+				$(AR) $(TARGET) $(addprefix $(OBJ_DIR)/, $(OBJS))
 				$(RAN) $(TARGET)
 
 $(TEST_TARGET)	: $(GCOV_OBJS) $(INC)
-				$(AR) $(TEST_TARGET) $(GCOV_OBJ_DIR)/*
+				$(AR) $(TEST_TARGET) $(GCOV_OBJS)
 				$(RAN) $(TEST_TARGET)
 
-$(TEST_EXE) 			: $(TARGET) $(TEST_OBJS) $(TEST_INC) Makefile
-				$(CC) $(OBJ_DIR)/* $(ASAN) $(UBSAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(LIBS) -L. $(TARGET)
+$(TEST_EXE) 	: $(TARGET) $(TEST_OBJS) $(TEST_INC) Makefile
+				$(CC) $(addprefix $(OBJ_DIR)/, $(TEST_OBJS)) $(ASAN) $(UBSAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(LIBS) -L. $(TARGET)
 				./$(TEST_EXE)
 
 # GCOV stage
@@ -106,7 +106,7 @@ $(GCOV_TARGET) 	: $(GCOV_INFO)
 # GCOV objects compilation rule
 $(GCOV_OBJ_DIR)/gcov_%.o : %.c $(INC)
 				@$(MK) $(OBJ_DIR)
-				$(CC) $(CFLAGS) -o $(GCOV_OBJ_DIR)/$(notdir $@) -c $<
+				$(CC) $(CFLAGS) -o $@ -c $<
 
 # Linking of GCOV objects
 $(TEST_GCOV_EXE): $(TEST_TARGET) $(GCOV_OBJS) $(GCOV_TEST_OBJS) Makefile
@@ -156,4 +156,4 @@ lint 			: Makefile
 
 re 				: fclean all
 
-.PHONY 			: all clean fclean re open lint
+.PHONY 			: all clean fclean re open lint vg leaks clangd
