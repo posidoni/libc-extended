@@ -1,4 +1,5 @@
 #include "../s21_decimal.h"
+#include <stdio.h>
 
 static int bank_rounding(int n);
 
@@ -38,20 +39,40 @@ static int bank_rounding(int n) {
 
 void s21_bank_rounding(s21_decimal *dec, int times) {
     int code = 0;
+    int sign = get_sign(*dec);
+    set_sign_pos(dec);
+    s21_decimal copy = *dec;
 
     while (times > 0) {
         int old_exp = get_exponent(*dec);
         set_exponent(dec, 0);
-        s21_decimal remainder = s21_integer_mod(*dec, get_power_of_ten(2));
+        s21_decimal remainder = s21_integer_mod(copy, get_power_of_ten(2));
         set_exponent(dec, old_exp - 1);
-        s21_decimal new_value = s21_integer_div(*dec, get_power_of_ten(1), &new_value);
+
+        s21_decimal new_value = {0};
+        // new_value = s21_integer_div(copy, get_power_of_ten(1), &new_value);
+
+        set_exponent(&copy, 0);
+        set_exponent(&new_value, 0);
+
+        s21_div(copy, get_power_of_ten(1), &new_value);
+
+        set_exponent(&new_value, old_exp - 1);
+
+        *dec = new_value; // decimal is divided by 10
 
         /* Interesting mask trick by Vlad. Remainder in mod(a, 100) can never be more than 100 */
         int mask = (127 & remainder.bits[0]);
 
         if (bank_rounding(mask)) {
-            *dec = binary_addition(*dec, get_power_of_ten(0), &code);
+            printf("ADDING ONE!\n");
+            s21_add(*dec, get_power_of_ten(0), &new_value);
+            *dec = new_value;
+            set_exponent(dec, old_exp - 1);
         }
         times--;
     }
+
+    if (sign)
+        set_sign_neg(dec);
 }

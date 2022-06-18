@@ -1,4 +1,5 @@
 #include "../s21_decimal_test.h"
+#include <math.h>
 
 START_TEST(overflow_test) {
     s21_decimal a = {0};
@@ -104,14 +105,18 @@ START_TEST(random_float) {
     if (rand() % 2)
         float_b *= -1;
 
+    // float_a = fabsf(float_a);
+    // float_b = fabsf(float_b);
+
     float float_res = float_a + float_b;
 
-#define  DEBUG
+    // float_res = fabsf(float_res);
 
+#define  DEBUG
 #ifdef DEBUG
     printf("float_a = %f\n", float_a);
     printf("float_b = %f\n", float_b);
-    printf("float_sum = %f\n", float_res);
+    printf("float_sum (expected) = %f\n", float_res);
 #endif
 
     s21_decimal expected = {0};
@@ -126,11 +131,11 @@ START_TEST(random_float) {
     /* NOTE: SOMETIMES CODE IS INFINITY FOR UNKNOWN REASON */
     int code = s21_add(dec_a, dec_b, &result);
 
-    float expected_float = 0;
-    s21_from_decimal_to_float(result, &expected_float);
+    float got_float = 0;
+    s21_from_decimal_to_float(result, &got_float);
 
 #ifdef DEBUG
-    printf("expctd_flt= %f\n", expected_float);
+    printf("GOT_FLOAT (got dec -> got float)= %f\n", got_float);
     printf("BELOW & ABOVE SOME LOSE OF PRECISION IS OK\n");
     printf("------------------------------------------\n");
     printf("result_exp   = %d\n", get_exponent(result));
@@ -143,7 +148,7 @@ START_TEST(random_float) {
 #endif
 
     ck_assert_int_eq(code, ARITHMETIC_OK);
-    ck_assert_float_eq_tol(expected_float, float_res, 1e-06);
+    ck_assert_float_eq_tol(got_float, float_res, 1e-06);
 }
 
 Suite *suite_s21_add(void) {
