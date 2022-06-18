@@ -14,9 +14,13 @@ static int bank_rounding(int n) {
     int res = 0;
 
     int rem = n % 10;
-    int second_is_even = (n / 10) % 2;
+    int second_is_odd = (n / 10) % 2;
 
-    if (rem > 5 || (rem == 5 && second_is_even)) {
+    // Bank rounding applies when the second is odd. Examples: 0.95, 0.75
+    // because bank rounding downs to nearest even number -> 1.00, 8.00, etc.
+    // zero will be discarded. 0.5 -> 0.0
+
+    if (rem > 5 || (rem == 5 && second_is_odd)) {
         res = 1;
     }
 
@@ -48,5 +52,6 @@ void s21_bank_rounding(s21_decimal *dec, int times) {
         if (bank_rounding(mask)) {
             *dec = binary_addition(*dec, get_power_of_ten(0), &code);
         }
+        times--;
     }
 }
