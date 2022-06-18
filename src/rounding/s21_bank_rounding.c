@@ -1,6 +1,4 @@
 #include "../s21_decimal.h"
-#include "../tests/s21_decimal_test.h"
-#include <stdio.h>
 
 static int bank_rounding(int n);
 
@@ -33,6 +31,8 @@ static int bank_rounding(int n) {
  * @brief Applies bank rounding to provided decimal. Bank rounding can never overflow a decimal,
  * if it is used correctly (i.e. if the decimal has exponent >= 1).
  *
+ * @warning (@bezlant): code might seem like a mess but it really works.
+ *
  * @param dec - Target of bank rounding.
  * @param times - Times the rounding is applied.
  * Each time it will decrement the exponent and eat 1 digit.
@@ -54,7 +54,7 @@ void s21_bank_rounding(s21_decimal *dec, int times) {
 
         // s21_div(copy, get_power_of_ten(1), &new_value);
         // new_value = s21_integer_div(copy, get_power_of_ten(2), &new_value); does not work probably
-        
+
         set_exponent(dec, old_exp - 1);
 
         set_exponent(&copy, 0);
@@ -71,14 +71,11 @@ void s21_bank_rounding(s21_decimal *dec, int times) {
 
         if (bank_rounding(mask)) {
             s21_decimal one = get_power_of_ten(0);
+            // To round up 0.00095 we want to add 0.0001, not 1.0
             set_exponent(&one, old_exp - 1);
-
             s21_decimal tmp = {0};
-
             (void)s21_add(*dec, one, &tmp);
-
             *dec = tmp;
-
         }
         times--;
     }
