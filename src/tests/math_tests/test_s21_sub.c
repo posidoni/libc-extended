@@ -32,16 +32,14 @@ START_TEST(random_decimal_exp) {
 
     bool comp_res = s21_is_equal(dec_sub, short_dec);
 
-    if (!comp_res) {
-#ifdef DEBUG
-        printf("ERROR\n");
-        printf("1: \t");
-        print_bits_r(a);
-        printf("2: \t");
-        print_bits_r(b);
-        print_bits_r(dec_sub);
-        print_bits_r(short_dec);
-#endif
+    if (comp_res == 0) {
+        printf("%lld \n", long_a);
+        printf("(-) \n");
+        printf("%lld \n", long_b);
+
+        printf("=== (exp, got)\n");
+        print_python(short_dec);
+        print_python(dec_sub);
     }
 
     ck_assert_int_eq(comp_res, true);
@@ -138,8 +136,8 @@ Suite *suite_s21_sub(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_sub"));
     TCase *tc = tcase_create("s21_sub_tc");
 
-    tcase_add_loop_test(tc, random_decimal_exp, 0, 100);
-    tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
+    tcase_add_loop_test(tc, random_decimal_exp, 0, 1000);
+    tcase_add_loop_test(tc, gcc_128_bits, 0, 1000);
     // tcase_add_loop_test(tc, random_float, 0, 1);
 
     suite_add_tcase(s, tc);

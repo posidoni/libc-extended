@@ -39,6 +39,8 @@ void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2,
 
     int res_exp = exp_v1 - exp_v2;
 
+    s21_normalize_decimal_pair(&value_1, &value_2, code);
+
     // Edge case. mod by 1
     if (s21_is_equal(value_2, get_power_of_ten(0)) ||
         s21_is_equal(value_1, value_2)) {

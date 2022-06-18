@@ -27,6 +27,10 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     set_sign_pos(&value_1);
     set_sign_pos(&value_2);
 
+    s21_normalize_decimal_pair(&value_1, &value_2, &code);
+
+    // if we can't normalize divide -> use bank rounding
+
     handle_exponent_div(value_1, value_2, result, &code);
 
     if (s1 != s2)
@@ -42,7 +46,6 @@ static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
     /* 2 / 3 => 2 * 10^3 / 3 => 2000 / 3 => 666 / 10^3 => 0.66666666(6) */
     /* Last bit is rounded, i.e. 2/3 = 0.6666666666(6) => 0.66666666667 */
 
-    s21_normalize_decimal_pair(&value_1, &value_2, code);
 
     /* Edge case. Division by 1 */
     if (s21_is_equal(value_2, get_power_of_ten(0))) {
