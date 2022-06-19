@@ -71,14 +71,29 @@ int s21_round(s21_decimal value, s21_decimal *result) {
     s21_from_decimal_to_int(rem, &bank_rounding);
 
 #ifdef DEBUG
-    printf("bank_round = %d\n", bank_rounding);
+    printf("bank_rounding   = %d\n", bank_rounding);
 #endif
 
-    // BUG: #76 our bank rounding is broken (5 is special case we need to check even/odd next number)
-    if (bank_rounding >= 5)
+    /* https://wiki.c2.com/?BankersRounding */
+    if (bank_rounding > 5) {
         code = s21_add(truncated, get_power_of_ten(0), &rounded);
-    else
+    } else if (bank_rounding < 5) {
         rounded = truncated;
+    } else {
+        s21_decimal truncated_mod10 = {0};
+        s21_mod(truncated, get_power_of_ten(1), &truncated_mod10);
+        int tie_breaker = 0;
+        s21_from_decimal_to_int(truncated_mod10, &tie_breaker);
+
+        if ((tie_breaker + 1) % 2 == 0)
+            code = s21_add(truncated, get_power_of_ten(0), &rounded);
+        else
+            rounded = truncated;
+
+#ifdef DEBUG
+        printf("TIE_BREAKER = %d\n", tie_breaker);
+#endif
+    }
 
     *result = rounded;
 
