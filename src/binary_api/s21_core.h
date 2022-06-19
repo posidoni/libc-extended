@@ -18,9 +18,8 @@
 #define INIT_ZERO(X) (X &= (0U << 32))
 #define ZERO_BIT(X, POS) (X &= ~(1UL << POS));
 
-/* BUG #77 I'm pretty sure these values are wrong. Double check this */
-#define MAX_DECIMAL 7.92281625143e+28
-#define MIN_DECIMAL -7.92281625143e+28
+#define MAX_DECIMAL 79228162514264337593543950335.0F
+#define MIN_DECIMAL -79228162514264337593543950335.0F
 
 // SIGN handling
 bool get_sign(s21_decimal decimal);
