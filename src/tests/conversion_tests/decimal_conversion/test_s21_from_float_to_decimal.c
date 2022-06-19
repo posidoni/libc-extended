@@ -3,7 +3,8 @@
 START_TEST(float_to_dec) {
     s21_decimal res = {0};
 
-    float expected = get_random_float(-5387.4133, 41341.41134);
+    float expected =
+        get_random_float(-0.411349519359193591, 1.4113458138581851);
     int err = s21_from_float_to_decimal(expected, &res);
     float got = 0;
     s21_from_decimal_to_float(res, &got);
@@ -18,7 +19,7 @@ START_TEST(float_to_dec) {
 #endif
 
     if (err == CONVERTATION_OK)
-        ck_assert_float_eq_tol(got, expected, 1e-01);
+        ck_assert_float_eq_tol(got, expected, 1e-06);
 }
 
 Suite *suite_s21_from_float_to_decimal(void) {
