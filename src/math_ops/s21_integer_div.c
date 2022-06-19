@@ -12,13 +12,12 @@
 
 #include "../s21_decimal.h"
 
-static s21_decimal s21_integer_div_private(s21_decimal dividend, s21_decimal divisor,
-                                           s21_decimal *result);
+static s21_decimal s21_integer_div_private(s21_decimal dividend, s21_decimal divisor, s21_decimal *result);
 
-static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
-                                s21_decimal *result, int *code);
+static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code);
 
 int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
+    memset(result, 0, sizeof(*result));
     if (eq_zero(value_2))
         return S21_NAN;
 
@@ -43,7 +42,8 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 }
 
 int s21_int_div(s21_decimal dividend, s21_decimal divisor, s21_decimal *result) {
-    if (eq_zero(divisor)) return S21_NAN;
+    if (eq_zero(divisor))
+        return S21_NAN;
     int code = ARITHMETIC_OK;
 
     *result = get_power_of_ten(0);
@@ -70,8 +70,7 @@ int s21_int_div(s21_decimal dividend, s21_decimal divisor, s21_decimal *result) 
     return code;
 }
 
-static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
-                                s21_decimal *result, int *code) {
+static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code) {
     /* TODO add floating point division logic */
 
     /* 2 / 3 => 2 * 10^3 / 3 => 2000 / 3 => 666 / 10^3 => 0.66666666(6) */
@@ -92,8 +91,7 @@ static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
     }
 }
 
-static s21_decimal s21_integer_div_private(s21_decimal dividend, s21_decimal divisor,
-                                           s21_decimal *result) {
+static s21_decimal s21_integer_div_private(s21_decimal dividend, s21_decimal divisor, s21_decimal *result) {
     s21_decimal original_divisor = divisor;
     s21_decimal modified_dividend = {0};
     s21_decimal one = {{1}};
@@ -120,7 +118,8 @@ static s21_decimal s21_integer_div_private(s21_decimal dividend, s21_decimal div
      * once.
      */
 
-    while ((s21_is_less_basic(divisor, dividend) || s21_is_equal(divisor, dividend)) && !get_bit(divisor, 95)) {
+    while ((s21_is_less_basic(divisor, dividend) || s21_is_equal(divisor, dividend)) &&
+           !get_bit(divisor, 95)) {
         // printf("3\n");
         shiftl(&divisor);
         shiftl(result);
