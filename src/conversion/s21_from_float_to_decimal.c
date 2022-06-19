@@ -10,9 +10,7 @@ static int get_float_exponent(double val) {
 }
 
 /* NOTE: this works, make sure to set the exponent if testing using online calc
-*/
-
-
+ */
 
 /*
 
@@ -21,9 +19,8 @@ static int get_float_exponent(double val) {
 
 */
 
-
 int s21_from_float_to_decimal(float src, s21_decimal *dst) {
-
+    memset(dst, 0, sizeof(*dst));
     if (!isnormal(src))
         return CONVERTATION_ERROR;
     if (src > MAX_DECIMAL || src < MIN_DECIMAL)

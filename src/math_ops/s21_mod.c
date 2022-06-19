@@ -1,13 +1,14 @@
+#include <stdio.h>
+
 #include "../s21_decimal.h"
 #include "s21_dec_math.h"
-#include <stdio.h>
 
 static s21_decimal s21_integer_mod_private(s21_decimal dividend, s21_decimal divisor);
 
-void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2,
-                         s21_decimal *result, int *code);
+void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code);
 
 int s21_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
+    memset(result, 0, sizeof(*result));
     if (eq_zero(value_2))
         return S21_NAN;
 
@@ -71,7 +72,8 @@ static s21_decimal s21_integer_mod_private(s21_decimal dividend, s21_decimal div
      * once.
      */
 
-    while ((s21_is_less_basic(divisor, dividend) || s21_is_equal(divisor, dividend)) && !get_bit(divisor, 95)) {
+    while ((s21_is_less_basic(divisor, dividend) || s21_is_equal(divisor, dividend)) &&
+           !get_bit(divisor, 95)) {
         // printf("1\n");
         shiftl(&divisor);
     }
