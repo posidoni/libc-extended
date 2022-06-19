@@ -12,6 +12,9 @@
 
 #include "../s21_decimal.h"
 
+static s21_decimal s21_integer_div_private(s21_decimal dividend, s21_decimal divisor,
+                                           s21_decimal *result);
+
 static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
                                 s21_decimal *result, int *code);
 
@@ -27,11 +30,42 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     set_sign_pos(&value_1);
     set_sign_pos(&value_2);
 
+<<<<<<< HEAD
+=======
     s21_normalize_decimal_pair(&value_1, &value_2, &code);
 
+>>>>>>> 2ae3e96eaa63686216f49d600198b1f333803c56
     // if we can't normalize divide -> use bank rounding
 
     handle_exponent_div(value_1, value_2, result, &code);
+
+    if (s1 != s2)
+        set_sign_neg(result);
+
+    return code;
+}
+
+int s21_int_div(s21_decimal dividend, s21_decimal divisor, s21_decimal *result) {
+    if (eq_zero(divisor)) return S21_NAN;
+    int code = ARITHMETIC_OK;
+
+    *result = get_power_of_ten(0);
+    int s1 = get_sign(dividend), s2 = get_sign(divisor);
+
+    set_sign_pos(&dividend);
+    set_sign_pos(&divisor);
+
+    int final_exp = get_exponent(dividend) - get_exponent(divisor);
+
+    set_exponent(&dividend, 0);
+    set_exponent(&divisor, 0);
+
+    memset(result, 0, sizeof(s21_decimal));
+    result->bits[0] = 1;
+
+    *result = s21_integer_div_private(dividend, divisor, result);
+
+    set_exponent(result, final_exp);
 
     if (s1 != s2)
         set_sign_neg(result);
@@ -45,7 +79,7 @@ static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
 
     /* 2 / 3 => 2 * 10^3 / 3 => 2000 / 3 => 666 / 10^3 => 0.66666666(6) */
     /* Last bit is rounded, i.e. 2/3 = 0.6666666666(6) => 0.66666666667 */
-
+    s21_normalize_decimal_pair(&value_1, &value_2, code);
 
     /* Edge case. Division by 1 */
     if (s21_is_equal(value_2, get_power_of_ten(0))) {
@@ -57,19 +91,20 @@ static void handle_exponent_div(s21_decimal value_1, s21_decimal value_2,
         memset(result, 0, sizeof(s21_decimal));
         result->bits[0] = 1;
 
-        *result = s21_integer_div(value_1, value_2, result);
+        *result = s21_integer_div_private(value_1, value_2, result);
     }
 }
 
-s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor,
-                                   s21_decimal *result) {
+static s21_decimal s21_integer_div_private(s21_decimal dividend, s21_decimal divisor,
+                                           s21_decimal *result) {
     s21_decimal original_divisor = divisor;
     s21_decimal modified_dividend = {0};
     s21_decimal one = {{1}};
+    int unused_code = 0;
 
     if (s21_is_equal(dividend, divisor))
         return one;
-    else if (s21_is_less(dividend, divisor))
+    else if (s21_is_less_basic(dividend, divisor))
         return modified_dividend;
 
     /* Our goal is to align divisor & dividend, so we are shifting divisor to
@@ -88,13 +123,15 @@ s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor,
      * once.
      */
 
-    while (s21_is_less_or_equal(divisor, dividend)) {
+    while ((s21_is_less_basic(divisor, dividend) || s21_is_equal(divisor, dividend)) && !get_bit(divisor, 95)) {
+        // printf("3\n");
         shiftl(&divisor);
         shiftl(result);
     }
 
     /* Shifting (@divisor) once to correctly align it with dividend */
-    if (s21_is_less(dividend, divisor)) {
+    if (s21_is_less_basic(dividend, divisor)) {
+        // printf("4\n");
         shiftr(&divisor);
         shiftr(result);
     }
@@ -109,7 +146,7 @@ s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor,
      * substraction. It will later be passed to the recursive call of sivision.
      */
 
-    s21_sub(dividend, divisor, &modified_dividend);
+    modified_dividend = binary_subtraction(dividend, divisor, &unused_code);
 
     /**
      * @arg (original_divisor) is nesessary to divide by non-modified version of
@@ -117,10 +154,10 @@ s21_decimal s21_integer_div(s21_decimal dividend, s21_decimal divisor,
      * left.
      */
 
-    one = s21_integer_div(modified_dividend, original_divisor, &one);
+    one = s21_integer_div_private(modified_dividend, original_divisor, &one);
 
     /* @arg (result) accumulates result of division */
-    s21_add(*result, one, result);
+    *result = binary_addition(one, *result, &unused_code);
 
     return *result;
 }

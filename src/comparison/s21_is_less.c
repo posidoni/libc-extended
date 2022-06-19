@@ -43,6 +43,23 @@ int s21_is_less(s21_decimal a, s21_decimal b) {
     return res;
 }
 
+bool s21_is_less_basic(s21_decimal a, s21_decimal b) {
+    for (int i = 95; i >= 0; i--) {
+        if ((get_bit(a, i) && get_bit(b, i)) ||
+            (!get_bit(a, i) && !get_bit(b, i))) {
+            continue;
+        }
+
+        if (!get_bit(a, i) && get_bit(b, i)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    return false;
+}
+
 static bool s21_is_less_positive(s21_decimal a, s21_decimal b) {
     int overflow = 0;
     s21_normalize_decimal_pair(&a, &b, &overflow);

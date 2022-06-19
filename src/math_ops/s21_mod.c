@@ -1,4 +1,8 @@
 #include "../s21_decimal.h"
+#include "s21_dec_math.h"
+#include <stdio.h>
+
+static s21_decimal s21_integer_mod_private(s21_decimal dividend, s21_decimal divisor);
 
 void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2,
                          s21_decimal *result, int *code);
@@ -7,72 +11,47 @@ int s21_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     if (eq_zero(value_2))
         return S21_NAN;
 
-    int code = ARITHMETIC_OK;
+    int code = 0;
 
-    int s1 = get_sign(value_1);
+    s21_normalize_decimal_pair(&value_1, &value_2, &code);
 
-    s21_decimal copy = value_1;
-    set_sign_pos(&copy);
+    int exp = get_exponent(value_1);
 
-    if (s21_is_greater(value_2, copy)) {
-        set_sign_pos(&value_1);
-        *result = value_1;
-    } else {
-        set_sign_pos(&value_1);
-        set_sign_pos(&value_2);
-        handle_exponent_mod(value_1, value_2, result, &code);
-    }
+    code = s21_int_mod(value_1, value_2, result);
 
-    if (s1)
-        set_sign_neg(result);
+    set_exponent(result, exp);
 
     return code;
 }
 
-void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2,
-                         s21_decimal *result, int *code) {
-    int exp_v1 = get_exponent(value_1);
-    int exp_v2 = get_exponent(value_2);
+int s21_int_mod(s21_decimal dividend, s21_decimal divisor, s21_decimal *result) {
+    if (eq_zero(divisor))
+        return S21_NAN;
 
-    set_exponent(&value_1, 0);
-    set_exponent(&value_2, 0);
+    result->bits[0] = 1;
+    result->bits[1] = 0;
+    result->bits[2] = 0;
+    result->bits[3] = 0;
 
-    int res_exp = exp_v1 - exp_v2;
+    set_sign(result, get_sign(dividend));
+    set_sign_pos(&dividend);
+    set_sign_pos(&divisor);
 
-    s21_normalize_decimal_pair(&value_1, &value_2, code);
+    *result = s21_integer_mod_private(dividend, divisor);
 
-    // Edge case. mod by 1
-    if (s21_is_equal(value_2, get_power_of_ten(0)) ||
-        s21_is_equal(value_1, value_2)) {
-        const s21_decimal zero = {0};
-        *result = zero;
-        *code = ARITHMETIC_OK;
-    } else {
-        // We must set 1 bit in result, because we will move this bit in mod to
-        // the left
-        memset(result, 0, sizeof(s21_decimal));
-        result->bits[0] = 1;
-
-        *result = s21_integer_mod(value_1, value_2);
-
-        while (res_exp < 0) {
-            *result = binary_multiplication(*result, get_power_of_ten(1), code);
-            res_exp++;
-        }
-
-        set_exponent(result, res_exp);
-    }
+    return ARITHMETIC_OK;
 }
 
-s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
+static s21_decimal s21_integer_mod_private(s21_decimal dividend, s21_decimal divisor) {
     s21_decimal original_divisor = divisor;
     s21_decimal res = {0};
     s21_decimal modified_dividend = {0};
     s21_decimal zero = {0};
+    int code = 0;
 
     if (s21_is_equal(dividend, divisor)) {
         return zero;
-    } else if (s21_is_less(dividend, divisor)) {
+    } else if (s21_is_less_basic(dividend, divisor)) {
         return dividend;
     }
 
@@ -92,12 +71,14 @@ s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
      * once.
      */
 
-    while (s21_is_less_or_equal(divisor, dividend)) {
+    while ((s21_is_less_basic(divisor, dividend) || s21_is_equal(divisor, dividend)) && !get_bit(divisor, 95)) {
+        // printf("1\n");
         shiftl(&divisor);
     }
 
     // Shifting (divisor) once to correctly align it with dividend
-    if (s21_is_less(dividend, divisor)) {
+    if (s21_is_less_basic(dividend, divisor)) {
+        // printf("2\n");
         shiftr(&divisor);
     }
 
@@ -111,7 +92,7 @@ s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
      * substraction. It will later be passed to the recursive call of sivision.
      */
 
-    s21_sub(dividend, divisor, &modified_dividend);
+    modified_dividend = binary_subtraction(dividend, divisor, &code);
 
     /**
      * @arg (original_divisor) is nesessary to modide by non-modified version of
@@ -119,7 +100,7 @@ s21_decimal s21_integer_mod(s21_decimal dividend, s21_decimal divisor) {
      * left.
      */
 
-    res = s21_integer_mod(modified_dividend, original_divisor);
+    res = s21_integer_mod_private(modified_dividend, original_divisor);
 
     return res;
 }

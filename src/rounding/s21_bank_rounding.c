@@ -1,4 +1,11 @@
+<<<<<<< HEAD
+#include <stdio.h>
+=======
 #include "../s21_decimal.h"
+>>>>>>> 2ae3e96eaa63686216f49d600198b1f333803c56
+
+#include "../s21_decimal.h"
+#include "../tests/s21_decimal_test.h"
 
 static int bank_rounding(int n);
 
@@ -39,46 +46,53 @@ static int bank_rounding(int n) {
  */
 
 void s21_bank_rounding(s21_decimal *dec, int times) {
+    int code = 0;
+
     int sign = get_sign(*dec);
+    int exp = get_exponent(*dec);
     set_sign_pos(dec);
-    s21_decimal copy = *dec;
 
     while (times > 0) {
-        int old_exp = get_exponent(*dec);
-        set_exponent(dec, 0);
-        s21_decimal remainder = s21_integer_mod(copy, get_power_of_ten(2));
-        set_exponent(dec, old_exp - 1);
+        s21_decimal mod = {0}, ten = get_power_of_ten(1), hun = get_power_of_ten(2);
 
-        set_exponent(dec, 0);
-        s21_decimal new_value = {0};
+        s21_int_mod(*dec, hun, &mod);
 
-        // s21_div(copy, get_power_of_ten(1), &new_value);
-        // new_value = s21_integer_div(copy, get_power_of_ten(2), &new_value); does not work probably
+        int mask = (127 & mod.bits[0]);
 
-        set_exponent(dec, old_exp - 1);
+        s21_int_div(*dec, ten, dec);
 
-        set_exponent(&copy, 0);
-        set_exponent(&new_value, 0);
-
-        s21_div(copy, get_power_of_ten(1), &new_value);
-
-        *dec = new_value; // decimal is divided by 10
-
-        set_exponent(dec, old_exp - 1);
-
-        /* Interesting mask trick by Vlad. Remainder in mod(a, 100) can never be more than 100 */
-        int mask = (127 & remainder.bits[0]);
+        set_exponent(dec, exp - 1);
 
         if (bank_rounding(mask)) {
-            s21_decimal one = get_power_of_ten(0);
-            // To round up 0.00095 we want to add 0.0001, not 1.0
-            set_exponent(&one, old_exp - 1);
-            s21_decimal tmp = {0};
-            (void)s21_add(*dec, one, &tmp);
-            *dec = tmp;
+            // THIS BREAKS EVERYTHING (!) BINARY ADDITION IS TOO STUPID AND ASSUMS WE HAVE 0 EXP
+            s21_decimal one = {1, 0, 0, 0};
+            s21_decimal copy = *dec;
+            *dec = binary_addition(copy, one, &code);
+            set_exponent(dec, exp - 1);
         }
+
         times--;
     }
 
     set_sign(dec, sign);
 }
+
+// int bank_round(s21_decimal *a, int n) {
+//     while (n--) {
+//         s21_decimal mod_res = init_zero_decimal(), ten, hun;
+//         s21_from_int_to_decimal(100, &hun);
+//         s21_from_int_to_decimal(10, &ten);
+//         stupid_mod(*a, hun, &mod_res);
+//         // d_print_decimal(*a);
+//         // change_endian(&mod_res);
+//         int mask = 127 & mod_res.bits[0];
+//         int_div(*a, ten, a);
+//         int exp = get_exponent(*a) - 1;
+//         set_exponent(a, exp);
+//         if (bank_rounding(mask)) {
+//             s21_decimal one = {1, 0, 0, 0};
+//             very_stupid_add(*a, one, a, 0, 0);
+//         }
+//     }
+//     return 0;
+// }
