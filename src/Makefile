@@ -5,7 +5,7 @@ CC 				 =	gcc
 ALL_TARGETS 	 = $(TARGET) $(TEST_EXE) #gcov_report
 ASAN 			 = 	#-fsanitize=address
 UBSAN			 =	#-fsanitize=undefined
-STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic $(C_OPTIMIZATION) # -fanalyzer -Werror #-Werror
+STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic $(C_OPTIMIZATION) # -fanalyzer -Werror 
 
 # Optimizaiton (https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html):
 C_OPTIMIZATION	 = -O0
