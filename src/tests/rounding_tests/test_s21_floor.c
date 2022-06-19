@@ -1,8 +1,7 @@
 #include "../s21_decimal_test.h"
 
 START_TEST(gcc_128_bits) {
-    /* get random value */
-    __int128_t a = get_random_ll() * rand();
+    /* get random value */ __int128_t a = get_random_ll() * rand();
     if (rand() % 2)
         a = -a;
 
@@ -28,7 +27,7 @@ START_TEST(gcc_128_bits) {
     int ret = s21_floor(val, &got);
 
 #ifdef DEBUG
-    printf("exponenet = %d\n", get_exponent(val));
+    printf("exponent = %d\n", get_exponent(val));
     printf("val=     ");
     print_bits_r(val);
     printf("expected=");
