@@ -58,7 +58,7 @@ class MyDecimal:
                     other.balancing_decimal(-diff)
 
     def to_bin_form(self):
-        line = f"{'1' if self.decimal < 0 else '0'}"
+        line = f"{'1' if self.decimal < 0 else '0'}"j
         for i in range(7):
             line += '0'
         tmp_exp = str(bin(self.exponent))[2:]

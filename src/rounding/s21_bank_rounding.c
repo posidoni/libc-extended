@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 #include <stdio.h>
-=======
-#include "../s21_decimal.h"
->>>>>>> 2ae3e96eaa63686216f49d600198b1f333803c56
 
 #include "../s21_decimal.h"
 #include "../tests/s21_decimal_test.h"

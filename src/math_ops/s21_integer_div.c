@@ -30,11 +30,8 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     set_sign_pos(&value_1);
     set_sign_pos(&value_2);
 
-<<<<<<< HEAD
-=======
     s21_normalize_decimal_pair(&value_1, &value_2, &code);
 
->>>>>>> 2ae3e96eaa63686216f49d600198b1f333803c56
     // if we can't normalize divide -> use bank rounding
 
     handle_exponent_div(value_1, value_2, result, &code);
