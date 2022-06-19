@@ -11,6 +11,8 @@ int s21_is_greater_or_equal(s21_decimal a, s21_decimal b);
 int s21_is_equal(s21_decimal a, s21_decimal b);
 int s21_is_not_equal(s21_decimal a, s21_decimal b);
 
+bool s21_is_less_basic(s21_decimal a, s21_decimal b);
+
 int s21_check_infinity(int code, int sign);
 
 /* Helpers */

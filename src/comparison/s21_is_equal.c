@@ -6,7 +6,7 @@ static bool bits_eq(const unsigned bits_a[4], const unsigned bits_b[4]) {
 }
 
 int s21_is_equal(s21_decimal a, s21_decimal b) {
-    return (both_all_zeroes(a, b)) ? TRUE : bits_eq(a.bits, b.bits);
+    return (both_all_zeroes(a, b)) || bits_eq(a.bits, b.bits);
 }
 
 bool both_all_zeroes(s21_decimal a, s21_decimal b) {

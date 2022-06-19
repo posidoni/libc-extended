@@ -15,14 +15,25 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     s21_sum_handle_signs(s1, s2, value_1, value_2, result, &code);
 
     // if (code && get_exponent(value_1) && get_exponent(value_2)) {
+    //     set_sign_pos(&value_1);
+    //     set_sign_pos(&value_2);
+
+    //     printf("E1: %d E2: %d\n", get_exponent(value_1), get_exponent(value_2));
+    //     print_python(value_1);
+    //     print_python(value_2);
+
     //     s21_bank_rounding(&value_1, 1);
     //     s21_bank_rounding(&value_2, 1);
 
-    //     code = s21_add(value_1, value_2, result);
+    //     printf("E1: %d E2: %d\n", get_exponent(value_1), get_exponent(value_2));
+    //     print_python(value_1);
+    //     print_python(value_2);
 
-    //     code = 0;
     //     set_sign(&value_1, s1);
     //     set_sign(&value_2, s2);
+
+    //     // code = s21_add(value_1, value_2, result);
+    //     // s21_sum_handle_signs(s1, s2, value_1, value_2, result, &code);
     // }
 
     set_exponent(result, get_exponent(value_1));
