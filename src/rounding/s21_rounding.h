@@ -11,7 +11,7 @@ int s21_truncate(s21_decimal value, s21_decimal *result);
 void s21_bank_rounding(s21_decimal *dec, int times);
 
 // Helpers
-void get_bit_string(float res, char *bits, int exponent);
+void get_bit_string(long double res, char *bits, int exponent);
 void set_bits_from_string(char *bits, s21_decimal *result);
 
 #endif  // S21_ROUNDING_H_

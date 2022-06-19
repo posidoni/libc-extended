@@ -1,13 +1,12 @@
 #include "../s21_decimal.h"
 
-void get_bit_string(float res, char *bits, int exponent) {
-    long double val = res;
+void get_bit_string(long double res, char *bits, int exponent) {
 
-    val *= powl((long double)10, (long double)(D_MAX_EXP_VAL - exponent));
+    res *= powl((long double)10, (long double)(D_MAX_EXP_VAL - exponent));
 
-    for (int i = 0; val > 1e-6; i++) {
-        val = floorl(val) / 2;
-        if (val - floorl(val) > 1e-6)
+    for (int i = 0; res > 1e-6; i++) {
+        res = floorl(res) / 2;
+        if (res - floorl(res) > 1e-6)
             bits[i] = '1';
         else
             bits[i] = '0';
