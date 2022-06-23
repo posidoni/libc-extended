@@ -11,6 +11,7 @@
  */
 
 #include "../s21_decimal.h"
+#include "s21_dec_math.h"
 
 static s21_decimal s21_integer_div_private(s21_decimal dividend, s21_decimal divisor, s21_decimal *result);
 
@@ -29,9 +30,6 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     set_sign_pos(&value_1);
     set_sign_pos(&value_2);
 
-    s21_normalize_decimal_pair(&value_1, &value_2, &code);
-
-    // if we can't normalize divide -> use bank rounding
 
     handle_exponent_div(value_1, value_2, result, &code);
 
@@ -53,7 +51,7 @@ int s21_int_div(s21_decimal dividend, s21_decimal divisor, s21_decimal *result) 
     set_sign_pos(&divisor);
 
     int final_exp = get_exponent(dividend) - get_exponent(divisor);
-
+    s21_normalize(&dividend, &divisor);
     set_exponent(&dividend, 0);
     set_exponent(&divisor, 0);
 

@@ -25,16 +25,22 @@ void handle_exponent_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *
 
     *result = binary_multiplication(value_1, value_2, code);
     int i = 0;
+
     for (; i < exp_v1 + exp_v2 && *code != 0; ++i) {
         s21_int_div(i % 2 ? value_1 : value_2, get_power_of_ten(1), i % 2 ? &value_1 : &value_2);
         *result = binary_multiplication(value_1, value_2, code);
     }
+    int flag = 0;
     if (*code == 0) {
         for (; i > 0 && *code == 0;) {
             s21_decimal tmp = binary_multiplication(*result, get_power_of_ten(1), code);
             if (*code == 0) {
                 i--;
                 *result = tmp;
+            } else {
+                s21_int_div(flag % 2 ? value_1 : value_2, get_power_of_ten(1), flag % 2 ? &value_1 : &value_2);
+                flag++;
+                i++;
             }
         }
         *code = 0;

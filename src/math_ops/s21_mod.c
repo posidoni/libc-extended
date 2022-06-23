@@ -9,17 +9,16 @@ void handle_exponent_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *
 
 int s21_mod(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     memset(result, 0, sizeof(*result));
+
     if (eq_zero(value_2))
         return S21_NAN;
 
     int code = 0;
 
-    s21_normalize_decimal_pair(&value_1, &value_2, &code);
-
-    int exp = get_exponent(value_1);
+    int exp = max(get_exponent(value_1), get_exponent(value_2));
+    (void) s21_normalize(&value_1, &value_2);
 
     code = s21_int_mod(value_1, value_2, result);
-
     set_exponent(result, exp);
 
     return code;
