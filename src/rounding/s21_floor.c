@@ -27,11 +27,20 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
 
     /* Round down for negative numbers -12.321351 becomes -13.00000 */
     if (sign == NEG && exponent) {
-        s21_decimal tmp = {0};
-        /* i.e -420.00 - 1 = -421.00*/
-        if (s21_add(truncated, get_power_of_ten(0), &tmp))
-            return CONVERTATION_ERROR;
-        truncated = tmp;
+        /* check if there is a fraction before round down */
+        s21_decimal zero = {0};
+        s21_decimal fraction = {0};
+
+        s21_sub(value, truncated, &fraction);
+        int is_zero_fraction = s21_is_equal(fraction, zero);
+
+        if (!is_zero_fraction) {
+            s21_decimal tmp = {0};
+            /* i.e -420.00 - 1 = -421.00*/
+            if (s21_add(truncated, get_power_of_ten(0), &tmp))
+                return CONVERTATION_ERROR;
+            truncated = tmp;
+        }
     }
 
     int tmp_exp = exponent;
