@@ -31,7 +31,7 @@ GCOV_TARGET		 =	./coverage
 GCOV_INFO		 =	coverage.info
 
 # Modules - dirs with source code. Grep'ed dirs are excluded from search.
-MODULES 		 =	$(shell find . -type d | grep -v -E "docker|objs|tests")
+MODULES 		 =	$(shell find . -type d | grep -v -E "docker|objs|tests|st_test")
 TEST_MODULES 	 =	$(shell find tests -type d | grep -v -E "objs")
 
 # Dirs configuration
@@ -92,7 +92,7 @@ $(TEST_TARGET)	: $(GCOV_OBJS) $(INC)
 
 $(TEST_EXE) 	: $(TARGET) $(TEST_OBJS) $(TEST_INC) Makefile
 				$(CC) $(addprefix $(OBJ_DIR)/, $(TEST_OBJS)) $(ASAN) $(UBSAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(LIBS) -L. $(TARGET)
-				./$(TEST_EXE)
+				# ./$(TEST_EXE)
 
 # GCOV stage
 gcov_report 	: $(GCOV_TARGET)
@@ -127,7 +127,6 @@ leaks			: $(TEST_EXE)
 # Configures clangd language server for VSCode, provides jump tp implementation feature
 clangd			: fclean
 				bear -- make
-				mv compile_commands.json ../.vscode
 
 # Utility targets
 open 			:

@@ -1,5 +1,8 @@
 #include "../s21_decimal.h"
-#include "../tests/s21_decimal_test.h"
+
+int s21_normalize(s21_decimal *value_1, s21_decimal *value_2);
+
+void handle_exponent_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result, int *code);
 
 int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
     memset(result, 0, sizeof(*result));
