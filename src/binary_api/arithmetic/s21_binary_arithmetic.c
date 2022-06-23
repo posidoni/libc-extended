@@ -22,6 +22,7 @@
  */
 
 s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2, int *err) {
+    *err = ARITHMETIC_OK;
     s21_decimal carry = {0};
 
     s21_decimal origin_1 = value_1;
@@ -50,6 +51,7 @@ s21_decimal binary_addition(s21_decimal value_1, s21_decimal value_2, int *err) 
 }
 
 s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2, int *err) {
+    *err = ARITHMETIC_OK;
     value_1.bits[3] = 0;
     value_2.bits[3] = 0;
     s21_decimal carry = {0};
@@ -69,6 +71,7 @@ s21_decimal binary_subtraction(s21_decimal value_1, s21_decimal value_2, int *er
 }
 
 s21_decimal binary_multiplication(s21_decimal value_1, s21_decimal value_2, int *err) {
+    *err = ARITHMETIC_OK;
     s21_decimal result = {0};
     while (!eq_zero(value_2) && !(*err)) {
         if (!eq_zero(bit_and(value_2, get_power_of_ten(0)))) {
@@ -80,6 +83,5 @@ s21_decimal binary_multiplication(s21_decimal value_1, s21_decimal value_2, int 
         *err = shiftl(&value_1);
         shiftr(&value_2);
     }
-
     return result;
 }

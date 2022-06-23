@@ -44,6 +44,8 @@ int s21_normalize(s21_decimal *value_1, s21_decimal *value_2) {
         }
         e_small--;
     }
+    set_exponent(value_1, e_small);
+    set_exponent(value_2, e_small);
     if (e1 > e2) {
         *value_2 = big;
         *value_1 = small;
