@@ -41,6 +41,9 @@ s21_decimal get_05(void) {
 int eq_zero(s21_decimal value) {
     return (value.bits[0] == 0 && value.bits[1] == 0 && value.bits[2] == 0);
 }
+int eq_zerol(s21_decimal value) {
+    return (value.bits[0] == 0 && value.bits[1] == 0 && value.bits[2] == 0 && value.bits[3] == 0);
+}
 
 int max(int a, int b) {
     return a > b ? a : b;

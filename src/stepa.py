@@ -58,7 +58,7 @@ class MyDecimal:
                     other.balancing_decimal(-diff)
 
     def to_bin_form(self):
-        line = f"{'1' if self.decimal < 0 else '0'}"j
+        line = f"{'1' if self.decimal < 0 else '0'}"
         for i in range(7):
             line += '0'
         tmp_exp = str(bin(self.exponent))[2:]
@@ -72,7 +72,7 @@ class MyDecimal:
 
     def print(self, human: bool = False, base: bool = False):
         if (human):
-            print(f'\t\tFINALLY:\t{self.decimal:.28f}')
+            print(f'\t\t{self.decimal:.28f}')
 
 #define RED "\033[0;31m"
 #define BRED "\033[1;31m"

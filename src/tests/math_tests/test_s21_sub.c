@@ -136,9 +136,9 @@ Suite *suite_s21_sub(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_sub"));
     TCase *tc = tcase_create("s21_sub_tc");
 
-    tcase_add_loop_test(tc, random_decimal_exp, 0, 1000);
-    tcase_add_loop_test(tc, gcc_128_bits, 0, 1000);
-    // tcase_add_loop_test(tc, random_float, 0, 1);
+    tcase_add_loop_test(tc, random_decimal_exp, 0, 10000);
+    tcase_add_loop_test(tc, gcc_128_bits, 0, 10000);
+    // tcase_add_loop_test(tc, random_float, 0, 100);
 
     suite_add_tcase(s, tc);
     return s;
