@@ -8,8 +8,11 @@ int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 
     handle_exponent_mul(value_1, value_2, result, &code);
 
-    if (get_sign(value_1) != get_sign(value_2))
+    if (get_sign(value_1) != get_sign(value_2)) {
         set_sign_neg(result);
+        if (code == 1)
+            code = 2;
+    }
 
     return code;
 }
@@ -20,9 +23,21 @@ void handle_exponent_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *
     set_exponent(&value_1, 0);
     set_exponent(&value_2, 0);
 
-    int res_exp = exp_v1 + exp_v2;
-
     *result = binary_multiplication(value_1, value_2, code);
-
-    set_exponent(result, res_exp);
+    int i = 0;
+    for (; i < exp_v1 + exp_v2 && *code != 0; ++i) {
+        s21_int_div(i % 2 ? value_1 : value_2, get_power_of_ten(1), i % 2 ? &value_1 : &value_2);
+        *result = binary_multiplication(value_1, value_2, code);
+    }
+    if (*code == 0) {
+        for (; i > 0 && *code == 0;) {
+            s21_decimal tmp = binary_multiplication(*result, get_power_of_ten(1), code);
+            if (*code == 0) {
+                i--;
+                *result = tmp;
+            }
+        }
+        *code = 0;
+        set_exponent(result, exp_v1 + exp_v2 - i);
+    }
 }
