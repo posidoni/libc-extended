@@ -5,5 +5,6 @@
 
 void shiftr(s21_decimal *a);
 int shiftl(s21_decimal *a);
+int lshiftl(s21_decimal *a);
 
 #endif  // S21_BINARY_SHIFTS_H_

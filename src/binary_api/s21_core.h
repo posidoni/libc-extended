@@ -32,6 +32,7 @@ void set_bit_1(s21_decimal *n, int pos);
 void set_bit_0(s21_decimal *n, int pos);
 int get_bit(s21_decimal n, int pos);
 int eq_zero(s21_decimal value);
+int eq_zerol(s21_decimal value);
 
 s21_decimal get_05(void);
 
