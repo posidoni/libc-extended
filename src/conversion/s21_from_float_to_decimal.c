@@ -1,6 +1,6 @@
 #include "../s21_decimal.h"
 
-static int get_float_exponent(double val) {
+static int get_float_exponent(long double val) {
     int exponent = 0;
     while (val >= 1) {
         val /= 10;
@@ -17,7 +17,7 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
         return CONVERTATION_ERROR;
 
     bool is_negative = signbit(src);
-    double dsrc = fabsf(src);
+    long double dsrc = fabsf(src);
 
     /* get exponent */
     int exponent = get_float_exponent(dsrc);
