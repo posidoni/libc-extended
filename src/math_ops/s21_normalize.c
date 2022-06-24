@@ -14,7 +14,8 @@ int s21_normalize(s21_decimal *value_1, s21_decimal *value_2) {
     int of_check = 0;
     s21_decimal big_overflow = big;
     while (e_big < e_small) {
-        big_overflow = binary_multiplication(big_overflow, get_power_of_ten(1), &of_check);
+        big_overflow =
+            binary_multiplication(big_overflow, get_power_of_ten(1), &of_check);
         if (of_check)
             break;
         e_big++;
@@ -37,9 +38,10 @@ int s21_normalize(s21_decimal *value_1, s21_decimal *value_2) {
         if (ilast < 5) {
         } else if (ilast == 5) {
             if (ibefore_last % 2 == 1) {
-                small = binary_addition(small, get_power_of_ten(0), &never_error);
+                small =
+                    binary_addition(small, get_power_of_ten(0), &never_error);
             }
-        } else if (ilast > 5) {
+        } else {
             small = binary_addition(small, get_power_of_ten(0), &never_error);
         }
         e_small--;

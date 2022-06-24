@@ -14,6 +14,10 @@ START_TEST(random_loop) {
 #endif
 
     s21_decimal expected = {0};
+    int sign = x > 0 ? 0 : 1;
+
+    if (x < 0)
+        x = -x;
     int expected_int = x;
 
     if (x % 10 >= 5)
@@ -21,9 +25,11 @@ START_TEST(random_loop) {
     else
         expected_int = expected_int / 10;
 
+    expected_int = sign ? -expected_int : expected_int;
     s21_from_int_to_decimal(expected_int, &expected);
 
     s21_decimal got = {0};
+    x = sign ? -x : x;
     s21_from_int_to_decimal(x, &got);
     set_exponent(&got, 1);
 
@@ -48,7 +54,7 @@ Suite *suite_s21_round(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_round"));
     TCase *tc = tcase_create("s21_round_tc");
 
-    tcase_add_loop_test(tc, random_loop, 0, 1000);
+    tcase_add_loop_test(tc, random_loop, 0, 10);
 
     suite_add_tcase(s, tc);
     return s;

@@ -10,6 +10,7 @@ void set_sign_neg(s21_decimal *decimal) {
 void set_sign_pos(s21_decimal *decimal) {
     ZERO_BIT(decimal->bits[3], D_SIGN);
 }
+
 void set_sign(s21_decimal *decimal, int sign) {
     sign ? set_sign_neg(decimal) : set_sign_pos(decimal);
 }
@@ -24,25 +25,12 @@ void set_bit_0(s21_decimal *n, int pos) {
     ZERO_BIT(n->bits[pos / 32], pos % 32);
 }
 
-void s21_swap(s21_decimal *a, s21_decimal *b) {
-    s21_decimal tmp = *a;
-    *a = *b;
-    *b = tmp;
-}
-
-s21_decimal get_05(void) {
-    s21_decimal result = {0};
-    s21_from_int_to_decimal(5, &result);
-    set_exponent(&result, 1);
-    set_sign_pos(&result);
-    return result;
-}
-
 int eq_zero(s21_decimal value) {
     return (value.bits[0] == 0 && value.bits[1] == 0 && value.bits[2] == 0);
 }
 int eq_zerol(s21_decimal value) {
-    return (value.bits[0] == 0 && value.bits[1] == 0 && value.bits[2] == 0 && value.bits[3] == 0);
+    return (value.bits[0] == 0 && value.bits[1] == 0 && value.bits[2] == 0 &&
+            value.bits[3] == 0);
 }
 
 int max(int a, int b) {

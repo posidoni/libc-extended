@@ -40,25 +40,8 @@ START_TEST(gcc_128_bits) {
     printf("res128_=");
     print_bits_r(res128);
 #endif
-    // print_python(res128);
-    // print_python(dec_mul);
     ck_assert_int_eq(s21_is_equal(res128, dec_mul), TRUE);
 }
-
-// START_TEST(simple_test) {
-//     s21_decimal a = {0};
-//     s21_decimal b = {0};
-
-//     set_bit_1(&b, 95);
-//     set_bit_1(&a, 32);
-
-//     print_bits_r(a);
-//     print_bits_r(b);
-//     s21_decimal res = {0};
-//     s21_mul(a, b, &res);
-//     print_bits_r(res);
-// }
-// END_TEST
 
 START_TEST(random_float) {
     float float_a = get_random_float(-85818.51851, 85818.51851);
@@ -115,9 +98,8 @@ Suite *suite_s21_mul(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_mult"));
     TCase *tc = tcase_create("s21_mul_tc");
 
-    /* tcase_add_test(tc, simple_test); */
-    tcase_add_loop_test(tc, gcc_128_bits, 0, 1000);
-    tcase_add_loop_test(tc, random_float, 0, 1000);
+    tcase_add_loop_test(tc, gcc_128_bits, 0, 10);
+    tcase_add_loop_test(tc, random_float, 0, 10);
 
     suite_add_tcase(s, tc);
     return s;
