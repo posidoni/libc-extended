@@ -18,9 +18,9 @@ int s21_round(s21_decimal value, s21_decimal *result) {
     int never_error = 0;
     int sign = get_sign(value);
     s21_decimal one = get_power_of_ten(0);
-    s21_decimal  zeroDotFive = {0};
+    s21_decimal zeroDotFive = {0};
     zeroDotFive.bits[0] = 5;
-    s21_decimal      mod_res = {0};
+    s21_decimal mod_res = {0};
     set_exponent(&zeroDotFive, 1);
 
     /* print_python(zeroDotFive); */
@@ -32,7 +32,8 @@ int s21_round(s21_decimal value, s21_decimal *result) {
 
     s21_normalize(&mod_res, &zeroDotFive);
 
-    if (s21_is_greater(mod_res, zeroDotFive) || s21_is_equal(mod_res, zeroDotFive)) {
+    if (s21_is_greater(mod_res, zeroDotFive) ||
+        s21_is_equal(mod_res, zeroDotFive)) {
         /* print_python(mod_res); */
         /* print_python(zeroDotFive); */
         *result = binary_addition(*result, one, &never_error);
@@ -41,32 +42,3 @@ int s21_round(s21_decimal value, s21_decimal *result) {
     set_sign(result, sign);
     return CONVERTATION_OK;
 }
-
-/* ROUND: */
-/* 9 - OK */
-/* 8 - OK */
-/* 7 - OK */
-/* 6 - OK */
-/* 5 - OK */
-/* 4 - OK */
-/* ERROR */
-/* s21_is_eq = 1 */
-/* NUMBER: */
-/* 100000000000001000000000000000000100100100010001010010111010000110100010010100110111110011001100011100101000100000 */
-/* 11110110101010 */
-/* RESULT: */
-/* 100000000000000000000000000000000000000010111011000011011000111001101010100101010101000010011011101001001111110000 */
-/* 11111000001111 */
-/* DECIMAL_NUMBER */
-/* echo ":1OOOOOOO00000010OOOOOOOOOOOOOOOO:-01001001000100010100101110100001-10100010010100110111110011001100-0111001 */
-/* 0100010000011110110101010:" | python3 conv.py | grep FINALY */
-/*         FINALY:                         -226133146150004796782558734.5000000000000000000000000000 */
-/* S21 RESULT */
-/* echo ":1OOOOOOO00000000OOOOOOOOOOOOOOOO:-00000000101110110000110110001110-01101010100101010101000010011011-1010010 */
-/* 0111111000011111000001110:" | python3 conv.py | grep FINALY */
-/*         FINALY:                         -226133146150004796782558734.0000000000000000000000000000 */
-/* NEEDED RESULT */
-/* echo ":1OOOOOOO00000000OOOOOOOOOOOOOOOO:-00000000101110110000110110001110-01101010100101010101000010011011-1010010 */
-/* 0111111000011111000001111:" | python3 conv.py | grep FINALY */
-/*         FINALY:                         -226133146150004796782558735.0000000000000000000000000000 */
-

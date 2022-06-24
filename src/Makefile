@@ -11,9 +11,8 @@ STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic $(C_OPTIMIZATION) # -fanaly
 C_OPTIMIZATION	 = -O0
 
 # Linking flags configuration
-LIBS 			 =	$(CHECK_LIB) $(GMP_LIB)
+LIBS 			 =	$(CHECK_LIB)
 CHECK_LIB 		 = 	$(shell pkg-config --libs --cflags check)
-GMP_LIB 		 = 	$(shell pkg-config --libs --cflags gmp)
 
 # DevTools config
 VG 				 = valgrind $(VG_FLAGS)
@@ -92,8 +91,7 @@ $(TEST_TARGET)	: $(GCOV_OBJS) $(INC)
 
 $(TEST_EXE) 	: $(TARGET) $(TEST_OBJS) $(TEST_INC) Makefile
 				$(CC) $(addprefix $(OBJ_DIR)/, $(TEST_OBJS)) $(ASAN) $(UBSAN) $(GCOV_FLAGS) -o $(TEST_EXE) $(LIBS) -L. $(TARGET)
-				# ./$(TEST_EXE)
-
+				./test
 # GCOV stage
 gcov_report 	: $(GCOV_TARGET)
 

@@ -4,28 +4,22 @@
 #include <assert.h>
 #include <check.h>
 #include <float.h>
-#include <gmp.h>
 #include <stdio.h>
 #include <time.h>
 
 #include "../s21_decimal.h"
 #include "helpers/printers.h"
-#include "helpers/s21_gmp_helpers.h"
 #include "helpers/s21_int128_helpers.h"
 
 void apply_exponent_to_decimal(s21_decimal *dec);
 
 void print_python(s21_decimal dec);
-char *print_python_debug(s21_decimal dec);
 
 // helpers
 int get_rand(int min, int max);
 void set_random_sign(s21_decimal *dec);
 float get_random_float(float min, float max);
-
-/* Our functions test */
-Suite *suite_convert_gmp_to_decimal(void);
-Suite *suite_convert_decimal_to_gmp(void);
+s21_decimal get_random_decimal(int size, int exp);
 
 /* Decimal function tests */
 Suite *suite_s21_add(void);

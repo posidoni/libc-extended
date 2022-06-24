@@ -29,7 +29,6 @@ s21_decimal bigint_to_decimal(__int128_t src) {
         set_sign_neg(&res);
         src = -src;
     }
-
     for (int i = 0, k = 0; i < 3; i++)
         for (int j = 0; j < 32; j++, k++)
             if (IS_SET(src, k))

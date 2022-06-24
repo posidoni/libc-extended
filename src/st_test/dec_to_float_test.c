@@ -4,7 +4,6 @@
 
 #include "main.h"
 
-
 void run_dec_to_float_test(int count) {
     char *number;
     char *result;
@@ -29,9 +28,11 @@ void run_dec_to_float_test(int count) {
             printf("%s%s%s\n%s\n", COLOR_ORANGE, "RESULT:", COLOR_END, result);
             printf("%s%s%s\n", COLOR_BLUE, "DECIMAL_NUMBER", COLOR_END);
             d_print_decimal(decimal_num);
-            printf("%s%s%s\n%f\n", COLOR_GREEN, "S21 RESULT", COLOR_END, s21_res);
+            printf("%s%s%s\n%f\n", COLOR_GREEN, "S21 RESULT", COLOR_END,
+                   s21_res);
             printf("%s%s%s\n%f\n", COLOR_CYAN, "NEEDED RESULT", COLOR_END, res);
-            scanf("*c"); rewind(stdin);
+            scanf("*c");
+            rewind(stdin);
         } else {
             printf("%d - OK\n", count);
         }

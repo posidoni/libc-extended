@@ -1,6 +1,3 @@
-#include <math.h>
-#include <stdio.h>
-
 #include "../s21_decimal_test.h"
 
 START_TEST(minus_overflow_test) {
@@ -56,7 +53,6 @@ START_TEST(gcc_128_bits) {
 
     int code = s21_add(dec_a, dec_b, &dec_sum);
 
-#define DEBUG
 #ifdef DEBUG
     printf("CODE %d \n", code);
 #endif
@@ -75,6 +71,7 @@ START_TEST(gcc_128_bits) {
 #endif
 
         int res = s21_is_equal(res128, dec_sum);
+#ifdef DEBUG
         // if (res == 0) {
         printf("%lld \n", long_a);
         printf("(+) \n");
@@ -84,6 +81,7 @@ START_TEST(gcc_128_bits) {
         print_python(res128);
         print_python(dec_sum);
         // }
+#endif
 
         ck_assert_int_eq(code, ARITHMETIC_OK);
         ck_assert_int_eq(res, TRUE);
@@ -164,6 +162,7 @@ START_TEST(random_positive_float) {
     s21_from_decimal_to_float(result, &got_float);
 
     // if (got_float - float_res > 1e-6) {
+#ifdef DEBUG
     static int test_n = 0;
     printf("\nTEST#%d\n", test_n++);
     printf("float_a = %f\n", float_a);
@@ -171,6 +170,7 @@ START_TEST(random_positive_float) {
     printf("float_sum (expected) = %f\n", float_res);
     printf("GOT: = %f\n", got_float);
     // }
+#endif
 
     ck_assert_int_eq(code, ARITHMETIC_OK);
     ck_assert_float_eq_tol(got_float, float_res, 1e-6);
@@ -212,7 +212,8 @@ START_TEST(random_negative_float) {
     ck_assert_float_eq_tol(got_float, float_res, 1e-6);
 }
 
-// This test exist for easy testing of failing numbers. Please, do not delete it.
+// This test exist for easy testing of failing numbers. Please, do not delete
+// it.
 START_TEST(target_float) {
     float float_a = -10758.218750;
     float float_b = 6268.843750;
@@ -233,6 +234,7 @@ START_TEST(target_float) {
     float got_float = 0;
     s21_from_decimal_to_float(result, &got_float);
 
+#ifdef DEBUG
     static int test_n = 0;
     printf("TEST#%d\n", test_n++);
     printf("DEC_A:\n");
@@ -243,6 +245,7 @@ START_TEST(target_float) {
     print_python(result);
     printf("EXPECTED:\n");
     printf("\t\t%f\n\n", float_res);
+#endif
 
     ck_assert_int_eq(code, ARITHMETIC_OK);
     ck_assert_float_eq_tol(got_float, float_res, 1e-06);
@@ -305,15 +308,15 @@ Suite *suite_s21_add(void) {
     Suite *s = suite_create(PRETTY_PRINT("s21_add"));
     TCase *tc = tcase_create("s21_add_tc");
 
-    // tcase_add_loop_test(tc, target_float, 0, 1);
+    tcase_add_loop_test(tc, target_float, 0, 1);
     tcase_add_loop_test(tc, gcc_128_bits, 0, 100);
     tcase_add_loop_test(tc, random_decimal_exp, 0, 10);
     tcase_add_test(tc, minus_overflow_test);
     tcase_add_test(tc, overflow_test);
 
-    tcase_add_loop_test(tc, random_positive_float, 0, 100);
-    tcase_add_loop_test(tc, random_negative_float, 0, 1000);
-    tcase_add_loop_test(tc, random_signed_floats, 0, 1000);
+    tcase_add_loop_test(tc, random_positive_float, 0, 10);
+    tcase_add_loop_test(tc, random_negative_float, 0, 10);
+    tcase_add_loop_test(tc, random_signed_floats, 0, 10);
 
     suite_add_tcase(s, tc);
     return s;
