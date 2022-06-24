@@ -53,8 +53,7 @@ void run_tests(void) {
                            suite_s21_negate(),
                            NULL};
 
-    for (Suite **current_testcase = list_cases; *current_testcase != NULL;
-         current_testcase++) {
+    for (Suite **current_testcase = list_cases; *current_testcase != NULL; current_testcase++) {
         run_testcase(*current_testcase);
     }
 }
