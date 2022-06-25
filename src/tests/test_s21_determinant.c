@@ -41,19 +41,6 @@ START_TEST(determinant_no_zeros) {
 }
 END_TEST
 
-START_TEST(determinant_nan) {
-    int rows = get_rand(3, 100);
-    int cols = rows + 1;
-    matrix_t m1 = {0};
-    s21_create_matrix(rows, cols, &m1);
-    double result = 0;
-    int got = s21_determinant(&m1, &result);
-    ck_assert_int_eq(got, CALC_ERROR);
-    ck_assert_double_nan(result);
-    s21_remove_matrix(&m1);
-}
-END_TEST
-
 // START_TEST(determinant_rand) {
 //     char numpy[512] = "";
 //     char s21_determinant[512] = "./s21_grep ";
@@ -80,10 +67,9 @@ Suite *suite_s21_determinant(void) {
     Suite *s = suite_create("suite_s21_determinant");
     TCase *tc = tcase_create("s21_determinant_tc");
 
-    // TODO: add test cases of calculating determinant from custom python script
     tcase_add_test(tc, determinant_hardcoded);
     tcase_add_test(tc, determinant_no_zeros);
-    tcase_add_test(tc, determinant_nan);
+    /* tcase_add_test(tc, determinant_nan); */
 
     suite_add_tcase(s, tc);
     return s;

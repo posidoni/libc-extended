@@ -1,14 +1,16 @@
 #include "s21_matrix.h"
 
-static double s21_determinant_rec(double **mat, int dim);
 
 int s21_determinant(matrix_t *A, double *result) {
-    if (!result || !A || A->rows != A->columns || A->rows <= 0 || A->columns <= 0) {
-
-        if (result)
-            *result = NAN;
-
+    if (s21_check_matrix(A))
         return INCORRECT_MATRIX;
+
+    if (A->rows != A->columns)
+        return CALC_ERROR;
+
+    if (A->rows == 1) {
+        *result = A->matrix[0][0];
+        return OK;
     }
 
     *result = s21_determinant_rec(A->matrix, A->rows);
@@ -16,7 +18,7 @@ int s21_determinant(matrix_t *A, double *result) {
     return OK;
 }
 
-static double s21_determinant_rec(double **mat, int dim) {
+double s21_determinant_rec(double **mat, int dim) {
     if (dim == 1)
         return mat[0][0];
     if (dim == 2) {
@@ -28,7 +30,9 @@ static double s21_determinant_rec(double **mat, int dim) {
 
     for (int i = 0; i < dim; i++) {
         matrix_t tmp = {0};
-        s21_create_matrix(dim - 1, dim - 1, &tmp);
+        int code = s21_create_matrix(dim - 1, dim - 1, &tmp);
+        if (code == MALLOC_FAILED)
+            s21_halt();
 
         for (int m = 1; m < dim; m++) {
             int p = 0;

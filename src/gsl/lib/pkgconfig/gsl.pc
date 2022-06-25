@@ -1,11 +1,11 @@
-prefix=/Users/posidoni/s21_matrix/src/gsl
-exec_prefix=/Users/posidoni/s21_matrix/src/gsl
-libdir=/Users/posidoni/s21_matrix/src/gsl/lib
-includedir=/Users/posidoni/s21_matrix/src/gsl/include
+prefix=/Users/capricey/s21_matrix/gsl
+exec_prefix=/Users/capricey/s21_matrix/gsl
+libdir=/Users/capricey/s21_matrix/gsl/lib
+includedir=/Users/capricey/s21_matrix/gsl/include
 GSL_CBLAS_LIB=-lgslcblas
 
 Name: GSL
 Description: GNU Scientific Library
 Version: 2.7.1
-Libs: -L/Users/posidoni/s21_matrix/src/gsl/lib -lgsl ${GSL_CBLAS_LIB}  -lm 
-Cflags: -I/Users/posidoni/s21_matrix/src/gsl/include
+Libs: -L/Users/capricey/s21_matrix/gsl/lib -lgsl ${GSL_CBLAS_LIB}  -lm 
+Cflags: -I/Users/capricey/s21_matrix/gsl/include
