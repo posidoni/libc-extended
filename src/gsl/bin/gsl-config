@@ -1,8 +1,8 @@
 #! /bin/sh
 
-prefix=/Users/posidoni/s21_matrix/src/gsl
-exec_prefix=/Users/posidoni/s21_matrix/src/gsl
-includedir=/Users/posidoni/s21_matrix/src/gsl/include
+prefix=/Users/capricey/s21_matrix/gsl
+exec_prefix=/Users/capricey/s21_matrix/gsl
+includedir=/Users/capricey/s21_matrix/gsl/include
 
 usage()
 {
@@ -58,16 +58,16 @@ while test $# -gt 0; do
 	;;
 
     --cflags)
-       	echo -I/Users/posidoni/s21_matrix/src/gsl/include 
+       	echo -I/Users/capricey/s21_matrix/gsl/include 
        	;;
 
     --libs)
         : ${GSL_CBLAS_LIB=-lgslcblas}
-	echo -L/Users/posidoni/s21_matrix/src/gsl/lib -lgsl $GSL_CBLAS_LIB 
+	echo -L/Users/capricey/s21_matrix/gsl/lib -lgsl $GSL_CBLAS_LIB 
        	;;
 
     --libs-without-cblas)
-	echo -L/Users/posidoni/s21_matrix/src/gsl/lib -lgsl 
+	echo -L/Users/capricey/s21_matrix/gsl/lib -lgsl 
        	;;
     *)
 	usage

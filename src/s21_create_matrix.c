@@ -14,7 +14,6 @@ int s21_create_matrix(const int rows, const int columns, matrix_t *result) {
                 result->matrix[i] = calloc(columns, sizeof(double));
                 if (!result->matrix[i])
                     return MALLOC_FAILED;
-                // (?) memory cleanup after failed malloc (?)
             }
             res = OK;
         }

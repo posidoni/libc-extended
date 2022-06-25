@@ -54,10 +54,10 @@ START_TEST(mult_hardcode) {
             m.matrix[i][j] = md++;
 
     // m.matrix[i][j] = get_rand(-10e10, 10e10);
-    int k = 1;
+    int k1 = 1;
     for (int i = 0; i < cols; i++)
         for (int j = 0; j < rows; j++)
-            mtx.matrix[i][j] = k++;
+            mtx.matrix[i][j] = k1++;
     // mtx.matrix[i][j] = get_rand(-10e10, 10e10);
 
     matrix_t check = {0};
