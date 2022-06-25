@@ -6,3 +6,9 @@ void s21_remove_matrix(matrix_t *const A) {
 
     free(A->matrix);
 }
+
+void s21_halt(void) {
+    fprintf(stderr, "Malloc error\n");
+    perror(errno);
+    exit(1);
+}

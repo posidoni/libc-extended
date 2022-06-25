@@ -3,9 +3,12 @@
 static double s21_determinant_rec(double **mat, int dim);
 
 int s21_determinant(matrix_t *A, double *result) {
-    if (A->rows != A->columns || A->rows <= 0 || A->columns <= 0) {
-        *result = NAN;
-        return CALC_ERROR;
+    if (!result || !A || A->rows != A->columns || A->rows <= 0 || A->columns <= 0) {
+
+        if (result)
+            *result = NAN;
+
+        return INCORRECT_MATRIX;
     }
 
     *result = s21_determinant_rec(A->matrix, A->rows);
