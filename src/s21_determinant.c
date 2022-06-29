@@ -1,6 +1,5 @@
 #include "s21_matrix.h"
 
-
 int s21_determinant(matrix_t *A, double *result) {
     if (s21_check_matrix(A))
         return INCORRECT_MATRIX;
@@ -8,12 +7,10 @@ int s21_determinant(matrix_t *A, double *result) {
     if (A->rows != A->columns)
         return CALC_ERROR;
 
-    if (A->rows == 1) {
+    if (A->rows == 1)
         *result = A->matrix[0][0];
-        return OK;
-    }
-
-    *result = s21_determinant_rec(A->matrix, A->rows);
+    else
+        *result = s21_determinant_rec(A->matrix, A->rows);
 
     return OK;
 }
@@ -21,12 +18,10 @@ int s21_determinant(matrix_t *A, double *result) {
 double s21_determinant_rec(double **mat, int dim) {
     if (dim == 1)
         return mat[0][0];
-    if (dim == 2) {
-        return mat[0][0] * mat[1][1] - mat[0][1] * mat[1][0];
-    }
 
     double det = 0.0;
-    static double sign = 1.0;
+    // @bugfix: Sign should NOT be static
+    double sign = 1.0;
 
     for (int i = 0; i < dim; i++) {
         matrix_t tmp = {0};
@@ -40,7 +35,9 @@ double s21_determinant_rec(double **mat, int dim) {
                 /* If we are on the same column as our 'anchor' value */
                 if (n == i)
                     continue;
-                /* Filling out our tmp value with the valus from the base matr */
+                /* Filling out our tmp value with the valus from the base
+                 * matr
+                 */
                 tmp.matrix[m - 1][p] = mat[m][n];
                 p++;
             }
