@@ -17,7 +17,7 @@ void s21_remove_matrix(matrix_t *const A) {
 
 noreturn void s21_halt(void) {
     fprintf(stderr, "Malloc error\n");
+    errno = ENOMEM;
     perror("Memory error");
     exit(0);
 }
-

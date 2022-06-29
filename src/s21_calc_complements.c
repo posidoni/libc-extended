@@ -1,15 +1,16 @@
 #include "s21_matrix.h"
 
-void adjoint(matrix_t *A, matrix_t *result);
+static void adjoint(matrix_t *A, matrix_t *result);
 
 int s21_calc_complements(matrix_t *A, matrix_t *result) {
+    int code = OK;
+
     if (s21_check_matrix(A))
-        return INCORRECT_MATRIX;
-
-    if (A->rows != A->columns)
-        return CALC_ERROR;
-
-    int code = s21_create_matrix(A->rows, A->columns, result);
+        code = INCORRECT_MATRIX;
+    else if (A->rows != A->columns)
+        code = CALC_ERROR;
+    else
+        code = s21_create_matrix(A->rows, A->columns, result);
 
     if (code == OK)
         adjoint(A, result);
@@ -17,7 +18,7 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
     return (code);
 }
 
-void adjoint(matrix_t *A, matrix_t *result) {
+static void adjoint(matrix_t *A, matrix_t *result) {
     if (A->rows == 1) {
         result->matrix[0][0] = 1;
         return;
