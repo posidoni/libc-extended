@@ -2,11 +2,14 @@
 #define TEST
 
 #include <check.h>
+#include <errno.h>
 #include <gsl/gsl_matrix.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "../gsl/include/gsl/gsl_matrix.h"
 #include "../s21_matrix.h"

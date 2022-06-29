@@ -1,18 +1,19 @@
 #include "s21_matrix.h"
 
 int s21_determinant(matrix_t *A, double *result) {
+    int code = OK;
+
     if (s21_check_matrix(A))
-        return INCORRECT_MATRIX;
+        code = INCORRECT_MATRIX;
+    else if (A->rows != A->columns)
+        code = CALC_ERROR;
 
-    if (A->rows != A->columns)
-        return CALC_ERROR;
-
-    if (A->rows == 1)
+    if (code == OK && A->rows == 1)
         *result = A->matrix[0][0];
     else
         *result = s21_determinant_rec(A->matrix, A->rows);
 
-    return OK;
+    return (code);
 }
 
 double s21_determinant_rec(double **mat, int dim) {
