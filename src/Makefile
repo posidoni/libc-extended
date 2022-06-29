@@ -3,7 +3,7 @@ CC 				 =	gcc
 
 # Compilation flags configuration
 ALL_TARGETS 	 = $(TARGET) $(TEST_EXE) #gcov_report
-ASAN 			 = 	#-fsanitize=address
+ASAN 			 = 	-fsanitize=address
 UBSAN			 =	#-fsanitize=undefined
 STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic -I gsl/include $(C_OPTIMIZATION) # -fanalyzer -Werror 
 
