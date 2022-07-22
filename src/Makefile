@@ -22,6 +22,7 @@ LEAKS 			 = leaks -atExit --
 VG_LOG 			 = valgrind-report.txt
 
 # Names config
+BUILDDIR		 =  ../build
 TARGET 			 =	s21_decimal.a
 TEST_TARGET		 =	test_s21_decimal.a
 TEST_EXE 		 =	test
@@ -84,6 +85,8 @@ all 			: 	$(ALL_TARGETS)
 $(TARGET) 		: $(OBJS) Makefile
 				$(AR) $(TARGET) $(addprefix $(OBJ_DIR)/, $(OBJS))
 				$(RAN) $(TARGET)
+				mkdir -p $(BUILDDIR)
+				mv $(TARGET) $(BUILDDIR)
 
 $(TEST_TARGET)	: $(GCOV_OBJS) $(INC)
 				$(AR) $(TEST_TARGET) $(GCOV_OBJS)
@@ -136,7 +139,7 @@ clean 			:
 				$(RM) $(GCNO)
 
 fclean 			: clean
-				$(RM) $(TARGET)
+				$(RM) -r $(BUILDDIR)
 				$(RM) $(TEST_TARGET)
 				$(RM) $(TEST_EXE)
 				$(RM) $(TEST_GCOV_EXE)
