@@ -139,4 +139,4 @@ $ make
 ![Tests & Coverage](assets/tests.gif)
 ## Credits
 - Developers: [Mikhail Kuznetsov (@posidoni)](https://github.com/AndreyZhelannikov), [Andrey Jhelannikov(@capricey)](https://github.com/AndreyZhelannikov), [Anton Bezludniy(@tarticar)](https://github.com/bezlant).
-- Thanks to [Stepa(@co-cy)](https://github.com/co-cy) for providing a Python testing framework.
+- Thanks to [Stepan Fedorov(@nanadaug)](https://github.com/co-cy) for providing a Python testing framework.
