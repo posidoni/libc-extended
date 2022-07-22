@@ -1,37 +1,25 @@
-# S21_Decimal
+# Bigint Calculator
 
 ## Table of contents
-* [General info](https://github.com/AndreyZhelannikov/s21_decimal/tree/main#general-info)
-* [Goal & requirements](https://github.com/AndreyZhelannikov/s21_decimal/tree/main#goal--requirements)
-* [Key learnings](https://github.com/AndreyZhelannikov/s21_decimal/tree/main#key-learnings)
-* [Build](https://github.com/AndreyZhelannikov/s21_decimal/tree/main#build)
-* [Credits](https://github.com/AndreyZhelannikov/s21_decimal/tree/main#credits)
+* [Introduction](#introduction)
+* [Goals](#goals)
+* [Task](#task)
+* [Build](#build)
+* [Tests](#tests)
+* [Credits](#credits)
 
-## General info 
+## Introduction
 
 Implementation of `decimal` value type in C language. This type represents 96-bit signed real number featuring opratinons without floating point imprecision. The library also provides an API for working with this type.
 
-## Goal & requirements
+## Goals 
 
-In this project our task was to implement `decimal` type, that is 96-bit signed real number, and provide an API for working with it.
+- Understand low level binary operations  
+- Implement a binary api for BigInt math 
+- Fully covered with tests using [Check](https://libcheck.github.io/check/)
 
-This type may be used instead of `IEEE 754` floats for calculations where floating point imprecision is unacceptable, for example, in financial transactions. 
-
-`Decimal` also may be used as an analogue to Java `BigInteger` or 'BigInt' in JavaScript for scientific calculations.
-
-## Key learnings
-
-- Got familiar with decimal processing functions & their implementation
-- Became more confident with bitwise operations 
-- Discovered [GMP](https://www.gmplib.org) & used it for testing of the functions
-
-## Specification of `decimal`
-
-# s21_decimal 
-
-## Chapter I
-
-## Information
+## Task
+### Intro
 
 The Decimal value type represents decimal numbers ranging from positive 79,228,162,514,264,337,593,543,950,335 to negative 79,228,162,514,264,337,593,543,950,335. The default value of a Decimal is 0. The Decimal value type is appropriate for financial calculations that require large numbers of significant integral and fractional digits and no round-off errors. The Decimal type does not eliminate the need for rounding. Rather, it minimizes errors due to rounding.
 
@@ -64,7 +52,7 @@ Note that the bit representation differentiates between negative and positive ze
 ```c
 typedef struct 
 {
-    int bits[4];
+    usigned int bits[4];
 } s21_decimal;
 ```
 
@@ -137,35 +125,18 @@ Return value - code error:
 | Returns the integral digits of the specified Decimal; any fractional digits are discarded, including trailing zeroes. | int s21_truncate(s21_decimal value, s21_decimal *result) |
 | Returns the result of multiplying the specified Decimal value by negative one. | int s21_negate(s21_decimal value, s21_decimal *result)   |
 
-
-## Chapter II
-
-## Part 1. Implementation of the decimal.h library functions
-
-The functions of the decimal.h library described [above](#information) must be implemented:
-- The library must be developed in C language of C11 standard using gcc compiler
-- The library code must be located in the src folder on the develop branch   
-- Do not use outdated and legacy language constructions and library functions. Pay attention to the legacy and obsolete marks in the official documentation on the language and the libraries used. Use the POSIX.1-2017 standard.
-- Make it as a static library (with the s21_decimal.h header file)
-- The library must be developed according to the principles of structured programming;
-- Use prefix s21_ before each function
-- Prepare full coverage of library functions code with unit-tests using the Check library
-- Unit tests must cover at least 80% of each function (checked using gcov)   
-- Provide a Makefile for building the library and tests (with targets all, clean, test, s21_decimal.a, gcov_report)  
-- The gcov_report target should generate a gcov report in the form of an html page. Unit tests must be run with gcov flags to do this
-- When implementing decimal, stick to [the binary representation](#binary-representation) with the integer `bits` array as specified in the [example above](#example). Observe the position of the digits of a number in the `bits` array
-- It is forbidden to use the __int128 type
-- Trailing zeros can be as preserved as deleted (except for the `s21_truncate` function)
-- The defined type must support numbers from -79,228,162,514,264,337,593,543,950,335 to +79,228,162,514,264,337,593,543,950,335.
-
 ## Build
 
 ```
-$ git clone ..
-$ cd repo/src/
+$ git clone https://github.com/bezlant/s21_bigint
+$ cd s21_bigint/src/
 $ make
 ```
 
+### Tests
+* Unit tests are implemented using [Check](https://libcheck.github.io/check/) & coverage report with [LCOV](https://github.com/linux-test-project/lcov)
+
+![Tests & Coverage](assets/tests.gif)
 ## Credits
 - Developers: [Mikhail Kuznetsov (@posidoni)](https://github.com/AndreyZhelannikov), [Andrey Jhelannikov(@capricey)](https://github.com/AndreyZhelannikov), [Anton Bezludniy(@tarticar)](https://github.com/bezlant).
-- SC21 for providing this task as a part of our curriculum 🙂💚
+- Thanks to [Stepa(@co-cy)](https://github.com/co-cy) for providing a Python testing framework.

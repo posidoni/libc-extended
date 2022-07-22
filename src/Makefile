@@ -11,7 +11,7 @@ STDFLAGS 		 =	-g -c -Wall -Wextra -std=c11 -pedantic $(C_OPTIMIZATION) # -fanaly
 C_OPTIMIZATION	 = -O0
 
 # Linking flags configuration
-LIBS 			 =	$(CHECK_LIB)
+LIBS 			 =	$(CHECK_LIB) -lm
 CHECK_LIB 		 = 	$(shell pkg-config --libs --cflags check)
 
 # DevTools config
