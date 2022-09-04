@@ -6,7 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "../s21_string.h"
+#include "s21_string.h"
 
 Suite *suite_atoi(void);
 Suite *suite_sprintf(void);

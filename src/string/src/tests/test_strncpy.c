@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(empty) {
     char src[] = "";
@@ -10,7 +10,8 @@ START_TEST(empty) {
     strncpy(exp, src, n_byte);
 
     ck_assert_str_eq(res, exp);
-} END_TEST
+}
+END_TEST
 
 START_TEST(zero_byte) {
     char src[] = "123";
@@ -22,7 +23,8 @@ START_TEST(zero_byte) {
     strncpy(exp, src, n_byte);
 
     ck_assert_str_eq(res, exp);
-} END_TEST
+}
+END_TEST
 
 START_TEST(empty_src) {
     char src[] = "";
@@ -34,7 +36,8 @@ START_TEST(empty_src) {
     strncpy(exp, src, n_byte);
 
     ck_assert_str_eq(res, exp);
-} END_TEST
+}
+END_TEST
 
 START_TEST(one_byte) {
     char src[] = "123";
@@ -46,7 +49,8 @@ START_TEST(one_byte) {
     strncpy(exp, src, n_byte);
 
     ck_assert_str_eq(res, exp);
-} END_TEST
+}
+END_TEST
 
 START_TEST(two_byte) {
     char src[] = "123";
@@ -58,7 +62,8 @@ START_TEST(two_byte) {
     strncpy(exp, src, n_byte);
 
     ck_assert_str_eq(res, exp);
-} END_TEST
+}
+END_TEST
 
 START_TEST(string) {
     char src[] = "Str1ng";
@@ -70,7 +75,8 @@ START_TEST(string) {
     strncpy(exp, src, n_byte);
 
     ck_assert_str_eq(res, exp);
-} END_TEST
+}
+END_TEST
 
 Suite *suite_strncpy(void) {
     Suite *s = suite_create("suite_strncpy");

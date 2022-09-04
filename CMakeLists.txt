@@ -15,7 +15,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 set(USE_FOLDERS ON)
 
 option(GENERATE_TESTS "Generates unit tests build systems for every lib" OFF)
-option(GENERATE_COVERAGE_ON "Generates test coverate report" ON)
+option(GENERATE_COVERAGE_ON "Generates test coverate report" OFF)
 option(ENABLE_CXX_EXCEPTIONS "Enables C++ exceptions" OFF)
 option(ENABLE_ASAN "Enables ASAN for all CMake targets & subdirectories" OFF)
 option(ENABLE_DOCS_TARGET "Enables docs / dvi target" ON)

@@ -1,7 +1,11 @@
 #ifndef SRC_S21_SPRINTF_H_
 #define SRC_S21_SPRINTF_H_
-#include "s21_string.h"
+
 #include <locale.h>
+#include <stdarg.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <wchar.h>
 
 typedef struct {
     bool minus;

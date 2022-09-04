@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(simple_int) {
     char str1[BUFF_SIZE];
@@ -111,8 +111,8 @@ START_TEST(many_flags_many_ints) {
     char format[] = "%0.*i %d %4.*i %013d %d";
     int val = 69;
     ck_assert_int_eq(
-        s21_sprintf(str1, format, 5, val, -10431, 13, 5311, 0, -581813581),
-        sprintf(str2, format, 5, val, -10431, 13, 5311, 0, -581813581));
+      s21_sprintf(str1, format, 5, val, -10431, 13, 5311, 0, -581813581),
+      sprintf(str2, format, 5, val, -10431, 13, 5311, 0, -581813581));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -278,10 +278,10 @@ START_TEST(unsigned_val_many) {
 
     char *format = "%lu, %u, %hu, %.5u, %5.u";
     unsigned long int val = 949149114140;
-    ck_assert_int_eq(s21_sprintf(str1, format, val, 14, 1441, 14414, 9681),
-                     sprintf(str2, format, val, (unsigned)14,
-                             (unsigned short)1441, (unsigned)14414,
-                             (unsigned)9681));
+    ck_assert_int_eq(
+      s21_sprintf(str1, format, val, 14, 1441, 14414, 9681),
+      sprintf(str2, format, val, (unsigned)14, (unsigned short)1441,
+              (unsigned)14414, (unsigned)9681));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -392,10 +392,10 @@ START_TEST(octal_many) {
 
     char *format = "%lo, %o, %ho, %.5o, %5.o";
     long int val = 949149114140;
-    ck_assert_int_eq(s21_sprintf(str1, format, val, 14, 1441, 14414, 9681),
-                     sprintf(str2, format, val, (unsigned)14,
-                             (unsigned short)1441, (unsigned)14414,
-                             (unsigned)9681));
+    ck_assert_int_eq(
+      s21_sprintf(str1, format, val, 14, 1441, 14414, 9681),
+      sprintf(str2, format, val, (unsigned)14, (unsigned short)1441,
+              (unsigned)14414, (unsigned)9681));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -693,7 +693,7 @@ START_TEST(string_long) {
 
     char *format = "%s";
     char *val =
-        "69 IS MY FAVORITE NUMBER THIS IS SUPPOSED TO BE A VERY LONG STRING";
+      "69 IS MY FAVORITE NUMBER THIS IS SUPPOSED TO BE A VERY LONG STRING";
     ck_assert_int_eq(s21_sprintf(str1, format, val),
                      sprintf(str2, format, val));
 
@@ -707,7 +707,7 @@ START_TEST(string_many) {
 
     char *format = "%s%s%s%s";
     char *val =
-        "69 IS MY FAVORITE NUMBER THIS IS SUPPOSED TO BE A VERY LONG STRING";
+      "69 IS MY FAVORITE NUMBER THIS IS SUPPOSED TO BE A VERY LONG STRING";
     char *s1 = "";
     char *s2 = "87418347813748913749871389480913";
     char *s3 = "HAHAABOBASUCKER";
@@ -887,8 +887,8 @@ START_TEST(float_many) {
     double val4 = 9851.51351;
     long double val5 = 95919539159.53151351131;
     ck_assert_int_eq(
-        s21_sprintf(str1, format, val, val1, val2, val3, val4, val5),
-        sprintf(str2, format, val, val1, val2, val3, val4, val5));
+      s21_sprintf(str1, format, val, val1, val2, val3, val4, val5),
+      sprintf(str2, format, val, val1, val2, val3, val4, val5));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -995,8 +995,8 @@ START_TEST(e_many) {
     double val4 = 0.094913941;
     long double val5 = 95919539159.53151351131;
     ck_assert_int_eq(
-        s21_sprintf(str1, format, val, val1, val2, val3, val4, val5),
-        sprintf(str2, format, val, val1, val2, val3, val4, val5));
+      s21_sprintf(str1, format, val, val1, val2, val3, val4, val5),
+      sprintf(str2, format, val, val1, val2, val3, val4, val5));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -1068,8 +1068,8 @@ START_TEST(test_many_string) {
     char str2[BUFF_SIZE];
 
     ck_assert_int_eq(
-        s21_sprintf(str1, "%s%s%s%s%s", "Drop", " ", "Sega", " ", "PLS"),
-        sprintf(str2, "%s%s%s%s%s", "Drop", " ", "Sega", " ", "PLS"));
+      s21_sprintf(str1, "%s%s%s%s%s", "Drop", " ", "Sega", " ", "PLS"),
+      sprintf(str2, "%s%s%s%s%s", "Drop", " ", "Sega", " ", "PLS"));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -1133,8 +1133,8 @@ START_TEST(test_many_float) {
     char str2[BUFF_SIZE];
 
     ck_assert_int_eq(
-        s21_sprintf(str1, "%f%f%f%f", -999.666, 0.0001, 666.999, -100.001),
-        sprintf(str2, "%f%f%f%f", -999.666, 0.0001, 666.999, -100.001));
+      s21_sprintf(str1, "%f%f%f%f", -999.666, 0.0001, 666.999, -100.001),
+      sprintf(str2, "%f%f%f%f", -999.666, 0.0001, 666.999, -100.001));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -1190,8 +1190,8 @@ START_TEST(test_many_char_with_alignment) {
     char str2[BUFF_SIZE];
 
     ck_assert_int_eq(
-        s21_sprintf(str1, "%3c%-11c%10c%-2c%c", '\t', '\n', '0', 'S', 's'),
-        sprintf(str2, "%3c%-11c%10c%-2c%c", '\t', '\n', '0', 'S', 's'));
+      s21_sprintf(str1, "%3c%-11c%10c%-2c%c", '\t', '\n', '0', 'S', 's'),
+      sprintf(str2, "%3c%-11c%10c%-2c%c", '\t', '\n', '0', 'S', 's'));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -1232,8 +1232,8 @@ START_TEST(test_many_hex_lower) {
     char str2[BUFF_SIZE];
 
     ck_assert_int_eq(
-        s21_sprintf(str1, "%x%x%x%x%x", 12340987, 135, 0, -1230, -123213123),
-        sprintf(str2, "%x%x%x%x%x", 12340987, 135, 0, -1230, -123213123));
+      s21_sprintf(str1, "%x%x%x%x%x", 12340987, 135, 0, -1230, -123213123),
+      sprintf(str2, "%x%x%x%x%x", 12340987, 135, 0, -1230, -123213123));
     ck_assert_str_eq(str1, str2);
 }
 END_TEST
@@ -1243,8 +1243,8 @@ START_TEST(test_many_hex_upper) {
     char str2[BUFF_SIZE];
 
     ck_assert_int_eq(
-        s21_sprintf(str1, "%X%X%X%X%X", 12340987, 135, 0, -1230, -123213123),
-        sprintf(str2, "%X%X%X%X%X", 12340987, 135, 0, -1230, -123213123));
+      s21_sprintf(str1, "%X%X%X%X%X", 12340987, 135, 0, -1230, -123213123),
+      sprintf(str2, "%X%X%X%X%X", 12340987, 135, 0, -1230, -123213123));
     ck_assert_str_eq(str1, str2);
 }
 END_TEST
@@ -1316,8 +1316,8 @@ START_TEST(test_many_hex_lower_with_alignment) {
     char str2[BUFF_SIZE];
 
     ck_assert_int_eq(
-        s21_sprintf(str1, "%2x%-7x%9x%11x%0x", 12340987, 100, 0, 1, -666999),
-        sprintf(str2, "%2x%-7x%9x%11x%0x", 12340987, 100, 0, 1, -666999));
+      s21_sprintf(str1, "%2x%-7x%9x%11x%0x", 12340987, 100, 0, 1, -666999),
+      sprintf(str2, "%2x%-7x%9x%11x%0x", 12340987, 100, 0, 1, -666999));
     ck_assert_str_eq(str1, str2);
 }
 END_TEST
@@ -1326,8 +1326,8 @@ START_TEST(test_many_hex_upper_with_alignment) {
     char str1[BUFF_SIZE];
     char str2[BUFF_SIZE];
     ck_assert_int_eq(
-        s21_sprintf(str1, "%2X%-7X%9X%11X%0X", 12340987, 100, 0, 1, -666999),
-        sprintf(str2, "%2X%-7X%9X%11X%0X", 12340987, 100, 0, 1, -666999));
+      s21_sprintf(str1, "%2X%-7X%9X%11X%0X", 12340987, 100, 0, 1, -666999),
+      sprintf(str2, "%2X%-7X%9X%11X%0X", 12340987, 100, 0, 1, -666999));
     ck_assert_str_eq(str1, str2);
 }
 END_TEST
@@ -1368,10 +1368,10 @@ START_TEST(test_many_hex_lower_with_hashtag_and_alignm) {
     char str1[BUFF_SIZE];
     char str2[BUFF_SIZE];
 
-    ck_assert_int_eq(s21_sprintf(str1, "%#x%#x%3x%#32x%#-1x", 87, 1222224535,
-                                 -13, -0, 123213123),
-                     sprintf(str2, "%#x%#x%3x%#32x%#-1x", 87, 1222224535, -13,
-                             -0, 123213123));
+    ck_assert_int_eq(
+      s21_sprintf(str1, "%#x%#x%3x%#32x%#-1x", 87, 1222224535, -13, -0,
+                  123213123),
+      sprintf(str2, "%#x%#x%3x%#32x%#-1x", 87, 1222224535, -13, -0, 123213123));
     ck_assert_str_eq(str1, str2);
 }
 END_TEST
@@ -1380,10 +1380,10 @@ START_TEST(test_many_hex_upper_with_hashtag_and_alignm) {
     char str1[BUFF_SIZE];
     char str2[BUFF_SIZE];
 
-    ck_assert_int_eq(s21_sprintf(str1, "%#X%#X%3X%#32X%#-1X", 87, 1222224535,
-                                 -13, -0, 123213123),
-                     sprintf(str2, "%#X%#X%3X%#32X%#-1X", 87, 1222224535, -13,
-                             -0, 123213123));
+    ck_assert_int_eq(
+      s21_sprintf(str1, "%#X%#X%3X%#32X%#-1X", 87, 1222224535, -13, -0,
+                  123213123),
+      sprintf(str2, "%#X%#X%3X%#32X%#-1X", 87, 1222224535, -13, -0, 123213123));
     ck_assert_str_eq(str1, str2);
 }
 END_TEST
@@ -1478,11 +1478,11 @@ START_TEST(test_many_hex_lower_with_precision_and_other) {
     char str1[BUFF_SIZE];
     char str2[BUFF_SIZE];
     int a = s21_sprintf(
-        str1, "%#3.*x%#3x%-7.*x%#-1.8x%4.3x%#2.15x%*.*x%*.1x%3x%-1x", 3, 126714,
-        4444444, 0, 6423235, 0, 666, 999, 13, 5, 419, 9, 41, -41, 33);
+      str1, "%#3.*x%#3x%-7.*x%#-1.8x%4.3x%#2.15x%*.*x%*.1x%3x%-1x", 3, 126714,
+      4444444, 0, 6423235, 0, 666, 999, 13, 5, 419, 9, 41, -41, 33);
     int b = sprintf(
-        str2, "%#3.*x%#3x%-7.*x%#-1.8x%4.3x%#2.15x%*.*x%*.1x%3x%-1x", 3, 126714,
-        4444444, 0, 6423235, 0, 666, 999, 13, 5, 419, 9, 41, -41, 33);
+      str2, "%#3.*x%#3x%-7.*x%#-1.8x%4.3x%#2.15x%*.*x%*.1x%3x%-1x", 3, 126714,
+      4444444, 0, 6423235, 0, 666, 999, 13, 5, 419, 9, 41, -41, 33);
     ck_assert_int_eq(a, b);
     ck_assert_str_eq(str1, str2);
 }
@@ -1493,13 +1493,12 @@ START_TEST(test_many_hex_upper_with_precision_and_other) {
     char str2[BUFF_SIZE];
 
     ck_assert_int_eq(
-        s21_sprintf(str1,
-                    "%#3.*X%#3x%-7.*X%#-1.8X%4.3X%#2.15x%*.*X%*.1X%3X%-1X", 3,
-                    -126714, 4444444, 0, 6423235, 0, 666, 999, 13, 5, -419, 9,
-                    41, -41, 33),
-        sprintf(str2, "%#3.*X%#3x%-7.*X%#-1.8X%4.3X%#2.15x%*.*X%*.1X%3X%-1X", 3,
-                -126714, 4444444, 0, 6423235, 0, 666, 999, 13, 5, -419, 9, 41,
-                -41, 33));
+      s21_sprintf(str1, "%#3.*X%#3x%-7.*X%#-1.8X%4.3X%#2.15x%*.*X%*.1X%3X%-1X",
+                  3, -126714, 4444444, 0, 6423235, 0, 666, 999, 13, 5, -419, 9,
+                  41, -41, 33),
+      sprintf(str2, "%#3.*X%#3x%-7.*X%#-1.8X%4.3X%#2.15x%*.*X%*.1X%3X%-1X", 3,
+              -126714, 4444444, 0, 6423235, 0, 666, 999, 13, 5, -419, 9, 41,
+              -41, 33));
     ck_assert_str_eq(str1, str2);
 }
 END_TEST
@@ -1678,8 +1677,8 @@ START_TEST(test_sprintf12) {
     long double k = 333.33213;
 
     ck_assert_int_eq(
-        s21_sprintf(str1, format, 66666666666, 5555555555, 44444444444, k),
-        sprintf(str2, format, 66666666666, 5555555555, 44444444444, k));
+      s21_sprintf(str1, format, 66666666666, 5555555555, 44444444444, k),
+      sprintf(str2, format, 66666666666, 5555555555, 44444444444, k));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -1691,8 +1690,8 @@ START_TEST(test_sprintf14) {
     char format[] = "% 0.0li% 0.0lu% 0.0ld % 0.0lf";
 
     ck_assert_int_eq(
-        s21_sprintf(str1, format, 1, 222, 33333333333, -166513.1232),
-        sprintf(str2, format, 1, 222, 33333333333, -166513.1232));
+      s21_sprintf(str1, format, 1, 222, 33333333333, -166513.1232),
+      sprintf(str2, format, 1, 222, 33333333333, -166513.1232));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -1704,8 +1703,8 @@ START_TEST(test_sprintf15) {
     char format[] = "% 0.0hi% 0.0hu% 0.0hd % 0.0hf";
 
     ck_assert_int_eq(
-        s21_sprintf(str1, format, 1, 222, 33333333333, -166513.1232),
-        sprintf(str2, format, 1, 222, 33333333333, -166513.1232));
+      s21_sprintf(str1, format, 1, 222, 33333333333, -166513.1232),
+      sprintf(str2, format, 1, 222, 33333333333, -166513.1232));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -1777,10 +1776,10 @@ START_TEST(test_sprintf24) {
     char format[] = "%+2.1c%+4.2d%+5.4i%+10.2f%+55.55s%+1.1u";
 
     ck_assert_int_eq(
-        s21_sprintf(str1, format, 'f', 21, 42, 666.666,
-                    "Lorem ipsum dolor sit amet. Aut quam ducimus.", 11),
-        sprintf(str2, format, 'f', 21, 42, 666.666,
-                "Lorem ipsum dolor sit amet. Aut quam ducimus.", 11));
+      s21_sprintf(str1, format, 'f', 21, 42, 666.666,
+                  "Lorem ipsum dolor sit amet. Aut quam ducimus.", 11),
+      sprintf(str2, format, 'f', 21, 42, 666.666,
+              "Lorem ipsum dolor sit amet. Aut quam ducimus.", 11));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -1875,8 +1874,8 @@ START_TEST(test_sprintf32) {
     char format[] = "%e%e%e%e";
 
     ck_assert_int_eq(
-        s21_sprintf(str1, format, 11.111, 222.2222, 666., -555.125),
-        sprintf(str2, format, 11.111, 222.2222, 666., -555.125));
+      s21_sprintf(str1, format, 11.111, 222.2222, 666., -555.125),
+      sprintf(str2, format, 11.111, 222.2222, 666., -555.125));
 
     ck_assert_str_eq(str1, str2);
 }
@@ -2172,8 +2171,8 @@ START_TEST(g_many) {
     double hex4 = 0.0005;
     double hex5 = 0.8481481;
     ck_assert_int_eq(
-        s21_sprintf(str1, format, hex, hex1, hex2, hex3, hex4, hex5),
-        sprintf(str2, format, hex, hex1, hex2, hex3, hex4, hex5));
+      s21_sprintf(str1, format, hex, hex1, hex2, hex3, hex4, hex5),
+      sprintf(str2, format, hex, hex1, hex2, hex3, hex4, hex5));
 
     ck_assert_str_eq(str1, str2);
 }

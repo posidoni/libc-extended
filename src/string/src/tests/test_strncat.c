@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(all_empty) {
     char src[] = "";
@@ -10,7 +10,8 @@ START_TEST(all_empty) {
     strncat(expected, src, n_byte);
 
     ck_assert_mem_ge(res, expected, n_byte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(zero_byte) {
     char src[] = "abosal";
@@ -22,7 +23,8 @@ START_TEST(zero_byte) {
     strncat(expected, src, n_byte);
 
     ck_assert_mem_ge(res, expected, n_byte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(empty_src) {
     char src[] = "";
@@ -34,8 +36,8 @@ START_TEST(empty_src) {
     strncat(expected, src, n_byte);
 
     ck_assert_mem_ge(res, expected, n_byte);
-} END_TEST
-
+}
+END_TEST
 
 START_TEST(cd_abosa) {
     char src[] = "abosal";
@@ -47,7 +49,8 @@ START_TEST(cd_abosa) {
     strncat(expected, src, n_byte);
 
     ck_assert_mem_ge(res, expected, n_byte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(string) {
     char src[] = "abosal";
@@ -59,7 +62,8 @@ START_TEST(string) {
     strncat(expected, src, n_byte);
 
     ck_assert_mem_ge(res, expected, n_byte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(BIGFLOPPA) {
     char src[] = "BIGFLOPPA";
@@ -71,7 +75,8 @@ START_TEST(BIGFLOPPA) {
     strncat(expected, src, n_byte);
 
     ck_assert_mem_ge(res, expected, n_byte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(BIGFLOPPA2) {
     char src[] = "BIGFLOPPA";
@@ -83,7 +88,8 @@ START_TEST(BIGFLOPPA2) {
     strncat(expected, src, n_byte);
 
     ck_assert_mem_ge(res, expected, n_byte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(BIGFLOPPA3) {
     char src[] = "BIGFLOPPA";
@@ -95,7 +101,8 @@ START_TEST(BIGFLOPPA3) {
     strncat(expected, src, n_byte);
 
     ck_assert_mem_ge(res, expected, n_byte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(BIGFLOPPA4) {
     char src[] = "BIGFLOPPA";
@@ -107,7 +114,8 @@ START_TEST(BIGFLOPPA4) {
     strncat(expected, src, n_byte);
 
     ck_assert_mem_ge(res, expected, n_byte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(zero_char) {
     char src[] = "\0";
@@ -119,8 +127,8 @@ START_TEST(zero_char) {
     strncat(expected, src, n_byte);
 
     ck_assert_mem_ge(res, expected, n_byte);
-} END_TEST
-
+}
+END_TEST
 
 Suite *suite_strncat(void) {
     Suite *s = suite_create("suite_strncat");

@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(Heloboba_Heloboba) {
     char a[] = "Heloboba";
@@ -7,14 +7,19 @@ START_TEST(Heloboba_Heloboba) {
     int got = s21_strcmp(a, b);
     int expected = strcmp(a, b);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(HEloboba_Heloboba) {
     char a[] = "HEloboba";
@@ -23,14 +28,19 @@ START_TEST(HEloboba_Heloboba) {
     int got = s21_strcmp(a, b);
     int expected = strcmp(a, b);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(Hel0boba_Helob0ba) {
     char a[] = "Hel0boba";
@@ -39,14 +49,19 @@ START_TEST(Hel0boba_Helob0ba) {
     int got = s21_strcmp(a, b);
     int expected = strcmp(a, b);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(Heloboba_) {
     char a[] = "Heloboba";
@@ -55,14 +70,19 @@ START_TEST(Heloboba_) {
     int got = s21_strcmp(a, b);
     int expected = strcmp(a, b);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(_Heloboba) {
     char a[] = "";
@@ -71,14 +91,19 @@ START_TEST(_Heloboba) {
     int got = s21_strcmp(a, b);
     int expected = strcmp(a, b);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(Heloboba) {
     char a[] = "L(8)L";
@@ -87,14 +112,19 @@ START_TEST(Heloboba) {
     int got = s21_strcmp(a, b);
     int expected = strcmp(a, b);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(empty) {
     char a[] = "";
@@ -103,14 +133,19 @@ START_TEST(empty) {
     int got = s21_strcmp(a, b);
     int expected = strcmp(a, b);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(only_num) {
     char a[] = "1234567890";
@@ -119,14 +154,19 @@ START_TEST(only_num) {
     int got = s21_strcmp(a, b);
     int expected = strcmp(a, b);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 Suite *suite_strcmp(void) {
     Suite *s = suite_create("suite_strcmp");

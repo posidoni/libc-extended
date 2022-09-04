@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(empty) {
     char str1[] = "";
@@ -8,14 +8,19 @@ START_TEST(empty) {
     int got = s21_strncmp(str1, str2, n_byte);
     int expected = strncmp(str1, str2, n_byte);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(floppa_) {
     char str1[] = "floppa";
@@ -25,14 +30,19 @@ START_TEST(floppa_) {
     int got = s21_strncmp(str1, str2, n_byte);
     int expected = strncmp(str1, str2, n_byte);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(_floppa) {
     char str1[] = "";
@@ -42,14 +52,19 @@ START_TEST(_floppa) {
     int got = s21_strncmp(str1, str2, n_byte);
     int expected = strncmp(str1, str2, n_byte);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(floppa_floppa) {
     char str1[] = "floppa";
@@ -59,14 +74,19 @@ START_TEST(floppa_floppa) {
     int got = s21_strncmp(str1, str2, n_byte);
     int expected = strncmp(str1, str2, n_byte);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(floppa_floppa_zero_byte) {
     char str1[] = "floppabazbazkotya";
@@ -76,14 +96,19 @@ START_TEST(floppa_floppa_zero_byte) {
     int got = s21_strncmp(str1, str2, n_byte);
     int expected = strncmp(str1, str2, n_byte);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(floppa_floppa_one_byte) {
     char str1[] = "floppa";
@@ -93,14 +118,19 @@ START_TEST(floppa_floppa_one_byte) {
     int got = s21_strncmp(str1, str2, n_byte);
     int expected = strncmp(str1, str2, n_byte);
 
-    if (got > 1) got = 1;
-    if (expected > 1) expected = 1;
+    if (got > 1)
+        got = 1;
+    if (expected > 1)
+        expected = 1;
 
-    if (got < -1) got = -1;
-    if (expected < -1) expected = -1;
+    if (got < -1)
+        got = -1;
+    if (expected < -1)
+        expected = -1;
 
     ck_assert_int_eq(got, expected);
-} END_TEST
+}
+END_TEST
 
 Suite *suite_strncmp(void) {
     Suite *s = suite_create("suite_strncmp");
