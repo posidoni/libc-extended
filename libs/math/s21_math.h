@@ -1,9 +1,9 @@
 #ifndef S21_MATH
 #define S21_MATH
 
-#define s21_true 1
+#define s21_true  1
 #define s21_false 0
-#define s21_bool int
+#define s21_bool  int
 
 #include <errno.h>
 #include <float.h>
@@ -13,9 +13,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define EPS 1e-6
-#define EPS_8 1e-7
-#define S21_M_PI 3.14159265358979323846264338327950288
+#define EPS        1e-6
+#define EPS_8      1e-7
+#define S21_M_PI   3.14159265358979323846264338327950288
 #define S21_M_PI_2 1.57079632679489661923132169163975144
 
 // sets the value to INF
@@ -27,7 +27,7 @@
 // check if NAN
 #define is_nan(x) __builtin_isnan(x)
 // check for INF
-#define is_inf(x) __builtin_isinf(x)
+#define is_inf(x)    __builtin_isinf(x)
 #define is_normal(x) __builtin_isnormal(x)
 
 #define TWO52 0x1.0p52 /* 2^52 */

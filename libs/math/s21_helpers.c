@@ -2,13 +2,6 @@
 
 /* God, I wish C had C++ templates & overloading ... (~Misha) */
 
-<<<<<<< HEAD
-s21_bool s21_ldeq(long double a, long double b) { return (a < b + EPS_8 && a > b - EPS_8); }
-
-s21_bool s21_deq(double a, double b) { return (a < b + EPS_8 && a > b - EPS_8); }
-
-s21_bool s21_feq(float a, float b) { return (a < b + EPS_8 && a > b - EPS_8); }
-=======
 s21_bool s21_ldeq(long double a, long double b) {
     return (a < b + EPS_8 && a > b - EPS_8);
 }
@@ -17,16 +10,7 @@ s21_bool s21_deq(double a, double b) {
     return (a < b + EPS_8 && a > b - EPS_8);
 }
 
-<<<<<<< HEAD:s21_helpers.c
-s21_bool s21_feq(float a, float b) {
-    return (a < b + EPS_8 && a > b - EPS_8);
-}
-<<<<<<< HEAD
->>>>>>> 85ddb17 (Add TODO)
-=======
-=======
 s21_bool s21_feq(float a, float b) { return (a < b + EPS_8 && a > b - EPS_8); }
->>>>>>> 21502c1 (Fix project structure):src/s21_helpers.c
 
 static long double s21_atan_custom_pos_neg(long double magic, long double res,
                                            int mod, int *sp, long double x);
@@ -60,14 +44,14 @@ long double s21_atan_custom(double x) {
                 res += (s21_pow(-1.0, i) * s21_pow(x, 1 + 2 * i)) / (1 + 2 * i);
             } else {
                 res +=
-                    (s21_pow(-1.0, i) * s21_pow(x, (-1 - 2 * i))) / (1 + 2 * i);
+                  (s21_pow(-1.0, i) * s21_pow(x, (-1 - 2 * i))) / (1 + 2 * i);
             }
         }
     }
 
     return (is_nan(x))
-               ? S21_NAN
-               : s21_atan_custom_pos_neg(magic, res, modulo_x, &special, x);
+             ? S21_NAN
+             : s21_atan_custom_pos_neg(magic, res, modulo_x, &special, x);
 }
 
 static long double s21_atan_custom_pos_neg(long double magic, long double res,
@@ -96,7 +80,3 @@ static int check_inf_custom(double x) {
 
     return flag;
 }
-<<<<<<< HEAD:s21_helpers.c
->>>>>>> 83195a0 (Fix bugs in acos, atan, asin. Add s21_atan_custom helper)
-=======
->>>>>>> 21502c1 (Fix project structure):src/s21_helpers.c
