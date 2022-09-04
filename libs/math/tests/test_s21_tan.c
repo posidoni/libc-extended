@@ -2,7 +2,7 @@
 #include "s21_math_test.h"
 
 START_TEST(tan_test_1) {
-    double x = RandomReal(-2 * M_PI, 2 * M_PI);
+    double x = RandomReal(-2 * S21_M_PI, 2 * S21_M_PI);
     ck_assert_ldouble_eq_tol(s21_tan(x), tanl(x), 1e-06);
 }
 END_TEST

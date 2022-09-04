@@ -2,12 +2,6 @@
 
 START_TEST(sqrt_test_1) {
     double x = RandomReal(10e-16, 10e+16);
-<<<<<<< HEAD
-=======
-    double x = RandomReal(-1e+11, 1e+11);
->>>>>>> 71bf06a (s21_)
-=======
->>>>>>> 79b848b (Fixed acos / asin (stable), added correct doubles equality, added good tests)
 
     if (x < 0) {
         /* CPPLINT doesn't allow this! */
