@@ -26,7 +26,8 @@ char *s21_strtok(char *str, const char *delim) {
     if (str) {
         tok = 1;
         ind = 0, next_null = 0;
-        addr = str + s21_strspn(str, delim);  // skipping trailing delims, if any;
+        addr =
+          str + s21_strspn(str, delim);  // skipping trailing delims, if any;
         max_ptr = str + s21_strlen(str);
     }
 
@@ -45,7 +46,8 @@ char *s21_strtok(char *str, const char *delim) {
             }
         }
 
-        if (tok == 1 && non_delim) next_null = 1;
+        if (tok == 1 && non_delim)
+            next_null = 1;
 
         res = addr;   // old start of the string
         addr += ind;  // new start of the new string

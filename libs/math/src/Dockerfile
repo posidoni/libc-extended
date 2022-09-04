@@ -6,12 +6,12 @@ RUN apk --no-cache --upgrade add \
     curl \
     jq \
     bash \
-	build-base \
+    build-base \
     python3 \
     valgrind \
     cppcheck \
-	alpine-sdk \
-	pcre-dev \
+    alpine-sdk \
+    pcre-dev \
     clang \
     bash \
     check-dev

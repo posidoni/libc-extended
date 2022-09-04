@@ -12,7 +12,9 @@ START_TEST(exp_0) {
 }
 END_TEST
 
-START_TEST(exp_minf) { ck_assert_ldouble_eq_tol(s21_exp(-INFINITY), expl(-INFINITY), 1e-06); }
+START_TEST(exp_minf) {
+    ck_assert_ldouble_eq_tol(s21_exp(-INFINITY), expl(-INFINITY), 1e-06);
+}
 END_TEST
 
 START_TEST(exp_inf) {

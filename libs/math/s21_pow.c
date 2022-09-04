@@ -2,23 +2,7 @@
 #include "s21_math.h"
 
 long double s21_fast_pow(long double base, long long int exp) {
-<<<<<<< HEAD:s21_pow.c
-<<<<<<< HEAD
     long double res;
-<<<<<<< HEAD
-
-    if (base > EPS) {
-        if (fabs(exp) > EPS) {
-            res = expl(exp * logl(base));
-        } else {
-            res = (long double)1 / expl(-exp * logl(base));
-=======
-=======
-    long double res;    
->>>>>>> 5969fca (Stable, 100% tests. Fix bugs in pow tests)
-=======
-    long double res;
->>>>>>> 3b6eab5 (Minor fix, uncommented targets in makefile, removed math.h, GCOV untested):src/s21_pow.c
     if (exp >= 0) {
         res = 1;
         while (exp) {
@@ -26,13 +10,10 @@ long double s21_fast_pow(long double base, long long int exp) {
                 res *= base;
             base *= base;
             exp >>= 1;
->>>>>>> 90d402d (Added more check in pow)
         }
-
     } else {
         res = 1 / s21_fast_pow(base, -exp);
     }
-
     return res;
 }
 
