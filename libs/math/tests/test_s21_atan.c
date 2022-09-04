@@ -53,15 +53,9 @@ Suite *suite_s21_atan(void) {
     Suite *s = suite_create("s21_atan");
     TCase *tc = tcase_create("s21_add_tc");
 
-<<<<<<< HEAD
-    tcase_add_loop_test(tc, atan_test_1_rand, 0, 20000);
-    tcase_add_loop_test(tc, atan_test_2_rand, 0, 10000);
-    tcase_add_loop_test(tc, atan_test_3_rand, 0, 10000);
-=======
     tcase_add_loop_test(tc, atan_test_1_rand, 0, 5);
     tcase_add_loop_test(tc, atan_test_2_rand, 0, 5);
     tcase_add_loop_test(tc, atan_test_3_rand, 0, 5);
->>>>>>> 3b6eab5 (Minor fix, uncommented targets in makefile, removed math.h, GCOV untested)
     tcase_add_test(tc, atan_test_2_inf);
     tcase_add_test(tc, atan_test_3_nan);
     tcase_add_test(tc, atan_test_4_one);
