@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(Doubles1) {
     long double a1 = 1, b1 = 2, d1 = 3, c1 = 4;
@@ -440,7 +440,6 @@ START_TEST(Mixed3) {
     d1 = s21_strtold(str4);
     d2 = strtold(str4, NULL);
 
-
     ck_assert_ldouble_infinite(a1);
     ck_assert_ldouble_infinite(a2);
 
@@ -585,7 +584,6 @@ START_TEST(Mixed8) {
 
     ck_assert_ldouble_nan(b1);
     ck_assert_ldouble_nan(b2);
-
 
     ck_assert_double_eq_tol(a1, a2, 0.00001);
     ck_assert_double_eq_tol(c1, c2, 0.00001);

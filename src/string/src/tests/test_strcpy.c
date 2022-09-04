@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(aboba_floppa) {
     char src[] = " floppa!!!";
@@ -9,7 +9,8 @@ START_TEST(aboba_floppa) {
     strcpy(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(_floppa) {
     char src[] = "Floppa!!!";
@@ -20,7 +21,8 @@ START_TEST(_floppa) {
     strcpy(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(aboba_) {
     char src[] = "";
@@ -31,7 +33,8 @@ START_TEST(aboba_) {
     strcpy(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(empty) {
     char src[] = "";
@@ -42,7 +45,8 @@ START_TEST(empty) {
     strcpy(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(empty_num) {
     char src[] = "1";
@@ -53,7 +57,8 @@ START_TEST(empty_num) {
     strcpy(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(hello) {
     char src[] = " my dear friend\"";
@@ -64,7 +69,8 @@ START_TEST(hello) {
     strcpy(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(over_string) {
     char src[] = "ab\0ba";
@@ -75,7 +81,8 @@ START_TEST(over_string) {
     strcpy(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(hard_test) {
     char src[] = "ad[sofijpoiajsdf pj98981h23 p9h floppa!!!";
@@ -86,7 +93,8 @@ START_TEST(hard_test) {
     strcpy(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 Suite *suite_strcpy(void) {
     Suite *s = suite_create("suite_strcpy");

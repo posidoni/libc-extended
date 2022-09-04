@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(aboba_test) {
     char res[] = "aboba";
@@ -65,8 +65,12 @@ START_TEST(replace_on_register_num) {
 END_TEST
 
 START_TEST(long_string) {
-    char res[] = "a1oas[pifjaosidfj oapisjdfpoi asjdfoij ouh12oi3 uh12i3 hiajhIOUAHSDiouAHSdu1).bA";
-    char expected[] = "a1oas[pifjaosidfj oapisjdfpoi asjdfoij ouh12oi3 uh12i3 hiajhIOUAHSDiouAHSdu1).bA";
+    char res[] =
+      "a1oas[pifjaosidfj oapisjdfpoi asjdfoij ouh12oi3 uh12i3 "
+      "hiajhIOUAHSDiouAHSdu1).bA";
+    char expected[] =
+      "a1oas[pifjaosidfj oapisjdfpoi asjdfoij ouh12oi3 uh12i3 "
+      "hiajhIOUAHSDiouAHSdu1).bA";
     char replace = '1';
     s21_size_t n_byte = 5;
 

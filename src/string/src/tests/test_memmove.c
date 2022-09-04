@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(empty_dest_and_src) {
     char src[200] = "";
@@ -13,7 +13,8 @@ START_TEST(empty_dest_and_src) {
     memmove(expected, src2, copy_kByte);
 
     ck_assert_mem_eq(res, expected, check_kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(empty_dest) {
     char src[200] = "123SDFAZ`ESFsdfsdf";
@@ -28,8 +29,8 @@ START_TEST(empty_dest) {
     memmove(expected, src2, copy_kByte);
 
     ck_assert_mem_eq(res, expected, check_kByte);
-} END_TEST
-
+}
+END_TEST
 
 START_TEST(empty_src) {
     char src[200] = "";
@@ -44,7 +45,8 @@ START_TEST(empty_src) {
     memmove(expected, src2, copy_kByte);
 
     ck_assert_mem_eq(res, expected, check_kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(write_in_left) {
     char src[200] = "Hate";
@@ -59,7 +61,8 @@ START_TEST(write_in_left) {
     memmove(expected, src2, copy_kByte);
 
     ck_assert_mem_eq(res, expected, check_kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(write_in_right) {
     char src[200] = "Hate";
@@ -74,7 +77,8 @@ START_TEST(write_in_right) {
     memmove(expected + 13, src2, copy_kByte);
 
     ck_assert_mem_eq(res, expected, check_kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(write_in_mid) {
     char src[200] = "Hate";
@@ -89,7 +93,8 @@ START_TEST(write_in_mid) {
     memmove(expected + 5, src2, copy_kByte);
 
     ck_assert_mem_eq(res, expected, check_kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(overlap_write_in_left) {
     char src[200] = "I HATE memmove!!!";
@@ -104,7 +109,8 @@ START_TEST(overlap_write_in_left) {
     memmove(expected, src2, copy_kByte);
 
     ck_assert_mem_eq(res, expected, check_kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(overlap_write_in_right) {
     char src[200] = "I HATE memmove!!!";
@@ -119,7 +125,8 @@ START_TEST(overlap_write_in_right) {
     memmove(expected, src2, copy_kByte);
 
     ck_assert_mem_eq(res, expected, check_kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(overlap_write_in_mid) {
     char src[200] = "I HATE memmove!!!";
@@ -134,166 +141,178 @@ START_TEST(overlap_write_in_mid) {
     memmove(expected, src2, copy_kByte);
 
     ck_assert_mem_eq(res, expected, check_kByte);
-} END_TEST
-
+}
+END_TEST
 
 START_TEST(zero_test_string) {
     char src[] = "aboba";
     s21_size_t kByte = 0;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(any_empty) {
     char src[] = "";
     s21_size_t kByte = 0;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(zero_test_string_with_register) {
     char src[] = "I hate memcmp";
     s21_size_t kByte = 0;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
-
+}
+END_TEST
 
 START_TEST(zero_test_num) {
     char src[] = "123";
     s21_size_t kByte = 1;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(one_byte_string) {
     char src[] = "aboba";
     s21_size_t kByte = 1;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(one_byte_string_with_register) {
     char src[] = "Zboba";
     s21_size_t kByte = 1;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
-
+}
+END_TEST
 
 START_TEST(one_byte_num) {
     char src[] = "09";
     s21_size_t kByte = 1;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(basic_long_string) {
     char src[] = "abobasdafoijasdofjas asdopij";
     s21_size_t kByte = 28;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(long_string_with_register) {
     char src[] = "aposkd AOSIjFasodijpaoisdjf poisdjfg";
     s21_size_t kByte = 36;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(long_string_with_register_and_num) {
     char src[] = "aodasf ieuwfh luhasdfLIAUSHD liuh 12li3uh 12i4ouhsdfh";
     s21_size_t kByte = 53;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(long_string_with_register_and_num_and_simbol) {
-    char src[] = "()()(((())):!,....aodasf ieuwfh luhasdfLIAUSHD liuh 12li3uh 12i4ouhsdfh";
+    char src[] =
+      "()()(((())):!,....aodasf ieuwfh luhasdfLIAUSHD liuh 12li3uh 12i4ouhsdfh";
     s21_size_t kByte = 71;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(ints) {
     int src[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     s21_size_t kByte = 4;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(floats) {
     float src[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     s21_size_t kByte = 8;
-    char res[kByte+8];
-    char expected[kByte+8];
+    char res[kByte + 8];
+    char expected[kByte + 8];
 
     s21_memmove(res, src, kByte);
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
+}
+END_TEST
 
 START_TEST(long_doubels) {
     long double src[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -305,9 +324,8 @@ START_TEST(long_doubels) {
     memmove(expected, src, kByte);
 
     ck_assert_mem_eq(res, expected, kByte);
-} END_TEST
-
-
+}
+END_TEST
 
 Suite *suite_memmove(void) {
     Suite *s = suite_create("suite_memmove");

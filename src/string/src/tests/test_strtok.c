@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(correct_token_string) {
     char str1[] = "Aboba++Floppa_! Kotya====!Shleppa";
@@ -8,10 +8,8 @@ START_TEST(correct_token_string) {
     char *got = s21_strtok(str1, delims);
     char *expected = strtok(str2, delims);
 
-
     ck_assert_uint_eq(s21_strlen(got), s21_strlen(expected));
     ck_assert_str_eq(got, expected);
-
 
     while (got && expected) {
         got = s21_strtok(NULL, delims);
@@ -26,7 +24,8 @@ START_TEST(correct_token_string) {
             ck_assert_ptr_null(expected);
         }
     }
-} END_TEST
+}
+END_TEST
 
 START_TEST(hard_token_string) {
     char str1[] = "++Aboba++Floppa_! Kotya===!Shleppa+++ A +";
@@ -52,7 +51,8 @@ START_TEST(hard_token_string) {
             ck_assert_ptr_null(expected);
         }
     }
-} END_TEST
+}
+END_TEST
 
 START_TEST(unary_delimiters) {
     char str1[] = "Aboba+Anuroba_Floppa!Kotya_Kekus";
@@ -78,7 +78,8 @@ START_TEST(unary_delimiters) {
             ck_assert_ptr_null(expected);
         }
     }
-} END_TEST
+}
+END_TEST
 
 START_TEST(no_delims) {
     char str1[] = "AbobaHasNoDelims";
@@ -95,7 +96,6 @@ START_TEST(no_delims) {
         got = s21_strtok(NULL, delims);
         expected = strtok(NULL, delims);
 
-
         ck_assert_uint_eq(s21_strlen(got), s21_strlen(expected));
 
         if (got || expected) {
@@ -105,7 +105,8 @@ START_TEST(no_delims) {
             ck_assert_ptr_null(expected);
         }
     }
-} END_TEST
+}
+END_TEST
 
 START_TEST(only_delims) {
     char str1[] = "++++++++";
@@ -117,8 +118,8 @@ START_TEST(only_delims) {
 
     ck_assert_ptr_null(got);
     ck_assert_ptr_null(expected);
-} END_TEST
-
+}
+END_TEST
 
 START_TEST(too_many_uses_non_segfault) {
     char str1[] = "Aboba_Floppa_Roba";
@@ -146,7 +147,8 @@ START_TEST(too_many_uses_non_segfault) {
             ck_assert_ptr_null(expected);
         }
     }
-} END_TEST
+}
+END_TEST
 
 START_TEST(even_n_of_delims) {
     char str1[] = "Roba++++Kepa++A++++B__V";
@@ -172,7 +174,8 @@ START_TEST(even_n_of_delims) {
             ck_assert_ptr_null(expected);
         }
     }
-} END_TEST
+}
+END_TEST
 
 START_TEST(odd_n_of_delims) {
     char str1[] = "Aboba__+Floppa_  Roba";
@@ -198,7 +201,8 @@ START_TEST(odd_n_of_delims) {
             ck_assert_ptr_null(expected);
         }
     }
-} END_TEST
+}
+END_TEST
 
 START_TEST(mixed_n_of_delims) {
     char str1[] = "Aboba__Floppa_+++Roba_Kepa";
@@ -224,7 +228,8 @@ START_TEST(mixed_n_of_delims) {
             ck_assert_ptr_null(expected);
         }
     }
-} END_TEST
+}
+END_TEST
 
 START_TEST(hard_mixed) {
     char str1[] = "     Aboba__+ Flo!ppa_   Roba+";
@@ -250,7 +255,8 @@ START_TEST(hard_mixed) {
             ck_assert_ptr_null(expected);
         }
     }
-} END_TEST
+}
+END_TEST
 
 START_TEST(mixed_hard_incorrect) {
     char str1[] = "!Stepa__ !M!ish a____Anton+An!!!drey";
@@ -276,7 +282,8 @@ START_TEST(mixed_hard_incorrect) {
             ck_assert_ptr_null(expected);
         }
     }
-} END_TEST
+}
+END_TEST
 
 START_TEST(very_hard_mixed) {
     char str1[] = "!       A!B!C!D!E!!F!!G";
@@ -301,9 +308,8 @@ START_TEST(very_hard_mixed) {
             ck_assert_ptr_null(expected);
         }
     }
-} END_TEST
-
-
+}
+END_TEST
 
 Suite *suite_strtok(void) {
     Suite *s = suite_create("suite_strtok");

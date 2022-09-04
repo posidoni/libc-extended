@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(empty_str) {
     s21_size_t n_byte = 0;
@@ -7,7 +7,8 @@ START_TEST(empty_str) {
 
     ck_assert_ptr_eq(s21_memchr(str, find_byte, n_byte),
                      memchr(str, find_byte, n_byte));
-} END_TEST
+}
+END_TEST
 
 START_TEST(find_zero_in_string) {
     s21_size_t n_byte = 7;
@@ -16,7 +17,8 @@ START_TEST(find_zero_in_string) {
 
     ck_assert_ptr_eq(s21_memchr(str, find_byte, n_byte),
                      memchr(str, find_byte, n_byte));
-} END_TEST
+}
+END_TEST
 
 START_TEST(find_simbol_in_string_in_start) {
     s21_size_t n_byte = 6;
@@ -25,7 +27,8 @@ START_TEST(find_simbol_in_string_in_start) {
 
     ck_assert_ptr_eq(s21_memchr(str, find_byte, n_byte),
                      memchr(str, find_byte, n_byte));
-} END_TEST
+}
+END_TEST
 
 START_TEST(find_simbol_in_string_in_end) {
     s21_size_t n_byte = 7;
@@ -34,7 +37,8 @@ START_TEST(find_simbol_in_string_in_end) {
 
     ck_assert_ptr_eq(s21_memchr(str, find_byte, n_byte),
                      memchr(str, find_byte, n_byte));
-} END_TEST
+}
+END_TEST
 
 START_TEST(find_num_in_string_in_mid) {
     s21_size_t n_byte = 15;
@@ -43,7 +47,8 @@ START_TEST(find_num_in_string_in_mid) {
 
     ck_assert_ptr_eq(s21_memchr(str, find_byte, n_byte),
                      memchr(str, find_byte, n_byte));
-} END_TEST
+}
+END_TEST
 
 START_TEST(find_num_in_array_num) {
     int array[] = {1, 2, 3, 666, 5, 99, 100};
@@ -52,8 +57,8 @@ START_TEST(find_num_in_array_num) {
 
     ck_assert_ptr_eq(s21_memchr(array, find_byte, n_byte),
                      memchr(array, find_byte, n_byte));
-} END_TEST
-
+}
+END_TEST
 
 START_TEST(find_float_in_array) {
     float array[] = {1, 2, 3, 666, 5, 99, 100};
@@ -62,7 +67,8 @@ START_TEST(find_float_in_array) {
 
     ck_assert_ptr_eq(s21_memchr(array, find_byte, n_byte),
                      memchr(array, find_byte, n_byte));
-} END_TEST
+}
+END_TEST
 
 START_TEST(easy_test_string) {
     s21_size_t n_byte = 5;
@@ -71,7 +77,8 @@ START_TEST(easy_test_string) {
 
     ck_assert_ptr_eq(s21_memchr(str, find_byte, n_byte),
                      memchr(str, find_byte, n_byte));
-} END_TEST
+}
+END_TEST
 
 Suite *suite_memchr(void) {
     Suite *s = suite_create("suite_memchr");

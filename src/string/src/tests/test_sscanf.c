@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(EOF1) {
     char fstr[] = "%d";
@@ -833,8 +833,8 @@ START_TEST(strings_mixed1) {
     long double e1 = 0, e2 = 0;
 
     const char str[] =
-        "4444444"
-        "eeeeeee\teeeeeee";
+      "4444444"
+      "eeeeeee\teeeeeee";
     const char fstr[] = "%5s %1s %*s %*s %llu %s %llu %llu %lld %Lf %33s";
 
     char s1[BUFF_SIZE] = {'\0'};
@@ -849,7 +849,7 @@ START_TEST(strings_mixed1) {
     char s10[BUFF_SIZE] = {'\0'};
 
     int16_t res1 =
-        s21_sscanf(str, fstr, s7, s9, &a1, s5, &b1, &c1, &d1, &e1, s1);
+      s21_sscanf(str, fstr, s7, s9, &a1, s5, &b1, &c1, &d1, &e1, s1);
     int16_t res2 = sscanf(str, fstr, s8, s10, &a2, s6, &b2, &c2, &d2, &e2, s2);
 
     ck_assert_int_eq(res1, res2);
@@ -1152,7 +1152,7 @@ START_TEST(floats_sci5) {
     float a1 = 0, a2 = 0, b1 = 0, b2 = 0, c1 = 0, c2 = 0, d1 = 0, d2 = 0;
 
     const char str[] =
-        "nAN           INF                   -0.1111         1e-10";
+      "nAN           INF                   -0.1111         1e-10";
     const char fstr[] = "%G %G %G %G";
 
     int16_t res1 = s21_sscanf(str, fstr, &a1, &b1, &c1, &d1);
@@ -1209,8 +1209,8 @@ START_TEST(uint3) {
     long double v1, v2;
 
     const char str[] =
-        "\t\t\t\t\t\n 3      adsfdfa%$$$$`adfasdfasdfaszcvzcxvcv -1337 "
-        "anurobich+ 21 -5008 -33000 0.3333";
+      "\t\t\t\t\t\n 3      adsfdfa%$$$$`adfasdfasdfaszcvzcxvcv -1337 "
+      "anurobich+ 21 -5008 -33000 0.3333";
     const char fstr[] = "%*s %*s %llu %s %llu %llu %lld %Lf";
 
     char s1[BUFF_SIZE] = {'\0'};
@@ -1966,8 +1966,7 @@ START_TEST(buff3) {
 }
 END_TEST
 
-Suite *
-suite_sscanf(void) {
+Suite *suite_sscanf(void) {
     Suite *s = suite_create("suite_sscanf");
     TCase *tc = tcase_create("sscanf_tc");
     // %[width][.precision][length][specifier]
@@ -1998,7 +1997,7 @@ suite_sscanf(void) {
     tcase_add_test(tc, chars_flags1);  // Precision flags lead to fail
     tcase_add_test(tc, chars_flags2);  // Width flags do nothing (if <= 1)
     tcase_add_test(
-        tc, chars_flags3);             // Demonstrates how (*) works. * - ignore the char
+      tc, chars_flags3);  // Demonstrates how (*) works. * - ignore the char
     tcase_add_test(tc, chars_flags4);  // Length flags do nothing
     tcase_add_test(tc, chars_flags5);  // * flags - ignores char
     // Test cases specifically for (%*c), as this is very important concept

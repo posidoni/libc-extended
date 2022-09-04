@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(Hello_aboba) {
     char src[] = " aboba!!!";
@@ -9,7 +9,8 @@ START_TEST(Hello_aboba) {
     strcat(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(zero_first) {
     char src[] = " aboba!!!";
@@ -20,7 +21,8 @@ START_TEST(zero_first) {
     strcat(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(zero_last) {
     char src[] = "";
@@ -31,7 +33,8 @@ START_TEST(zero_last) {
     strcat(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(any_letters_with_register) {
     char src[] = "asdfj  asdf aisdfjaiushdfASD SAD asDSad ASDAsdwqqeAS";
@@ -42,7 +45,8 @@ START_TEST(any_letters_with_register) {
     strcat(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(any_letters_with_register_and_num) {
     char src[] = "asd0fj  asd1f aisdfjw6234A1241SD SA5 asDSad 89SDAsdw7qqeAS";
@@ -53,10 +57,12 @@ START_TEST(any_letters_with_register_and_num) {
     strcat(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 START_TEST(any_letters_with_register_and_num_and_sim) {
-    char src[] = "asd0fj  asd1f aisdfjw6234A1241SD SA5 asDSad 89SDAsdw7qqeAS)(?!.,";
+    char src[] =
+      "asd0fj  asd1f aisdfjw6234A1241SD SA5 asDSad 89SDAsdw7qqeAS)(?!.,";
     char res[5 + 65] = "Hello";
     char expected[5 + 65] = "Hello";
 
@@ -64,7 +70,8 @@ START_TEST(any_letters_with_register_and_num_and_sim) {
     strcat(expected, src);
 
     ck_assert_str_eq(res, expected);
-} END_TEST
+}
+END_TEST
 
 Suite *suite_strcat(void) {
     Suite *s = suite_create("suite_strcat");

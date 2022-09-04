@@ -1,4 +1,4 @@
-#include "../tests_includes/s21_tests.h"
+#include "s21_tests.h"
 
 START_TEST(all_std_errors) {
     for (int i = -1000; i < 150; i++) {

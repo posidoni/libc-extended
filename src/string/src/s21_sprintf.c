@@ -1,3 +1,6 @@
+#include "s21_sprintf.h"
+
+#include "s21_sscanf.h"
 #include "s21_string.h"
 
 int s21_sprintf(char *str, const char *format, ...) {
@@ -24,8 +27,7 @@ int s21_sprintf(char *str, const char *format, ...) {
 
         char buff[BUFF_SIZE] = {'\0'};
         handle_value(f, buff, va);
-        for (int i = 0; buff[i]; i++, str++)
-            *str = buff[i];
+        for (int i = 0; buff[i]; i++, str++) *str = buff[i];
 
         if (f.specifier == 'n') {
             int *ret = va_arg(va, int *);
@@ -42,21 +44,11 @@ const char *get_flags(const char *format, flags *f) {
     while (*format == '-' || *format == '+' || *format == ' ' ||
            *format == '0' || *format == '#') {
         switch (*format) {
-        case '0':
-            f->zero = true;
-            break;
-        case '-':
-            f->minus = true;
-            break;
-        case '+':
-            f->plus = true;
-            break;
-        case ' ':
-            f->space = true;
-            break;
-        case '#':
-            f->hash = true;
-            break;
+            case '0': f->zero = true; break;
+            case '-': f->minus = true; break;
+            case '+': f->plus = true; break;
+            case ' ': f->space = true; break;
+            case '#': f->hash = true; break;
         }
         format++;
     }
@@ -69,8 +61,7 @@ const char *get_width(const char *format, flags *f, va_list va) {
         f->width = va_arg(va, int);
     } else if (s21_isdigit(*format)) {
         char tmp[BUFF_SIZE] = {'\0'};
-        for (int i = 0; s21_isdigit(*format); i++, format++)
-            tmp[i] = *format;
+        for (int i = 0; s21_isdigit(*format); i++, format++) tmp[i] = *format;
         f->width = s21_atoi(tmp);
     }
     return format;
@@ -88,8 +79,7 @@ const char *get_precision(const char *format, flags *f, va_list va) {
     }
     if (s21_isdigit(*format)) {
         char tmp[BUFF_SIZE] = {'\0'};
-        for (int i = 0; s21_isdigit(*format); i++, format++)
-            tmp[i] = *format;
+        for (int i = 0; s21_isdigit(*format); i++, format++) tmp[i] = *format;
         f->precision = s21_atoi(tmp);
     }
     return format;
@@ -97,17 +87,15 @@ const char *get_precision(const char *format, flags *f, va_list va) {
 
 const char *get_length(const char *format, flags *f) {
     switch (*format) {
-    case 'h':
-        f->length = 'h';
-        format++;
-        break;
-    case 'l':
-        f->length = 'l';
-        format++;
-        break;
-    case 'L':
-        f->length = 'L';
-        format++;
+        case 'h':
+            f->length = 'h';
+            format++;
+            break;
+        case 'l':
+            f->length = 'l';
+            format++;
+            break;
+        case 'L': f->length = 'L'; format++;
     }
     return format;
 }
@@ -143,11 +131,8 @@ void parse_int(flags f, char *buff, va_list va) {
     int64_t val = va_arg(va, int64_t);
 
     switch (f.length) {
-    case 0:
-        val = (int32_t)val;
-        break;
-    case 'h':
-        val = (int16_t)val;
+        case 0: val = (int32_t)val; break;
+        case 'h': val = (int16_t)val;
     }
     whole_num_to_string(val, buff, 10);
     format_precision(buff, f);
@@ -192,11 +177,9 @@ void format_precision(char *buff, flags f) {
 
     if (f.precision > len) {
         int idx;
-        for (idx = sign; idx < f.precision - len + sign; idx++)
-            tmp[idx] = '0';
+        for (idx = sign; idx < f.precision - len + sign; idx++) tmp[idx] = '0';
 
-        for (int i = sign; buff[i]; i++, idx++)
-            tmp[idx] = buff[i];
+        for (int i = sign; buff[i]; i++, idx++) tmp[idx] = buff[i];
 
         s21_strcpy(buff, tmp);
     }
@@ -252,21 +235,15 @@ void unsigned_num_to_string(uint64_t val, char *ret, int base) {
 
     for (; val && idx; --idx, val /= base)
         buf[idx] = "0123456789abcdef"[val % base];
-    for (int j = 0; buf[idx + 1]; idx++, j++)
-        ret[j] = buf[idx + 1];
+    for (int j = 0; buf[idx + 1]; idx++, j++) ret[j] = buf[idx + 1];
 }
 
 void parse_unsigned(flags f, char *buff, va_list va) {
     uint64_t val = va_arg(va, uint64_t);
     switch (f.length) {
-    case 'h':
-        val = (uint16_t)val;
-        break;
-    case 'l':
-        val = (uint64_t)val;
-        break;
-    case 0:
-        val = (uint32_t)val;
+        case 'h': val = (uint16_t)val; break;
+        case 'l': val = (uint64_t)val; break;
+        case 0: val = (uint32_t)val;
     }
     unsigned_num_to_string(val, buff, 10);
     format_precision(buff, f);
@@ -298,15 +275,9 @@ bool is_all_zeroes(char *buff) {
 void parse_hex(flags f, char *buff, va_list va) {
     uint64_t val = va_arg(va, uint64_t);
     switch (f.length) {
-    case 0:
-        val = (uint32_t)val;
-        break;
-    case 'h':
-        val = (uint16_t)val;
-        break;
-    case 'l':
-        val = (uint64_t)val;
-        break;
+        case 0: val = (uint32_t)val; break;
+        case 'h': val = (uint16_t)val; break;
+        case 'l': val = (uint64_t)val; break;
     }
     unsigned_num_to_string(val, buff, 16);
     format_precision(buff, f);
@@ -345,8 +316,7 @@ void format_wchar(flags f, char *buff, wchar_t w_c) {
         }
     } else if (f.width) {
         wcstombs(buff, &w_c, BUFF_SIZE);
-        for (int i = s21_strlen(buff); i < f.width; i++)
-            buff[i] = ' ';
+        for (int i = s21_strlen(buff); i < f.width; i++) buff[i] = ' ';
     } else {
         wcstombs(buff, &w_c, BUFF_SIZE);
     }
@@ -360,8 +330,7 @@ void format_char(flags f, char *buff, char c) {
         }
     } else if (f.width) {
         buff[0] = c;
-        for (int i = 1; i < f.width; i++)
-            buff[i] = ' ';
+        for (int i = 1; i < f.width; i++) buff[i] = ' ';
     } else {
         buff[0] = c;
     }
@@ -457,8 +426,7 @@ void double_to_string(long double val, char *ret, flags f) {
     }
     long long right = roundl(r), left = l;
     if (!right) {
-        for (int i = 0; i < f.precision; idx--, i++)
-            buff[idx] = '0';
+        for (int i = 0; i < f.precision; idx--, i++) buff[idx] = '0';
     } else {
         for (int i = s21_strlen(fractions); right || i > 0;
              right /= 10, idx--, i--)
@@ -471,8 +439,7 @@ void double_to_string(long double val, char *ret, flags f) {
         buff[idx] = '0';
         idx--;
     } else {
-        for (; left; left /= 10, idx--)
-            buff[idx] = (int)(left % 10) + '0';
+        for (; left; left /= 10, idx--) buff[idx] = (int)(left % 10) + '0';
     }
     for (int i = 0; buff[idx + 1]; idx++, i++) {
         if (neg && i == 0) {

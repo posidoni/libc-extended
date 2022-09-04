@@ -250,8 +250,8 @@ void write_unspec_int_to_memory(char **str, int *fail_flag, int *res,
     }
 }
 
-// if BUFF is S21_NULL, we simply skip chars, if precision is <= 0, it does not do
-// anyhting
+// if BUFF is S21_NULL, we simply skip chars, if precision is <= 0, it does not
+// do anyhting
 void write_chars_to_buff(char **str, const char *chars, char *buff,
                          int16_t width, int start_ind) {
     while (**str && s21_strspn(*str, chars) != 0) {
@@ -308,7 +308,8 @@ void write_float_to_memory(char **str, int *res, token *tok) {
     }
 }
 
-void write_string_to_memory(char **str, const int *fail_flag, int *res, token *tok) {
+void write_string_to_memory(char **str, const int *fail_flag, int *res,
+                            token *tok) {
     int succ = 0;
     char buff[BUFF_SIZE] = {'\0'};
     unsigned int i = 0;
@@ -385,7 +386,7 @@ void write_hex_or_oct_to_memory(char **str, int *fail_flag, int *res,
     if (s21_strspn(*str, "0123456789abcdefABCDEF") > 0 ||
         s21_strspn(*str, "xX0123456789abcdefABCDEF") >= 2) {
         unsigned long long int result = s21_strntollu(
-            *str, &ptr, base, tok->width ? tok->width_n : s21_strlen(*str));
+          *str, &ptr, base, tok->width ? tok->width_n : s21_strlen(*str));
         if (tok->width != WIDTH_AST) {
             if (tok->spec == 'p')
                 *(int *)tok->addr = (int)result;
@@ -413,7 +414,7 @@ void unsigned_type_converter(token *tok, unsigned long long int result,
         *(unsigned long int *)tok->addr = sign * (unsigned long int)result;
     } else if (tok->length_t == LENGTH_LONG_LONG) {
         *(unsigned long long int *)tok->addr =
-            sign * (unsigned long long int)result;
+          sign * (unsigned long long int)result;
     }
 }
 

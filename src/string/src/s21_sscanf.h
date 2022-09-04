@@ -1,6 +1,8 @@
-#include "s21_string.h"
 #ifndef SRC_S21_SSCANF_H_
 #define SRC_S21_SSCANF_H_
+
+#include <stdarg.h>
+#include <stdint.h>
 
 #if defined(VERBOSE_MODE) && defined(DEBUG)
 typedef enum specifier {
@@ -24,9 +26,7 @@ typedef enum specifier {
 } specifier;
 #endif
 
-typedef enum width_t { NONE_WIDTH,
-                       WIDTH_NUMBER,
-                       WIDTH_AST } width_t;
+typedef enum width_t { NONE_WIDTH, WIDTH_NUMBER, WIDTH_AST } width_t;
 
 typedef enum length_t {
     NONE_LENGTH,
@@ -82,7 +82,8 @@ void write_int_to_memory(char **str, int *fail_flag, int *res, token *tok);
 void write_unspec_int_to_memory(char **str, int *fail_flag, int *res,
                                 token *tok);
 void write_float_to_memory(char **str, int *res, token *tok);
-void write_string_to_memory(char **str, const int *fail_flag, int *res, token *tok);
+void write_string_to_memory(char **str, const int *fail_flag, int *res,
+                            token *tok);
 void write_unsigned_to_memory(char **str, int *fail_flag, int *res, token *tok);
 void write_hex_or_oct_to_memory(char **str, int *fail_flag, int *res,
                                 token *tok, int base);
