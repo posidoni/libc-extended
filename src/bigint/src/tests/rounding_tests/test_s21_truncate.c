@@ -1,4 +1,4 @@
-#include "../s21_decimal_test.h"
+#include "s21_decimal_test.h"
 
 START_TEST(gcc_128_bits) {
     /* get random value */

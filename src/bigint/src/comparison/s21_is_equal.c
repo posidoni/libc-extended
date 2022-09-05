@@ -1,4 +1,4 @@
-#include "../s21_decimal.h"
+#include "s21_decimal.h"
 
 static bool bits_eq(const unsigned bits_a[4], const unsigned bits_b[4]) {
     return bits_a[0] == bits_b[0] && bits_a[1] == bits_b[1] &&

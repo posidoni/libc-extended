@@ -1,4 +1,4 @@
-#include "../s21_decimal.h"
+#include "s21_decimal.h"
 
 /*
     We assume that 1 (dec) is represented like this in s21_decimal:
@@ -45,7 +45,8 @@ int s21_is_less(s21_decimal a, s21_decimal b) {
 
 bool s21_is_less_basic(s21_decimal a, s21_decimal b) {
     for (int i = 95; i >= 0; i--) {
-        if ((get_bit(a, i) && get_bit(b, i)) || (!get_bit(a, i) && !get_bit(b, i))) {
+        if ((get_bit(a, i) && get_bit(b, i)) ||
+            (!get_bit(a, i) && !get_bit(b, i))) {
             continue;
         }
 
@@ -63,7 +64,8 @@ static bool s21_is_less_positive(s21_decimal a, s21_decimal b) {
     s21_normalize(&a, &b);
 
     for (int i = 95; i >= 0; i--) {
-        if ((get_bit(a, i) && get_bit(b, i)) || (!get_bit(a, i) && !get_bit(b, i))) {
+        if ((get_bit(a, i) && get_bit(b, i)) ||
+            (!get_bit(a, i) && !get_bit(b, i))) {
             continue;
         }
         if (!get_bit(a, i) && get_bit(b, i)) {

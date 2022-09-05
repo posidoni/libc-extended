@@ -1,15 +1,16 @@
 #include <stdio.h>
 
-#include "../s21_decimal.h"
-#include "../tests/s21_decimal_test.h"
+#include "s21_decimal.h"
 
 static int bank_rounding(int n);
 
 /**
  * @brief Bank rounding logic. From wiki:
- * "Rather than rounding 0.5 and higher up, and 0.4 and lower down, bankers rounding rounds 0.5 to the nearest even number."
+ * "Rather than rounding 0.5 and higher up, and 0.4 and lower down, bankers
+ * rounding rounds 0.5 to the nearest even number."
  *
- * @param n - int [0; 99], as we need 2 numbers to decide whether or not applu bank rounding
+ * @param n - int [0; 99], as we need 2 numbers to decide whether or not applu
+ * bank rounding
  * @return int - 1 if the rounding is applied, 0 - otherwise
  */
 
@@ -31,8 +32,9 @@ static int bank_rounding(int n) {
 }
 
 /**
- * @brief Applies bank rounding to provided decimal. Bank rounding can never overflow a decimal,
- * if it is used correctly (i.e. if the decimal has exponent >= 1).
+ * @brief Applies bank rounding to provided decimal. Bank rounding can never
+ * overflow a decimal, if it is used correctly (i.e. if the decimal has exponent
+ * >= 1).
  *
  * @warning (@bezlant): code might seem like a mess but it really works.
  *
@@ -49,7 +51,8 @@ void s21_bank_rounding(s21_decimal *dec, int times) {
     set_sign_pos(dec);
 
     while (times > 0) {
-        s21_decimal mod = {0}, ten = get_power_of_ten(1), hun = get_power_of_ten(2);
+        s21_decimal mod = {0}, ten = get_power_of_ten(1),
+                    hun = get_power_of_ten(2);
 
         s21_int_mod(*dec, hun, &mod);
 

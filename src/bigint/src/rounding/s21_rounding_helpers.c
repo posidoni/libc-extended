@@ -1,7 +1,6 @@
-#include "../s21_decimal.h"
+#include "s21_decimal.h"
 
 void get_bit_string(long double res, char *bits, int exponent) {
-
     res *= powl((long double)10, (long double)(D_MAX_EXP_VAL - exponent));
 
     for (int i = 0; res > 1e-6; i++) {

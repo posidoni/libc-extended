@@ -1,4 +1,4 @@
-#include "../s21_decimal.h"
+#include "s21_decimal.h"
 
 int s21_from_decimal_to_int(s21_decimal src, int *dst) {
     s21_decimal truncated = {0};
@@ -15,8 +15,7 @@ int s21_from_decimal_to_int(s21_decimal src, int *dst) {
 
     int tmp = 0;
 
-    for (int i = 0; i < 31; i++)
-        tmp += pow(2, i) * get_bit(truncated, i);
+    for (int i = 0; i < 31; i++) tmp += pow(2, i) * get_bit(truncated, i);
 
     if (tmp == INT_MIN && sign)
         return CONVERTATION_ERROR;

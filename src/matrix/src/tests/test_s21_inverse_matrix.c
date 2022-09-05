@@ -1,5 +1,3 @@
-#include <sys/errno.h>
-
 #include "test_s21_matrix.h"
 
 START_TEST(inverse_hardcoded) {
@@ -52,15 +50,7 @@ START_TEST(inverse_hardcoded) {
     if (errno == 0) {
         if (pid == 0)
             s21_halt();
-        else
-            fprintf(stderr,
-                    "\tExplanation of what just happened. In order to boost \n\
-        code coverage & somehow test halt function I forked process and called \n\
-        halt function in child. Child died with error message, and parent prints this message\n");
     } else {
-        fprintf(stderr,
-                "We are in such a bad state, that this program couldn't even \n\
-        fork one process. This is really sad.\n");
         s21_halt();
     }
 }

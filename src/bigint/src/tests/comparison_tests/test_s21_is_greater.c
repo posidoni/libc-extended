@@ -1,4 +1,4 @@
-#include "../s21_decimal_test.h"
+#include "s21_decimal_test.h"
 
 START_TEST(decimal_random_noexp_unsigned) {
     s21_decimal dec1 = get_random_decimal(3, 0);

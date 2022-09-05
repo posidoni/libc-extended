@@ -1,4 +1,4 @@
-#include "../s21_decimal.h"
+#include "s21_decimal.h"
 
 /**
  * @brief Truncates a floating point number and discards the floating part

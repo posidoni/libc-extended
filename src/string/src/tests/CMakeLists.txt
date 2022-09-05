@@ -1,13 +1,8 @@
 cmake_minimum_required(VERSION 3.20)
 
-pretty_print("Tests dir included")
+pretty_print("String tests dir included")
 
 set(TEST_EXECUTABLE_NAME string_test_runner)
-
-file(
-  GLOB_RECURSE BACKEND_SRCS
-  LIST_DIRECTORIES TRUE
-  CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/src/clevy_interpreter/clevy_stdlib/*.c)
 
 set(TESTS_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/test_strtold.c
@@ -59,7 +54,7 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(CHECK REQUIRED IMPORTED_TARGET check)
 
 target_include_directories(${TEST_EXECUTABLE_NAME}
-                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+                           PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/includes)
 
 target_link_libraries(${TEST_EXECUTABLE_NAME} check PkgConfig::CHECK
                       ${S21_STRING_LIB_NAME})

@@ -1,4 +1,4 @@
-#include "../s21_decimal_test.h"
+#include "s21_decimal_test.h"
 
 START_TEST(hardcoded_decimal_loop) {
     s21_decimal n1 = get_random_decimal(get_rand(0, 3), get_rand(0, 26));

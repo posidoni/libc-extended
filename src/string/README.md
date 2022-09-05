@@ -32,7 +32,7 @@ $ ./s21_test_runner
 $ make gcov_report /* To check test coverage, requires lcov utility */
 ```
 ## Credits
-- Developers: [Mikhail Kuznetsov (@posidoni)](https://github.com/MikhailKuzntsov1), [Andrey Jhelannikov(@capricey)](https://github.com/AndreyZhelannikov), [Stepan Fedorov (@nanadaug)](https://github.com/co-cy), [Anton Bezludniy(@tarticar)](https://github.com/bezlant).
+- Developers: [Mikhail Kuznetsov (@posidoni)](https://github.com/posidoni), [Andrey Jhelannikov(@capricey)](https://github.com/AndreyZhelannikov), [Stepan Fedorov (@nanadaug)](https://github.com/co-cy), [Anton Bezludniy(@tarticar)](https://github.com/bezlant).
 - Peer reviewers: @gerardys (Vlad), [@sparelis (Dasha)](https://github.com/GrusnyDance), [@deltajed (Ramin)](https://github.com/RamaObama) & others.
 - SC21 for providing this task 🙂💚
 - Unfortunately, commit history was lost after migrating repo from Gitlab to Github :(

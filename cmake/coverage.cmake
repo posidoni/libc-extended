@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.20)
 pretty_print("Coverage module included")
 
 if(GENERATE_COVERAGE_ON)
-
   add_custom_target(
     GCOV_REPORT
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
