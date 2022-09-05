@@ -26,6 +26,5 @@ long double s21_sqrt(double n) {
 }
 
 static long double handle_special_cases(double n, long double root) {
-    return is_nan(n) ? S21_NAN : is_finite(n) ? root
-                                              : S21_INF;
+    return is_nan(n) ? S21_NAN : is_finite(n) ? root : S21_INF;
 }

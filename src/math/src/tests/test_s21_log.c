@@ -42,8 +42,7 @@ START_TEST(log_test_4_one) {
 }
 END_TEST
 
-Suite *
-suite_s21_log(void) {
+Suite *suite_s21_log(void) {
     Suite *s = suite_create("s21_log");
     TCase *tc = tcase_create("s21_add_tc");
 

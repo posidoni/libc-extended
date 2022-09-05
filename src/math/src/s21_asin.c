@@ -1,4 +1,5 @@
 #include "s21_math.h"
+
 long double s21_asin(double x) {
     long double res = 0.0;
     s21_bool mod = 0;

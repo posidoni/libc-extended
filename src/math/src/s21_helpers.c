@@ -1,7 +1,5 @@
 #include "s21_math.h"
 
-/* God, I wish C had C++ templates & overloading ... (~Misha) */
-
 s21_bool s21_ldeq(long double a, long double b) {
     return (a < b + EPS_8 && a > b - EPS_8);
 }

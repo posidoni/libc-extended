@@ -1,4 +1,4 @@
-#include "tests/s21_math_test.h"
+#include "s21_math_test.h"
 
 int main(void) {
     // Set seed for random
@@ -25,25 +25,26 @@ void run_testcase(Suite *testcase) {
 }
 void run_tests(void) {
     Suite *list_cases[] = {
-        suite_s21_abs(),    //
-        suite_s21_acos(),   //
-        suite_s21_asin(),   //
-        suite_s21_atan(),   //
-        suite_s21_ceil(),   //
-        suite_s21_cos(),    //
-        suite_s21_fabs(),   //
-        suite_s21_exp(),    //
-        suite_s21_fmod(),   //
-        suite_s21_floor(),  //
-        suite_s21_log(),    //
-        suite_s21_pow(),    //
-        suite_s21_sin(),    //
-        suite_s21_sqrt(),   //
-        suite_s21_tan(),    //
-        NULL,
+      suite_s21_abs(),    //
+      suite_s21_acos(),   //
+      suite_s21_asin(),   //
+      suite_s21_atan(),   //
+      suite_s21_ceil(),   //
+      suite_s21_cos(),    //
+      suite_s21_fabs(),   //
+      suite_s21_exp(),    //
+      suite_s21_fmod(),   //
+      suite_s21_floor(),  //
+      suite_s21_log(),    //
+      suite_s21_pow(),    //
+      suite_s21_sin(),    //
+      suite_s21_sqrt(),   //
+      suite_s21_tan(),    //
+      NULL,
     };
 
-    for (Suite **current_testcase = list_cases; *current_testcase; current_testcase++) {
+    for (Suite **current_testcase = list_cases; *current_testcase;
+         current_testcase++) {
         run_testcase(*current_testcase);
     }
 }
