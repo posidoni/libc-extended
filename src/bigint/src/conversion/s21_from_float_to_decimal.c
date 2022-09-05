@@ -1,4 +1,4 @@
-#include "../s21_decimal.h"
+#include "s21_decimal.h"
 
 static int get_float_exponent(long double val) {
     int exponent = 0;
