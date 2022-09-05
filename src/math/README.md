@@ -1,10 +1,10 @@
 ## Table of contents
-* [General info](https://github.com/MikhailKuzntsov1/s21_math/tree/main#general-info)
-* [Goal & requirements](https://github.com/MikhailKuzntsov1/s21_math/tree/main#goal--requirements)
-* [Key learnings](https://github.com/MikhailKuzntsov1/s21_math/tree/main#key-learnings)
-* [Build](https://github.com/MikhailKuzntsov1/s21_math/tree/main#build)
-* [Overview of implemented functions](https://github.com/MikhailKuzntsov1/s21_math/tree/main#overview-of-implemented-functions)
-* [Credits](https://github.com/MikhailKuzntsov1/s21_math/tree/main#credits)
+* [General info](https://github.com/posidoni/s21_math/tree/main#general-info)
+* [Goal & requirements](https://github.com/posidoni/s21_math/tree/main#goal--requirements)
+* [Key learnings](https://github.com/posidoni/s21_math/tree/main#key-learnings)
+* [Build](https://github.com/posidoni/s21_math/tree/main#build)
+* [Overview of implemented functions](https://github.com/posidoni/s21_math/tree/main#overview-of-implemented-functions)
+* [Credits](https://github.com/posidoni/s21_math/tree/main#credits)
 
 ## General info 
 
@@ -62,8 +62,7 @@ $ docker build -t s21_math:1.0
 $ docker run -it s21_math:1.0
 $ ./test
 ```
-
 ## Credits
-- Developers: [Mikhail Kuznetsov (@posidoni)](https://github.com/MikhailKuzntsov1), [Andrey Jhelannikov(@capricey)](https://github.com/AndreyZhelannikov), [Stepan Fedorov (@nanadaug)](https://github.com/co-cy), [Anton Bezludniy(@tarticar)](https://github.com/bezlant).
+- Developers: [Mikhail Kuznetsov (@posidoni)](https://github.com/posidoni), [Andrey Jhelannikov(@capricey)](https://github.com/AndreyZhelannikov), [Stepan Fedorov (@nanadaug)](https://github.com/co-cy), [Anton Bezludniy(@tarticar)](https://github.com/bezlant).
 - Any feedback & bug-reports are highly appreciated! 
 - SC21 for providing this task 🙂💚
